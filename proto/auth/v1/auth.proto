@@ -1,0 +1,303 @@
+syntax = "proto3";
+
+package auth.v1;
+
+option go_package = "github.com/edadai/platform-go/contracts/authv1;authv1";
+
+service AuthService {
+  rpc Register(RegisterRequest) returns (GenericMessageResponse);
+  rpc RequestEmailVerification(RequestEmailVerificationRequest) returns (GenericMessageResponse);
+  rpc VerifyEmail(VerifyEmailRequest) returns (GenericMessageResponse);
+
+  rpc LoginPassword(LoginPasswordRequest) returns (SessionTokensResponse);
+  rpc RefreshSession(RefreshSessionRequest) returns (SessionTokensResponse);
+  rpc Logout(LogoutRequest) returns (GenericMessageResponse);
+  rpc LogoutAll(LogoutAllRequest) returns (GenericMessageResponse);
+
+  rpc RequestPasswordReset(RequestPasswordResetRequest) returns (GenericMessageResponse);
+  rpc ResetPassword(ResetPasswordRequest) returns (GenericMessageResponse);
+
+  rpc RequestEmailChange(RequestEmailChangeRequest) returns (GenericMessageResponse);
+  rpc ConfirmEmailChange(ConfirmEmailChangeRequest) returns (GenericMessageResponse);
+
+  rpc StartOAuth(StartOAuthRequest) returns (StartOAuthResponse);
+  rpc CompleteOAuth(CompleteOAuthRequest) returns (SessionTokensResponse);
+  rpc LinkOAuth(LinkOAuthRequest) returns (GenericMessageResponse);
+  rpc UnlinkOAuth(UnlinkOAuthRequest) returns (GenericMessageResponse);
+
+  rpc GetMe(GetMeRequest) returns (GetMeResponse);
+  rpc GetUser(GetUserRequest) returns (GetMeResponse);
+  rpc ValidateAccessToken(ValidateAccessTokenRequest) returns (ValidateAccessTokenResponse);
+  rpc ValidateSession(ValidateSessionRequest) returns (ValidateSessionResponse);
+
+  rpc CheckRole(CheckRoleRequest) returns (CheckRoleResponse);
+  rpc CheckPermission(CheckPermissionRequest) returns (CheckPermissionResponse);
+
+  rpc ListSessions(ListSessionsRequest) returns (ListSessionsResponse);
+  rpc RevokeSession(RevokeSessionRequest) returns (GenericMessageResponse);
+
+  rpc AssignRole(AssignRoleRequest) returns (GenericMessageResponse);
+  rpc RevokeRole(RevokeRoleRequest) returns (GenericMessageResponse);
+  rpc GrantUserPermission(GrantUserPermissionRequest) returns (GenericMessageResponse);
+  rpc DenyUserPermission(DenyUserPermissionRequest) returns (GenericMessageResponse);
+  rpc RemoveUserPermissionOverride(RemoveUserPermissionOverrideRequest) returns (GenericMessageResponse);
+
+  rpc SuspendUser(SuspendUserRequest) returns (GenericMessageResponse);
+  rpc DeleteUser(DeleteUserRequest) returns (GenericMessageResponse);
+}
+
+message RequestContext {
+  string request_id = 1;
+  string correlation_id = 2;
+  string actor_user_id = 3;
+  string ip_address = 4;
+  string user_agent = 5;
+}
+
+message GenericMessageResponse {
+  string message = 1;
+}
+
+message SessionTokensResponse {
+  string access_token = 1;
+  string refresh_token = 2;
+  string user_id = 3;
+  string session_id = 4;
+  int64 access_token_expires_at_unix = 5;
+  int64 refresh_token_expires_at_unix = 6;
+}
+
+message UserMessage {
+  string id = 1;
+  string email = 2;
+  bool email_verified = 3;
+  string status = 4;
+  int64 created_at_unix = 5;
+}
+
+message SessionMessage {
+  string id = 1;
+  string user_id = 2;
+  string device_name = 3;
+  string ip_address = 4;
+  string user_agent = 5;
+  int64 created_at_unix = 6;
+  int64 last_seen_at_unix = 7;
+  int64 expires_at_unix = 8;
+  bool revoked = 9;
+  string revoke_reason = 10;
+}
+
+message RegisterRequest {
+  string email = 1;
+  string password = 2;
+  string first_name = 3;
+  string last_name = 4;
+  string device_name = 5;
+  RequestContext context = 6;
+}
+
+message RequestEmailVerificationRequest {
+  string email = 1;
+  RequestContext context = 2;
+}
+
+message VerifyEmailRequest {
+  string token = 1;
+  RequestContext context = 2;
+}
+
+message LoginPasswordRequest {
+  string email = 1;
+  string password = 2;
+  string device_name = 3;
+  RequestContext context = 4;
+}
+
+message RefreshSessionRequest {
+  string refresh_token = 1;
+  RequestContext context = 2;
+}
+
+message LogoutRequest {
+  string session_id = 1;
+  RequestContext context = 2;
+}
+
+message LogoutAllRequest {
+  string user_id = 1;
+  RequestContext context = 2;
+}
+
+message RequestPasswordResetRequest {
+  string email = 1;
+  RequestContext context = 2;
+}
+
+message ResetPasswordRequest {
+  string token = 1;
+  string new_password = 2;
+  RequestContext context = 3;
+}
+
+message RequestEmailChangeRequest {
+  string user_id = 1;
+  string new_email = 2;
+  RequestContext context = 3;
+}
+
+message ConfirmEmailChangeRequest {
+  string token = 1;
+  RequestContext context = 2;
+}
+
+message StartOAuthRequest {
+  string provider = 1;
+  string redirect_after_login = 2;
+  string purpose = 3;
+  string user_id = 4;
+  RequestContext context = 5;
+}
+
+message StartOAuthResponse {
+  string authorization_url = 1;
+  string state = 2;
+}
+
+message CompleteOAuthRequest {
+  string provider = 1;
+  string state = 2;
+  string code = 3;
+  string device_name = 4;
+  RequestContext context = 5;
+}
+
+message LinkOAuthRequest {
+  string provider = 1;
+  string state = 2;
+  string code = 3;
+  string user_id = 4;
+  RequestContext context = 5;
+}
+
+message UnlinkOAuthRequest {
+  string provider = 1;
+  string user_id = 2;
+  RequestContext context = 3;
+}
+
+message GetMeRequest {
+  string access_token = 1;
+  RequestContext context = 2;
+}
+
+message GetUserRequest { string user_id = 1; RequestContext context = 2; }
+
+message GetMeResponse {
+  UserMessage user = 1;
+}
+
+message ValidateAccessTokenRequest {
+  string access_token = 1;
+  RequestContext context = 2;
+}
+
+message ValidateAccessTokenResponse {
+  bool valid = 1;
+  string user_id = 2;
+  string session_id = 3;
+  string status = 4;
+}
+
+message ValidateSessionRequest {
+  string session_id = 1;
+  RequestContext context = 2;
+}
+
+message ValidateSessionResponse {
+  bool active = 1;
+  string user_id = 2;
+  string session_id = 3;
+}
+
+message CheckRoleRequest {
+  string user_id = 1;
+  string role_key = 2;
+  RequestContext context = 3;
+}
+
+message CheckRoleResponse {
+  bool has_role = 1;
+}
+
+message CheckPermissionRequest {
+  string user_id = 1;
+  string permission_key = 2;
+  RequestContext context = 3;
+}
+
+message CheckPermissionResponse {
+  bool allowed = 1;
+  string reason = 2;
+}
+
+message ListSessionsRequest {
+  string user_id = 1;
+  RequestContext context = 2;
+}
+
+message ListSessionsResponse {
+  repeated SessionMessage sessions = 1;
+}
+
+message RevokeSessionRequest {
+  string session_id = 1;
+  string reason = 2;
+  RequestContext context = 3;
+}
+
+message AssignRoleRequest {
+  string user_id = 1;
+  string role_key = 2;
+  RequestContext context = 3;
+}
+
+message RevokeRoleRequest {
+  string user_id = 1;
+  string role_key = 2;
+  RequestContext context = 3;
+}
+
+message GrantUserPermissionRequest {
+  string user_id = 1;
+  string permission_key = 2;
+  string reason = 3;
+  int64 expires_at_unix = 4;
+  RequestContext context = 5;
+}
+
+message DenyUserPermissionRequest {
+  string user_id = 1;
+  string permission_key = 2;
+  string reason = 3;
+  int64 expires_at_unix = 4;
+  RequestContext context = 5;
+}
+
+message RemoveUserPermissionOverrideRequest {
+  string user_id = 1;
+  string permission_key = 2;
+  RequestContext context = 3;
+}
+
+message SuspendUserRequest {
+  string user_id = 1;
+  string reason = 2;
+  RequestContext context = 3;
+}
+
+message DeleteUserRequest {
+  string user_id = 1;
+  string reason = 2;
+  RequestContext context = 3;
+}

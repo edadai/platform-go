@@ -1,0 +1,379 @@
+syntax = "proto3";
+
+option csharp_namespace = "SubscriptionBillingService.Api.Protos";
+option go_package = "github.com/edadai/platform-go/contracts/subscriptionbillingpb;subscriptionbillingpb";
+
+package subscriptionbilling;
+
+service SubscriptionBillingApi {
+  rpc CreateProduct (CreateProductRequest) returns (EntityResponse);
+  rpc CreatePlan (CreatePlanRequest) returns (EntityResponse);
+  rpc CreatePrice (CreatePriceRequest) returns (EntityResponse);
+  rpc CreateOffer (CreateOfferRequest) returns (EntityResponse);
+  rpc EnableOffer (EntityIdRequest) returns (EntityResponse);
+  rpc DisableOffer (EntityIdRequest) returns (EntityResponse);
+  rpc AttachEntitlementToPlan (AttachEntitlementToPlanRequest) returns (EntityResponse);
+  rpc ConfigureTrialPolicy (ConfigureTrialPolicyRequest) returns (EntityResponse);
+  rpc ConfigureBillingPolicy (ConfigureBillingPolicyRequest) returns (EntityResponse);
+  rpc ListPlans (ListPlansRequest) returns (ListPlansResponse);
+  rpc UpdatePlan (UpdatePlanRequest) returns (PlanResponse);
+  rpc PublishPlan (EntityIdRequest) returns (PlanResponse);
+  rpc ArchivePlan (EntityIdRequest) returns (PlanResponse);
+
+  rpc StartTrial (StartTrialRequest) returns (SubscriptionResponse);
+  rpc StartSubscription (StartSubscriptionRequest) returns (SubscriptionResponse);
+  rpc CancelSubscription (EntityIdRequest) returns (SubscriptionResponse);
+  rpc ChangePlan (ChangePlanRequest) returns (SubscriptionResponse);
+  rpc GetSubscriptionStatus (EntityIdRequest) returns (SubscriptionStatusResponse);
+  rpc GetCurrentSubscription (CustomerRequest) returns (SubscriptionResponse);
+
+  rpc CheckEntitlement (CheckEntitlementRequest) returns (CheckEntitlementResponse);
+  rpc GetEntitlementSnapshot (EntityIdRequest) returns (EntitlementSnapshotResponse);
+  rpc RefreshEntitlementSnapshot (EntityIdRequest) returns (EntitlementSnapshotResponse);
+  rpc RecordUsage (RecordUsageRequest) returns (EntityResponse);
+
+  rpc CreateInvoice (CreateInvoiceRequest) returns (InvoiceResponse);
+  rpc GetInvoice (EntityIdRequest) returns (InvoiceResponse);
+  rpc ListInvoices (CustomerRequest) returns (ListInvoicesResponse);
+  rpc MarkManualInvoicePaid (EntityIdRequest) returns (InvoiceResponse);
+  rpc RetryPayment (EntityIdRequest) returns (PaymentResponse);
+  rpc RefundPayment (RefundPaymentRequest) returns (EntityResponse);
+
+  rpc CreatePaymentIntent (CreatePaymentIntentRequest) returns (PaymentIntentResponse);
+  rpc ConfirmPayment (EntityIdRequest) returns (PaymentResponse);
+  rpc GetPaymentStatus (EntityIdRequest) returns (PaymentResponse);
+
+  rpc ExtendSubscription (ExtendSubscriptionRequest) returns (SubscriptionResponse);
+  rpc RestrictSubscription (ReasonedEntityRequest) returns (SubscriptionResponse);
+  rpc ExpireSubscription (ReasonedEntityRequest) returns (SubscriptionResponse);
+  rpc GrantCustomEntitlement (GrantCustomEntitlementRequest) returns (EntityResponse);
+  rpc ViewLedgerTransactions (OptionalSubscriptionRequest) returns (ViewLedgerTransactionsResponse);
+  rpc ViewAuditOutboxEvents (Empty) returns (ViewAuditOutboxEventsResponse);
+  rpc ReplayAuditOutboxEvent (EntityIdRequest) returns (StatusResponse);
+  rpc ReplayDomainEventOutboxEvent (EntityIdRequest) returns (StatusResponse);
+
+  rpc ReceivePaystackWebhook (ReceivePaystackWebhookRequest) returns (StatusResponse);
+}
+
+message Empty {}
+
+message ListPlansRequest { bool public_only = 1; }
+message UpdatePlanRequest {
+  string id = 1;
+  string name = 2;
+  string description = 3;
+  int32 display_order = 4;
+  RequestContext context = 5;
+  double amount = 6;
+  string currency = 7;
+  string interval_unit = 8;
+  int32 interval_count = 9;
+}
+message PlanResponse {
+  string id = 1;
+  string product_id = 2;
+  string code = 3;
+  string name = 4;
+  string description = 5;
+  string status = 6;
+  int32 display_order = 7;
+  string price_id = 8;
+  double amount = 9;
+  string currency = 10;
+  string interval_unit = 11;
+  int32 interval_count = 12;
+  int32 active_subscriber_count = 13;
+}
+message ListPlansResponse { repeated PlanResponse plans = 1; }
+
+message RequestContext {
+  string correlation_id = 1;
+  string request_id = 2;
+  string actor_user_id = 3;
+  string actor_type = 4;
+  string ip_address = 5;
+  string user_agent = 6;
+  string reason = 7;
+}
+
+message EntityIdRequest {
+  string id = 1;
+  RequestContext context = 2;
+}
+
+message ReasonedEntityRequest {
+  string id = 1;
+  string reason = 2;
+  RequestContext context = 3;
+}
+
+message CustomerRequest {
+  string customer_id = 1;
+  RequestContext context = 2;
+}
+
+message OptionalSubscriptionRequest {
+  string subscription_id = 1;
+}
+
+message CreateProductRequest {
+  string code = 1;
+  string name = 2;
+  string description = 3;
+  RequestContext context = 4;
+}
+
+message CreatePlanRequest {
+  string product_id = 1;
+  string code = 2;
+  string name = 3;
+  string description = 4;
+  RequestContext context = 5;
+}
+
+message CreatePriceRequest {
+  string plan_id = 1;
+  string code = 2;
+  double amount = 3;
+  string currency = 4;
+  string interval_unit = 5;
+  int32 interval_count = 6;
+  bool is_default = 7;
+  RequestContext context = 8;
+}
+
+message CreateOfferRequest {
+  string plan_id = 1;
+  string price_id = 2;
+  string code = 3;
+  string name = 4;
+  string description = 5;
+  RequestContext context = 6;
+}
+
+message AttachEntitlementToPlanRequest {
+  string plan_id = 1;
+  string feature_code = 2;
+  string value = 3;
+  double usage_limit = 4;
+  RequestContext context = 5;
+}
+
+message ConfigureTrialPolicyRequest {
+  string product_id = 1;
+  string plan_id = 2;
+  string price_id = 3;
+  string offer_id = 4;
+  string name = 5;
+  int32 trial_days = 6;
+  int32 max_redemptions_per_customer = 7;
+  bool is_enabled = 8;
+  string eligibility_rules_json = 9;
+  RequestContext context = 10;
+}
+
+message ConfigureBillingPolicyRequest {
+  string product_id = 1;
+  string plan_id = 2;
+  string price_id = 3;
+  int32 retry_count = 4;
+  int32 retry_interval_hours = 5;
+  int32 grace_days = 6;
+  string failure_access_behavior = 7;
+  bool is_enabled = 8;
+  RequestContext context = 9;
+}
+
+message StartTrialRequest {
+  string customer_id = 1;
+  string product_id = 2;
+  string plan_id = 3;
+  string price_id = 4;
+  string offer_id = 5;
+  string payment_provider = 6;
+  string external_reference = 7;
+  RequestContext context = 8;
+}
+
+message StartSubscriptionRequest {
+  string customer_id = 1;
+  string product_id = 2;
+  string plan_id = 3;
+  string price_id = 4;
+  string offer_id = 5;
+  string payment_provider = 6;
+  string external_reference = 7;
+  bool charge_immediately = 8;
+  RequestContext context = 9;
+}
+
+message ChangePlanRequest {
+  string subscription_id = 1;
+  string plan_id = 2;
+  string price_id = 3;
+  RequestContext context = 4;
+}
+
+message CheckEntitlementRequest {
+  string subscription_id = 1;
+  string feature_code = 2;
+}
+
+message RecordUsageRequest {
+  string subscription_id = 1;
+  string customer_id = 2;
+  string feature_code = 3;
+  double quantity = 4;
+  string unit = 5;
+  string idempotency_key = 6;
+  RequestContext context = 7;
+}
+
+message CreateInvoiceRequest {
+  string subscription_id = 1;
+  string description = 2;
+  RequestContext context = 3;
+}
+
+message RefundPaymentRequest {
+  string payment_id = 1;
+  string reason = 2;
+  RequestContext context = 3;
+}
+
+message CreatePaymentIntentRequest {
+  string invoice_id = 1;
+  string callback_url = 2;
+  RequestContext context = 3;
+}
+
+message ExtendSubscriptionRequest {
+  string subscription_id = 1;
+  int32 additional_days = 2;
+  RequestContext context = 3;
+}
+
+message GrantCustomEntitlementRequest {
+  string subscription_id = 1;
+  string customer_id = 2;
+  string feature_code = 3;
+  string value = 4;
+  double usage_limit = 5;
+  string expires_at_utc = 6;
+  RequestContext context = 7;
+}
+
+message ReceivePaystackWebhookRequest {
+  string payload = 1;
+  RequestContext context = 2;
+}
+
+message EntityResponse {
+  string id = 1;
+  string message = 2;
+}
+
+message StatusResponse {
+  bool success = 1;
+  string message = 2;
+}
+
+message SubscriptionStatusResponse {
+  string subscription_id = 1;
+  string status = 2;
+  string access_behavior = 3;
+}
+
+message SubscriptionResponse {
+  string id = 1;
+  string customer_id = 2;
+  string product_id = 3;
+  string plan_id = 4;
+  string price_id = 5;
+  string offer_id = 6;
+  string status = 7;
+  string access_behavior = 8;
+  string payment_provider = 9;
+  string current_period_start_utc = 10;
+  string current_period_end_utc = 11;
+  string trial_ends_at_utc = 12;
+}
+
+message CheckEntitlementResponse {
+  bool allowed = 1;
+  string access_behavior = 2;
+  string reason = 3;
+  string value = 4;
+}
+
+message EntitlementSnapshotResponse {
+  string subscription_id = 1;
+  string customer_id = 2;
+  string access_behavior = 3;
+  string snapshot_json = 4;
+  string calculated_at_utc = 5;
+}
+
+message InvoiceResponse {
+  string id = 1;
+  string subscription_id = 2;
+  string customer_id = 3;
+  string number = 4;
+  string status = 5;
+  double total_amount = 6;
+  double amount_due = 7;
+  string currency = 8;
+  string due_at_utc = 9;
+  string paid_at_utc = 10;
+}
+
+message ListInvoicesResponse {
+  repeated InvoiceResponse invoices = 1;
+}
+
+message PaymentIntentResponse {
+  string id = 1;
+  string invoice_id = 2;
+  string subscription_id = 3;
+  string provider = 4;
+  string status = 5;
+  string provider_reference = 6;
+  string checkout_url = 7;
+}
+
+message PaymentResponse {
+  string id = 1;
+  string invoice_id = 2;
+  string subscription_id = 3;
+  string provider = 4;
+  string status = 5;
+  double amount = 6;
+  string currency = 7;
+  string provider_reference = 8;
+  string processed_at_utc = 9;
+}
+
+message LedgerTransactionMessage {
+  string id = 1;
+  string reference = 2;
+  string description = 3;
+  string posted_at_utc = 4;
+}
+
+message ViewLedgerTransactionsResponse {
+  repeated LedgerTransactionMessage transactions = 1;
+}
+
+message AuditOutboxEventMessage {
+  string id = 1;
+  string category = 2;
+  string action = 3;
+  string entity_type = 4;
+  string entity_id = 5;
+  string occurred_at_utc = 6;
+  string status = 7;
+}
+
+message ViewAuditOutboxEventsResponse {
+  repeated AuditOutboxEventMessage events = 1;
+}
