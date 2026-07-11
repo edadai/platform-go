@@ -42,6 +42,7 @@ service SubscriptionBillingApi {
   rpc CreatePaymentIntent (CreatePaymentIntentRequest) returns (PaymentIntentResponse);
   rpc ConfirmPayment (EntityIdRequest) returns (PaymentResponse);
   rpc GetPaymentStatus (EntityIdRequest) returns (PaymentResponse);
+  rpc GetPaymentStatusByReference (PaymentReferenceRequest) returns (PaymentResponse);
 
   rpc ExtendSubscription (ExtendSubscriptionRequest) returns (SubscriptionResponse);
   rpc RestrictSubscription (ReasonedEntityRequest) returns (SubscriptionResponse);
@@ -247,6 +248,11 @@ message CreatePaymentIntentRequest {
   RequestContext context = 3;
 }
 
+message PaymentReferenceRequest {
+  string reference = 1;
+  RequestContext context = 2;
+}
+
 message ExtendSubscriptionRequest {
   string subscription_id = 1;
   int32 additional_days = 2;
@@ -351,6 +357,7 @@ message PaymentResponse {
   string currency = 7;
   string provider_reference = 8;
   string processed_at_utc = 9;
+  string failure_reason = 10;
 }
 
 message LedgerTransactionMessage {
