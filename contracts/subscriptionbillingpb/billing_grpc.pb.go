@@ -2,7 +2,7 @@
 // versions:
 // - protoc-gen-go-grpc v1.5.1
 // - protoc             (unknown)
-// source: billing.proto
+// source: proto/subscriptionbilling/billing.proto
 
 package subscriptionbillingpb
 
@@ -23,6 +23,7 @@ const (
 	SubscriptionBillingApi_CreatePlan_FullMethodName                  = "/subscriptionbilling.SubscriptionBillingApi/CreatePlan"
 	SubscriptionBillingApi_CreatePrice_FullMethodName                 = "/subscriptionbilling.SubscriptionBillingApi/CreatePrice"
 	SubscriptionBillingApi_CreateOffer_FullMethodName                 = "/subscriptionbilling.SubscriptionBillingApi/CreateOffer"
+	SubscriptionBillingApi_ConfigureOfferPhase_FullMethodName         = "/subscriptionbilling.SubscriptionBillingApi/ConfigureOfferPhase"
 	SubscriptionBillingApi_EnableOffer_FullMethodName                 = "/subscriptionbilling.SubscriptionBillingApi/EnableOffer"
 	SubscriptionBillingApi_DisableOffer_FullMethodName                = "/subscriptionbilling.SubscriptionBillingApi/DisableOffer"
 	SubscriptionBillingApi_AttachEntitlementToPlan_FullMethodName     = "/subscriptionbilling.SubscriptionBillingApi/AttachEntitlementToPlan"
@@ -60,6 +61,7 @@ type SubscriptionBillingApiClient interface {
 	CreatePlan(ctx context.Context, in *CreatePlanRequest, opts ...grpc.CallOption) (*EntityResponse, error)
 	CreatePrice(ctx context.Context, in *CreatePriceRequest, opts ...grpc.CallOption) (*EntityResponse, error)
 	CreateOffer(ctx context.Context, in *CreateOfferRequest, opts ...grpc.CallOption) (*EntityResponse, error)
+	ConfigureOfferPhase(ctx context.Context, in *ConfigureOfferPhaseRequest, opts ...grpc.CallOption) (*EntityResponse, error)
 	EnableOffer(ctx context.Context, in *EntityIdRequest, opts ...grpc.CallOption) (*EntityResponse, error)
 	DisableOffer(ctx context.Context, in *EntityIdRequest, opts ...grpc.CallOption) (*EntityResponse, error)
 	AttachEntitlementToPlan(ctx context.Context, in *AttachEntitlementToPlanRequest, opts ...grpc.CallOption) (*EntityResponse, error)
@@ -84,7 +86,7 @@ type SubscriptionBillingApiClient interface {
 	ListInvoices(ctx context.Context, in *CustomerRequest, opts ...grpc.CallOption) (*ListInvoicesResponse, error)
 	MarkManualInvoicePaid(ctx context.Context, in *EntityIdRequest, opts ...grpc.CallOption) (*InvoiceResponse, error)
 	RefundPayment(ctx context.Context, in *RefundPaymentRequest, opts ...grpc.CallOption) (*EntityResponse, error)
-	CreateCheckout(ctx context.Context, in *CreateCheckoutRequest, opts ...grpc.CallOption) (*PaymentIntentResponse, error)
+	CreateCheckout(ctx context.Context, in *CreateCheckoutRequest, opts ...grpc.CallOption) (*CheckoutResponse, error)
 	GetPaymentStatusByReference(ctx context.Context, in *PaymentReferenceRequest, opts ...grpc.CallOption) (*PaymentResponse, error)
 	ReceivePaystackWebhook(ctx context.Context, in *ReceivePaystackWebhookRequest, opts ...grpc.CallOption) (*StatusResponse, error)
 }
@@ -131,6 +133,16 @@ func (c *subscriptionBillingApiClient) CreateOffer(ctx context.Context, in *Crea
 	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
 	out := new(EntityResponse)
 	err := c.cc.Invoke(ctx, SubscriptionBillingApi_CreateOffer_FullMethodName, in, out, cOpts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *subscriptionBillingApiClient) ConfigureOfferPhase(ctx context.Context, in *ConfigureOfferPhaseRequest, opts ...grpc.CallOption) (*EntityResponse, error) {
+	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
+	out := new(EntityResponse)
+	err := c.cc.Invoke(ctx, SubscriptionBillingApi_ConfigureOfferPhase_FullMethodName, in, out, cOpts...)
 	if err != nil {
 		return nil, err
 	}
@@ -377,9 +389,9 @@ func (c *subscriptionBillingApiClient) RefundPayment(ctx context.Context, in *Re
 	return out, nil
 }
 
-func (c *subscriptionBillingApiClient) CreateCheckout(ctx context.Context, in *CreateCheckoutRequest, opts ...grpc.CallOption) (*PaymentIntentResponse, error) {
+func (c *subscriptionBillingApiClient) CreateCheckout(ctx context.Context, in *CreateCheckoutRequest, opts ...grpc.CallOption) (*CheckoutResponse, error) {
 	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
-	out := new(PaymentIntentResponse)
+	out := new(CheckoutResponse)
 	err := c.cc.Invoke(ctx, SubscriptionBillingApi_CreateCheckout_FullMethodName, in, out, cOpts...)
 	if err != nil {
 		return nil, err
@@ -415,6 +427,7 @@ type SubscriptionBillingApiServer interface {
 	CreatePlan(context.Context, *CreatePlanRequest) (*EntityResponse, error)
 	CreatePrice(context.Context, *CreatePriceRequest) (*EntityResponse, error)
 	CreateOffer(context.Context, *CreateOfferRequest) (*EntityResponse, error)
+	ConfigureOfferPhase(context.Context, *ConfigureOfferPhaseRequest) (*EntityResponse, error)
 	EnableOffer(context.Context, *EntityIdRequest) (*EntityResponse, error)
 	DisableOffer(context.Context, *EntityIdRequest) (*EntityResponse, error)
 	AttachEntitlementToPlan(context.Context, *AttachEntitlementToPlanRequest) (*EntityResponse, error)
@@ -439,7 +452,7 @@ type SubscriptionBillingApiServer interface {
 	ListInvoices(context.Context, *CustomerRequest) (*ListInvoicesResponse, error)
 	MarkManualInvoicePaid(context.Context, *EntityIdRequest) (*InvoiceResponse, error)
 	RefundPayment(context.Context, *RefundPaymentRequest) (*EntityResponse, error)
-	CreateCheckout(context.Context, *CreateCheckoutRequest) (*PaymentIntentResponse, error)
+	CreateCheckout(context.Context, *CreateCheckoutRequest) (*CheckoutResponse, error)
 	GetPaymentStatusByReference(context.Context, *PaymentReferenceRequest) (*PaymentResponse, error)
 	ReceivePaystackWebhook(context.Context, *ReceivePaystackWebhookRequest) (*StatusResponse, error)
 	mustEmbedUnimplementedSubscriptionBillingApiServer()
@@ -463,6 +476,9 @@ func (UnimplementedSubscriptionBillingApiServer) CreatePrice(context.Context, *C
 }
 func (UnimplementedSubscriptionBillingApiServer) CreateOffer(context.Context, *CreateOfferRequest) (*EntityResponse, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method CreateOffer not implemented")
+}
+func (UnimplementedSubscriptionBillingApiServer) ConfigureOfferPhase(context.Context, *ConfigureOfferPhaseRequest) (*EntityResponse, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method ConfigureOfferPhase not implemented")
 }
 func (UnimplementedSubscriptionBillingApiServer) EnableOffer(context.Context, *EntityIdRequest) (*EntityResponse, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method EnableOffer not implemented")
@@ -536,7 +552,7 @@ func (UnimplementedSubscriptionBillingApiServer) MarkManualInvoicePaid(context.C
 func (UnimplementedSubscriptionBillingApiServer) RefundPayment(context.Context, *RefundPaymentRequest) (*EntityResponse, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method RefundPayment not implemented")
 }
-func (UnimplementedSubscriptionBillingApiServer) CreateCheckout(context.Context, *CreateCheckoutRequest) (*PaymentIntentResponse, error) {
+func (UnimplementedSubscriptionBillingApiServer) CreateCheckout(context.Context, *CreateCheckoutRequest) (*CheckoutResponse, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method CreateCheckout not implemented")
 }
 func (UnimplementedSubscriptionBillingApiServer) GetPaymentStatusByReference(context.Context, *PaymentReferenceRequest) (*PaymentResponse, error) {
@@ -635,6 +651,24 @@ func _SubscriptionBillingApi_CreateOffer_Handler(srv interface{}, ctx context.Co
 	}
 	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
 		return srv.(SubscriptionBillingApiServer).CreateOffer(ctx, req.(*CreateOfferRequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _SubscriptionBillingApi_ConfigureOfferPhase_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(ConfigureOfferPhaseRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(SubscriptionBillingApiServer).ConfigureOfferPhase(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: SubscriptionBillingApi_ConfigureOfferPhase_FullMethodName,
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(SubscriptionBillingApiServer).ConfigureOfferPhase(ctx, req.(*ConfigureOfferPhaseRequest))
 	}
 	return interceptor(ctx, in, info, handler)
 }
@@ -1149,6 +1183,10 @@ var SubscriptionBillingApi_ServiceDesc = grpc.ServiceDesc{
 			Handler:    _SubscriptionBillingApi_CreateOffer_Handler,
 		},
 		{
+			MethodName: "ConfigureOfferPhase",
+			Handler:    _SubscriptionBillingApi_ConfigureOfferPhase_Handler,
+		},
+		{
 			MethodName: "EnableOffer",
 			Handler:    _SubscriptionBillingApi_EnableOffer_Handler,
 		},
@@ -1258,5 +1296,5 @@ var SubscriptionBillingApi_ServiceDesc = grpc.ServiceDesc{
 		},
 	},
 	Streams:  []grpc.StreamDesc{},
-	Metadata: "billing.proto",
+	Metadata: "proto/subscriptionbilling/billing.proto",
 }

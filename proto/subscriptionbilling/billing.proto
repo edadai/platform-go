@@ -10,6 +10,8 @@ service SubscriptionBillingApi {
   rpc CreatePlan (CreatePlanRequest) returns (EntityResponse);
   rpc CreatePrice (CreatePriceRequest) returns (EntityResponse);
   rpc CreateOffer (CreateOfferRequest) returns (EntityResponse);
+  rpc ConfigureOfferPhase (ConfigureOfferPhaseRequest) returns (EntityResponse);
+  rpc ConfigureCatalogPresentation (ConfigureCatalogPresentationRequest) returns (EntityResponse);
   rpc EnableOffer (EntityIdRequest) returns (EntityResponse);
   rpc DisableOffer (EntityIdRequest) returns (EntityResponse);
   rpc AttachEntitlementToPlan (AttachEntitlementToPlanRequest) returns (EntityResponse);
@@ -38,7 +40,7 @@ service SubscriptionBillingApi {
   rpc MarkManualInvoicePaid (EntityIdRequest) returns (InvoiceResponse);
   rpc RefundPayment (RefundPaymentRequest) returns (EntityResponse);
 
-  rpc CreateCheckout (CreateCheckoutRequest) returns (PaymentIntentResponse);
+  rpc CreateCheckout (CreateCheckoutRequest) returns (CheckoutResponse);
   rpc GetPaymentStatusByReference (PaymentReferenceRequest) returns (PaymentResponse);
 
   rpc ReceivePaystackWebhook (ReceivePaystackWebhookRequest) returns (StatusResponse);
@@ -70,6 +72,28 @@ message PlanResponse {
   string interval_unit = 11;
   int32 interval_count = 12;
   int32 active_subscriber_count = 13;
+  string parent_plan_id = 14;
+  string offer_id = 15;
+  string checkout_plan_code = 16;
+  string checkout_option_code = 17;
+  bool is_offer = 18;
+  string offer_phase_kind = 19;
+  double offer_phase_amount = 20;
+  string offer_phase_currency = 21;
+  string offer_phase_duration_unit = 22;
+  int32 offer_phase_duration_count = 23;
+  double recurring_amount = 24;
+  string recurring_currency = 25;
+  string recurring_interval_unit = 26;
+  int32 recurring_interval_count = 27;
+  string display_name = 28;
+  string display_description = 29;
+  string badge_text = 30;
+  int32 highlight_rank = 31;
+  bool is_recommended = 32;
+  string recommendation_reason = 33;
+  string terms_summary = 34;
+  string disclosure_text = 35;
 }
 message ListPlansResponse { repeated PlanResponse plans = 1; }
 
@@ -126,6 +150,33 @@ message CreateOfferRequest {
   string name = 4;
   string description = 5;
   RequestContext context = 6;
+}
+
+message ConfigureOfferPhaseRequest {
+  string offer_id = 1;
+  string kind = 2;
+  int32 sequence = 3;
+  double amount = 4;
+  string currency = 5;
+  string duration_unit = 6;
+  int32 duration_count = 7;
+  bool is_enabled = 8;
+  RequestContext context = 9;
+}
+
+message ConfigureCatalogPresentationRequest {
+  string plan_id = 1;
+  string offer_id = 2;
+  string display_name = 3;
+  string display_description = 4;
+  string badge_text = 5;
+  int32 highlight_rank = 6;
+  bool is_recommended = 7;
+  string recommendation_reason = 8;
+  string terms_summary = 9;
+  string disclosure_text = 10;
+  bool is_enabled = 11;
+  RequestContext context = 12;
 }
 
 message AttachEntitlementToPlanRequest {
@@ -222,8 +273,9 @@ message CreateCheckoutRequest {
   string customer_id = 1;
   string plan_code = 2;
   string billing_cycle = 3;
-  string callback_url = 4;
-  RequestContext context = 5;
+  string checkout_option_code = 4;
+  string callback_url = 5;
+  RequestContext context = 6;
 }
 
 message PaymentReferenceRequest {
@@ -307,6 +359,12 @@ message PaymentIntentResponse {
   string status = 5;
   string provider_reference = 6;
   string checkout_url = 7;
+}
+
+message CheckoutResponse {
+  SubscriptionResponse subscription = 1;
+  PaymentIntentResponse payment_intent = 2;
+  bool requires_payment = 3;
 }
 
 message PaymentResponse {
