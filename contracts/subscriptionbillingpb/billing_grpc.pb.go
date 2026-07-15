@@ -19,38 +19,39 @@ import (
 const _ = grpc.SupportPackageIsVersion9
 
 const (
-	SubscriptionBillingApi_CreateProduct_FullMethodName               = "/subscriptionbilling.SubscriptionBillingApi/CreateProduct"
-	SubscriptionBillingApi_CreatePlan_FullMethodName                  = "/subscriptionbilling.SubscriptionBillingApi/CreatePlan"
-	SubscriptionBillingApi_CreatePrice_FullMethodName                 = "/subscriptionbilling.SubscriptionBillingApi/CreatePrice"
-	SubscriptionBillingApi_CreateOffer_FullMethodName                 = "/subscriptionbilling.SubscriptionBillingApi/CreateOffer"
-	SubscriptionBillingApi_ConfigureOfferPhase_FullMethodName         = "/subscriptionbilling.SubscriptionBillingApi/ConfigureOfferPhase"
-	SubscriptionBillingApi_EnableOffer_FullMethodName                 = "/subscriptionbilling.SubscriptionBillingApi/EnableOffer"
-	SubscriptionBillingApi_DisableOffer_FullMethodName                = "/subscriptionbilling.SubscriptionBillingApi/DisableOffer"
-	SubscriptionBillingApi_AttachEntitlementToPlan_FullMethodName     = "/subscriptionbilling.SubscriptionBillingApi/AttachEntitlementToPlan"
-	SubscriptionBillingApi_ConfigureTrialPolicy_FullMethodName        = "/subscriptionbilling.SubscriptionBillingApi/ConfigureTrialPolicy"
-	SubscriptionBillingApi_ConfigureBillingPolicy_FullMethodName      = "/subscriptionbilling.SubscriptionBillingApi/ConfigureBillingPolicy"
-	SubscriptionBillingApi_ListPlans_FullMethodName                   = "/subscriptionbilling.SubscriptionBillingApi/ListPlans"
-	SubscriptionBillingApi_UpdatePlan_FullMethodName                  = "/subscriptionbilling.SubscriptionBillingApi/UpdatePlan"
-	SubscriptionBillingApi_PublishPlan_FullMethodName                 = "/subscriptionbilling.SubscriptionBillingApi/PublishPlan"
-	SubscriptionBillingApi_ArchivePlan_FullMethodName                 = "/subscriptionbilling.SubscriptionBillingApi/ArchivePlan"
-	SubscriptionBillingApi_StartTrial_FullMethodName                  = "/subscriptionbilling.SubscriptionBillingApi/StartTrial"
-	SubscriptionBillingApi_StartSubscription_FullMethodName           = "/subscriptionbilling.SubscriptionBillingApi/StartSubscription"
-	SubscriptionBillingApi_CancelSubscription_FullMethodName          = "/subscriptionbilling.SubscriptionBillingApi/CancelSubscription"
-	SubscriptionBillingApi_ChangePlan_FullMethodName                  = "/subscriptionbilling.SubscriptionBillingApi/ChangePlan"
-	SubscriptionBillingApi_GetSubscriptionStatus_FullMethodName       = "/subscriptionbilling.SubscriptionBillingApi/GetSubscriptionStatus"
-	SubscriptionBillingApi_GetCurrentSubscription_FullMethodName      = "/subscriptionbilling.SubscriptionBillingApi/GetCurrentSubscription"
-	SubscriptionBillingApi_CheckEntitlement_FullMethodName            = "/subscriptionbilling.SubscriptionBillingApi/CheckEntitlement"
-	SubscriptionBillingApi_GetEntitlementSnapshot_FullMethodName      = "/subscriptionbilling.SubscriptionBillingApi/GetEntitlementSnapshot"
-	SubscriptionBillingApi_RefreshEntitlementSnapshot_FullMethodName  = "/subscriptionbilling.SubscriptionBillingApi/RefreshEntitlementSnapshot"
-	SubscriptionBillingApi_RecordUsage_FullMethodName                 = "/subscriptionbilling.SubscriptionBillingApi/RecordUsage"
-	SubscriptionBillingApi_CreateInvoice_FullMethodName               = "/subscriptionbilling.SubscriptionBillingApi/CreateInvoice"
-	SubscriptionBillingApi_GetInvoice_FullMethodName                  = "/subscriptionbilling.SubscriptionBillingApi/GetInvoice"
-	SubscriptionBillingApi_ListInvoices_FullMethodName                = "/subscriptionbilling.SubscriptionBillingApi/ListInvoices"
-	SubscriptionBillingApi_MarkManualInvoicePaid_FullMethodName       = "/subscriptionbilling.SubscriptionBillingApi/MarkManualInvoicePaid"
-	SubscriptionBillingApi_RefundPayment_FullMethodName               = "/subscriptionbilling.SubscriptionBillingApi/RefundPayment"
-	SubscriptionBillingApi_CreateCheckout_FullMethodName              = "/subscriptionbilling.SubscriptionBillingApi/CreateCheckout"
-	SubscriptionBillingApi_GetPaymentStatusByReference_FullMethodName = "/subscriptionbilling.SubscriptionBillingApi/GetPaymentStatusByReference"
-	SubscriptionBillingApi_ReceivePaystackWebhook_FullMethodName      = "/subscriptionbilling.SubscriptionBillingApi/ReceivePaystackWebhook"
+	SubscriptionBillingApi_CreateProduct_FullMethodName                = "/subscriptionbilling.SubscriptionBillingApi/CreateProduct"
+	SubscriptionBillingApi_CreatePlan_FullMethodName                   = "/subscriptionbilling.SubscriptionBillingApi/CreatePlan"
+	SubscriptionBillingApi_CreatePrice_FullMethodName                  = "/subscriptionbilling.SubscriptionBillingApi/CreatePrice"
+	SubscriptionBillingApi_CreateOffer_FullMethodName                  = "/subscriptionbilling.SubscriptionBillingApi/CreateOffer"
+	SubscriptionBillingApi_ConfigureOfferPhase_FullMethodName          = "/subscriptionbilling.SubscriptionBillingApi/ConfigureOfferPhase"
+	SubscriptionBillingApi_ConfigureCatalogPresentation_FullMethodName = "/subscriptionbilling.SubscriptionBillingApi/ConfigureCatalogPresentation"
+	SubscriptionBillingApi_EnableOffer_FullMethodName                  = "/subscriptionbilling.SubscriptionBillingApi/EnableOffer"
+	SubscriptionBillingApi_DisableOffer_FullMethodName                 = "/subscriptionbilling.SubscriptionBillingApi/DisableOffer"
+	SubscriptionBillingApi_AttachEntitlementToPlan_FullMethodName      = "/subscriptionbilling.SubscriptionBillingApi/AttachEntitlementToPlan"
+	SubscriptionBillingApi_ConfigureTrialPolicy_FullMethodName         = "/subscriptionbilling.SubscriptionBillingApi/ConfigureTrialPolicy"
+	SubscriptionBillingApi_ConfigureBillingPolicy_FullMethodName       = "/subscriptionbilling.SubscriptionBillingApi/ConfigureBillingPolicy"
+	SubscriptionBillingApi_ListPlans_FullMethodName                    = "/subscriptionbilling.SubscriptionBillingApi/ListPlans"
+	SubscriptionBillingApi_UpdatePlan_FullMethodName                   = "/subscriptionbilling.SubscriptionBillingApi/UpdatePlan"
+	SubscriptionBillingApi_PublishPlan_FullMethodName                  = "/subscriptionbilling.SubscriptionBillingApi/PublishPlan"
+	SubscriptionBillingApi_ArchivePlan_FullMethodName                  = "/subscriptionbilling.SubscriptionBillingApi/ArchivePlan"
+	SubscriptionBillingApi_StartTrial_FullMethodName                   = "/subscriptionbilling.SubscriptionBillingApi/StartTrial"
+	SubscriptionBillingApi_StartSubscription_FullMethodName            = "/subscriptionbilling.SubscriptionBillingApi/StartSubscription"
+	SubscriptionBillingApi_CancelSubscription_FullMethodName           = "/subscriptionbilling.SubscriptionBillingApi/CancelSubscription"
+	SubscriptionBillingApi_ChangePlan_FullMethodName                   = "/subscriptionbilling.SubscriptionBillingApi/ChangePlan"
+	SubscriptionBillingApi_GetSubscriptionStatus_FullMethodName        = "/subscriptionbilling.SubscriptionBillingApi/GetSubscriptionStatus"
+	SubscriptionBillingApi_GetCurrentSubscription_FullMethodName       = "/subscriptionbilling.SubscriptionBillingApi/GetCurrentSubscription"
+	SubscriptionBillingApi_CheckEntitlement_FullMethodName             = "/subscriptionbilling.SubscriptionBillingApi/CheckEntitlement"
+	SubscriptionBillingApi_GetEntitlementSnapshot_FullMethodName       = "/subscriptionbilling.SubscriptionBillingApi/GetEntitlementSnapshot"
+	SubscriptionBillingApi_RefreshEntitlementSnapshot_FullMethodName   = "/subscriptionbilling.SubscriptionBillingApi/RefreshEntitlementSnapshot"
+	SubscriptionBillingApi_RecordUsage_FullMethodName                  = "/subscriptionbilling.SubscriptionBillingApi/RecordUsage"
+	SubscriptionBillingApi_CreateInvoice_FullMethodName                = "/subscriptionbilling.SubscriptionBillingApi/CreateInvoice"
+	SubscriptionBillingApi_GetInvoice_FullMethodName                   = "/subscriptionbilling.SubscriptionBillingApi/GetInvoice"
+	SubscriptionBillingApi_ListInvoices_FullMethodName                 = "/subscriptionbilling.SubscriptionBillingApi/ListInvoices"
+	SubscriptionBillingApi_MarkManualInvoicePaid_FullMethodName        = "/subscriptionbilling.SubscriptionBillingApi/MarkManualInvoicePaid"
+	SubscriptionBillingApi_RefundPayment_FullMethodName                = "/subscriptionbilling.SubscriptionBillingApi/RefundPayment"
+	SubscriptionBillingApi_CreateCheckout_FullMethodName               = "/subscriptionbilling.SubscriptionBillingApi/CreateCheckout"
+	SubscriptionBillingApi_GetPaymentStatusByReference_FullMethodName  = "/subscriptionbilling.SubscriptionBillingApi/GetPaymentStatusByReference"
+	SubscriptionBillingApi_ReceivePaystackWebhook_FullMethodName       = "/subscriptionbilling.SubscriptionBillingApi/ReceivePaystackWebhook"
 )
 
 // SubscriptionBillingApiClient is the client API for SubscriptionBillingApi service.
@@ -62,6 +63,7 @@ type SubscriptionBillingApiClient interface {
 	CreatePrice(ctx context.Context, in *CreatePriceRequest, opts ...grpc.CallOption) (*EntityResponse, error)
 	CreateOffer(ctx context.Context, in *CreateOfferRequest, opts ...grpc.CallOption) (*EntityResponse, error)
 	ConfigureOfferPhase(ctx context.Context, in *ConfigureOfferPhaseRequest, opts ...grpc.CallOption) (*EntityResponse, error)
+	ConfigureCatalogPresentation(ctx context.Context, in *ConfigureCatalogPresentationRequest, opts ...grpc.CallOption) (*EntityResponse, error)
 	EnableOffer(ctx context.Context, in *EntityIdRequest, opts ...grpc.CallOption) (*EntityResponse, error)
 	DisableOffer(ctx context.Context, in *EntityIdRequest, opts ...grpc.CallOption) (*EntityResponse, error)
 	AttachEntitlementToPlan(ctx context.Context, in *AttachEntitlementToPlanRequest, opts ...grpc.CallOption) (*EntityResponse, error)
@@ -143,6 +145,16 @@ func (c *subscriptionBillingApiClient) ConfigureOfferPhase(ctx context.Context, 
 	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
 	out := new(EntityResponse)
 	err := c.cc.Invoke(ctx, SubscriptionBillingApi_ConfigureOfferPhase_FullMethodName, in, out, cOpts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *subscriptionBillingApiClient) ConfigureCatalogPresentation(ctx context.Context, in *ConfigureCatalogPresentationRequest, opts ...grpc.CallOption) (*EntityResponse, error) {
+	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
+	out := new(EntityResponse)
+	err := c.cc.Invoke(ctx, SubscriptionBillingApi_ConfigureCatalogPresentation_FullMethodName, in, out, cOpts...)
 	if err != nil {
 		return nil, err
 	}
@@ -428,6 +440,7 @@ type SubscriptionBillingApiServer interface {
 	CreatePrice(context.Context, *CreatePriceRequest) (*EntityResponse, error)
 	CreateOffer(context.Context, *CreateOfferRequest) (*EntityResponse, error)
 	ConfigureOfferPhase(context.Context, *ConfigureOfferPhaseRequest) (*EntityResponse, error)
+	ConfigureCatalogPresentation(context.Context, *ConfigureCatalogPresentationRequest) (*EntityResponse, error)
 	EnableOffer(context.Context, *EntityIdRequest) (*EntityResponse, error)
 	DisableOffer(context.Context, *EntityIdRequest) (*EntityResponse, error)
 	AttachEntitlementToPlan(context.Context, *AttachEntitlementToPlanRequest) (*EntityResponse, error)
@@ -479,6 +492,9 @@ func (UnimplementedSubscriptionBillingApiServer) CreateOffer(context.Context, *C
 }
 func (UnimplementedSubscriptionBillingApiServer) ConfigureOfferPhase(context.Context, *ConfigureOfferPhaseRequest) (*EntityResponse, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method ConfigureOfferPhase not implemented")
+}
+func (UnimplementedSubscriptionBillingApiServer) ConfigureCatalogPresentation(context.Context, *ConfigureCatalogPresentationRequest) (*EntityResponse, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method ConfigureCatalogPresentation not implemented")
 }
 func (UnimplementedSubscriptionBillingApiServer) EnableOffer(context.Context, *EntityIdRequest) (*EntityResponse, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method EnableOffer not implemented")
@@ -669,6 +685,24 @@ func _SubscriptionBillingApi_ConfigureOfferPhase_Handler(srv interface{}, ctx co
 	}
 	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
 		return srv.(SubscriptionBillingApiServer).ConfigureOfferPhase(ctx, req.(*ConfigureOfferPhaseRequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _SubscriptionBillingApi_ConfigureCatalogPresentation_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(ConfigureCatalogPresentationRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(SubscriptionBillingApiServer).ConfigureCatalogPresentation(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: SubscriptionBillingApi_ConfigureCatalogPresentation_FullMethodName,
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(SubscriptionBillingApiServer).ConfigureCatalogPresentation(ctx, req.(*ConfigureCatalogPresentationRequest))
 	}
 	return interceptor(ctx, in, info, handler)
 }
@@ -1185,6 +1219,10 @@ var SubscriptionBillingApi_ServiceDesc = grpc.ServiceDesc{
 		{
 			MethodName: "ConfigureOfferPhase",
 			Handler:    _SubscriptionBillingApi_ConfigureOfferPhase_Handler,
+		},
+		{
+			MethodName: "ConfigureCatalogPresentation",
+			Handler:    _SubscriptionBillingApi_ConfigureCatalogPresentation_Handler,
 		},
 		{
 			MethodName: "EnableOffer",
