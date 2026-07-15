@@ -36,27 +36,13 @@ service SubscriptionBillingApi {
   rpc GetInvoice (EntityIdRequest) returns (InvoiceResponse);
   rpc ListInvoices (CustomerRequest) returns (ListInvoicesResponse);
   rpc MarkManualInvoicePaid (EntityIdRequest) returns (InvoiceResponse);
-  rpc RetryPayment (EntityIdRequest) returns (PaymentResponse);
   rpc RefundPayment (RefundPaymentRequest) returns (EntityResponse);
 
-  rpc CreatePaymentIntent (CreatePaymentIntentRequest) returns (PaymentIntentResponse);
-  rpc ConfirmPayment (EntityIdRequest) returns (PaymentResponse);
-  rpc GetPaymentStatus (EntityIdRequest) returns (PaymentResponse);
+  rpc CreateCheckout (CreateCheckoutRequest) returns (PaymentIntentResponse);
   rpc GetPaymentStatusByReference (PaymentReferenceRequest) returns (PaymentResponse);
-
-  rpc ExtendSubscription (ExtendSubscriptionRequest) returns (SubscriptionResponse);
-  rpc RestrictSubscription (ReasonedEntityRequest) returns (SubscriptionResponse);
-  rpc ExpireSubscription (ReasonedEntityRequest) returns (SubscriptionResponse);
-  rpc GrantCustomEntitlement (GrantCustomEntitlementRequest) returns (EntityResponse);
-  rpc ViewLedgerTransactions (OptionalSubscriptionRequest) returns (ViewLedgerTransactionsResponse);
-  rpc ViewAuditOutboxEvents (Empty) returns (ViewAuditOutboxEventsResponse);
-  rpc ReplayAuditOutboxEvent (EntityIdRequest) returns (StatusResponse);
-  rpc ReplayDomainEventOutboxEvent (EntityIdRequest) returns (StatusResponse);
 
   rpc ReceivePaystackWebhook (ReceivePaystackWebhookRequest) returns (StatusResponse);
 }
-
-message Empty {}
 
 message ListPlansRequest { bool public_only = 1; }
 message UpdatePlanRequest {
@@ -102,19 +88,9 @@ message EntityIdRequest {
   RequestContext context = 2;
 }
 
-message ReasonedEntityRequest {
-  string id = 1;
-  string reason = 2;
-  RequestContext context = 3;
-}
-
 message CustomerRequest {
   string customer_id = 1;
   RequestContext context = 2;
-}
-
-message OptionalSubscriptionRequest {
-  string subscription_id = 1;
 }
 
 message CreateProductRequest {
@@ -242,31 +218,17 @@ message RefundPaymentRequest {
   RequestContext context = 3;
 }
 
-message CreatePaymentIntentRequest {
-  string invoice_id = 1;
-  string callback_url = 2;
-  RequestContext context = 3;
+message CreateCheckoutRequest {
+  string customer_id = 1;
+  string plan_code = 2;
+  string billing_cycle = 3;
+  string callback_url = 4;
+  RequestContext context = 5;
 }
 
 message PaymentReferenceRequest {
   string reference = 1;
   RequestContext context = 2;
-}
-
-message ExtendSubscriptionRequest {
-  string subscription_id = 1;
-  int32 additional_days = 2;
-  RequestContext context = 3;
-}
-
-message GrantCustomEntitlementRequest {
-  string subscription_id = 1;
-  string customer_id = 2;
-  string feature_code = 3;
-  string value = 4;
-  double usage_limit = 5;
-  string expires_at_utc = 6;
-  RequestContext context = 7;
 }
 
 message ReceivePaystackWebhookRequest {
@@ -358,29 +320,4 @@ message PaymentResponse {
   string provider_reference = 8;
   string processed_at_utc = 9;
   string failure_reason = 10;
-}
-
-message LedgerTransactionMessage {
-  string id = 1;
-  string reference = 2;
-  string description = 3;
-  string posted_at_utc = 4;
-}
-
-message ViewLedgerTransactionsResponse {
-  repeated LedgerTransactionMessage transactions = 1;
-}
-
-message AuditOutboxEventMessage {
-  string id = 1;
-  string category = 2;
-  string action = 3;
-  string entity_type = 4;
-  string entity_id = 5;
-  string occurred_at_utc = 6;
-  string status = 7;
-}
-
-message ViewAuditOutboxEventsResponse {
-  repeated AuditOutboxEventMessage events = 1;
 }

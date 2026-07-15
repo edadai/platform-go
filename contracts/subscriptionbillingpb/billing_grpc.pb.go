@@ -19,48 +19,37 @@ import (
 const _ = grpc.SupportPackageIsVersion9
 
 const (
-	SubscriptionBillingApi_CreateProduct_FullMethodName                = "/subscriptionbilling.SubscriptionBillingApi/CreateProduct"
-	SubscriptionBillingApi_CreatePlan_FullMethodName                   = "/subscriptionbilling.SubscriptionBillingApi/CreatePlan"
-	SubscriptionBillingApi_CreatePrice_FullMethodName                  = "/subscriptionbilling.SubscriptionBillingApi/CreatePrice"
-	SubscriptionBillingApi_CreateOffer_FullMethodName                  = "/subscriptionbilling.SubscriptionBillingApi/CreateOffer"
-	SubscriptionBillingApi_EnableOffer_FullMethodName                  = "/subscriptionbilling.SubscriptionBillingApi/EnableOffer"
-	SubscriptionBillingApi_DisableOffer_FullMethodName                 = "/subscriptionbilling.SubscriptionBillingApi/DisableOffer"
-	SubscriptionBillingApi_AttachEntitlementToPlan_FullMethodName      = "/subscriptionbilling.SubscriptionBillingApi/AttachEntitlementToPlan"
-	SubscriptionBillingApi_ConfigureTrialPolicy_FullMethodName         = "/subscriptionbilling.SubscriptionBillingApi/ConfigureTrialPolicy"
-	SubscriptionBillingApi_ConfigureBillingPolicy_FullMethodName       = "/subscriptionbilling.SubscriptionBillingApi/ConfigureBillingPolicy"
-	SubscriptionBillingApi_ListPlans_FullMethodName                    = "/subscriptionbilling.SubscriptionBillingApi/ListPlans"
-	SubscriptionBillingApi_UpdatePlan_FullMethodName                   = "/subscriptionbilling.SubscriptionBillingApi/UpdatePlan"
-	SubscriptionBillingApi_PublishPlan_FullMethodName                  = "/subscriptionbilling.SubscriptionBillingApi/PublishPlan"
-	SubscriptionBillingApi_ArchivePlan_FullMethodName                  = "/subscriptionbilling.SubscriptionBillingApi/ArchivePlan"
-	SubscriptionBillingApi_StartTrial_FullMethodName                   = "/subscriptionbilling.SubscriptionBillingApi/StartTrial"
-	SubscriptionBillingApi_StartSubscription_FullMethodName            = "/subscriptionbilling.SubscriptionBillingApi/StartSubscription"
-	SubscriptionBillingApi_CancelSubscription_FullMethodName           = "/subscriptionbilling.SubscriptionBillingApi/CancelSubscription"
-	SubscriptionBillingApi_ChangePlan_FullMethodName                   = "/subscriptionbilling.SubscriptionBillingApi/ChangePlan"
-	SubscriptionBillingApi_GetSubscriptionStatus_FullMethodName        = "/subscriptionbilling.SubscriptionBillingApi/GetSubscriptionStatus"
-	SubscriptionBillingApi_GetCurrentSubscription_FullMethodName       = "/subscriptionbilling.SubscriptionBillingApi/GetCurrentSubscription"
-	SubscriptionBillingApi_CheckEntitlement_FullMethodName             = "/subscriptionbilling.SubscriptionBillingApi/CheckEntitlement"
-	SubscriptionBillingApi_GetEntitlementSnapshot_FullMethodName       = "/subscriptionbilling.SubscriptionBillingApi/GetEntitlementSnapshot"
-	SubscriptionBillingApi_RefreshEntitlementSnapshot_FullMethodName   = "/subscriptionbilling.SubscriptionBillingApi/RefreshEntitlementSnapshot"
-	SubscriptionBillingApi_RecordUsage_FullMethodName                  = "/subscriptionbilling.SubscriptionBillingApi/RecordUsage"
-	SubscriptionBillingApi_CreateInvoice_FullMethodName                = "/subscriptionbilling.SubscriptionBillingApi/CreateInvoice"
-	SubscriptionBillingApi_GetInvoice_FullMethodName                   = "/subscriptionbilling.SubscriptionBillingApi/GetInvoice"
-	SubscriptionBillingApi_ListInvoices_FullMethodName                 = "/subscriptionbilling.SubscriptionBillingApi/ListInvoices"
-	SubscriptionBillingApi_MarkManualInvoicePaid_FullMethodName        = "/subscriptionbilling.SubscriptionBillingApi/MarkManualInvoicePaid"
-	SubscriptionBillingApi_RetryPayment_FullMethodName                 = "/subscriptionbilling.SubscriptionBillingApi/RetryPayment"
-	SubscriptionBillingApi_RefundPayment_FullMethodName                = "/subscriptionbilling.SubscriptionBillingApi/RefundPayment"
-	SubscriptionBillingApi_CreatePaymentIntent_FullMethodName          = "/subscriptionbilling.SubscriptionBillingApi/CreatePaymentIntent"
-	SubscriptionBillingApi_ConfirmPayment_FullMethodName               = "/subscriptionbilling.SubscriptionBillingApi/ConfirmPayment"
-	SubscriptionBillingApi_GetPaymentStatus_FullMethodName             = "/subscriptionbilling.SubscriptionBillingApi/GetPaymentStatus"
-	SubscriptionBillingApi_GetPaymentStatusByReference_FullMethodName  = "/subscriptionbilling.SubscriptionBillingApi/GetPaymentStatusByReference"
-	SubscriptionBillingApi_ExtendSubscription_FullMethodName           = "/subscriptionbilling.SubscriptionBillingApi/ExtendSubscription"
-	SubscriptionBillingApi_RestrictSubscription_FullMethodName         = "/subscriptionbilling.SubscriptionBillingApi/RestrictSubscription"
-	SubscriptionBillingApi_ExpireSubscription_FullMethodName           = "/subscriptionbilling.SubscriptionBillingApi/ExpireSubscription"
-	SubscriptionBillingApi_GrantCustomEntitlement_FullMethodName       = "/subscriptionbilling.SubscriptionBillingApi/GrantCustomEntitlement"
-	SubscriptionBillingApi_ViewLedgerTransactions_FullMethodName       = "/subscriptionbilling.SubscriptionBillingApi/ViewLedgerTransactions"
-	SubscriptionBillingApi_ViewAuditOutboxEvents_FullMethodName        = "/subscriptionbilling.SubscriptionBillingApi/ViewAuditOutboxEvents"
-	SubscriptionBillingApi_ReplayAuditOutboxEvent_FullMethodName       = "/subscriptionbilling.SubscriptionBillingApi/ReplayAuditOutboxEvent"
-	SubscriptionBillingApi_ReplayDomainEventOutboxEvent_FullMethodName = "/subscriptionbilling.SubscriptionBillingApi/ReplayDomainEventOutboxEvent"
-	SubscriptionBillingApi_ReceivePaystackWebhook_FullMethodName       = "/subscriptionbilling.SubscriptionBillingApi/ReceivePaystackWebhook"
+	SubscriptionBillingApi_CreateProduct_FullMethodName               = "/subscriptionbilling.SubscriptionBillingApi/CreateProduct"
+	SubscriptionBillingApi_CreatePlan_FullMethodName                  = "/subscriptionbilling.SubscriptionBillingApi/CreatePlan"
+	SubscriptionBillingApi_CreatePrice_FullMethodName                 = "/subscriptionbilling.SubscriptionBillingApi/CreatePrice"
+	SubscriptionBillingApi_CreateOffer_FullMethodName                 = "/subscriptionbilling.SubscriptionBillingApi/CreateOffer"
+	SubscriptionBillingApi_EnableOffer_FullMethodName                 = "/subscriptionbilling.SubscriptionBillingApi/EnableOffer"
+	SubscriptionBillingApi_DisableOffer_FullMethodName                = "/subscriptionbilling.SubscriptionBillingApi/DisableOffer"
+	SubscriptionBillingApi_AttachEntitlementToPlan_FullMethodName     = "/subscriptionbilling.SubscriptionBillingApi/AttachEntitlementToPlan"
+	SubscriptionBillingApi_ConfigureTrialPolicy_FullMethodName        = "/subscriptionbilling.SubscriptionBillingApi/ConfigureTrialPolicy"
+	SubscriptionBillingApi_ConfigureBillingPolicy_FullMethodName      = "/subscriptionbilling.SubscriptionBillingApi/ConfigureBillingPolicy"
+	SubscriptionBillingApi_ListPlans_FullMethodName                   = "/subscriptionbilling.SubscriptionBillingApi/ListPlans"
+	SubscriptionBillingApi_UpdatePlan_FullMethodName                  = "/subscriptionbilling.SubscriptionBillingApi/UpdatePlan"
+	SubscriptionBillingApi_PublishPlan_FullMethodName                 = "/subscriptionbilling.SubscriptionBillingApi/PublishPlan"
+	SubscriptionBillingApi_ArchivePlan_FullMethodName                 = "/subscriptionbilling.SubscriptionBillingApi/ArchivePlan"
+	SubscriptionBillingApi_StartTrial_FullMethodName                  = "/subscriptionbilling.SubscriptionBillingApi/StartTrial"
+	SubscriptionBillingApi_StartSubscription_FullMethodName           = "/subscriptionbilling.SubscriptionBillingApi/StartSubscription"
+	SubscriptionBillingApi_CancelSubscription_FullMethodName          = "/subscriptionbilling.SubscriptionBillingApi/CancelSubscription"
+	SubscriptionBillingApi_ChangePlan_FullMethodName                  = "/subscriptionbilling.SubscriptionBillingApi/ChangePlan"
+	SubscriptionBillingApi_GetSubscriptionStatus_FullMethodName       = "/subscriptionbilling.SubscriptionBillingApi/GetSubscriptionStatus"
+	SubscriptionBillingApi_GetCurrentSubscription_FullMethodName      = "/subscriptionbilling.SubscriptionBillingApi/GetCurrentSubscription"
+	SubscriptionBillingApi_CheckEntitlement_FullMethodName            = "/subscriptionbilling.SubscriptionBillingApi/CheckEntitlement"
+	SubscriptionBillingApi_GetEntitlementSnapshot_FullMethodName      = "/subscriptionbilling.SubscriptionBillingApi/GetEntitlementSnapshot"
+	SubscriptionBillingApi_RefreshEntitlementSnapshot_FullMethodName  = "/subscriptionbilling.SubscriptionBillingApi/RefreshEntitlementSnapshot"
+	SubscriptionBillingApi_RecordUsage_FullMethodName                 = "/subscriptionbilling.SubscriptionBillingApi/RecordUsage"
+	SubscriptionBillingApi_CreateInvoice_FullMethodName               = "/subscriptionbilling.SubscriptionBillingApi/CreateInvoice"
+	SubscriptionBillingApi_GetInvoice_FullMethodName                  = "/subscriptionbilling.SubscriptionBillingApi/GetInvoice"
+	SubscriptionBillingApi_ListInvoices_FullMethodName                = "/subscriptionbilling.SubscriptionBillingApi/ListInvoices"
+	SubscriptionBillingApi_MarkManualInvoicePaid_FullMethodName       = "/subscriptionbilling.SubscriptionBillingApi/MarkManualInvoicePaid"
+	SubscriptionBillingApi_RefundPayment_FullMethodName               = "/subscriptionbilling.SubscriptionBillingApi/RefundPayment"
+	SubscriptionBillingApi_CreateCheckout_FullMethodName              = "/subscriptionbilling.SubscriptionBillingApi/CreateCheckout"
+	SubscriptionBillingApi_GetPaymentStatusByReference_FullMethodName = "/subscriptionbilling.SubscriptionBillingApi/GetPaymentStatusByReference"
+	SubscriptionBillingApi_ReceivePaystackWebhook_FullMethodName      = "/subscriptionbilling.SubscriptionBillingApi/ReceivePaystackWebhook"
 )
 
 // SubscriptionBillingApiClient is the client API for SubscriptionBillingApi service.
@@ -94,20 +83,9 @@ type SubscriptionBillingApiClient interface {
 	GetInvoice(ctx context.Context, in *EntityIdRequest, opts ...grpc.CallOption) (*InvoiceResponse, error)
 	ListInvoices(ctx context.Context, in *CustomerRequest, opts ...grpc.CallOption) (*ListInvoicesResponse, error)
 	MarkManualInvoicePaid(ctx context.Context, in *EntityIdRequest, opts ...grpc.CallOption) (*InvoiceResponse, error)
-	RetryPayment(ctx context.Context, in *EntityIdRequest, opts ...grpc.CallOption) (*PaymentResponse, error)
 	RefundPayment(ctx context.Context, in *RefundPaymentRequest, opts ...grpc.CallOption) (*EntityResponse, error)
-	CreatePaymentIntent(ctx context.Context, in *CreatePaymentIntentRequest, opts ...grpc.CallOption) (*PaymentIntentResponse, error)
-	ConfirmPayment(ctx context.Context, in *EntityIdRequest, opts ...grpc.CallOption) (*PaymentResponse, error)
-	GetPaymentStatus(ctx context.Context, in *EntityIdRequest, opts ...grpc.CallOption) (*PaymentResponse, error)
+	CreateCheckout(ctx context.Context, in *CreateCheckoutRequest, opts ...grpc.CallOption) (*PaymentIntentResponse, error)
 	GetPaymentStatusByReference(ctx context.Context, in *PaymentReferenceRequest, opts ...grpc.CallOption) (*PaymentResponse, error)
-	ExtendSubscription(ctx context.Context, in *ExtendSubscriptionRequest, opts ...grpc.CallOption) (*SubscriptionResponse, error)
-	RestrictSubscription(ctx context.Context, in *ReasonedEntityRequest, opts ...grpc.CallOption) (*SubscriptionResponse, error)
-	ExpireSubscription(ctx context.Context, in *ReasonedEntityRequest, opts ...grpc.CallOption) (*SubscriptionResponse, error)
-	GrantCustomEntitlement(ctx context.Context, in *GrantCustomEntitlementRequest, opts ...grpc.CallOption) (*EntityResponse, error)
-	ViewLedgerTransactions(ctx context.Context, in *OptionalSubscriptionRequest, opts ...grpc.CallOption) (*ViewLedgerTransactionsResponse, error)
-	ViewAuditOutboxEvents(ctx context.Context, in *Empty, opts ...grpc.CallOption) (*ViewAuditOutboxEventsResponse, error)
-	ReplayAuditOutboxEvent(ctx context.Context, in *EntityIdRequest, opts ...grpc.CallOption) (*StatusResponse, error)
-	ReplayDomainEventOutboxEvent(ctx context.Context, in *EntityIdRequest, opts ...grpc.CallOption) (*StatusResponse, error)
 	ReceivePaystackWebhook(ctx context.Context, in *ReceivePaystackWebhookRequest, opts ...grpc.CallOption) (*StatusResponse, error)
 }
 
@@ -389,16 +367,6 @@ func (c *subscriptionBillingApiClient) MarkManualInvoicePaid(ctx context.Context
 	return out, nil
 }
 
-func (c *subscriptionBillingApiClient) RetryPayment(ctx context.Context, in *EntityIdRequest, opts ...grpc.CallOption) (*PaymentResponse, error) {
-	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
-	out := new(PaymentResponse)
-	err := c.cc.Invoke(ctx, SubscriptionBillingApi_RetryPayment_FullMethodName, in, out, cOpts...)
-	if err != nil {
-		return nil, err
-	}
-	return out, nil
-}
-
 func (c *subscriptionBillingApiClient) RefundPayment(ctx context.Context, in *RefundPaymentRequest, opts ...grpc.CallOption) (*EntityResponse, error) {
 	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
 	out := new(EntityResponse)
@@ -409,30 +377,10 @@ func (c *subscriptionBillingApiClient) RefundPayment(ctx context.Context, in *Re
 	return out, nil
 }
 
-func (c *subscriptionBillingApiClient) CreatePaymentIntent(ctx context.Context, in *CreatePaymentIntentRequest, opts ...grpc.CallOption) (*PaymentIntentResponse, error) {
+func (c *subscriptionBillingApiClient) CreateCheckout(ctx context.Context, in *CreateCheckoutRequest, opts ...grpc.CallOption) (*PaymentIntentResponse, error) {
 	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
 	out := new(PaymentIntentResponse)
-	err := c.cc.Invoke(ctx, SubscriptionBillingApi_CreatePaymentIntent_FullMethodName, in, out, cOpts...)
-	if err != nil {
-		return nil, err
-	}
-	return out, nil
-}
-
-func (c *subscriptionBillingApiClient) ConfirmPayment(ctx context.Context, in *EntityIdRequest, opts ...grpc.CallOption) (*PaymentResponse, error) {
-	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
-	out := new(PaymentResponse)
-	err := c.cc.Invoke(ctx, SubscriptionBillingApi_ConfirmPayment_FullMethodName, in, out, cOpts...)
-	if err != nil {
-		return nil, err
-	}
-	return out, nil
-}
-
-func (c *subscriptionBillingApiClient) GetPaymentStatus(ctx context.Context, in *EntityIdRequest, opts ...grpc.CallOption) (*PaymentResponse, error) {
-	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
-	out := new(PaymentResponse)
-	err := c.cc.Invoke(ctx, SubscriptionBillingApi_GetPaymentStatus_FullMethodName, in, out, cOpts...)
+	err := c.cc.Invoke(ctx, SubscriptionBillingApi_CreateCheckout_FullMethodName, in, out, cOpts...)
 	if err != nil {
 		return nil, err
 	}
@@ -443,86 +391,6 @@ func (c *subscriptionBillingApiClient) GetPaymentStatusByReference(ctx context.C
 	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
 	out := new(PaymentResponse)
 	err := c.cc.Invoke(ctx, SubscriptionBillingApi_GetPaymentStatusByReference_FullMethodName, in, out, cOpts...)
-	if err != nil {
-		return nil, err
-	}
-	return out, nil
-}
-
-func (c *subscriptionBillingApiClient) ExtendSubscription(ctx context.Context, in *ExtendSubscriptionRequest, opts ...grpc.CallOption) (*SubscriptionResponse, error) {
-	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
-	out := new(SubscriptionResponse)
-	err := c.cc.Invoke(ctx, SubscriptionBillingApi_ExtendSubscription_FullMethodName, in, out, cOpts...)
-	if err != nil {
-		return nil, err
-	}
-	return out, nil
-}
-
-func (c *subscriptionBillingApiClient) RestrictSubscription(ctx context.Context, in *ReasonedEntityRequest, opts ...grpc.CallOption) (*SubscriptionResponse, error) {
-	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
-	out := new(SubscriptionResponse)
-	err := c.cc.Invoke(ctx, SubscriptionBillingApi_RestrictSubscription_FullMethodName, in, out, cOpts...)
-	if err != nil {
-		return nil, err
-	}
-	return out, nil
-}
-
-func (c *subscriptionBillingApiClient) ExpireSubscription(ctx context.Context, in *ReasonedEntityRequest, opts ...grpc.CallOption) (*SubscriptionResponse, error) {
-	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
-	out := new(SubscriptionResponse)
-	err := c.cc.Invoke(ctx, SubscriptionBillingApi_ExpireSubscription_FullMethodName, in, out, cOpts...)
-	if err != nil {
-		return nil, err
-	}
-	return out, nil
-}
-
-func (c *subscriptionBillingApiClient) GrantCustomEntitlement(ctx context.Context, in *GrantCustomEntitlementRequest, opts ...grpc.CallOption) (*EntityResponse, error) {
-	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
-	out := new(EntityResponse)
-	err := c.cc.Invoke(ctx, SubscriptionBillingApi_GrantCustomEntitlement_FullMethodName, in, out, cOpts...)
-	if err != nil {
-		return nil, err
-	}
-	return out, nil
-}
-
-func (c *subscriptionBillingApiClient) ViewLedgerTransactions(ctx context.Context, in *OptionalSubscriptionRequest, opts ...grpc.CallOption) (*ViewLedgerTransactionsResponse, error) {
-	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
-	out := new(ViewLedgerTransactionsResponse)
-	err := c.cc.Invoke(ctx, SubscriptionBillingApi_ViewLedgerTransactions_FullMethodName, in, out, cOpts...)
-	if err != nil {
-		return nil, err
-	}
-	return out, nil
-}
-
-func (c *subscriptionBillingApiClient) ViewAuditOutboxEvents(ctx context.Context, in *Empty, opts ...grpc.CallOption) (*ViewAuditOutboxEventsResponse, error) {
-	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
-	out := new(ViewAuditOutboxEventsResponse)
-	err := c.cc.Invoke(ctx, SubscriptionBillingApi_ViewAuditOutboxEvents_FullMethodName, in, out, cOpts...)
-	if err != nil {
-		return nil, err
-	}
-	return out, nil
-}
-
-func (c *subscriptionBillingApiClient) ReplayAuditOutboxEvent(ctx context.Context, in *EntityIdRequest, opts ...grpc.CallOption) (*StatusResponse, error) {
-	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
-	out := new(StatusResponse)
-	err := c.cc.Invoke(ctx, SubscriptionBillingApi_ReplayAuditOutboxEvent_FullMethodName, in, out, cOpts...)
-	if err != nil {
-		return nil, err
-	}
-	return out, nil
-}
-
-func (c *subscriptionBillingApiClient) ReplayDomainEventOutboxEvent(ctx context.Context, in *EntityIdRequest, opts ...grpc.CallOption) (*StatusResponse, error) {
-	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
-	out := new(StatusResponse)
-	err := c.cc.Invoke(ctx, SubscriptionBillingApi_ReplayDomainEventOutboxEvent_FullMethodName, in, out, cOpts...)
 	if err != nil {
 		return nil, err
 	}
@@ -570,20 +438,9 @@ type SubscriptionBillingApiServer interface {
 	GetInvoice(context.Context, *EntityIdRequest) (*InvoiceResponse, error)
 	ListInvoices(context.Context, *CustomerRequest) (*ListInvoicesResponse, error)
 	MarkManualInvoicePaid(context.Context, *EntityIdRequest) (*InvoiceResponse, error)
-	RetryPayment(context.Context, *EntityIdRequest) (*PaymentResponse, error)
 	RefundPayment(context.Context, *RefundPaymentRequest) (*EntityResponse, error)
-	CreatePaymentIntent(context.Context, *CreatePaymentIntentRequest) (*PaymentIntentResponse, error)
-	ConfirmPayment(context.Context, *EntityIdRequest) (*PaymentResponse, error)
-	GetPaymentStatus(context.Context, *EntityIdRequest) (*PaymentResponse, error)
+	CreateCheckout(context.Context, *CreateCheckoutRequest) (*PaymentIntentResponse, error)
 	GetPaymentStatusByReference(context.Context, *PaymentReferenceRequest) (*PaymentResponse, error)
-	ExtendSubscription(context.Context, *ExtendSubscriptionRequest) (*SubscriptionResponse, error)
-	RestrictSubscription(context.Context, *ReasonedEntityRequest) (*SubscriptionResponse, error)
-	ExpireSubscription(context.Context, *ReasonedEntityRequest) (*SubscriptionResponse, error)
-	GrantCustomEntitlement(context.Context, *GrantCustomEntitlementRequest) (*EntityResponse, error)
-	ViewLedgerTransactions(context.Context, *OptionalSubscriptionRequest) (*ViewLedgerTransactionsResponse, error)
-	ViewAuditOutboxEvents(context.Context, *Empty) (*ViewAuditOutboxEventsResponse, error)
-	ReplayAuditOutboxEvent(context.Context, *EntityIdRequest) (*StatusResponse, error)
-	ReplayDomainEventOutboxEvent(context.Context, *EntityIdRequest) (*StatusResponse, error)
 	ReceivePaystackWebhook(context.Context, *ReceivePaystackWebhookRequest) (*StatusResponse, error)
 	mustEmbedUnimplementedSubscriptionBillingApiServer()
 }
@@ -676,47 +533,14 @@ func (UnimplementedSubscriptionBillingApiServer) ListInvoices(context.Context, *
 func (UnimplementedSubscriptionBillingApiServer) MarkManualInvoicePaid(context.Context, *EntityIdRequest) (*InvoiceResponse, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method MarkManualInvoicePaid not implemented")
 }
-func (UnimplementedSubscriptionBillingApiServer) RetryPayment(context.Context, *EntityIdRequest) (*PaymentResponse, error) {
-	return nil, status.Errorf(codes.Unimplemented, "method RetryPayment not implemented")
-}
 func (UnimplementedSubscriptionBillingApiServer) RefundPayment(context.Context, *RefundPaymentRequest) (*EntityResponse, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method RefundPayment not implemented")
 }
-func (UnimplementedSubscriptionBillingApiServer) CreatePaymentIntent(context.Context, *CreatePaymentIntentRequest) (*PaymentIntentResponse, error) {
-	return nil, status.Errorf(codes.Unimplemented, "method CreatePaymentIntent not implemented")
-}
-func (UnimplementedSubscriptionBillingApiServer) ConfirmPayment(context.Context, *EntityIdRequest) (*PaymentResponse, error) {
-	return nil, status.Errorf(codes.Unimplemented, "method ConfirmPayment not implemented")
-}
-func (UnimplementedSubscriptionBillingApiServer) GetPaymentStatus(context.Context, *EntityIdRequest) (*PaymentResponse, error) {
-	return nil, status.Errorf(codes.Unimplemented, "method GetPaymentStatus not implemented")
+func (UnimplementedSubscriptionBillingApiServer) CreateCheckout(context.Context, *CreateCheckoutRequest) (*PaymentIntentResponse, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method CreateCheckout not implemented")
 }
 func (UnimplementedSubscriptionBillingApiServer) GetPaymentStatusByReference(context.Context, *PaymentReferenceRequest) (*PaymentResponse, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method GetPaymentStatusByReference not implemented")
-}
-func (UnimplementedSubscriptionBillingApiServer) ExtendSubscription(context.Context, *ExtendSubscriptionRequest) (*SubscriptionResponse, error) {
-	return nil, status.Errorf(codes.Unimplemented, "method ExtendSubscription not implemented")
-}
-func (UnimplementedSubscriptionBillingApiServer) RestrictSubscription(context.Context, *ReasonedEntityRequest) (*SubscriptionResponse, error) {
-	return nil, status.Errorf(codes.Unimplemented, "method RestrictSubscription not implemented")
-}
-func (UnimplementedSubscriptionBillingApiServer) ExpireSubscription(context.Context, *ReasonedEntityRequest) (*SubscriptionResponse, error) {
-	return nil, status.Errorf(codes.Unimplemented, "method ExpireSubscription not implemented")
-}
-func (UnimplementedSubscriptionBillingApiServer) GrantCustomEntitlement(context.Context, *GrantCustomEntitlementRequest) (*EntityResponse, error) {
-	return nil, status.Errorf(codes.Unimplemented, "method GrantCustomEntitlement not implemented")
-}
-func (UnimplementedSubscriptionBillingApiServer) ViewLedgerTransactions(context.Context, *OptionalSubscriptionRequest) (*ViewLedgerTransactionsResponse, error) {
-	return nil, status.Errorf(codes.Unimplemented, "method ViewLedgerTransactions not implemented")
-}
-func (UnimplementedSubscriptionBillingApiServer) ViewAuditOutboxEvents(context.Context, *Empty) (*ViewAuditOutboxEventsResponse, error) {
-	return nil, status.Errorf(codes.Unimplemented, "method ViewAuditOutboxEvents not implemented")
-}
-func (UnimplementedSubscriptionBillingApiServer) ReplayAuditOutboxEvent(context.Context, *EntityIdRequest) (*StatusResponse, error) {
-	return nil, status.Errorf(codes.Unimplemented, "method ReplayAuditOutboxEvent not implemented")
-}
-func (UnimplementedSubscriptionBillingApiServer) ReplayDomainEventOutboxEvent(context.Context, *EntityIdRequest) (*StatusResponse, error) {
-	return nil, status.Errorf(codes.Unimplemented, "method ReplayDomainEventOutboxEvent not implemented")
 }
 func (UnimplementedSubscriptionBillingApiServer) ReceivePaystackWebhook(context.Context, *ReceivePaystackWebhookRequest) (*StatusResponse, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method ReceivePaystackWebhook not implemented")
@@ -1229,24 +1053,6 @@ func _SubscriptionBillingApi_MarkManualInvoicePaid_Handler(srv interface{}, ctx 
 	return interceptor(ctx, in, info, handler)
 }
 
-func _SubscriptionBillingApi_RetryPayment_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
-	in := new(EntityIdRequest)
-	if err := dec(in); err != nil {
-		return nil, err
-	}
-	if interceptor == nil {
-		return srv.(SubscriptionBillingApiServer).RetryPayment(ctx, in)
-	}
-	info := &grpc.UnaryServerInfo{
-		Server:     srv,
-		FullMethod: SubscriptionBillingApi_RetryPayment_FullMethodName,
-	}
-	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
-		return srv.(SubscriptionBillingApiServer).RetryPayment(ctx, req.(*EntityIdRequest))
-	}
-	return interceptor(ctx, in, info, handler)
-}
-
 func _SubscriptionBillingApi_RefundPayment_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
 	in := new(RefundPaymentRequest)
 	if err := dec(in); err != nil {
@@ -1265,56 +1071,20 @@ func _SubscriptionBillingApi_RefundPayment_Handler(srv interface{}, ctx context.
 	return interceptor(ctx, in, info, handler)
 }
 
-func _SubscriptionBillingApi_CreatePaymentIntent_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
-	in := new(CreatePaymentIntentRequest)
+func _SubscriptionBillingApi_CreateCheckout_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(CreateCheckoutRequest)
 	if err := dec(in); err != nil {
 		return nil, err
 	}
 	if interceptor == nil {
-		return srv.(SubscriptionBillingApiServer).CreatePaymentIntent(ctx, in)
+		return srv.(SubscriptionBillingApiServer).CreateCheckout(ctx, in)
 	}
 	info := &grpc.UnaryServerInfo{
 		Server:     srv,
-		FullMethod: SubscriptionBillingApi_CreatePaymentIntent_FullMethodName,
+		FullMethod: SubscriptionBillingApi_CreateCheckout_FullMethodName,
 	}
 	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
-		return srv.(SubscriptionBillingApiServer).CreatePaymentIntent(ctx, req.(*CreatePaymentIntentRequest))
-	}
-	return interceptor(ctx, in, info, handler)
-}
-
-func _SubscriptionBillingApi_ConfirmPayment_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
-	in := new(EntityIdRequest)
-	if err := dec(in); err != nil {
-		return nil, err
-	}
-	if interceptor == nil {
-		return srv.(SubscriptionBillingApiServer).ConfirmPayment(ctx, in)
-	}
-	info := &grpc.UnaryServerInfo{
-		Server:     srv,
-		FullMethod: SubscriptionBillingApi_ConfirmPayment_FullMethodName,
-	}
-	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
-		return srv.(SubscriptionBillingApiServer).ConfirmPayment(ctx, req.(*EntityIdRequest))
-	}
-	return interceptor(ctx, in, info, handler)
-}
-
-func _SubscriptionBillingApi_GetPaymentStatus_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
-	in := new(EntityIdRequest)
-	if err := dec(in); err != nil {
-		return nil, err
-	}
-	if interceptor == nil {
-		return srv.(SubscriptionBillingApiServer).GetPaymentStatus(ctx, in)
-	}
-	info := &grpc.UnaryServerInfo{
-		Server:     srv,
-		FullMethod: SubscriptionBillingApi_GetPaymentStatus_FullMethodName,
-	}
-	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
-		return srv.(SubscriptionBillingApiServer).GetPaymentStatus(ctx, req.(*EntityIdRequest))
+		return srv.(SubscriptionBillingApiServer).CreateCheckout(ctx, req.(*CreateCheckoutRequest))
 	}
 	return interceptor(ctx, in, info, handler)
 }
@@ -1333,150 +1103,6 @@ func _SubscriptionBillingApi_GetPaymentStatusByReference_Handler(srv interface{}
 	}
 	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
 		return srv.(SubscriptionBillingApiServer).GetPaymentStatusByReference(ctx, req.(*PaymentReferenceRequest))
-	}
-	return interceptor(ctx, in, info, handler)
-}
-
-func _SubscriptionBillingApi_ExtendSubscription_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
-	in := new(ExtendSubscriptionRequest)
-	if err := dec(in); err != nil {
-		return nil, err
-	}
-	if interceptor == nil {
-		return srv.(SubscriptionBillingApiServer).ExtendSubscription(ctx, in)
-	}
-	info := &grpc.UnaryServerInfo{
-		Server:     srv,
-		FullMethod: SubscriptionBillingApi_ExtendSubscription_FullMethodName,
-	}
-	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
-		return srv.(SubscriptionBillingApiServer).ExtendSubscription(ctx, req.(*ExtendSubscriptionRequest))
-	}
-	return interceptor(ctx, in, info, handler)
-}
-
-func _SubscriptionBillingApi_RestrictSubscription_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
-	in := new(ReasonedEntityRequest)
-	if err := dec(in); err != nil {
-		return nil, err
-	}
-	if interceptor == nil {
-		return srv.(SubscriptionBillingApiServer).RestrictSubscription(ctx, in)
-	}
-	info := &grpc.UnaryServerInfo{
-		Server:     srv,
-		FullMethod: SubscriptionBillingApi_RestrictSubscription_FullMethodName,
-	}
-	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
-		return srv.(SubscriptionBillingApiServer).RestrictSubscription(ctx, req.(*ReasonedEntityRequest))
-	}
-	return interceptor(ctx, in, info, handler)
-}
-
-func _SubscriptionBillingApi_ExpireSubscription_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
-	in := new(ReasonedEntityRequest)
-	if err := dec(in); err != nil {
-		return nil, err
-	}
-	if interceptor == nil {
-		return srv.(SubscriptionBillingApiServer).ExpireSubscription(ctx, in)
-	}
-	info := &grpc.UnaryServerInfo{
-		Server:     srv,
-		FullMethod: SubscriptionBillingApi_ExpireSubscription_FullMethodName,
-	}
-	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
-		return srv.(SubscriptionBillingApiServer).ExpireSubscription(ctx, req.(*ReasonedEntityRequest))
-	}
-	return interceptor(ctx, in, info, handler)
-}
-
-func _SubscriptionBillingApi_GrantCustomEntitlement_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
-	in := new(GrantCustomEntitlementRequest)
-	if err := dec(in); err != nil {
-		return nil, err
-	}
-	if interceptor == nil {
-		return srv.(SubscriptionBillingApiServer).GrantCustomEntitlement(ctx, in)
-	}
-	info := &grpc.UnaryServerInfo{
-		Server:     srv,
-		FullMethod: SubscriptionBillingApi_GrantCustomEntitlement_FullMethodName,
-	}
-	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
-		return srv.(SubscriptionBillingApiServer).GrantCustomEntitlement(ctx, req.(*GrantCustomEntitlementRequest))
-	}
-	return interceptor(ctx, in, info, handler)
-}
-
-func _SubscriptionBillingApi_ViewLedgerTransactions_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
-	in := new(OptionalSubscriptionRequest)
-	if err := dec(in); err != nil {
-		return nil, err
-	}
-	if interceptor == nil {
-		return srv.(SubscriptionBillingApiServer).ViewLedgerTransactions(ctx, in)
-	}
-	info := &grpc.UnaryServerInfo{
-		Server:     srv,
-		FullMethod: SubscriptionBillingApi_ViewLedgerTransactions_FullMethodName,
-	}
-	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
-		return srv.(SubscriptionBillingApiServer).ViewLedgerTransactions(ctx, req.(*OptionalSubscriptionRequest))
-	}
-	return interceptor(ctx, in, info, handler)
-}
-
-func _SubscriptionBillingApi_ViewAuditOutboxEvents_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
-	in := new(Empty)
-	if err := dec(in); err != nil {
-		return nil, err
-	}
-	if interceptor == nil {
-		return srv.(SubscriptionBillingApiServer).ViewAuditOutboxEvents(ctx, in)
-	}
-	info := &grpc.UnaryServerInfo{
-		Server:     srv,
-		FullMethod: SubscriptionBillingApi_ViewAuditOutboxEvents_FullMethodName,
-	}
-	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
-		return srv.(SubscriptionBillingApiServer).ViewAuditOutboxEvents(ctx, req.(*Empty))
-	}
-	return interceptor(ctx, in, info, handler)
-}
-
-func _SubscriptionBillingApi_ReplayAuditOutboxEvent_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
-	in := new(EntityIdRequest)
-	if err := dec(in); err != nil {
-		return nil, err
-	}
-	if interceptor == nil {
-		return srv.(SubscriptionBillingApiServer).ReplayAuditOutboxEvent(ctx, in)
-	}
-	info := &grpc.UnaryServerInfo{
-		Server:     srv,
-		FullMethod: SubscriptionBillingApi_ReplayAuditOutboxEvent_FullMethodName,
-	}
-	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
-		return srv.(SubscriptionBillingApiServer).ReplayAuditOutboxEvent(ctx, req.(*EntityIdRequest))
-	}
-	return interceptor(ctx, in, info, handler)
-}
-
-func _SubscriptionBillingApi_ReplayDomainEventOutboxEvent_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
-	in := new(EntityIdRequest)
-	if err := dec(in); err != nil {
-		return nil, err
-	}
-	if interceptor == nil {
-		return srv.(SubscriptionBillingApiServer).ReplayDomainEventOutboxEvent(ctx, in)
-	}
-	info := &grpc.UnaryServerInfo{
-		Server:     srv,
-		FullMethod: SubscriptionBillingApi_ReplayDomainEventOutboxEvent_FullMethodName,
-	}
-	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
-		return srv.(SubscriptionBillingApiServer).ReplayDomainEventOutboxEvent(ctx, req.(*EntityIdRequest))
 	}
 	return interceptor(ctx, in, info, handler)
 }
@@ -1615,60 +1241,16 @@ var SubscriptionBillingApi_ServiceDesc = grpc.ServiceDesc{
 			Handler:    _SubscriptionBillingApi_MarkManualInvoicePaid_Handler,
 		},
 		{
-			MethodName: "RetryPayment",
-			Handler:    _SubscriptionBillingApi_RetryPayment_Handler,
-		},
-		{
 			MethodName: "RefundPayment",
 			Handler:    _SubscriptionBillingApi_RefundPayment_Handler,
 		},
 		{
-			MethodName: "CreatePaymentIntent",
-			Handler:    _SubscriptionBillingApi_CreatePaymentIntent_Handler,
-		},
-		{
-			MethodName: "ConfirmPayment",
-			Handler:    _SubscriptionBillingApi_ConfirmPayment_Handler,
-		},
-		{
-			MethodName: "GetPaymentStatus",
-			Handler:    _SubscriptionBillingApi_GetPaymentStatus_Handler,
+			MethodName: "CreateCheckout",
+			Handler:    _SubscriptionBillingApi_CreateCheckout_Handler,
 		},
 		{
 			MethodName: "GetPaymentStatusByReference",
 			Handler:    _SubscriptionBillingApi_GetPaymentStatusByReference_Handler,
-		},
-		{
-			MethodName: "ExtendSubscription",
-			Handler:    _SubscriptionBillingApi_ExtendSubscription_Handler,
-		},
-		{
-			MethodName: "RestrictSubscription",
-			Handler:    _SubscriptionBillingApi_RestrictSubscription_Handler,
-		},
-		{
-			MethodName: "ExpireSubscription",
-			Handler:    _SubscriptionBillingApi_ExpireSubscription_Handler,
-		},
-		{
-			MethodName: "GrantCustomEntitlement",
-			Handler:    _SubscriptionBillingApi_GrantCustomEntitlement_Handler,
-		},
-		{
-			MethodName: "ViewLedgerTransactions",
-			Handler:    _SubscriptionBillingApi_ViewLedgerTransactions_Handler,
-		},
-		{
-			MethodName: "ViewAuditOutboxEvents",
-			Handler:    _SubscriptionBillingApi_ViewAuditOutboxEvents_Handler,
-		},
-		{
-			MethodName: "ReplayAuditOutboxEvent",
-			Handler:    _SubscriptionBillingApi_ReplayAuditOutboxEvent_Handler,
-		},
-		{
-			MethodName: "ReplayDomainEventOutboxEvent",
-			Handler:    _SubscriptionBillingApi_ReplayDomainEventOutboxEvent_Handler,
 		},
 		{
 			MethodName: "ReceivePaystackWebhook",
