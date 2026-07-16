@@ -57,6 +57,10 @@ const (
 	SubscriptionBillingApi_MarkManualInvoicePaid_FullMethodName        = "/subscriptionbilling.SubscriptionBillingApi/MarkManualInvoicePaid"
 	SubscriptionBillingApi_ListPayments_FullMethodName                 = "/subscriptionbilling.SubscriptionBillingApi/ListPayments"
 	SubscriptionBillingApi_RefundPayment_FullMethodName                = "/subscriptionbilling.SubscriptionBillingApi/RefundPayment"
+	SubscriptionBillingApi_RetryPayment_FullMethodName                 = "/subscriptionbilling.SubscriptionBillingApi/RetryPayment"
+	SubscriptionBillingApi_ListPaymentRetryQueue_FullMethodName        = "/subscriptionbilling.SubscriptionBillingApi/ListPaymentRetryQueue"
+	SubscriptionBillingApi_ProcessPaymentRetryQueue_FullMethodName     = "/subscriptionbilling.SubscriptionBillingApi/ProcessPaymentRetryQueue"
+	SubscriptionBillingApi_CancelPaymentRetry_FullMethodName           = "/subscriptionbilling.SubscriptionBillingApi/CancelPaymentRetry"
 	SubscriptionBillingApi_ListLedgerAccounts_FullMethodName           = "/subscriptionbilling.SubscriptionBillingApi/ListLedgerAccounts"
 	SubscriptionBillingApi_ListLedgerTransactions_FullMethodName       = "/subscriptionbilling.SubscriptionBillingApi/ListLedgerTransactions"
 	SubscriptionBillingApi_CreateCheckout_FullMethodName               = "/subscriptionbilling.SubscriptionBillingApi/CreateCheckout"
@@ -106,6 +110,10 @@ type SubscriptionBillingApiClient interface {
 	MarkManualInvoicePaid(ctx context.Context, in *EntityIdRequest, opts ...grpc.CallOption) (*InvoiceResponse, error)
 	ListPayments(ctx context.Context, in *ListBillingDocumentsRequest, opts ...grpc.CallOption) (*ListPaymentsResponse, error)
 	RefundPayment(ctx context.Context, in *RefundPaymentRequest, opts ...grpc.CallOption) (*EntityResponse, error)
+	RetryPayment(ctx context.Context, in *RetryPaymentRequest, opts ...grpc.CallOption) (*PaymentResponse, error)
+	ListPaymentRetryQueue(ctx context.Context, in *ListPaymentRetryQueueRequest, opts ...grpc.CallOption) (*ListPaymentRetryQueueResponse, error)
+	ProcessPaymentRetryQueue(ctx context.Context, in *ProcessPaymentRetryQueueRequest, opts ...grpc.CallOption) (*PaymentRetryBatchResponse, error)
+	CancelPaymentRetry(ctx context.Context, in *CancelPaymentRetryRequest, opts ...grpc.CallOption) (*EntityResponse, error)
 	ListLedgerAccounts(ctx context.Context, in *ListLedgerAccountsRequest, opts ...grpc.CallOption) (*ListLedgerAccountsResponse, error)
 	ListLedgerTransactions(ctx context.Context, in *ListLedgerTransactionsRequest, opts ...grpc.CallOption) (*ListLedgerTransactionsResponse, error)
 	CreateCheckout(ctx context.Context, in *CreateCheckoutRequest, opts ...grpc.CallOption) (*CheckoutResponse, error)
@@ -501,6 +509,46 @@ func (c *subscriptionBillingApiClient) RefundPayment(ctx context.Context, in *Re
 	return out, nil
 }
 
+func (c *subscriptionBillingApiClient) RetryPayment(ctx context.Context, in *RetryPaymentRequest, opts ...grpc.CallOption) (*PaymentResponse, error) {
+	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
+	out := new(PaymentResponse)
+	err := c.cc.Invoke(ctx, SubscriptionBillingApi_RetryPayment_FullMethodName, in, out, cOpts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *subscriptionBillingApiClient) ListPaymentRetryQueue(ctx context.Context, in *ListPaymentRetryQueueRequest, opts ...grpc.CallOption) (*ListPaymentRetryQueueResponse, error) {
+	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
+	out := new(ListPaymentRetryQueueResponse)
+	err := c.cc.Invoke(ctx, SubscriptionBillingApi_ListPaymentRetryQueue_FullMethodName, in, out, cOpts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *subscriptionBillingApiClient) ProcessPaymentRetryQueue(ctx context.Context, in *ProcessPaymentRetryQueueRequest, opts ...grpc.CallOption) (*PaymentRetryBatchResponse, error) {
+	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
+	out := new(PaymentRetryBatchResponse)
+	err := c.cc.Invoke(ctx, SubscriptionBillingApi_ProcessPaymentRetryQueue_FullMethodName, in, out, cOpts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *subscriptionBillingApiClient) CancelPaymentRetry(ctx context.Context, in *CancelPaymentRetryRequest, opts ...grpc.CallOption) (*EntityResponse, error) {
+	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
+	out := new(EntityResponse)
+	err := c.cc.Invoke(ctx, SubscriptionBillingApi_CancelPaymentRetry_FullMethodName, in, out, cOpts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
 func (c *subscriptionBillingApiClient) ListLedgerAccounts(ctx context.Context, in *ListLedgerAccountsRequest, opts ...grpc.CallOption) (*ListLedgerAccountsResponse, error) {
 	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
 	out := new(ListLedgerAccountsResponse)
@@ -593,6 +641,10 @@ type SubscriptionBillingApiServer interface {
 	MarkManualInvoicePaid(context.Context, *EntityIdRequest) (*InvoiceResponse, error)
 	ListPayments(context.Context, *ListBillingDocumentsRequest) (*ListPaymentsResponse, error)
 	RefundPayment(context.Context, *RefundPaymentRequest) (*EntityResponse, error)
+	RetryPayment(context.Context, *RetryPaymentRequest) (*PaymentResponse, error)
+	ListPaymentRetryQueue(context.Context, *ListPaymentRetryQueueRequest) (*ListPaymentRetryQueueResponse, error)
+	ProcessPaymentRetryQueue(context.Context, *ProcessPaymentRetryQueueRequest) (*PaymentRetryBatchResponse, error)
+	CancelPaymentRetry(context.Context, *CancelPaymentRetryRequest) (*EntityResponse, error)
 	ListLedgerAccounts(context.Context, *ListLedgerAccountsRequest) (*ListLedgerAccountsResponse, error)
 	ListLedgerTransactions(context.Context, *ListLedgerTransactionsRequest) (*ListLedgerTransactionsResponse, error)
 	CreateCheckout(context.Context, *CreateCheckoutRequest) (*CheckoutResponse, error)
@@ -721,6 +773,18 @@ func (UnimplementedSubscriptionBillingApiServer) ListPayments(context.Context, *
 }
 func (UnimplementedSubscriptionBillingApiServer) RefundPayment(context.Context, *RefundPaymentRequest) (*EntityResponse, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method RefundPayment not implemented")
+}
+func (UnimplementedSubscriptionBillingApiServer) RetryPayment(context.Context, *RetryPaymentRequest) (*PaymentResponse, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method RetryPayment not implemented")
+}
+func (UnimplementedSubscriptionBillingApiServer) ListPaymentRetryQueue(context.Context, *ListPaymentRetryQueueRequest) (*ListPaymentRetryQueueResponse, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method ListPaymentRetryQueue not implemented")
+}
+func (UnimplementedSubscriptionBillingApiServer) ProcessPaymentRetryQueue(context.Context, *ProcessPaymentRetryQueueRequest) (*PaymentRetryBatchResponse, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method ProcessPaymentRetryQueue not implemented")
+}
+func (UnimplementedSubscriptionBillingApiServer) CancelPaymentRetry(context.Context, *CancelPaymentRetryRequest) (*EntityResponse, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method CancelPaymentRetry not implemented")
 }
 func (UnimplementedSubscriptionBillingApiServer) ListLedgerAccounts(context.Context, *ListLedgerAccountsRequest) (*ListLedgerAccountsResponse, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method ListLedgerAccounts not implemented")
@@ -1443,6 +1507,78 @@ func _SubscriptionBillingApi_RefundPayment_Handler(srv interface{}, ctx context.
 	return interceptor(ctx, in, info, handler)
 }
 
+func _SubscriptionBillingApi_RetryPayment_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(RetryPaymentRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(SubscriptionBillingApiServer).RetryPayment(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: SubscriptionBillingApi_RetryPayment_FullMethodName,
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(SubscriptionBillingApiServer).RetryPayment(ctx, req.(*RetryPaymentRequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _SubscriptionBillingApi_ListPaymentRetryQueue_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(ListPaymentRetryQueueRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(SubscriptionBillingApiServer).ListPaymentRetryQueue(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: SubscriptionBillingApi_ListPaymentRetryQueue_FullMethodName,
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(SubscriptionBillingApiServer).ListPaymentRetryQueue(ctx, req.(*ListPaymentRetryQueueRequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _SubscriptionBillingApi_ProcessPaymentRetryQueue_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(ProcessPaymentRetryQueueRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(SubscriptionBillingApiServer).ProcessPaymentRetryQueue(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: SubscriptionBillingApi_ProcessPaymentRetryQueue_FullMethodName,
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(SubscriptionBillingApiServer).ProcessPaymentRetryQueue(ctx, req.(*ProcessPaymentRetryQueueRequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _SubscriptionBillingApi_CancelPaymentRetry_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(CancelPaymentRetryRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(SubscriptionBillingApiServer).CancelPaymentRetry(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: SubscriptionBillingApi_CancelPaymentRetry_FullMethodName,
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(SubscriptionBillingApiServer).CancelPaymentRetry(ctx, req.(*CancelPaymentRetryRequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
 func _SubscriptionBillingApi_ListLedgerAccounts_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
 	in := new(ListLedgerAccountsRequest)
 	if err := dec(in); err != nil {
@@ -1691,6 +1827,22 @@ var SubscriptionBillingApi_ServiceDesc = grpc.ServiceDesc{
 		{
 			MethodName: "RefundPayment",
 			Handler:    _SubscriptionBillingApi_RefundPayment_Handler,
+		},
+		{
+			MethodName: "RetryPayment",
+			Handler:    _SubscriptionBillingApi_RetryPayment_Handler,
+		},
+		{
+			MethodName: "ListPaymentRetryQueue",
+			Handler:    _SubscriptionBillingApi_ListPaymentRetryQueue_Handler,
+		},
+		{
+			MethodName: "ProcessPaymentRetryQueue",
+			Handler:    _SubscriptionBillingApi_ProcessPaymentRetryQueue_Handler,
+		},
+		{
+			MethodName: "CancelPaymentRetry",
+			Handler:    _SubscriptionBillingApi_CancelPaymentRetry_Handler,
 		},
 		{
 			MethodName: "ListLedgerAccounts",
