@@ -27,11 +27,16 @@ service AuthService {
 
   rpc GetMe(GetMeRequest) returns (GetMeResponse);
   rpc GetUser(GetUserRequest) returns (GetMeResponse);
+  rpc ListUsers(ListUsersRequest) returns (ListUsersResponse);
+  rpc InviteUser(InviteUserRequest) returns (GetMeResponse);
   rpc ValidateAccessToken(ValidateAccessTokenRequest) returns (ValidateAccessTokenResponse);
   rpc ValidateSession(ValidateSessionRequest) returns (ValidateSessionResponse);
 
   rpc CheckRole(CheckRoleRequest) returns (CheckRoleResponse);
   rpc CheckPermission(CheckPermissionRequest) returns (CheckPermissionResponse);
+  rpc ListRoles(ListRolesRequest) returns (ListRolesResponse);
+  rpc ListPermissions(ListPermissionsRequest) returns (ListPermissionsResponse);
+  rpc GetUserAccess(GetUserAccessRequest) returns (UserAccessResponse);
 
   rpc ListSessions(ListSessionsRequest) returns (ListSessionsResponse);
   rpc RevokeSession(RevokeSessionRequest) returns (GenericMessageResponse);
@@ -73,6 +78,9 @@ message UserMessage {
   bool email_verified = 3;
   string status = 4;
   int64 created_at_unix = 5;
+  repeated string roles = 6;
+  repeated PermissionOverrideMessage permission_overrides = 7;
+  repeated string effective_permissions = 8;
 }
 
 message SessionMessage {
@@ -197,6 +205,29 @@ message GetMeResponse {
   UserMessage user = 1;
 }
 
+message ListUsersRequest {
+  string query = 1;
+  string status = 2;
+  int32 page = 3;
+  int32 page_size = 4;
+  RequestContext context = 5;
+  int64 created_from_unix = 6;
+  int64 created_to_unix = 7;
+}
+
+message ListUsersResponse {
+  repeated UserMessage users = 1;
+  int32 page = 2;
+  int32 page_size = 3;
+  int64 total = 4;
+}
+
+message InviteUserRequest {
+  string email = 1;
+  repeated string role_keys = 2;
+  RequestContext context = 3;
+}
+
 message ValidateAccessTokenRequest {
   string access_token = 1;
   RequestContext context = 2;
@@ -239,6 +270,41 @@ message CheckPermissionRequest {
 message CheckPermissionResponse {
   bool allowed = 1;
   string reason = 2;
+}
+
+message RoleMessage {
+  string key = 1;
+  string name = 2;
+  repeated string permissions = 3;
+}
+
+message PermissionMessage {
+  string key = 1;
+  string description = 2;
+}
+
+message PermissionOverrideMessage {
+  string permission_key = 1;
+  string effect = 2;
+  string reason = 3;
+  int64 expires_at_unix = 4;
+}
+
+message ListRolesRequest { RequestContext context = 1; }
+
+message ListRolesResponse { repeated RoleMessage roles = 1; }
+
+message ListPermissionsRequest { RequestContext context = 1; }
+
+message ListPermissionsResponse { repeated PermissionMessage permissions = 1; }
+
+message GetUserAccessRequest { string user_id = 1; RequestContext context = 2; }
+
+message UserAccessResponse {
+  string user_id = 1;
+  repeated string roles = 2;
+  repeated PermissionOverrideMessage permission_overrides = 3;
+  repeated string effective_permissions = 4;
 }
 
 message ListSessionsRequest {

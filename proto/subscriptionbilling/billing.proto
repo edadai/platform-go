@@ -17,11 +17,17 @@ service SubscriptionBillingApi {
   rpc AttachEntitlementToPlan (AttachEntitlementToPlanRequest) returns (EntityResponse);
   rpc ConfigureTrialPolicy (ConfigureTrialPolicyRequest) returns (EntityResponse);
   rpc ConfigureBillingPolicy (ConfigureBillingPolicyRequest) returns (EntityResponse);
+  rpc GetBillingSummary (BillingSummaryRequest) returns (BillingSummaryResponse);
+  rpc ListProducts (ListProductsRequest) returns (ListProductsResponse);
   rpc ListPlans (ListPlansRequest) returns (ListPlansResponse);
+  rpc ListOffers (ListOffersRequest) returns (ListOffersResponse);
+  rpc ListTrialPolicies (ListPoliciesRequest) returns (ListTrialPoliciesResponse);
+  rpc ListBillingPolicies (ListPoliciesRequest) returns (ListBillingPoliciesResponse);
   rpc UpdatePlan (UpdatePlanRequest) returns (PlanResponse);
   rpc PublishPlan (EntityIdRequest) returns (PlanResponse);
   rpc ArchivePlan (EntityIdRequest) returns (PlanResponse);
 
+  rpc ListSubscriptions (ListSubscriptionsRequest) returns (ListSubscriptionsResponse);
   rpc StartTrial (StartTrialRequest) returns (SubscriptionResponse);
   rpc StartSubscription (StartSubscriptionRequest) returns (SubscriptionResponse);
   rpc CancelSubscription (EntityIdRequest) returns (SubscriptionResponse);
@@ -36,9 +42,13 @@ service SubscriptionBillingApi {
 
   rpc CreateInvoice (CreateInvoiceRequest) returns (InvoiceResponse);
   rpc GetInvoice (EntityIdRequest) returns (InvoiceResponse);
+  rpc ListAllInvoices (ListBillingDocumentsRequest) returns (ListInvoicesResponse);
   rpc ListInvoices (CustomerRequest) returns (ListInvoicesResponse);
   rpc MarkManualInvoicePaid (EntityIdRequest) returns (InvoiceResponse);
+  rpc ListPayments (ListBillingDocumentsRequest) returns (ListPaymentsResponse);
   rpc RefundPayment (RefundPaymentRequest) returns (EntityResponse);
+  rpc ListLedgerAccounts (ListLedgerAccountsRequest) returns (ListLedgerAccountsResponse);
+  rpc ListLedgerTransactions (ListLedgerTransactionsRequest) returns (ListLedgerTransactionsResponse);
 
   rpc CreateCheckout (CreateCheckoutRequest) returns (CheckoutResponse);
   rpc GetPaymentStatusByReference (PaymentReferenceRequest) returns (PaymentResponse);
@@ -47,6 +57,29 @@ service SubscriptionBillingApi {
 }
 
 message ListPlansRequest { bool public_only = 1; }
+message BillingSummaryRequest {}
+message BillingSummaryResponse {
+  int32 product_count = 1;
+  int32 published_plan_count = 2;
+  int32 active_subscription_count = 3;
+  int32 trialing_subscription_count = 4;
+  int32 open_invoice_count = 5;
+  double open_invoice_amount = 6;
+  int32 succeeded_payment_count = 7;
+  double succeeded_payment_amount = 8;
+  string currency = 9;
+}
+message ListProductsRequest { bool active_only = 1; }
+message ProductResponse {
+  string id = 1;
+  string code = 2;
+  string name = 3;
+  string description = 4;
+  bool is_active = 5;
+  string created_at_utc = 6;
+  string updated_at_utc = 7;
+}
+message ListProductsResponse { repeated ProductResponse products = 1; }
 message UpdatePlanRequest {
   string id = 1;
   string name = 2;
@@ -96,6 +129,46 @@ message PlanResponse {
   string disclosure_text = 35;
 }
 message ListPlansResponse { repeated PlanResponse plans = 1; }
+message ListOffersRequest { string plan_id = 1; bool enabled_only = 2; }
+message OfferResponse {
+  string id = 1;
+  string plan_id = 2;
+  string price_id = 3;
+  string code = 4;
+  string name = 5;
+  string description = 6;
+  bool is_enabled = 7;
+  string created_at_utc = 8;
+  string updated_at_utc = 9;
+}
+message ListOffersResponse { repeated OfferResponse offers = 1; }
+
+message ListPoliciesRequest {}
+message TrialPolicyResponse {
+  string id = 1;
+  string product_id = 2;
+  string plan_id = 3;
+  string price_id = 4;
+  string offer_id = 5;
+  string name = 6;
+  int32 trial_days = 7;
+  int32 max_redemptions_per_customer = 8;
+  bool is_enabled = 9;
+  string eligibility_rules_json = 10;
+}
+message BillingPolicyResponse {
+  string id = 1;
+  string product_id = 2;
+  string plan_id = 3;
+  string price_id = 4;
+  int32 retry_count = 5;
+  int32 retry_interval_hours = 6;
+  int32 grace_days = 7;
+  string failure_access_behavior = 8;
+  bool is_enabled = 9;
+}
+message ListTrialPoliciesResponse { repeated TrialPolicyResponse policies = 1; }
+message ListBillingPoliciesResponse { repeated BillingPolicyResponse policies = 1; }
 
 message RequestContext {
   string correlation_id = 1;
@@ -115,6 +188,12 @@ message EntityIdRequest {
 message CustomerRequest {
   string customer_id = 1;
   RequestContext context = 2;
+}
+
+message ListSubscriptionsRequest {
+  string customer_id = 1;
+  string status = 2;
+  int32 limit = 3;
 }
 
 message CreateProductRequest {
@@ -319,6 +398,8 @@ message SubscriptionResponse {
   string trial_ends_at_utc = 12;
 }
 
+message ListSubscriptionsResponse { repeated SubscriptionResponse subscriptions = 1; }
+
 message CheckEntitlementResponse {
   bool allowed = 1;
   string access_behavior = 2;
@@ -351,6 +432,13 @@ message ListInvoicesResponse {
   repeated InvoiceResponse invoices = 1;
 }
 
+message ListBillingDocumentsRequest {
+  string customer_id = 1;
+  string status = 2;
+  int32 limit = 3;
+  RequestContext context = 4;
+}
+
 message PaymentIntentResponse {
   string id = 1;
   string invoice_id = 2;
@@ -379,3 +467,36 @@ message PaymentResponse {
   string processed_at_utc = 9;
   string failure_reason = 10;
 }
+
+message ListPaymentsResponse { repeated PaymentResponse payments = 1; }
+
+message ListLedgerAccountsRequest {}
+message LedgerAccountResponse {
+  string id = 1;
+  string code = 2;
+  string name = 3;
+  string category = 4;
+  bool is_system = 5;
+}
+message ListLedgerAccountsResponse { repeated LedgerAccountResponse accounts = 1; }
+
+message ListLedgerTransactionsRequest {
+  string reference = 1;
+  int32 limit = 2;
+}
+message LedgerEntryResponse {
+  string id = 1;
+  string ledger_account_id = 2;
+  string direction = 3;
+  double amount = 4;
+  string currency = 5;
+  string memo = 6;
+}
+message LedgerTransactionResponse {
+  string id = 1;
+  string reference = 2;
+  string description = 3;
+  string posted_at_utc = 4;
+  repeated LedgerEntryResponse entries = 5;
+}
+message ListLedgerTransactionsResponse { repeated LedgerTransactionResponse transactions = 1; }

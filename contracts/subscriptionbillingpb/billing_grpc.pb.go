@@ -30,10 +30,16 @@ const (
 	SubscriptionBillingApi_AttachEntitlementToPlan_FullMethodName      = "/subscriptionbilling.SubscriptionBillingApi/AttachEntitlementToPlan"
 	SubscriptionBillingApi_ConfigureTrialPolicy_FullMethodName         = "/subscriptionbilling.SubscriptionBillingApi/ConfigureTrialPolicy"
 	SubscriptionBillingApi_ConfigureBillingPolicy_FullMethodName       = "/subscriptionbilling.SubscriptionBillingApi/ConfigureBillingPolicy"
+	SubscriptionBillingApi_GetBillingSummary_FullMethodName            = "/subscriptionbilling.SubscriptionBillingApi/GetBillingSummary"
+	SubscriptionBillingApi_ListProducts_FullMethodName                 = "/subscriptionbilling.SubscriptionBillingApi/ListProducts"
 	SubscriptionBillingApi_ListPlans_FullMethodName                    = "/subscriptionbilling.SubscriptionBillingApi/ListPlans"
+	SubscriptionBillingApi_ListOffers_FullMethodName                   = "/subscriptionbilling.SubscriptionBillingApi/ListOffers"
+	SubscriptionBillingApi_ListTrialPolicies_FullMethodName            = "/subscriptionbilling.SubscriptionBillingApi/ListTrialPolicies"
+	SubscriptionBillingApi_ListBillingPolicies_FullMethodName          = "/subscriptionbilling.SubscriptionBillingApi/ListBillingPolicies"
 	SubscriptionBillingApi_UpdatePlan_FullMethodName                   = "/subscriptionbilling.SubscriptionBillingApi/UpdatePlan"
 	SubscriptionBillingApi_PublishPlan_FullMethodName                  = "/subscriptionbilling.SubscriptionBillingApi/PublishPlan"
 	SubscriptionBillingApi_ArchivePlan_FullMethodName                  = "/subscriptionbilling.SubscriptionBillingApi/ArchivePlan"
+	SubscriptionBillingApi_ListSubscriptions_FullMethodName            = "/subscriptionbilling.SubscriptionBillingApi/ListSubscriptions"
 	SubscriptionBillingApi_StartTrial_FullMethodName                   = "/subscriptionbilling.SubscriptionBillingApi/StartTrial"
 	SubscriptionBillingApi_StartSubscription_FullMethodName            = "/subscriptionbilling.SubscriptionBillingApi/StartSubscription"
 	SubscriptionBillingApi_CancelSubscription_FullMethodName           = "/subscriptionbilling.SubscriptionBillingApi/CancelSubscription"
@@ -46,9 +52,13 @@ const (
 	SubscriptionBillingApi_RecordUsage_FullMethodName                  = "/subscriptionbilling.SubscriptionBillingApi/RecordUsage"
 	SubscriptionBillingApi_CreateInvoice_FullMethodName                = "/subscriptionbilling.SubscriptionBillingApi/CreateInvoice"
 	SubscriptionBillingApi_GetInvoice_FullMethodName                   = "/subscriptionbilling.SubscriptionBillingApi/GetInvoice"
+	SubscriptionBillingApi_ListAllInvoices_FullMethodName              = "/subscriptionbilling.SubscriptionBillingApi/ListAllInvoices"
 	SubscriptionBillingApi_ListInvoices_FullMethodName                 = "/subscriptionbilling.SubscriptionBillingApi/ListInvoices"
 	SubscriptionBillingApi_MarkManualInvoicePaid_FullMethodName        = "/subscriptionbilling.SubscriptionBillingApi/MarkManualInvoicePaid"
+	SubscriptionBillingApi_ListPayments_FullMethodName                 = "/subscriptionbilling.SubscriptionBillingApi/ListPayments"
 	SubscriptionBillingApi_RefundPayment_FullMethodName                = "/subscriptionbilling.SubscriptionBillingApi/RefundPayment"
+	SubscriptionBillingApi_ListLedgerAccounts_FullMethodName           = "/subscriptionbilling.SubscriptionBillingApi/ListLedgerAccounts"
+	SubscriptionBillingApi_ListLedgerTransactions_FullMethodName       = "/subscriptionbilling.SubscriptionBillingApi/ListLedgerTransactions"
 	SubscriptionBillingApi_CreateCheckout_FullMethodName               = "/subscriptionbilling.SubscriptionBillingApi/CreateCheckout"
 	SubscriptionBillingApi_GetPaymentStatusByReference_FullMethodName  = "/subscriptionbilling.SubscriptionBillingApi/GetPaymentStatusByReference"
 	SubscriptionBillingApi_ReceivePaystackWebhook_FullMethodName       = "/subscriptionbilling.SubscriptionBillingApi/ReceivePaystackWebhook"
@@ -69,10 +79,16 @@ type SubscriptionBillingApiClient interface {
 	AttachEntitlementToPlan(ctx context.Context, in *AttachEntitlementToPlanRequest, opts ...grpc.CallOption) (*EntityResponse, error)
 	ConfigureTrialPolicy(ctx context.Context, in *ConfigureTrialPolicyRequest, opts ...grpc.CallOption) (*EntityResponse, error)
 	ConfigureBillingPolicy(ctx context.Context, in *ConfigureBillingPolicyRequest, opts ...grpc.CallOption) (*EntityResponse, error)
+	GetBillingSummary(ctx context.Context, in *BillingSummaryRequest, opts ...grpc.CallOption) (*BillingSummaryResponse, error)
+	ListProducts(ctx context.Context, in *ListProductsRequest, opts ...grpc.CallOption) (*ListProductsResponse, error)
 	ListPlans(ctx context.Context, in *ListPlansRequest, opts ...grpc.CallOption) (*ListPlansResponse, error)
+	ListOffers(ctx context.Context, in *ListOffersRequest, opts ...grpc.CallOption) (*ListOffersResponse, error)
+	ListTrialPolicies(ctx context.Context, in *ListPoliciesRequest, opts ...grpc.CallOption) (*ListTrialPoliciesResponse, error)
+	ListBillingPolicies(ctx context.Context, in *ListPoliciesRequest, opts ...grpc.CallOption) (*ListBillingPoliciesResponse, error)
 	UpdatePlan(ctx context.Context, in *UpdatePlanRequest, opts ...grpc.CallOption) (*PlanResponse, error)
 	PublishPlan(ctx context.Context, in *EntityIdRequest, opts ...grpc.CallOption) (*PlanResponse, error)
 	ArchivePlan(ctx context.Context, in *EntityIdRequest, opts ...grpc.CallOption) (*PlanResponse, error)
+	ListSubscriptions(ctx context.Context, in *ListSubscriptionsRequest, opts ...grpc.CallOption) (*ListSubscriptionsResponse, error)
 	StartTrial(ctx context.Context, in *StartTrialRequest, opts ...grpc.CallOption) (*SubscriptionResponse, error)
 	StartSubscription(ctx context.Context, in *StartSubscriptionRequest, opts ...grpc.CallOption) (*SubscriptionResponse, error)
 	CancelSubscription(ctx context.Context, in *EntityIdRequest, opts ...grpc.CallOption) (*SubscriptionResponse, error)
@@ -85,9 +101,13 @@ type SubscriptionBillingApiClient interface {
 	RecordUsage(ctx context.Context, in *RecordUsageRequest, opts ...grpc.CallOption) (*EntityResponse, error)
 	CreateInvoice(ctx context.Context, in *CreateInvoiceRequest, opts ...grpc.CallOption) (*InvoiceResponse, error)
 	GetInvoice(ctx context.Context, in *EntityIdRequest, opts ...grpc.CallOption) (*InvoiceResponse, error)
+	ListAllInvoices(ctx context.Context, in *ListBillingDocumentsRequest, opts ...grpc.CallOption) (*ListInvoicesResponse, error)
 	ListInvoices(ctx context.Context, in *CustomerRequest, opts ...grpc.CallOption) (*ListInvoicesResponse, error)
 	MarkManualInvoicePaid(ctx context.Context, in *EntityIdRequest, opts ...grpc.CallOption) (*InvoiceResponse, error)
+	ListPayments(ctx context.Context, in *ListBillingDocumentsRequest, opts ...grpc.CallOption) (*ListPaymentsResponse, error)
 	RefundPayment(ctx context.Context, in *RefundPaymentRequest, opts ...grpc.CallOption) (*EntityResponse, error)
+	ListLedgerAccounts(ctx context.Context, in *ListLedgerAccountsRequest, opts ...grpc.CallOption) (*ListLedgerAccountsResponse, error)
+	ListLedgerTransactions(ctx context.Context, in *ListLedgerTransactionsRequest, opts ...grpc.CallOption) (*ListLedgerTransactionsResponse, error)
 	CreateCheckout(ctx context.Context, in *CreateCheckoutRequest, opts ...grpc.CallOption) (*CheckoutResponse, error)
 	GetPaymentStatusByReference(ctx context.Context, in *PaymentReferenceRequest, opts ...grpc.CallOption) (*PaymentResponse, error)
 	ReceivePaystackWebhook(ctx context.Context, in *ReceivePaystackWebhookRequest, opts ...grpc.CallOption) (*StatusResponse, error)
@@ -211,10 +231,60 @@ func (c *subscriptionBillingApiClient) ConfigureBillingPolicy(ctx context.Contex
 	return out, nil
 }
 
+func (c *subscriptionBillingApiClient) GetBillingSummary(ctx context.Context, in *BillingSummaryRequest, opts ...grpc.CallOption) (*BillingSummaryResponse, error) {
+	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
+	out := new(BillingSummaryResponse)
+	err := c.cc.Invoke(ctx, SubscriptionBillingApi_GetBillingSummary_FullMethodName, in, out, cOpts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *subscriptionBillingApiClient) ListProducts(ctx context.Context, in *ListProductsRequest, opts ...grpc.CallOption) (*ListProductsResponse, error) {
+	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
+	out := new(ListProductsResponse)
+	err := c.cc.Invoke(ctx, SubscriptionBillingApi_ListProducts_FullMethodName, in, out, cOpts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
 func (c *subscriptionBillingApiClient) ListPlans(ctx context.Context, in *ListPlansRequest, opts ...grpc.CallOption) (*ListPlansResponse, error) {
 	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
 	out := new(ListPlansResponse)
 	err := c.cc.Invoke(ctx, SubscriptionBillingApi_ListPlans_FullMethodName, in, out, cOpts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *subscriptionBillingApiClient) ListOffers(ctx context.Context, in *ListOffersRequest, opts ...grpc.CallOption) (*ListOffersResponse, error) {
+	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
+	out := new(ListOffersResponse)
+	err := c.cc.Invoke(ctx, SubscriptionBillingApi_ListOffers_FullMethodName, in, out, cOpts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *subscriptionBillingApiClient) ListTrialPolicies(ctx context.Context, in *ListPoliciesRequest, opts ...grpc.CallOption) (*ListTrialPoliciesResponse, error) {
+	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
+	out := new(ListTrialPoliciesResponse)
+	err := c.cc.Invoke(ctx, SubscriptionBillingApi_ListTrialPolicies_FullMethodName, in, out, cOpts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *subscriptionBillingApiClient) ListBillingPolicies(ctx context.Context, in *ListPoliciesRequest, opts ...grpc.CallOption) (*ListBillingPoliciesResponse, error) {
+	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
+	out := new(ListBillingPoliciesResponse)
+	err := c.cc.Invoke(ctx, SubscriptionBillingApi_ListBillingPolicies_FullMethodName, in, out, cOpts...)
 	if err != nil {
 		return nil, err
 	}
@@ -245,6 +315,16 @@ func (c *subscriptionBillingApiClient) ArchivePlan(ctx context.Context, in *Enti
 	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
 	out := new(PlanResponse)
 	err := c.cc.Invoke(ctx, SubscriptionBillingApi_ArchivePlan_FullMethodName, in, out, cOpts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *subscriptionBillingApiClient) ListSubscriptions(ctx context.Context, in *ListSubscriptionsRequest, opts ...grpc.CallOption) (*ListSubscriptionsResponse, error) {
+	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
+	out := new(ListSubscriptionsResponse)
+	err := c.cc.Invoke(ctx, SubscriptionBillingApi_ListSubscriptions_FullMethodName, in, out, cOpts...)
 	if err != nil {
 		return nil, err
 	}
@@ -371,6 +451,16 @@ func (c *subscriptionBillingApiClient) GetInvoice(ctx context.Context, in *Entit
 	return out, nil
 }
 
+func (c *subscriptionBillingApiClient) ListAllInvoices(ctx context.Context, in *ListBillingDocumentsRequest, opts ...grpc.CallOption) (*ListInvoicesResponse, error) {
+	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
+	out := new(ListInvoicesResponse)
+	err := c.cc.Invoke(ctx, SubscriptionBillingApi_ListAllInvoices_FullMethodName, in, out, cOpts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
 func (c *subscriptionBillingApiClient) ListInvoices(ctx context.Context, in *CustomerRequest, opts ...grpc.CallOption) (*ListInvoicesResponse, error) {
 	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
 	out := new(ListInvoicesResponse)
@@ -391,10 +481,40 @@ func (c *subscriptionBillingApiClient) MarkManualInvoicePaid(ctx context.Context
 	return out, nil
 }
 
+func (c *subscriptionBillingApiClient) ListPayments(ctx context.Context, in *ListBillingDocumentsRequest, opts ...grpc.CallOption) (*ListPaymentsResponse, error) {
+	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
+	out := new(ListPaymentsResponse)
+	err := c.cc.Invoke(ctx, SubscriptionBillingApi_ListPayments_FullMethodName, in, out, cOpts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
 func (c *subscriptionBillingApiClient) RefundPayment(ctx context.Context, in *RefundPaymentRequest, opts ...grpc.CallOption) (*EntityResponse, error) {
 	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
 	out := new(EntityResponse)
 	err := c.cc.Invoke(ctx, SubscriptionBillingApi_RefundPayment_FullMethodName, in, out, cOpts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *subscriptionBillingApiClient) ListLedgerAccounts(ctx context.Context, in *ListLedgerAccountsRequest, opts ...grpc.CallOption) (*ListLedgerAccountsResponse, error) {
+	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
+	out := new(ListLedgerAccountsResponse)
+	err := c.cc.Invoke(ctx, SubscriptionBillingApi_ListLedgerAccounts_FullMethodName, in, out, cOpts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *subscriptionBillingApiClient) ListLedgerTransactions(ctx context.Context, in *ListLedgerTransactionsRequest, opts ...grpc.CallOption) (*ListLedgerTransactionsResponse, error) {
+	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
+	out := new(ListLedgerTransactionsResponse)
+	err := c.cc.Invoke(ctx, SubscriptionBillingApi_ListLedgerTransactions_FullMethodName, in, out, cOpts...)
 	if err != nil {
 		return nil, err
 	}
@@ -446,10 +566,16 @@ type SubscriptionBillingApiServer interface {
 	AttachEntitlementToPlan(context.Context, *AttachEntitlementToPlanRequest) (*EntityResponse, error)
 	ConfigureTrialPolicy(context.Context, *ConfigureTrialPolicyRequest) (*EntityResponse, error)
 	ConfigureBillingPolicy(context.Context, *ConfigureBillingPolicyRequest) (*EntityResponse, error)
+	GetBillingSummary(context.Context, *BillingSummaryRequest) (*BillingSummaryResponse, error)
+	ListProducts(context.Context, *ListProductsRequest) (*ListProductsResponse, error)
 	ListPlans(context.Context, *ListPlansRequest) (*ListPlansResponse, error)
+	ListOffers(context.Context, *ListOffersRequest) (*ListOffersResponse, error)
+	ListTrialPolicies(context.Context, *ListPoliciesRequest) (*ListTrialPoliciesResponse, error)
+	ListBillingPolicies(context.Context, *ListPoliciesRequest) (*ListBillingPoliciesResponse, error)
 	UpdatePlan(context.Context, *UpdatePlanRequest) (*PlanResponse, error)
 	PublishPlan(context.Context, *EntityIdRequest) (*PlanResponse, error)
 	ArchivePlan(context.Context, *EntityIdRequest) (*PlanResponse, error)
+	ListSubscriptions(context.Context, *ListSubscriptionsRequest) (*ListSubscriptionsResponse, error)
 	StartTrial(context.Context, *StartTrialRequest) (*SubscriptionResponse, error)
 	StartSubscription(context.Context, *StartSubscriptionRequest) (*SubscriptionResponse, error)
 	CancelSubscription(context.Context, *EntityIdRequest) (*SubscriptionResponse, error)
@@ -462,9 +588,13 @@ type SubscriptionBillingApiServer interface {
 	RecordUsage(context.Context, *RecordUsageRequest) (*EntityResponse, error)
 	CreateInvoice(context.Context, *CreateInvoiceRequest) (*InvoiceResponse, error)
 	GetInvoice(context.Context, *EntityIdRequest) (*InvoiceResponse, error)
+	ListAllInvoices(context.Context, *ListBillingDocumentsRequest) (*ListInvoicesResponse, error)
 	ListInvoices(context.Context, *CustomerRequest) (*ListInvoicesResponse, error)
 	MarkManualInvoicePaid(context.Context, *EntityIdRequest) (*InvoiceResponse, error)
+	ListPayments(context.Context, *ListBillingDocumentsRequest) (*ListPaymentsResponse, error)
 	RefundPayment(context.Context, *RefundPaymentRequest) (*EntityResponse, error)
+	ListLedgerAccounts(context.Context, *ListLedgerAccountsRequest) (*ListLedgerAccountsResponse, error)
+	ListLedgerTransactions(context.Context, *ListLedgerTransactionsRequest) (*ListLedgerTransactionsResponse, error)
 	CreateCheckout(context.Context, *CreateCheckoutRequest) (*CheckoutResponse, error)
 	GetPaymentStatusByReference(context.Context, *PaymentReferenceRequest) (*PaymentResponse, error)
 	ReceivePaystackWebhook(context.Context, *ReceivePaystackWebhookRequest) (*StatusResponse, error)
@@ -511,8 +641,23 @@ func (UnimplementedSubscriptionBillingApiServer) ConfigureTrialPolicy(context.Co
 func (UnimplementedSubscriptionBillingApiServer) ConfigureBillingPolicy(context.Context, *ConfigureBillingPolicyRequest) (*EntityResponse, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method ConfigureBillingPolicy not implemented")
 }
+func (UnimplementedSubscriptionBillingApiServer) GetBillingSummary(context.Context, *BillingSummaryRequest) (*BillingSummaryResponse, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method GetBillingSummary not implemented")
+}
+func (UnimplementedSubscriptionBillingApiServer) ListProducts(context.Context, *ListProductsRequest) (*ListProductsResponse, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method ListProducts not implemented")
+}
 func (UnimplementedSubscriptionBillingApiServer) ListPlans(context.Context, *ListPlansRequest) (*ListPlansResponse, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method ListPlans not implemented")
+}
+func (UnimplementedSubscriptionBillingApiServer) ListOffers(context.Context, *ListOffersRequest) (*ListOffersResponse, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method ListOffers not implemented")
+}
+func (UnimplementedSubscriptionBillingApiServer) ListTrialPolicies(context.Context, *ListPoliciesRequest) (*ListTrialPoliciesResponse, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method ListTrialPolicies not implemented")
+}
+func (UnimplementedSubscriptionBillingApiServer) ListBillingPolicies(context.Context, *ListPoliciesRequest) (*ListBillingPoliciesResponse, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method ListBillingPolicies not implemented")
 }
 func (UnimplementedSubscriptionBillingApiServer) UpdatePlan(context.Context, *UpdatePlanRequest) (*PlanResponse, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method UpdatePlan not implemented")
@@ -522,6 +667,9 @@ func (UnimplementedSubscriptionBillingApiServer) PublishPlan(context.Context, *E
 }
 func (UnimplementedSubscriptionBillingApiServer) ArchivePlan(context.Context, *EntityIdRequest) (*PlanResponse, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method ArchivePlan not implemented")
+}
+func (UnimplementedSubscriptionBillingApiServer) ListSubscriptions(context.Context, *ListSubscriptionsRequest) (*ListSubscriptionsResponse, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method ListSubscriptions not implemented")
 }
 func (UnimplementedSubscriptionBillingApiServer) StartTrial(context.Context, *StartTrialRequest) (*SubscriptionResponse, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method StartTrial not implemented")
@@ -559,14 +707,26 @@ func (UnimplementedSubscriptionBillingApiServer) CreateInvoice(context.Context, 
 func (UnimplementedSubscriptionBillingApiServer) GetInvoice(context.Context, *EntityIdRequest) (*InvoiceResponse, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method GetInvoice not implemented")
 }
+func (UnimplementedSubscriptionBillingApiServer) ListAllInvoices(context.Context, *ListBillingDocumentsRequest) (*ListInvoicesResponse, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method ListAllInvoices not implemented")
+}
 func (UnimplementedSubscriptionBillingApiServer) ListInvoices(context.Context, *CustomerRequest) (*ListInvoicesResponse, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method ListInvoices not implemented")
 }
 func (UnimplementedSubscriptionBillingApiServer) MarkManualInvoicePaid(context.Context, *EntityIdRequest) (*InvoiceResponse, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method MarkManualInvoicePaid not implemented")
 }
+func (UnimplementedSubscriptionBillingApiServer) ListPayments(context.Context, *ListBillingDocumentsRequest) (*ListPaymentsResponse, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method ListPayments not implemented")
+}
 func (UnimplementedSubscriptionBillingApiServer) RefundPayment(context.Context, *RefundPaymentRequest) (*EntityResponse, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method RefundPayment not implemented")
+}
+func (UnimplementedSubscriptionBillingApiServer) ListLedgerAccounts(context.Context, *ListLedgerAccountsRequest) (*ListLedgerAccountsResponse, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method ListLedgerAccounts not implemented")
+}
+func (UnimplementedSubscriptionBillingApiServer) ListLedgerTransactions(context.Context, *ListLedgerTransactionsRequest) (*ListLedgerTransactionsResponse, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method ListLedgerTransactions not implemented")
 }
 func (UnimplementedSubscriptionBillingApiServer) CreateCheckout(context.Context, *CreateCheckoutRequest) (*CheckoutResponse, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method CreateCheckout not implemented")
@@ -797,6 +957,42 @@ func _SubscriptionBillingApi_ConfigureBillingPolicy_Handler(srv interface{}, ctx
 	return interceptor(ctx, in, info, handler)
 }
 
+func _SubscriptionBillingApi_GetBillingSummary_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(BillingSummaryRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(SubscriptionBillingApiServer).GetBillingSummary(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: SubscriptionBillingApi_GetBillingSummary_FullMethodName,
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(SubscriptionBillingApiServer).GetBillingSummary(ctx, req.(*BillingSummaryRequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _SubscriptionBillingApi_ListProducts_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(ListProductsRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(SubscriptionBillingApiServer).ListProducts(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: SubscriptionBillingApi_ListProducts_FullMethodName,
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(SubscriptionBillingApiServer).ListProducts(ctx, req.(*ListProductsRequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
 func _SubscriptionBillingApi_ListPlans_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
 	in := new(ListPlansRequest)
 	if err := dec(in); err != nil {
@@ -811,6 +1007,60 @@ func _SubscriptionBillingApi_ListPlans_Handler(srv interface{}, ctx context.Cont
 	}
 	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
 		return srv.(SubscriptionBillingApiServer).ListPlans(ctx, req.(*ListPlansRequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _SubscriptionBillingApi_ListOffers_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(ListOffersRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(SubscriptionBillingApiServer).ListOffers(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: SubscriptionBillingApi_ListOffers_FullMethodName,
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(SubscriptionBillingApiServer).ListOffers(ctx, req.(*ListOffersRequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _SubscriptionBillingApi_ListTrialPolicies_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(ListPoliciesRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(SubscriptionBillingApiServer).ListTrialPolicies(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: SubscriptionBillingApi_ListTrialPolicies_FullMethodName,
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(SubscriptionBillingApiServer).ListTrialPolicies(ctx, req.(*ListPoliciesRequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _SubscriptionBillingApi_ListBillingPolicies_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(ListPoliciesRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(SubscriptionBillingApiServer).ListBillingPolicies(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: SubscriptionBillingApi_ListBillingPolicies_FullMethodName,
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(SubscriptionBillingApiServer).ListBillingPolicies(ctx, req.(*ListPoliciesRequest))
 	}
 	return interceptor(ctx, in, info, handler)
 }
@@ -865,6 +1115,24 @@ func _SubscriptionBillingApi_ArchivePlan_Handler(srv interface{}, ctx context.Co
 	}
 	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
 		return srv.(SubscriptionBillingApiServer).ArchivePlan(ctx, req.(*EntityIdRequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _SubscriptionBillingApi_ListSubscriptions_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(ListSubscriptionsRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(SubscriptionBillingApiServer).ListSubscriptions(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: SubscriptionBillingApi_ListSubscriptions_FullMethodName,
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(SubscriptionBillingApiServer).ListSubscriptions(ctx, req.(*ListSubscriptionsRequest))
 	}
 	return interceptor(ctx, in, info, handler)
 }
@@ -1085,6 +1353,24 @@ func _SubscriptionBillingApi_GetInvoice_Handler(srv interface{}, ctx context.Con
 	return interceptor(ctx, in, info, handler)
 }
 
+func _SubscriptionBillingApi_ListAllInvoices_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(ListBillingDocumentsRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(SubscriptionBillingApiServer).ListAllInvoices(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: SubscriptionBillingApi_ListAllInvoices_FullMethodName,
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(SubscriptionBillingApiServer).ListAllInvoices(ctx, req.(*ListBillingDocumentsRequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
 func _SubscriptionBillingApi_ListInvoices_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
 	in := new(CustomerRequest)
 	if err := dec(in); err != nil {
@@ -1121,6 +1407,24 @@ func _SubscriptionBillingApi_MarkManualInvoicePaid_Handler(srv interface{}, ctx 
 	return interceptor(ctx, in, info, handler)
 }
 
+func _SubscriptionBillingApi_ListPayments_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(ListBillingDocumentsRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(SubscriptionBillingApiServer).ListPayments(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: SubscriptionBillingApi_ListPayments_FullMethodName,
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(SubscriptionBillingApiServer).ListPayments(ctx, req.(*ListBillingDocumentsRequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
 func _SubscriptionBillingApi_RefundPayment_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
 	in := new(RefundPaymentRequest)
 	if err := dec(in); err != nil {
@@ -1135,6 +1439,42 @@ func _SubscriptionBillingApi_RefundPayment_Handler(srv interface{}, ctx context.
 	}
 	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
 		return srv.(SubscriptionBillingApiServer).RefundPayment(ctx, req.(*RefundPaymentRequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _SubscriptionBillingApi_ListLedgerAccounts_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(ListLedgerAccountsRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(SubscriptionBillingApiServer).ListLedgerAccounts(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: SubscriptionBillingApi_ListLedgerAccounts_FullMethodName,
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(SubscriptionBillingApiServer).ListLedgerAccounts(ctx, req.(*ListLedgerAccountsRequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _SubscriptionBillingApi_ListLedgerTransactions_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(ListLedgerTransactionsRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(SubscriptionBillingApiServer).ListLedgerTransactions(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: SubscriptionBillingApi_ListLedgerTransactions_FullMethodName,
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(SubscriptionBillingApiServer).ListLedgerTransactions(ctx, req.(*ListLedgerTransactionsRequest))
 	}
 	return interceptor(ctx, in, info, handler)
 }
@@ -1245,8 +1585,28 @@ var SubscriptionBillingApi_ServiceDesc = grpc.ServiceDesc{
 			Handler:    _SubscriptionBillingApi_ConfigureBillingPolicy_Handler,
 		},
 		{
+			MethodName: "GetBillingSummary",
+			Handler:    _SubscriptionBillingApi_GetBillingSummary_Handler,
+		},
+		{
+			MethodName: "ListProducts",
+			Handler:    _SubscriptionBillingApi_ListProducts_Handler,
+		},
+		{
 			MethodName: "ListPlans",
 			Handler:    _SubscriptionBillingApi_ListPlans_Handler,
+		},
+		{
+			MethodName: "ListOffers",
+			Handler:    _SubscriptionBillingApi_ListOffers_Handler,
+		},
+		{
+			MethodName: "ListTrialPolicies",
+			Handler:    _SubscriptionBillingApi_ListTrialPolicies_Handler,
+		},
+		{
+			MethodName: "ListBillingPolicies",
+			Handler:    _SubscriptionBillingApi_ListBillingPolicies_Handler,
 		},
 		{
 			MethodName: "UpdatePlan",
@@ -1259,6 +1619,10 @@ var SubscriptionBillingApi_ServiceDesc = grpc.ServiceDesc{
 		{
 			MethodName: "ArchivePlan",
 			Handler:    _SubscriptionBillingApi_ArchivePlan_Handler,
+		},
+		{
+			MethodName: "ListSubscriptions",
+			Handler:    _SubscriptionBillingApi_ListSubscriptions_Handler,
 		},
 		{
 			MethodName: "StartTrial",
@@ -1309,6 +1673,10 @@ var SubscriptionBillingApi_ServiceDesc = grpc.ServiceDesc{
 			Handler:    _SubscriptionBillingApi_GetInvoice_Handler,
 		},
 		{
+			MethodName: "ListAllInvoices",
+			Handler:    _SubscriptionBillingApi_ListAllInvoices_Handler,
+		},
+		{
 			MethodName: "ListInvoices",
 			Handler:    _SubscriptionBillingApi_ListInvoices_Handler,
 		},
@@ -1317,8 +1685,20 @@ var SubscriptionBillingApi_ServiceDesc = grpc.ServiceDesc{
 			Handler:    _SubscriptionBillingApi_MarkManualInvoicePaid_Handler,
 		},
 		{
+			MethodName: "ListPayments",
+			Handler:    _SubscriptionBillingApi_ListPayments_Handler,
+		},
+		{
 			MethodName: "RefundPayment",
 			Handler:    _SubscriptionBillingApi_RefundPayment_Handler,
+		},
+		{
+			MethodName: "ListLedgerAccounts",
+			Handler:    _SubscriptionBillingApi_ListLedgerAccounts_Handler,
+		},
+		{
+			MethodName: "ListLedgerTransactions",
+			Handler:    _SubscriptionBillingApi_ListLedgerTransactions_Handler,
 		},
 		{
 			MethodName: "CreateCheckout",
