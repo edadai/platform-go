@@ -37,6 +37,9 @@ service AuthService {
   rpc ListRoles(ListRolesRequest) returns (ListRolesResponse);
   rpc ListPermissions(ListPermissionsRequest) returns (ListPermissionsResponse);
   rpc GetUserAccess(GetUserAccessRequest) returns (UserAccessResponse);
+  rpc CreateRole(CreateRoleRequest) returns (RoleMessage);
+  rpc UpdateRole(UpdateRoleRequest) returns (RoleMessage);
+  rpc DeleteRole(DeleteRoleRequest) returns (GenericMessageResponse);
 
   rpc ListSessions(ListSessionsRequest) returns (ListSessionsResponse);
   rpc RevokeSession(RevokeSessionRequest) returns (GenericMessageResponse);
@@ -213,6 +216,7 @@ message ListUsersRequest {
   RequestContext context = 5;
   int64 created_from_unix = 6;
   int64 created_to_unix = 7;
+  bool admin_only = 8;
 }
 
 message ListUsersResponse {
@@ -276,6 +280,7 @@ message RoleMessage {
   string key = 1;
   string name = 2;
   repeated string permissions = 3;
+  bool is_system = 4;
 }
 
 message PermissionMessage {
@@ -305,6 +310,25 @@ message UserAccessResponse {
   repeated string roles = 2;
   repeated PermissionOverrideMessage permission_overrides = 3;
   repeated string effective_permissions = 4;
+}
+
+message CreateRoleRequest {
+  string key = 1;
+  string name = 2;
+  repeated string permissions = 3;
+  RequestContext context = 4;
+}
+
+message UpdateRoleRequest {
+  string key = 1;
+  string name = 2;
+  repeated string permissions = 3;
+  RequestContext context = 4;
+}
+
+message DeleteRoleRequest {
+  string key = 1;
+  RequestContext context = 2;
 }
 
 message ListSessionsRequest {

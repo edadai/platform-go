@@ -1574,6 +1574,7 @@ type ListUsersRequest struct {
 	Context         *RequestContext        `protobuf:"bytes,5,opt,name=context,proto3" json:"context,omitempty"`
 	CreatedFromUnix int64                  `protobuf:"varint,6,opt,name=created_from_unix,json=createdFromUnix,proto3" json:"created_from_unix,omitempty"`
 	CreatedToUnix   int64                  `protobuf:"varint,7,opt,name=created_to_unix,json=createdToUnix,proto3" json:"created_to_unix,omitempty"`
+	AdminOnly       bool                   `protobuf:"varint,8,opt,name=admin_only,json=adminOnly,proto3" json:"admin_only,omitempty"`
 	unknownFields   protoimpl.UnknownFields
 	sizeCache       protoimpl.SizeCache
 }
@@ -1655,6 +1656,13 @@ func (x *ListUsersRequest) GetCreatedToUnix() int64 {
 		return x.CreatedToUnix
 	}
 	return 0
+}
+
+func (x *ListUsersRequest) GetAdminOnly() bool {
+	if x != nil {
+		return x.AdminOnly
+	}
+	return false
 }
 
 type ListUsersResponse struct {
@@ -2238,6 +2246,7 @@ type RoleMessage struct {
 	Key           string                 `protobuf:"bytes,1,opt,name=key,proto3" json:"key,omitempty"`
 	Name          string                 `protobuf:"bytes,2,opt,name=name,proto3" json:"name,omitempty"`
 	Permissions   []string               `protobuf:"bytes,3,rep,name=permissions,proto3" json:"permissions,omitempty"`
+	IsSystem      bool                   `protobuf:"varint,4,opt,name=is_system,json=isSystem,proto3" json:"is_system,omitempty"`
 	unknownFields protoimpl.UnknownFields
 	sizeCache     protoimpl.SizeCache
 }
@@ -2291,6 +2300,13 @@ func (x *RoleMessage) GetPermissions() []string {
 		return x.Permissions
 	}
 	return nil
+}
+
+func (x *RoleMessage) GetIsSystem() bool {
+	if x != nil {
+		return x.IsSystem
+	}
+	return false
 }
 
 type PermissionMessage struct {
@@ -2709,6 +2725,194 @@ func (x *UserAccessResponse) GetEffectivePermissions() []string {
 	return nil
 }
 
+type CreateRoleRequest struct {
+	state         protoimpl.MessageState `protogen:"open.v1"`
+	Key           string                 `protobuf:"bytes,1,opt,name=key,proto3" json:"key,omitempty"`
+	Name          string                 `protobuf:"bytes,2,opt,name=name,proto3" json:"name,omitempty"`
+	Permissions   []string               `protobuf:"bytes,3,rep,name=permissions,proto3" json:"permissions,omitempty"`
+	Context       *RequestContext        `protobuf:"bytes,4,opt,name=context,proto3" json:"context,omitempty"`
+	unknownFields protoimpl.UnknownFields
+	sizeCache     protoimpl.SizeCache
+}
+
+func (x *CreateRoleRequest) Reset() {
+	*x = CreateRoleRequest{}
+	mi := &file_proto_auth_v1_auth_proto_msgTypes[44]
+	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+	ms.StoreMessageInfo(mi)
+}
+
+func (x *CreateRoleRequest) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*CreateRoleRequest) ProtoMessage() {}
+
+func (x *CreateRoleRequest) ProtoReflect() protoreflect.Message {
+	mi := &file_proto_auth_v1_auth_proto_msgTypes[44]
+	if x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use CreateRoleRequest.ProtoReflect.Descriptor instead.
+func (*CreateRoleRequest) Descriptor() ([]byte, []int) {
+	return file_proto_auth_v1_auth_proto_rawDescGZIP(), []int{44}
+}
+
+func (x *CreateRoleRequest) GetKey() string {
+	if x != nil {
+		return x.Key
+	}
+	return ""
+}
+
+func (x *CreateRoleRequest) GetName() string {
+	if x != nil {
+		return x.Name
+	}
+	return ""
+}
+
+func (x *CreateRoleRequest) GetPermissions() []string {
+	if x != nil {
+		return x.Permissions
+	}
+	return nil
+}
+
+func (x *CreateRoleRequest) GetContext() *RequestContext {
+	if x != nil {
+		return x.Context
+	}
+	return nil
+}
+
+type UpdateRoleRequest struct {
+	state         protoimpl.MessageState `protogen:"open.v1"`
+	Key           string                 `protobuf:"bytes,1,opt,name=key,proto3" json:"key,omitempty"`
+	Name          string                 `protobuf:"bytes,2,opt,name=name,proto3" json:"name,omitempty"`
+	Permissions   []string               `protobuf:"bytes,3,rep,name=permissions,proto3" json:"permissions,omitempty"`
+	Context       *RequestContext        `protobuf:"bytes,4,opt,name=context,proto3" json:"context,omitempty"`
+	unknownFields protoimpl.UnknownFields
+	sizeCache     protoimpl.SizeCache
+}
+
+func (x *UpdateRoleRequest) Reset() {
+	*x = UpdateRoleRequest{}
+	mi := &file_proto_auth_v1_auth_proto_msgTypes[45]
+	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+	ms.StoreMessageInfo(mi)
+}
+
+func (x *UpdateRoleRequest) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*UpdateRoleRequest) ProtoMessage() {}
+
+func (x *UpdateRoleRequest) ProtoReflect() protoreflect.Message {
+	mi := &file_proto_auth_v1_auth_proto_msgTypes[45]
+	if x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use UpdateRoleRequest.ProtoReflect.Descriptor instead.
+func (*UpdateRoleRequest) Descriptor() ([]byte, []int) {
+	return file_proto_auth_v1_auth_proto_rawDescGZIP(), []int{45}
+}
+
+func (x *UpdateRoleRequest) GetKey() string {
+	if x != nil {
+		return x.Key
+	}
+	return ""
+}
+
+func (x *UpdateRoleRequest) GetName() string {
+	if x != nil {
+		return x.Name
+	}
+	return ""
+}
+
+func (x *UpdateRoleRequest) GetPermissions() []string {
+	if x != nil {
+		return x.Permissions
+	}
+	return nil
+}
+
+func (x *UpdateRoleRequest) GetContext() *RequestContext {
+	if x != nil {
+		return x.Context
+	}
+	return nil
+}
+
+type DeleteRoleRequest struct {
+	state         protoimpl.MessageState `protogen:"open.v1"`
+	Key           string                 `protobuf:"bytes,1,opt,name=key,proto3" json:"key,omitempty"`
+	Context       *RequestContext        `protobuf:"bytes,2,opt,name=context,proto3" json:"context,omitempty"`
+	unknownFields protoimpl.UnknownFields
+	sizeCache     protoimpl.SizeCache
+}
+
+func (x *DeleteRoleRequest) Reset() {
+	*x = DeleteRoleRequest{}
+	mi := &file_proto_auth_v1_auth_proto_msgTypes[46]
+	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+	ms.StoreMessageInfo(mi)
+}
+
+func (x *DeleteRoleRequest) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*DeleteRoleRequest) ProtoMessage() {}
+
+func (x *DeleteRoleRequest) ProtoReflect() protoreflect.Message {
+	mi := &file_proto_auth_v1_auth_proto_msgTypes[46]
+	if x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use DeleteRoleRequest.ProtoReflect.Descriptor instead.
+func (*DeleteRoleRequest) Descriptor() ([]byte, []int) {
+	return file_proto_auth_v1_auth_proto_rawDescGZIP(), []int{46}
+}
+
+func (x *DeleteRoleRequest) GetKey() string {
+	if x != nil {
+		return x.Key
+	}
+	return ""
+}
+
+func (x *DeleteRoleRequest) GetContext() *RequestContext {
+	if x != nil {
+		return x.Context
+	}
+	return nil
+}
+
 type ListSessionsRequest struct {
 	state         protoimpl.MessageState `protogen:"open.v1"`
 	UserId        string                 `protobuf:"bytes,1,opt,name=user_id,json=userId,proto3" json:"user_id,omitempty"`
@@ -2719,7 +2923,7 @@ type ListSessionsRequest struct {
 
 func (x *ListSessionsRequest) Reset() {
 	*x = ListSessionsRequest{}
-	mi := &file_proto_auth_v1_auth_proto_msgTypes[44]
+	mi := &file_proto_auth_v1_auth_proto_msgTypes[47]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -2731,7 +2935,7 @@ func (x *ListSessionsRequest) String() string {
 func (*ListSessionsRequest) ProtoMessage() {}
 
 func (x *ListSessionsRequest) ProtoReflect() protoreflect.Message {
-	mi := &file_proto_auth_v1_auth_proto_msgTypes[44]
+	mi := &file_proto_auth_v1_auth_proto_msgTypes[47]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -2744,7 +2948,7 @@ func (x *ListSessionsRequest) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use ListSessionsRequest.ProtoReflect.Descriptor instead.
 func (*ListSessionsRequest) Descriptor() ([]byte, []int) {
-	return file_proto_auth_v1_auth_proto_rawDescGZIP(), []int{44}
+	return file_proto_auth_v1_auth_proto_rawDescGZIP(), []int{47}
 }
 
 func (x *ListSessionsRequest) GetUserId() string {
@@ -2770,7 +2974,7 @@ type ListSessionsResponse struct {
 
 func (x *ListSessionsResponse) Reset() {
 	*x = ListSessionsResponse{}
-	mi := &file_proto_auth_v1_auth_proto_msgTypes[45]
+	mi := &file_proto_auth_v1_auth_proto_msgTypes[48]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -2782,7 +2986,7 @@ func (x *ListSessionsResponse) String() string {
 func (*ListSessionsResponse) ProtoMessage() {}
 
 func (x *ListSessionsResponse) ProtoReflect() protoreflect.Message {
-	mi := &file_proto_auth_v1_auth_proto_msgTypes[45]
+	mi := &file_proto_auth_v1_auth_proto_msgTypes[48]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -2795,7 +2999,7 @@ func (x *ListSessionsResponse) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use ListSessionsResponse.ProtoReflect.Descriptor instead.
 func (*ListSessionsResponse) Descriptor() ([]byte, []int) {
-	return file_proto_auth_v1_auth_proto_rawDescGZIP(), []int{45}
+	return file_proto_auth_v1_auth_proto_rawDescGZIP(), []int{48}
 }
 
 func (x *ListSessionsResponse) GetSessions() []*SessionMessage {
@@ -2816,7 +3020,7 @@ type RevokeSessionRequest struct {
 
 func (x *RevokeSessionRequest) Reset() {
 	*x = RevokeSessionRequest{}
-	mi := &file_proto_auth_v1_auth_proto_msgTypes[46]
+	mi := &file_proto_auth_v1_auth_proto_msgTypes[49]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -2828,7 +3032,7 @@ func (x *RevokeSessionRequest) String() string {
 func (*RevokeSessionRequest) ProtoMessage() {}
 
 func (x *RevokeSessionRequest) ProtoReflect() protoreflect.Message {
-	mi := &file_proto_auth_v1_auth_proto_msgTypes[46]
+	mi := &file_proto_auth_v1_auth_proto_msgTypes[49]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -2841,7 +3045,7 @@ func (x *RevokeSessionRequest) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use RevokeSessionRequest.ProtoReflect.Descriptor instead.
 func (*RevokeSessionRequest) Descriptor() ([]byte, []int) {
-	return file_proto_auth_v1_auth_proto_rawDescGZIP(), []int{46}
+	return file_proto_auth_v1_auth_proto_rawDescGZIP(), []int{49}
 }
 
 func (x *RevokeSessionRequest) GetSessionId() string {
@@ -2876,7 +3080,7 @@ type AssignRoleRequest struct {
 
 func (x *AssignRoleRequest) Reset() {
 	*x = AssignRoleRequest{}
-	mi := &file_proto_auth_v1_auth_proto_msgTypes[47]
+	mi := &file_proto_auth_v1_auth_proto_msgTypes[50]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -2888,7 +3092,7 @@ func (x *AssignRoleRequest) String() string {
 func (*AssignRoleRequest) ProtoMessage() {}
 
 func (x *AssignRoleRequest) ProtoReflect() protoreflect.Message {
-	mi := &file_proto_auth_v1_auth_proto_msgTypes[47]
+	mi := &file_proto_auth_v1_auth_proto_msgTypes[50]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -2901,7 +3105,7 @@ func (x *AssignRoleRequest) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use AssignRoleRequest.ProtoReflect.Descriptor instead.
 func (*AssignRoleRequest) Descriptor() ([]byte, []int) {
-	return file_proto_auth_v1_auth_proto_rawDescGZIP(), []int{47}
+	return file_proto_auth_v1_auth_proto_rawDescGZIP(), []int{50}
 }
 
 func (x *AssignRoleRequest) GetUserId() string {
@@ -2936,7 +3140,7 @@ type RevokeRoleRequest struct {
 
 func (x *RevokeRoleRequest) Reset() {
 	*x = RevokeRoleRequest{}
-	mi := &file_proto_auth_v1_auth_proto_msgTypes[48]
+	mi := &file_proto_auth_v1_auth_proto_msgTypes[51]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -2948,7 +3152,7 @@ func (x *RevokeRoleRequest) String() string {
 func (*RevokeRoleRequest) ProtoMessage() {}
 
 func (x *RevokeRoleRequest) ProtoReflect() protoreflect.Message {
-	mi := &file_proto_auth_v1_auth_proto_msgTypes[48]
+	mi := &file_proto_auth_v1_auth_proto_msgTypes[51]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -2961,7 +3165,7 @@ func (x *RevokeRoleRequest) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use RevokeRoleRequest.ProtoReflect.Descriptor instead.
 func (*RevokeRoleRequest) Descriptor() ([]byte, []int) {
-	return file_proto_auth_v1_auth_proto_rawDescGZIP(), []int{48}
+	return file_proto_auth_v1_auth_proto_rawDescGZIP(), []int{51}
 }
 
 func (x *RevokeRoleRequest) GetUserId() string {
@@ -2998,7 +3202,7 @@ type GrantUserPermissionRequest struct {
 
 func (x *GrantUserPermissionRequest) Reset() {
 	*x = GrantUserPermissionRequest{}
-	mi := &file_proto_auth_v1_auth_proto_msgTypes[49]
+	mi := &file_proto_auth_v1_auth_proto_msgTypes[52]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -3010,7 +3214,7 @@ func (x *GrantUserPermissionRequest) String() string {
 func (*GrantUserPermissionRequest) ProtoMessage() {}
 
 func (x *GrantUserPermissionRequest) ProtoReflect() protoreflect.Message {
-	mi := &file_proto_auth_v1_auth_proto_msgTypes[49]
+	mi := &file_proto_auth_v1_auth_proto_msgTypes[52]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -3023,7 +3227,7 @@ func (x *GrantUserPermissionRequest) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use GrantUserPermissionRequest.ProtoReflect.Descriptor instead.
 func (*GrantUserPermissionRequest) Descriptor() ([]byte, []int) {
-	return file_proto_auth_v1_auth_proto_rawDescGZIP(), []int{49}
+	return file_proto_auth_v1_auth_proto_rawDescGZIP(), []int{52}
 }
 
 func (x *GrantUserPermissionRequest) GetUserId() string {
@@ -3074,7 +3278,7 @@ type DenyUserPermissionRequest struct {
 
 func (x *DenyUserPermissionRequest) Reset() {
 	*x = DenyUserPermissionRequest{}
-	mi := &file_proto_auth_v1_auth_proto_msgTypes[50]
+	mi := &file_proto_auth_v1_auth_proto_msgTypes[53]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -3086,7 +3290,7 @@ func (x *DenyUserPermissionRequest) String() string {
 func (*DenyUserPermissionRequest) ProtoMessage() {}
 
 func (x *DenyUserPermissionRequest) ProtoReflect() protoreflect.Message {
-	mi := &file_proto_auth_v1_auth_proto_msgTypes[50]
+	mi := &file_proto_auth_v1_auth_proto_msgTypes[53]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -3099,7 +3303,7 @@ func (x *DenyUserPermissionRequest) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use DenyUserPermissionRequest.ProtoReflect.Descriptor instead.
 func (*DenyUserPermissionRequest) Descriptor() ([]byte, []int) {
-	return file_proto_auth_v1_auth_proto_rawDescGZIP(), []int{50}
+	return file_proto_auth_v1_auth_proto_rawDescGZIP(), []int{53}
 }
 
 func (x *DenyUserPermissionRequest) GetUserId() string {
@@ -3148,7 +3352,7 @@ type RemoveUserPermissionOverrideRequest struct {
 
 func (x *RemoveUserPermissionOverrideRequest) Reset() {
 	*x = RemoveUserPermissionOverrideRequest{}
-	mi := &file_proto_auth_v1_auth_proto_msgTypes[51]
+	mi := &file_proto_auth_v1_auth_proto_msgTypes[54]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -3160,7 +3364,7 @@ func (x *RemoveUserPermissionOverrideRequest) String() string {
 func (*RemoveUserPermissionOverrideRequest) ProtoMessage() {}
 
 func (x *RemoveUserPermissionOverrideRequest) ProtoReflect() protoreflect.Message {
-	mi := &file_proto_auth_v1_auth_proto_msgTypes[51]
+	mi := &file_proto_auth_v1_auth_proto_msgTypes[54]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -3173,7 +3377,7 @@ func (x *RemoveUserPermissionOverrideRequest) ProtoReflect() protoreflect.Messag
 
 // Deprecated: Use RemoveUserPermissionOverrideRequest.ProtoReflect.Descriptor instead.
 func (*RemoveUserPermissionOverrideRequest) Descriptor() ([]byte, []int) {
-	return file_proto_auth_v1_auth_proto_rawDescGZIP(), []int{51}
+	return file_proto_auth_v1_auth_proto_rawDescGZIP(), []int{54}
 }
 
 func (x *RemoveUserPermissionOverrideRequest) GetUserId() string {
@@ -3208,7 +3412,7 @@ type SuspendUserRequest struct {
 
 func (x *SuspendUserRequest) Reset() {
 	*x = SuspendUserRequest{}
-	mi := &file_proto_auth_v1_auth_proto_msgTypes[52]
+	mi := &file_proto_auth_v1_auth_proto_msgTypes[55]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -3220,7 +3424,7 @@ func (x *SuspendUserRequest) String() string {
 func (*SuspendUserRequest) ProtoMessage() {}
 
 func (x *SuspendUserRequest) ProtoReflect() protoreflect.Message {
-	mi := &file_proto_auth_v1_auth_proto_msgTypes[52]
+	mi := &file_proto_auth_v1_auth_proto_msgTypes[55]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -3233,7 +3437,7 @@ func (x *SuspendUserRequest) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use SuspendUserRequest.ProtoReflect.Descriptor instead.
 func (*SuspendUserRequest) Descriptor() ([]byte, []int) {
-	return file_proto_auth_v1_auth_proto_rawDescGZIP(), []int{52}
+	return file_proto_auth_v1_auth_proto_rawDescGZIP(), []int{55}
 }
 
 func (x *SuspendUserRequest) GetUserId() string {
@@ -3268,7 +3472,7 @@ type DeleteUserRequest struct {
 
 func (x *DeleteUserRequest) Reset() {
 	*x = DeleteUserRequest{}
-	mi := &file_proto_auth_v1_auth_proto_msgTypes[53]
+	mi := &file_proto_auth_v1_auth_proto_msgTypes[56]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -3280,7 +3484,7 @@ func (x *DeleteUserRequest) String() string {
 func (*DeleteUserRequest) ProtoMessage() {}
 
 func (x *DeleteUserRequest) ProtoReflect() protoreflect.Message {
-	mi := &file_proto_auth_v1_auth_proto_msgTypes[53]
+	mi := &file_proto_auth_v1_auth_proto_msgTypes[56]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -3293,7 +3497,7 @@ func (x *DeleteUserRequest) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use DeleteUserRequest.ProtoReflect.Descriptor instead.
 func (*DeleteUserRequest) Descriptor() ([]byte, []int) {
-	return file_proto_auth_v1_auth_proto_rawDescGZIP(), []int{53}
+	return file_proto_auth_v1_auth_proto_rawDescGZIP(), []int{56}
 }
 
 func (x *DeleteUserRequest) GetUserId() string {
@@ -3443,7 +3647,7 @@ const file_proto_auth_v1_auth_proto_rawDesc = "" +
 	"\auser_id\x18\x01 \x01(\tR\x06userId\x121\n" +
 	"\acontext\x18\x02 \x01(\v2\x17.auth.v1.RequestContextR\acontext\"9\n" +
 	"\rGetMeResponse\x12(\n" +
-	"\x04user\x18\x01 \x01(\v2\x14.auth.v1.UserMessageR\x04user\"\xf8\x01\n" +
+	"\x04user\x18\x01 \x01(\v2\x14.auth.v1.UserMessageR\x04user\"\x97\x02\n" +
 	"\x10ListUsersRequest\x12\x14\n" +
 	"\x05query\x18\x01 \x01(\tR\x05query\x12\x16\n" +
 	"\x06status\x18\x02 \x01(\tR\x06status\x12\x12\n" +
@@ -3451,7 +3655,9 @@ const file_proto_auth_v1_auth_proto_rawDesc = "" +
 	"\tpage_size\x18\x04 \x01(\x05R\bpageSize\x121\n" +
 	"\acontext\x18\x05 \x01(\v2\x17.auth.v1.RequestContextR\acontext\x12*\n" +
 	"\x11created_from_unix\x18\x06 \x01(\x03R\x0fcreatedFromUnix\x12&\n" +
-	"\x0fcreated_to_unix\x18\a \x01(\x03R\rcreatedToUnix\"\x86\x01\n" +
+	"\x0fcreated_to_unix\x18\a \x01(\x03R\rcreatedToUnix\x12\x1d\n" +
+	"\n" +
+	"admin_only\x18\b \x01(\bR\tadminOnly\"\x86\x01\n" +
 	"\x11ListUsersResponse\x12*\n" +
 	"\x05users\x18\x01 \x03(\v2\x14.auth.v1.UserMessageR\x05users\x12\x12\n" +
 	"\x04page\x18\x02 \x01(\x05R\x04page\x12\x1b\n" +
@@ -3491,11 +3697,12 @@ const file_proto_auth_v1_auth_proto_rawDesc = "" +
 	"\acontext\x18\x03 \x01(\v2\x17.auth.v1.RequestContextR\acontext\"K\n" +
 	"\x17CheckPermissionResponse\x12\x18\n" +
 	"\aallowed\x18\x01 \x01(\bR\aallowed\x12\x16\n" +
-	"\x06reason\x18\x02 \x01(\tR\x06reason\"U\n" +
+	"\x06reason\x18\x02 \x01(\tR\x06reason\"r\n" +
 	"\vRoleMessage\x12\x10\n" +
 	"\x03key\x18\x01 \x01(\tR\x03key\x12\x12\n" +
 	"\x04name\x18\x02 \x01(\tR\x04name\x12 \n" +
-	"\vpermissions\x18\x03 \x03(\tR\vpermissions\"G\n" +
+	"\vpermissions\x18\x03 \x03(\tR\vpermissions\x12\x1b\n" +
+	"\tis_system\x18\x04 \x01(\bR\bisSystem\"G\n" +
 	"\x11PermissionMessage\x12\x10\n" +
 	"\x03key\x18\x01 \x01(\tR\x03key\x12 \n" +
 	"\vdescription\x18\x02 \x01(\tR\vdescription\"\x9a\x01\n" +
@@ -3519,7 +3726,20 @@ const file_proto_auth_v1_auth_proto_rawDesc = "" +
 	"\auser_id\x18\x01 \x01(\tR\x06userId\x12\x14\n" +
 	"\x05roles\x18\x02 \x03(\tR\x05roles\x12U\n" +
 	"\x14permission_overrides\x18\x03 \x03(\v2\".auth.v1.PermissionOverrideMessageR\x13permissionOverrides\x123\n" +
-	"\x15effective_permissions\x18\x04 \x03(\tR\x14effectivePermissions\"a\n" +
+	"\x15effective_permissions\x18\x04 \x03(\tR\x14effectivePermissions\"\x8e\x01\n" +
+	"\x11CreateRoleRequest\x12\x10\n" +
+	"\x03key\x18\x01 \x01(\tR\x03key\x12\x12\n" +
+	"\x04name\x18\x02 \x01(\tR\x04name\x12 \n" +
+	"\vpermissions\x18\x03 \x03(\tR\vpermissions\x121\n" +
+	"\acontext\x18\x04 \x01(\v2\x17.auth.v1.RequestContextR\acontext\"\x8e\x01\n" +
+	"\x11UpdateRoleRequest\x12\x10\n" +
+	"\x03key\x18\x01 \x01(\tR\x03key\x12\x12\n" +
+	"\x04name\x18\x02 \x01(\tR\x04name\x12 \n" +
+	"\vpermissions\x18\x03 \x03(\tR\vpermissions\x121\n" +
+	"\acontext\x18\x04 \x01(\v2\x17.auth.v1.RequestContextR\acontext\"X\n" +
+	"\x11DeleteRoleRequest\x12\x10\n" +
+	"\x03key\x18\x01 \x01(\tR\x03key\x121\n" +
+	"\acontext\x18\x02 \x01(\v2\x17.auth.v1.RequestContextR\acontext\"a\n" +
 	"\x13ListSessionsRequest\x12\x17\n" +
 	"\auser_id\x18\x01 \x01(\tR\x06userId\x121\n" +
 	"\acontext\x18\x02 \x01(\v2\x17.auth.v1.RequestContextR\acontext\"K\n" +
@@ -3561,7 +3781,7 @@ const file_proto_auth_v1_auth_proto_rawDesc = "" +
 	"\x11DeleteUserRequest\x12\x17\n" +
 	"\auser_id\x18\x01 \x01(\tR\x06userId\x12\x16\n" +
 	"\x06reason\x18\x02 \x01(\tR\x06reason\x121\n" +
-	"\acontext\x18\x03 \x01(\v2\x17.auth.v1.RequestContextR\acontext2\xef\x15\n" +
+	"\acontext\x18\x03 \x01(\v2\x17.auth.v1.RequestContextR\acontext2\xba\x17\n" +
 	"\vAuthService\x12E\n" +
 	"\bRegister\x12\x18.auth.v1.RegisterRequest\x1a\x1f.auth.v1.GenericMessageResponse\x12e\n" +
 	"\x18RequestEmailVerification\x12(.auth.v1.RequestEmailVerificationRequest\x1a\x1f.auth.v1.GenericMessageResponse\x12K\n" +
@@ -3590,7 +3810,13 @@ const file_proto_auth_v1_auth_proto_rawDesc = "" +
 	"\x0fCheckPermission\x12\x1f.auth.v1.CheckPermissionRequest\x1a .auth.v1.CheckPermissionResponse\x12B\n" +
 	"\tListRoles\x12\x19.auth.v1.ListRolesRequest\x1a\x1a.auth.v1.ListRolesResponse\x12T\n" +
 	"\x0fListPermissions\x12\x1f.auth.v1.ListPermissionsRequest\x1a .auth.v1.ListPermissionsResponse\x12K\n" +
-	"\rGetUserAccess\x12\x1d.auth.v1.GetUserAccessRequest\x1a\x1b.auth.v1.UserAccessResponse\x12K\n" +
+	"\rGetUserAccess\x12\x1d.auth.v1.GetUserAccessRequest\x1a\x1b.auth.v1.UserAccessResponse\x12>\n" +
+	"\n" +
+	"CreateRole\x12\x1a.auth.v1.CreateRoleRequest\x1a\x14.auth.v1.RoleMessage\x12>\n" +
+	"\n" +
+	"UpdateRole\x12\x1a.auth.v1.UpdateRoleRequest\x1a\x14.auth.v1.RoleMessage\x12I\n" +
+	"\n" +
+	"DeleteRole\x12\x1a.auth.v1.DeleteRoleRequest\x1a\x1f.auth.v1.GenericMessageResponse\x12K\n" +
 	"\fListSessions\x12\x1c.auth.v1.ListSessionsRequest\x1a\x1d.auth.v1.ListSessionsResponse\x12O\n" +
 	"\rRevokeSession\x12\x1d.auth.v1.RevokeSessionRequest\x1a\x1f.auth.v1.GenericMessageResponse\x12I\n" +
 	"\n" +
@@ -3616,7 +3842,7 @@ func file_proto_auth_v1_auth_proto_rawDescGZIP() []byte {
 	return file_proto_auth_v1_auth_proto_rawDescData
 }
 
-var file_proto_auth_v1_auth_proto_msgTypes = make([]protoimpl.MessageInfo, 54)
+var file_proto_auth_v1_auth_proto_msgTypes = make([]protoimpl.MessageInfo, 57)
 var file_proto_auth_v1_auth_proto_goTypes = []any{
 	(*RequestContext)(nil),                      // 0: auth.v1.RequestContext
 	(*GenericMessageResponse)(nil),              // 1: auth.v1.GenericMessageResponse
@@ -3662,16 +3888,19 @@ var file_proto_auth_v1_auth_proto_goTypes = []any{
 	(*ListPermissionsResponse)(nil),             // 41: auth.v1.ListPermissionsResponse
 	(*GetUserAccessRequest)(nil),                // 42: auth.v1.GetUserAccessRequest
 	(*UserAccessResponse)(nil),                  // 43: auth.v1.UserAccessResponse
-	(*ListSessionsRequest)(nil),                 // 44: auth.v1.ListSessionsRequest
-	(*ListSessionsResponse)(nil),                // 45: auth.v1.ListSessionsResponse
-	(*RevokeSessionRequest)(nil),                // 46: auth.v1.RevokeSessionRequest
-	(*AssignRoleRequest)(nil),                   // 47: auth.v1.AssignRoleRequest
-	(*RevokeRoleRequest)(nil),                   // 48: auth.v1.RevokeRoleRequest
-	(*GrantUserPermissionRequest)(nil),          // 49: auth.v1.GrantUserPermissionRequest
-	(*DenyUserPermissionRequest)(nil),           // 50: auth.v1.DenyUserPermissionRequest
-	(*RemoveUserPermissionOverrideRequest)(nil), // 51: auth.v1.RemoveUserPermissionOverrideRequest
-	(*SuspendUserRequest)(nil),                  // 52: auth.v1.SuspendUserRequest
-	(*DeleteUserRequest)(nil),                   // 53: auth.v1.DeleteUserRequest
+	(*CreateRoleRequest)(nil),                   // 44: auth.v1.CreateRoleRequest
+	(*UpdateRoleRequest)(nil),                   // 45: auth.v1.UpdateRoleRequest
+	(*DeleteRoleRequest)(nil),                   // 46: auth.v1.DeleteRoleRequest
+	(*ListSessionsRequest)(nil),                 // 47: auth.v1.ListSessionsRequest
+	(*ListSessionsResponse)(nil),                // 48: auth.v1.ListSessionsResponse
+	(*RevokeSessionRequest)(nil),                // 49: auth.v1.RevokeSessionRequest
+	(*AssignRoleRequest)(nil),                   // 50: auth.v1.AssignRoleRequest
+	(*RevokeRoleRequest)(nil),                   // 51: auth.v1.RevokeRoleRequest
+	(*GrantUserPermissionRequest)(nil),          // 52: auth.v1.GrantUserPermissionRequest
+	(*DenyUserPermissionRequest)(nil),           // 53: auth.v1.DenyUserPermissionRequest
+	(*RemoveUserPermissionOverrideRequest)(nil), // 54: auth.v1.RemoveUserPermissionOverrideRequest
+	(*SuspendUserRequest)(nil),                  // 55: auth.v1.SuspendUserRequest
+	(*DeleteUserRequest)(nil),                   // 56: auth.v1.DeleteUserRequest
 }
 var file_proto_auth_v1_auth_proto_depIdxs = []int32{
 	37, // 0: auth.v1.UserMessage.permission_overrides:type_name -> auth.v1.PermissionOverrideMessage
@@ -3706,91 +3935,100 @@ var file_proto_auth_v1_auth_proto_depIdxs = []int32{
 	36, // 29: auth.v1.ListPermissionsResponse.permissions:type_name -> auth.v1.PermissionMessage
 	0,  // 30: auth.v1.GetUserAccessRequest.context:type_name -> auth.v1.RequestContext
 	37, // 31: auth.v1.UserAccessResponse.permission_overrides:type_name -> auth.v1.PermissionOverrideMessage
-	0,  // 32: auth.v1.ListSessionsRequest.context:type_name -> auth.v1.RequestContext
-	4,  // 33: auth.v1.ListSessionsResponse.sessions:type_name -> auth.v1.SessionMessage
-	0,  // 34: auth.v1.RevokeSessionRequest.context:type_name -> auth.v1.RequestContext
-	0,  // 35: auth.v1.AssignRoleRequest.context:type_name -> auth.v1.RequestContext
-	0,  // 36: auth.v1.RevokeRoleRequest.context:type_name -> auth.v1.RequestContext
-	0,  // 37: auth.v1.GrantUserPermissionRequest.context:type_name -> auth.v1.RequestContext
-	0,  // 38: auth.v1.DenyUserPermissionRequest.context:type_name -> auth.v1.RequestContext
-	0,  // 39: auth.v1.RemoveUserPermissionOverrideRequest.context:type_name -> auth.v1.RequestContext
-	0,  // 40: auth.v1.SuspendUserRequest.context:type_name -> auth.v1.RequestContext
-	0,  // 41: auth.v1.DeleteUserRequest.context:type_name -> auth.v1.RequestContext
-	5,  // 42: auth.v1.AuthService.Register:input_type -> auth.v1.RegisterRequest
-	6,  // 43: auth.v1.AuthService.RequestEmailVerification:input_type -> auth.v1.RequestEmailVerificationRequest
-	7,  // 44: auth.v1.AuthService.VerifyEmail:input_type -> auth.v1.VerifyEmailRequest
-	8,  // 45: auth.v1.AuthService.LoginPassword:input_type -> auth.v1.LoginPasswordRequest
-	9,  // 46: auth.v1.AuthService.RefreshSession:input_type -> auth.v1.RefreshSessionRequest
-	10, // 47: auth.v1.AuthService.Logout:input_type -> auth.v1.LogoutRequest
-	11, // 48: auth.v1.AuthService.LogoutAll:input_type -> auth.v1.LogoutAllRequest
-	12, // 49: auth.v1.AuthService.RequestPasswordReset:input_type -> auth.v1.RequestPasswordResetRequest
-	13, // 50: auth.v1.AuthService.ResetPassword:input_type -> auth.v1.ResetPasswordRequest
-	14, // 51: auth.v1.AuthService.RequestEmailChange:input_type -> auth.v1.RequestEmailChangeRequest
-	15, // 52: auth.v1.AuthService.ConfirmEmailChange:input_type -> auth.v1.ConfirmEmailChangeRequest
-	16, // 53: auth.v1.AuthService.StartOAuth:input_type -> auth.v1.StartOAuthRequest
-	18, // 54: auth.v1.AuthService.CompleteOAuth:input_type -> auth.v1.CompleteOAuthRequest
-	19, // 55: auth.v1.AuthService.LinkOAuth:input_type -> auth.v1.LinkOAuthRequest
-	20, // 56: auth.v1.AuthService.UnlinkOAuth:input_type -> auth.v1.UnlinkOAuthRequest
-	21, // 57: auth.v1.AuthService.GetMe:input_type -> auth.v1.GetMeRequest
-	22, // 58: auth.v1.AuthService.GetUser:input_type -> auth.v1.GetUserRequest
-	24, // 59: auth.v1.AuthService.ListUsers:input_type -> auth.v1.ListUsersRequest
-	26, // 60: auth.v1.AuthService.InviteUser:input_type -> auth.v1.InviteUserRequest
-	27, // 61: auth.v1.AuthService.ValidateAccessToken:input_type -> auth.v1.ValidateAccessTokenRequest
-	29, // 62: auth.v1.AuthService.ValidateSession:input_type -> auth.v1.ValidateSessionRequest
-	31, // 63: auth.v1.AuthService.CheckRole:input_type -> auth.v1.CheckRoleRequest
-	33, // 64: auth.v1.AuthService.CheckPermission:input_type -> auth.v1.CheckPermissionRequest
-	38, // 65: auth.v1.AuthService.ListRoles:input_type -> auth.v1.ListRolesRequest
-	40, // 66: auth.v1.AuthService.ListPermissions:input_type -> auth.v1.ListPermissionsRequest
-	42, // 67: auth.v1.AuthService.GetUserAccess:input_type -> auth.v1.GetUserAccessRequest
-	44, // 68: auth.v1.AuthService.ListSessions:input_type -> auth.v1.ListSessionsRequest
-	46, // 69: auth.v1.AuthService.RevokeSession:input_type -> auth.v1.RevokeSessionRequest
-	47, // 70: auth.v1.AuthService.AssignRole:input_type -> auth.v1.AssignRoleRequest
-	48, // 71: auth.v1.AuthService.RevokeRole:input_type -> auth.v1.RevokeRoleRequest
-	49, // 72: auth.v1.AuthService.GrantUserPermission:input_type -> auth.v1.GrantUserPermissionRequest
-	50, // 73: auth.v1.AuthService.DenyUserPermission:input_type -> auth.v1.DenyUserPermissionRequest
-	51, // 74: auth.v1.AuthService.RemoveUserPermissionOverride:input_type -> auth.v1.RemoveUserPermissionOverrideRequest
-	52, // 75: auth.v1.AuthService.SuspendUser:input_type -> auth.v1.SuspendUserRequest
-	53, // 76: auth.v1.AuthService.DeleteUser:input_type -> auth.v1.DeleteUserRequest
-	1,  // 77: auth.v1.AuthService.Register:output_type -> auth.v1.GenericMessageResponse
-	1,  // 78: auth.v1.AuthService.RequestEmailVerification:output_type -> auth.v1.GenericMessageResponse
-	1,  // 79: auth.v1.AuthService.VerifyEmail:output_type -> auth.v1.GenericMessageResponse
-	2,  // 80: auth.v1.AuthService.LoginPassword:output_type -> auth.v1.SessionTokensResponse
-	2,  // 81: auth.v1.AuthService.RefreshSession:output_type -> auth.v1.SessionTokensResponse
-	1,  // 82: auth.v1.AuthService.Logout:output_type -> auth.v1.GenericMessageResponse
-	1,  // 83: auth.v1.AuthService.LogoutAll:output_type -> auth.v1.GenericMessageResponse
-	1,  // 84: auth.v1.AuthService.RequestPasswordReset:output_type -> auth.v1.GenericMessageResponse
-	1,  // 85: auth.v1.AuthService.ResetPassword:output_type -> auth.v1.GenericMessageResponse
-	1,  // 86: auth.v1.AuthService.RequestEmailChange:output_type -> auth.v1.GenericMessageResponse
-	1,  // 87: auth.v1.AuthService.ConfirmEmailChange:output_type -> auth.v1.GenericMessageResponse
-	17, // 88: auth.v1.AuthService.StartOAuth:output_type -> auth.v1.StartOAuthResponse
-	2,  // 89: auth.v1.AuthService.CompleteOAuth:output_type -> auth.v1.SessionTokensResponse
-	1,  // 90: auth.v1.AuthService.LinkOAuth:output_type -> auth.v1.GenericMessageResponse
-	1,  // 91: auth.v1.AuthService.UnlinkOAuth:output_type -> auth.v1.GenericMessageResponse
-	23, // 92: auth.v1.AuthService.GetMe:output_type -> auth.v1.GetMeResponse
-	23, // 93: auth.v1.AuthService.GetUser:output_type -> auth.v1.GetMeResponse
-	25, // 94: auth.v1.AuthService.ListUsers:output_type -> auth.v1.ListUsersResponse
-	23, // 95: auth.v1.AuthService.InviteUser:output_type -> auth.v1.GetMeResponse
-	28, // 96: auth.v1.AuthService.ValidateAccessToken:output_type -> auth.v1.ValidateAccessTokenResponse
-	30, // 97: auth.v1.AuthService.ValidateSession:output_type -> auth.v1.ValidateSessionResponse
-	32, // 98: auth.v1.AuthService.CheckRole:output_type -> auth.v1.CheckRoleResponse
-	34, // 99: auth.v1.AuthService.CheckPermission:output_type -> auth.v1.CheckPermissionResponse
-	39, // 100: auth.v1.AuthService.ListRoles:output_type -> auth.v1.ListRolesResponse
-	41, // 101: auth.v1.AuthService.ListPermissions:output_type -> auth.v1.ListPermissionsResponse
-	43, // 102: auth.v1.AuthService.GetUserAccess:output_type -> auth.v1.UserAccessResponse
-	45, // 103: auth.v1.AuthService.ListSessions:output_type -> auth.v1.ListSessionsResponse
-	1,  // 104: auth.v1.AuthService.RevokeSession:output_type -> auth.v1.GenericMessageResponse
-	1,  // 105: auth.v1.AuthService.AssignRole:output_type -> auth.v1.GenericMessageResponse
-	1,  // 106: auth.v1.AuthService.RevokeRole:output_type -> auth.v1.GenericMessageResponse
-	1,  // 107: auth.v1.AuthService.GrantUserPermission:output_type -> auth.v1.GenericMessageResponse
-	1,  // 108: auth.v1.AuthService.DenyUserPermission:output_type -> auth.v1.GenericMessageResponse
-	1,  // 109: auth.v1.AuthService.RemoveUserPermissionOverride:output_type -> auth.v1.GenericMessageResponse
-	1,  // 110: auth.v1.AuthService.SuspendUser:output_type -> auth.v1.GenericMessageResponse
-	1,  // 111: auth.v1.AuthService.DeleteUser:output_type -> auth.v1.GenericMessageResponse
-	77, // [77:112] is the sub-list for method output_type
-	42, // [42:77] is the sub-list for method input_type
-	42, // [42:42] is the sub-list for extension type_name
-	42, // [42:42] is the sub-list for extension extendee
-	0,  // [0:42] is the sub-list for field type_name
+	0,  // 32: auth.v1.CreateRoleRequest.context:type_name -> auth.v1.RequestContext
+	0,  // 33: auth.v1.UpdateRoleRequest.context:type_name -> auth.v1.RequestContext
+	0,  // 34: auth.v1.DeleteRoleRequest.context:type_name -> auth.v1.RequestContext
+	0,  // 35: auth.v1.ListSessionsRequest.context:type_name -> auth.v1.RequestContext
+	4,  // 36: auth.v1.ListSessionsResponse.sessions:type_name -> auth.v1.SessionMessage
+	0,  // 37: auth.v1.RevokeSessionRequest.context:type_name -> auth.v1.RequestContext
+	0,  // 38: auth.v1.AssignRoleRequest.context:type_name -> auth.v1.RequestContext
+	0,  // 39: auth.v1.RevokeRoleRequest.context:type_name -> auth.v1.RequestContext
+	0,  // 40: auth.v1.GrantUserPermissionRequest.context:type_name -> auth.v1.RequestContext
+	0,  // 41: auth.v1.DenyUserPermissionRequest.context:type_name -> auth.v1.RequestContext
+	0,  // 42: auth.v1.RemoveUserPermissionOverrideRequest.context:type_name -> auth.v1.RequestContext
+	0,  // 43: auth.v1.SuspendUserRequest.context:type_name -> auth.v1.RequestContext
+	0,  // 44: auth.v1.DeleteUserRequest.context:type_name -> auth.v1.RequestContext
+	5,  // 45: auth.v1.AuthService.Register:input_type -> auth.v1.RegisterRequest
+	6,  // 46: auth.v1.AuthService.RequestEmailVerification:input_type -> auth.v1.RequestEmailVerificationRequest
+	7,  // 47: auth.v1.AuthService.VerifyEmail:input_type -> auth.v1.VerifyEmailRequest
+	8,  // 48: auth.v1.AuthService.LoginPassword:input_type -> auth.v1.LoginPasswordRequest
+	9,  // 49: auth.v1.AuthService.RefreshSession:input_type -> auth.v1.RefreshSessionRequest
+	10, // 50: auth.v1.AuthService.Logout:input_type -> auth.v1.LogoutRequest
+	11, // 51: auth.v1.AuthService.LogoutAll:input_type -> auth.v1.LogoutAllRequest
+	12, // 52: auth.v1.AuthService.RequestPasswordReset:input_type -> auth.v1.RequestPasswordResetRequest
+	13, // 53: auth.v1.AuthService.ResetPassword:input_type -> auth.v1.ResetPasswordRequest
+	14, // 54: auth.v1.AuthService.RequestEmailChange:input_type -> auth.v1.RequestEmailChangeRequest
+	15, // 55: auth.v1.AuthService.ConfirmEmailChange:input_type -> auth.v1.ConfirmEmailChangeRequest
+	16, // 56: auth.v1.AuthService.StartOAuth:input_type -> auth.v1.StartOAuthRequest
+	18, // 57: auth.v1.AuthService.CompleteOAuth:input_type -> auth.v1.CompleteOAuthRequest
+	19, // 58: auth.v1.AuthService.LinkOAuth:input_type -> auth.v1.LinkOAuthRequest
+	20, // 59: auth.v1.AuthService.UnlinkOAuth:input_type -> auth.v1.UnlinkOAuthRequest
+	21, // 60: auth.v1.AuthService.GetMe:input_type -> auth.v1.GetMeRequest
+	22, // 61: auth.v1.AuthService.GetUser:input_type -> auth.v1.GetUserRequest
+	24, // 62: auth.v1.AuthService.ListUsers:input_type -> auth.v1.ListUsersRequest
+	26, // 63: auth.v1.AuthService.InviteUser:input_type -> auth.v1.InviteUserRequest
+	27, // 64: auth.v1.AuthService.ValidateAccessToken:input_type -> auth.v1.ValidateAccessTokenRequest
+	29, // 65: auth.v1.AuthService.ValidateSession:input_type -> auth.v1.ValidateSessionRequest
+	31, // 66: auth.v1.AuthService.CheckRole:input_type -> auth.v1.CheckRoleRequest
+	33, // 67: auth.v1.AuthService.CheckPermission:input_type -> auth.v1.CheckPermissionRequest
+	38, // 68: auth.v1.AuthService.ListRoles:input_type -> auth.v1.ListRolesRequest
+	40, // 69: auth.v1.AuthService.ListPermissions:input_type -> auth.v1.ListPermissionsRequest
+	42, // 70: auth.v1.AuthService.GetUserAccess:input_type -> auth.v1.GetUserAccessRequest
+	44, // 71: auth.v1.AuthService.CreateRole:input_type -> auth.v1.CreateRoleRequest
+	45, // 72: auth.v1.AuthService.UpdateRole:input_type -> auth.v1.UpdateRoleRequest
+	46, // 73: auth.v1.AuthService.DeleteRole:input_type -> auth.v1.DeleteRoleRequest
+	47, // 74: auth.v1.AuthService.ListSessions:input_type -> auth.v1.ListSessionsRequest
+	49, // 75: auth.v1.AuthService.RevokeSession:input_type -> auth.v1.RevokeSessionRequest
+	50, // 76: auth.v1.AuthService.AssignRole:input_type -> auth.v1.AssignRoleRequest
+	51, // 77: auth.v1.AuthService.RevokeRole:input_type -> auth.v1.RevokeRoleRequest
+	52, // 78: auth.v1.AuthService.GrantUserPermission:input_type -> auth.v1.GrantUserPermissionRequest
+	53, // 79: auth.v1.AuthService.DenyUserPermission:input_type -> auth.v1.DenyUserPermissionRequest
+	54, // 80: auth.v1.AuthService.RemoveUserPermissionOverride:input_type -> auth.v1.RemoveUserPermissionOverrideRequest
+	55, // 81: auth.v1.AuthService.SuspendUser:input_type -> auth.v1.SuspendUserRequest
+	56, // 82: auth.v1.AuthService.DeleteUser:input_type -> auth.v1.DeleteUserRequest
+	1,  // 83: auth.v1.AuthService.Register:output_type -> auth.v1.GenericMessageResponse
+	1,  // 84: auth.v1.AuthService.RequestEmailVerification:output_type -> auth.v1.GenericMessageResponse
+	1,  // 85: auth.v1.AuthService.VerifyEmail:output_type -> auth.v1.GenericMessageResponse
+	2,  // 86: auth.v1.AuthService.LoginPassword:output_type -> auth.v1.SessionTokensResponse
+	2,  // 87: auth.v1.AuthService.RefreshSession:output_type -> auth.v1.SessionTokensResponse
+	1,  // 88: auth.v1.AuthService.Logout:output_type -> auth.v1.GenericMessageResponse
+	1,  // 89: auth.v1.AuthService.LogoutAll:output_type -> auth.v1.GenericMessageResponse
+	1,  // 90: auth.v1.AuthService.RequestPasswordReset:output_type -> auth.v1.GenericMessageResponse
+	1,  // 91: auth.v1.AuthService.ResetPassword:output_type -> auth.v1.GenericMessageResponse
+	1,  // 92: auth.v1.AuthService.RequestEmailChange:output_type -> auth.v1.GenericMessageResponse
+	1,  // 93: auth.v1.AuthService.ConfirmEmailChange:output_type -> auth.v1.GenericMessageResponse
+	17, // 94: auth.v1.AuthService.StartOAuth:output_type -> auth.v1.StartOAuthResponse
+	2,  // 95: auth.v1.AuthService.CompleteOAuth:output_type -> auth.v1.SessionTokensResponse
+	1,  // 96: auth.v1.AuthService.LinkOAuth:output_type -> auth.v1.GenericMessageResponse
+	1,  // 97: auth.v1.AuthService.UnlinkOAuth:output_type -> auth.v1.GenericMessageResponse
+	23, // 98: auth.v1.AuthService.GetMe:output_type -> auth.v1.GetMeResponse
+	23, // 99: auth.v1.AuthService.GetUser:output_type -> auth.v1.GetMeResponse
+	25, // 100: auth.v1.AuthService.ListUsers:output_type -> auth.v1.ListUsersResponse
+	23, // 101: auth.v1.AuthService.InviteUser:output_type -> auth.v1.GetMeResponse
+	28, // 102: auth.v1.AuthService.ValidateAccessToken:output_type -> auth.v1.ValidateAccessTokenResponse
+	30, // 103: auth.v1.AuthService.ValidateSession:output_type -> auth.v1.ValidateSessionResponse
+	32, // 104: auth.v1.AuthService.CheckRole:output_type -> auth.v1.CheckRoleResponse
+	34, // 105: auth.v1.AuthService.CheckPermission:output_type -> auth.v1.CheckPermissionResponse
+	39, // 106: auth.v1.AuthService.ListRoles:output_type -> auth.v1.ListRolesResponse
+	41, // 107: auth.v1.AuthService.ListPermissions:output_type -> auth.v1.ListPermissionsResponse
+	43, // 108: auth.v1.AuthService.GetUserAccess:output_type -> auth.v1.UserAccessResponse
+	35, // 109: auth.v1.AuthService.CreateRole:output_type -> auth.v1.RoleMessage
+	35, // 110: auth.v1.AuthService.UpdateRole:output_type -> auth.v1.RoleMessage
+	1,  // 111: auth.v1.AuthService.DeleteRole:output_type -> auth.v1.GenericMessageResponse
+	48, // 112: auth.v1.AuthService.ListSessions:output_type -> auth.v1.ListSessionsResponse
+	1,  // 113: auth.v1.AuthService.RevokeSession:output_type -> auth.v1.GenericMessageResponse
+	1,  // 114: auth.v1.AuthService.AssignRole:output_type -> auth.v1.GenericMessageResponse
+	1,  // 115: auth.v1.AuthService.RevokeRole:output_type -> auth.v1.GenericMessageResponse
+	1,  // 116: auth.v1.AuthService.GrantUserPermission:output_type -> auth.v1.GenericMessageResponse
+	1,  // 117: auth.v1.AuthService.DenyUserPermission:output_type -> auth.v1.GenericMessageResponse
+	1,  // 118: auth.v1.AuthService.RemoveUserPermissionOverride:output_type -> auth.v1.GenericMessageResponse
+	1,  // 119: auth.v1.AuthService.SuspendUser:output_type -> auth.v1.GenericMessageResponse
+	1,  // 120: auth.v1.AuthService.DeleteUser:output_type -> auth.v1.GenericMessageResponse
+	83, // [83:121] is the sub-list for method output_type
+	45, // [45:83] is the sub-list for method input_type
+	45, // [45:45] is the sub-list for extension type_name
+	45, // [45:45] is the sub-list for extension extendee
+	0,  // [0:45] is the sub-list for field type_name
 }
 
 func init() { file_proto_auth_v1_auth_proto_init() }
@@ -3804,7 +4042,7 @@ func file_proto_auth_v1_auth_proto_init() {
 			GoPackagePath: reflect.TypeOf(x{}).PkgPath(),
 			RawDescriptor: unsafe.Slice(unsafe.StringData(file_proto_auth_v1_auth_proto_rawDesc), len(file_proto_auth_v1_auth_proto_rawDesc)),
 			NumEnums:      0,
-			NumMessages:   54,
+			NumMessages:   57,
 			NumExtensions: 0,
 			NumServices:   1,
 		},
