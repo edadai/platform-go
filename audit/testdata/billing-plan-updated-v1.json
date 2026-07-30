@@ -1,0 +1,43 @@
+{
+  "specversion": "1.0",
+  "id": "019855b8-4c00-7abc-8def-1234567890ab",
+  "source": "urn:edadai:billing-service:test",
+  "type": "com.edadai.audit.billing.catalog.plan.update.v1",
+  "subject": "plan/019855b8-4c00-7abc-8def-1234567890ac",
+  "time": "2026-07-30T12:00:00Z",
+  "datacontenttype": "application/json",
+  "dataschema": "https://edad.ai/schemas/audit-event-data-v1.json",
+  "data": {
+    "category": "billing",
+    "outcome": "success",
+    "severity": "info",
+    "component": "billing",
+    "actor": {
+      "type": "user",
+      "id": "019855b8-4c00-7abc-8def-1234567890ad",
+      "roles": ["admin"]
+    },
+    "target": {
+      "type": "plan",
+      "id": "019855b8-4c00-7abc-8def-1234567890ac"
+    },
+    "request": {
+      "request_id": "request-123",
+      "correlation_id": "correlation-123",
+      "ip_address": "127.0.0.1",
+      "user_agent": "golden-fixture"
+    },
+    "reason_code": "catalog_maintenance",
+    "reason": "catalog maintenance",
+    "changes": [
+      {
+        "field": "LifecycleStatus",
+        "before": "Draft",
+        "after": "Published"
+      }
+    ],
+    "metadata": {
+      "policy_version": 1
+    }
+  }
+}
