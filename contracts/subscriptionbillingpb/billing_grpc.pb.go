@@ -71,6 +71,7 @@ const (
 	SubscriptionBillingApi_ListLedgerTransactions_FullMethodName       = "/subscriptionbilling.SubscriptionBillingApi/ListLedgerTransactions"
 	SubscriptionBillingApi_CreateCheckout_FullMethodName               = "/subscriptionbilling.SubscriptionBillingApi/CreateCheckout"
 	SubscriptionBillingApi_GetPaymentStatusByReference_FullMethodName  = "/subscriptionbilling.SubscriptionBillingApi/GetPaymentStatusByReference"
+	SubscriptionBillingApi_VerifyPaymentReference_FullMethodName       = "/subscriptionbilling.SubscriptionBillingApi/VerifyPaymentReference"
 	SubscriptionBillingApi_ReceivePaystackWebhook_FullMethodName       = "/subscriptionbilling.SubscriptionBillingApi/ReceivePaystackWebhook"
 )
 
@@ -130,6 +131,7 @@ type SubscriptionBillingApiClient interface {
 	ListLedgerTransactions(ctx context.Context, in *ListLedgerTransactionsRequest, opts ...grpc.CallOption) (*ListLedgerTransactionsResponse, error)
 	CreateCheckout(ctx context.Context, in *CreateCheckoutRequest, opts ...grpc.CallOption) (*CheckoutResponse, error)
 	GetPaymentStatusByReference(ctx context.Context, in *PaymentReferenceRequest, opts ...grpc.CallOption) (*PaymentResponse, error)
+	VerifyPaymentReference(ctx context.Context, in *PaymentReferenceRequest, opts ...grpc.CallOption) (*PaymentResponse, error)
 	ReceivePaystackWebhook(ctx context.Context, in *ReceivePaystackWebhookRequest, opts ...grpc.CallOption) (*StatusResponse, error)
 }
 
@@ -661,6 +663,16 @@ func (c *subscriptionBillingApiClient) GetPaymentStatusByReference(ctx context.C
 	return out, nil
 }
 
+func (c *subscriptionBillingApiClient) VerifyPaymentReference(ctx context.Context, in *PaymentReferenceRequest, opts ...grpc.CallOption) (*PaymentResponse, error) {
+	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
+	out := new(PaymentResponse)
+	err := c.cc.Invoke(ctx, SubscriptionBillingApi_VerifyPaymentReference_FullMethodName, in, out, cOpts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
 func (c *subscriptionBillingApiClient) ReceivePaystackWebhook(ctx context.Context, in *ReceivePaystackWebhookRequest, opts ...grpc.CallOption) (*StatusResponse, error) {
 	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
 	out := new(StatusResponse)
@@ -727,6 +739,7 @@ type SubscriptionBillingApiServer interface {
 	ListLedgerTransactions(context.Context, *ListLedgerTransactionsRequest) (*ListLedgerTransactionsResponse, error)
 	CreateCheckout(context.Context, *CreateCheckoutRequest) (*CheckoutResponse, error)
 	GetPaymentStatusByReference(context.Context, *PaymentReferenceRequest) (*PaymentResponse, error)
+	VerifyPaymentReference(context.Context, *PaymentReferenceRequest) (*PaymentResponse, error)
 	ReceivePaystackWebhook(context.Context, *ReceivePaystackWebhookRequest) (*StatusResponse, error)
 	mustEmbedUnimplementedSubscriptionBillingApiServer()
 }
@@ -893,6 +906,9 @@ func (UnimplementedSubscriptionBillingApiServer) CreateCheckout(context.Context,
 }
 func (UnimplementedSubscriptionBillingApiServer) GetPaymentStatusByReference(context.Context, *PaymentReferenceRequest) (*PaymentResponse, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method GetPaymentStatusByReference not implemented")
+}
+func (UnimplementedSubscriptionBillingApiServer) VerifyPaymentReference(context.Context, *PaymentReferenceRequest) (*PaymentResponse, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method VerifyPaymentReference not implemented")
 }
 func (UnimplementedSubscriptionBillingApiServer) ReceivePaystackWebhook(context.Context, *ReceivePaystackWebhookRequest) (*StatusResponse, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method ReceivePaystackWebhook not implemented")
@@ -1855,6 +1871,24 @@ func _SubscriptionBillingApi_GetPaymentStatusByReference_Handler(srv interface{}
 	return interceptor(ctx, in, info, handler)
 }
 
+func _SubscriptionBillingApi_VerifyPaymentReference_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(PaymentReferenceRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(SubscriptionBillingApiServer).VerifyPaymentReference(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: SubscriptionBillingApi_VerifyPaymentReference_FullMethodName,
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(SubscriptionBillingApiServer).VerifyPaymentReference(ctx, req.(*PaymentReferenceRequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
 func _SubscriptionBillingApi_ReceivePaystackWebhook_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
 	in := new(ReceivePaystackWebhookRequest)
 	if err := dec(in); err != nil {
@@ -2087,6 +2121,10 @@ var SubscriptionBillingApi_ServiceDesc = grpc.ServiceDesc{
 		{
 			MethodName: "GetPaymentStatusByReference",
 			Handler:    _SubscriptionBillingApi_GetPaymentStatusByReference_Handler,
+		},
+		{
+			MethodName: "VerifyPaymentReference",
+			Handler:    _SubscriptionBillingApi_VerifyPaymentReference_Handler,
 		},
 		{
 			MethodName: "ReceivePaystackWebhook",

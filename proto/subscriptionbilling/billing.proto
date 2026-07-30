@@ -62,6 +62,7 @@ service SubscriptionBillingApi {
 
   rpc CreateCheckout (CreateCheckoutRequest) returns (CheckoutResponse);
   rpc GetPaymentStatusByReference (PaymentReferenceRequest) returns (PaymentResponse);
+  rpc VerifyPaymentReference (PaymentReferenceRequest) returns (PaymentResponse);
 
   rpc ReceivePaystackWebhook (ReceivePaystackWebhookRequest) returns (StatusResponse);
 }
