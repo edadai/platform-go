@@ -9,17 +9,23 @@ service SubscriptionBillingApi {
   rpc CreateProduct (CreateProductRequest) returns (EntityResponse);
   rpc CreatePlan (CreatePlanRequest) returns (EntityResponse);
   rpc CreatePrice (CreatePriceRequest) returns (EntityResponse);
+  rpc SetDefaultPrice (EntityIdRequest) returns (PriceResponse);
+  rpc DeactivatePrice (EntityIdRequest) returns (PriceResponse);
   rpc CreateOffer (CreateOfferRequest) returns (EntityResponse);
+  rpc UpdateOffer (UpdateOfferRequest) returns (OfferResponse);
   rpc ConfigureOfferPhase (ConfigureOfferPhaseRequest) returns (EntityResponse);
   rpc ConfigureCatalogPresentation (ConfigureCatalogPresentationRequest) returns (EntityResponse);
   rpc EnableOffer (EntityIdRequest) returns (EntityResponse);
   rpc DisableOffer (EntityIdRequest) returns (EntityResponse);
   rpc AttachEntitlementToPlan (AttachEntitlementToPlanRequest) returns (EntityResponse);
+  rpc UpsertPlanEntitlement (UpsertPlanEntitlementRequest) returns (PlanEntitlementResponse);
   rpc ConfigureTrialPolicy (ConfigureTrialPolicyRequest) returns (EntityResponse);
   rpc ConfigureBillingPolicy (ConfigureBillingPolicyRequest) returns (EntityResponse);
   rpc GetBillingSummary (BillingSummaryRequest) returns (BillingSummaryResponse);
   rpc ListProducts (ListProductsRequest) returns (ListProductsResponse);
   rpc ListPlans (ListPlansRequest) returns (ListPlansResponse);
+  rpc GetPlan (EntityIdRequest) returns (PlanDetailResponse);
+  rpc ListPlanPrices (EntityIdRequest) returns (ListPricesResponse);
   rpc ListOffers (ListOffersRequest) returns (ListOffersResponse);
   rpc ListTrialPolicies (ListPoliciesRequest) returns (ListTrialPoliciesResponse);
   rpc ListBillingPolicies (ListPoliciesRequest) returns (ListBillingPoliciesResponse);
@@ -131,9 +137,70 @@ message PlanResponse {
   string recommendation_reason = 33;
   string terms_summary = 34;
   string disclosure_text = 35;
+  string catalog_option_id = 36;
+  repeated string features = 37;
 }
 message ListPlansResponse { repeated PlanResponse plans = 1; }
+message PriceResponse {
+  string id = 1;
+  string plan_id = 2;
+  string code = 3;
+  double amount = 4;
+  string currency = 5;
+  string interval_unit = 6;
+  int32 interval_count = 7;
+  bool is_default = 8;
+  bool is_active = 9;
+  int32 active_subscriber_count = 10;
+  string created_at_utc = 11;
+  string updated_at_utc = 12;
+}
+message ListPricesResponse { repeated PriceResponse prices = 1; }
+message PlanEntitlementResponse {
+  string id = 1;
+  string plan_id = 2;
+  string feature_code = 3;
+  string value = 4;
+  double usage_limit = 5;
+  bool has_usage_limit = 6;
+  bool is_enabled = 7;
+  string created_at_utc = 8;
+  string updated_at_utc = 9;
+}
+message CatalogPresentationResponse {
+  string id = 1;
+  string plan_id = 2;
+  string offer_id = 3;
+  string display_name = 4;
+  string display_description = 5;
+  string badge_text = 6;
+  int32 highlight_rank = 7;
+  bool is_recommended = 8;
+  string recommendation_reason = 9;
+  string terms_summary = 10;
+  string disclosure_text = 11;
+  bool is_enabled = 12;
+  repeated string features = 13;
+}
+message PlanDetailResponse {
+  PlanResponse plan = 1;
+  repeated PriceResponse prices = 2;
+  repeated PlanEntitlementResponse entitlements = 3;
+  CatalogPresentationResponse presentation = 4;
+  repeated OfferResponse offers = 5;
+}
 message ListOffersRequest { string plan_id = 1; bool enabled_only = 2; }
+message OfferPhaseResponse {
+  string id = 1;
+  string offer_id = 2;
+  string kind = 3;
+  int32 sequence = 4;
+  double amount = 5;
+  string currency = 6;
+  string duration_unit = 7;
+  int32 duration_count = 8;
+  bool is_enabled = 9;
+}
 message OfferResponse {
   string id = 1;
   string plan_id = 2;
@@ -144,6 +211,8 @@ message OfferResponse {
   bool is_enabled = 7;
   string created_at_utc = 8;
   string updated_at_utc = 9;
+  repeated OfferPhaseResponse phases = 10;
+  CatalogPresentationResponse presentation = 11;
 }
 message ListOffersResponse { repeated OfferResponse offers = 1; }
 
@@ -233,6 +302,15 @@ message CreateOfferRequest {
   string name = 4;
   string description = 5;
   RequestContext context = 6;
+  repeated ConfigureOfferPhaseRequest phases = 7;
+  ConfigureCatalogPresentationRequest presentation = 8;
+}
+
+message UpdateOfferRequest {
+  string id = 1;
+  string name = 2;
+  string description = 3;
+  RequestContext context = 4;
 }
 
 message ConfigureOfferPhaseRequest {
@@ -260,6 +338,7 @@ message ConfigureCatalogPresentationRequest {
   string disclosure_text = 10;
   bool is_enabled = 11;
   RequestContext context = 12;
+  repeated string features = 13;
 }
 
 message AttachEntitlementToPlanRequest {
@@ -268,6 +347,16 @@ message AttachEntitlementToPlanRequest {
   string value = 3;
   double usage_limit = 4;
   RequestContext context = 5;
+}
+
+message UpsertPlanEntitlementRequest {
+  string plan_id = 1;
+  string feature_code = 2;
+  string value = 3;
+  double usage_limit = 4;
+  bool has_usage_limit = 5;
+  bool is_enabled = 6;
+  RequestContext context = 7;
 }
 
 message ConfigureTrialPolicyRequest {

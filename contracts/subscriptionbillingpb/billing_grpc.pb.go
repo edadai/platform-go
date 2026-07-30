@@ -22,17 +22,23 @@ const (
 	SubscriptionBillingApi_CreateProduct_FullMethodName                = "/subscriptionbilling.SubscriptionBillingApi/CreateProduct"
 	SubscriptionBillingApi_CreatePlan_FullMethodName                   = "/subscriptionbilling.SubscriptionBillingApi/CreatePlan"
 	SubscriptionBillingApi_CreatePrice_FullMethodName                  = "/subscriptionbilling.SubscriptionBillingApi/CreatePrice"
+	SubscriptionBillingApi_SetDefaultPrice_FullMethodName              = "/subscriptionbilling.SubscriptionBillingApi/SetDefaultPrice"
+	SubscriptionBillingApi_DeactivatePrice_FullMethodName              = "/subscriptionbilling.SubscriptionBillingApi/DeactivatePrice"
 	SubscriptionBillingApi_CreateOffer_FullMethodName                  = "/subscriptionbilling.SubscriptionBillingApi/CreateOffer"
+	SubscriptionBillingApi_UpdateOffer_FullMethodName                  = "/subscriptionbilling.SubscriptionBillingApi/UpdateOffer"
 	SubscriptionBillingApi_ConfigureOfferPhase_FullMethodName          = "/subscriptionbilling.SubscriptionBillingApi/ConfigureOfferPhase"
 	SubscriptionBillingApi_ConfigureCatalogPresentation_FullMethodName = "/subscriptionbilling.SubscriptionBillingApi/ConfigureCatalogPresentation"
 	SubscriptionBillingApi_EnableOffer_FullMethodName                  = "/subscriptionbilling.SubscriptionBillingApi/EnableOffer"
 	SubscriptionBillingApi_DisableOffer_FullMethodName                 = "/subscriptionbilling.SubscriptionBillingApi/DisableOffer"
 	SubscriptionBillingApi_AttachEntitlementToPlan_FullMethodName      = "/subscriptionbilling.SubscriptionBillingApi/AttachEntitlementToPlan"
+	SubscriptionBillingApi_UpsertPlanEntitlement_FullMethodName        = "/subscriptionbilling.SubscriptionBillingApi/UpsertPlanEntitlement"
 	SubscriptionBillingApi_ConfigureTrialPolicy_FullMethodName         = "/subscriptionbilling.SubscriptionBillingApi/ConfigureTrialPolicy"
 	SubscriptionBillingApi_ConfigureBillingPolicy_FullMethodName       = "/subscriptionbilling.SubscriptionBillingApi/ConfigureBillingPolicy"
 	SubscriptionBillingApi_GetBillingSummary_FullMethodName            = "/subscriptionbilling.SubscriptionBillingApi/GetBillingSummary"
 	SubscriptionBillingApi_ListProducts_FullMethodName                 = "/subscriptionbilling.SubscriptionBillingApi/ListProducts"
 	SubscriptionBillingApi_ListPlans_FullMethodName                    = "/subscriptionbilling.SubscriptionBillingApi/ListPlans"
+	SubscriptionBillingApi_GetPlan_FullMethodName                      = "/subscriptionbilling.SubscriptionBillingApi/GetPlan"
+	SubscriptionBillingApi_ListPlanPrices_FullMethodName               = "/subscriptionbilling.SubscriptionBillingApi/ListPlanPrices"
 	SubscriptionBillingApi_ListOffers_FullMethodName                   = "/subscriptionbilling.SubscriptionBillingApi/ListOffers"
 	SubscriptionBillingApi_ListTrialPolicies_FullMethodName            = "/subscriptionbilling.SubscriptionBillingApi/ListTrialPolicies"
 	SubscriptionBillingApi_ListBillingPolicies_FullMethodName          = "/subscriptionbilling.SubscriptionBillingApi/ListBillingPolicies"
@@ -75,17 +81,23 @@ type SubscriptionBillingApiClient interface {
 	CreateProduct(ctx context.Context, in *CreateProductRequest, opts ...grpc.CallOption) (*EntityResponse, error)
 	CreatePlan(ctx context.Context, in *CreatePlanRequest, opts ...grpc.CallOption) (*EntityResponse, error)
 	CreatePrice(ctx context.Context, in *CreatePriceRequest, opts ...grpc.CallOption) (*EntityResponse, error)
+	SetDefaultPrice(ctx context.Context, in *EntityIdRequest, opts ...grpc.CallOption) (*PriceResponse, error)
+	DeactivatePrice(ctx context.Context, in *EntityIdRequest, opts ...grpc.CallOption) (*PriceResponse, error)
 	CreateOffer(ctx context.Context, in *CreateOfferRequest, opts ...grpc.CallOption) (*EntityResponse, error)
+	UpdateOffer(ctx context.Context, in *UpdateOfferRequest, opts ...grpc.CallOption) (*OfferResponse, error)
 	ConfigureOfferPhase(ctx context.Context, in *ConfigureOfferPhaseRequest, opts ...grpc.CallOption) (*EntityResponse, error)
 	ConfigureCatalogPresentation(ctx context.Context, in *ConfigureCatalogPresentationRequest, opts ...grpc.CallOption) (*EntityResponse, error)
 	EnableOffer(ctx context.Context, in *EntityIdRequest, opts ...grpc.CallOption) (*EntityResponse, error)
 	DisableOffer(ctx context.Context, in *EntityIdRequest, opts ...grpc.CallOption) (*EntityResponse, error)
 	AttachEntitlementToPlan(ctx context.Context, in *AttachEntitlementToPlanRequest, opts ...grpc.CallOption) (*EntityResponse, error)
+	UpsertPlanEntitlement(ctx context.Context, in *UpsertPlanEntitlementRequest, opts ...grpc.CallOption) (*PlanEntitlementResponse, error)
 	ConfigureTrialPolicy(ctx context.Context, in *ConfigureTrialPolicyRequest, opts ...grpc.CallOption) (*EntityResponse, error)
 	ConfigureBillingPolicy(ctx context.Context, in *ConfigureBillingPolicyRequest, opts ...grpc.CallOption) (*EntityResponse, error)
 	GetBillingSummary(ctx context.Context, in *BillingSummaryRequest, opts ...grpc.CallOption) (*BillingSummaryResponse, error)
 	ListProducts(ctx context.Context, in *ListProductsRequest, opts ...grpc.CallOption) (*ListProductsResponse, error)
 	ListPlans(ctx context.Context, in *ListPlansRequest, opts ...grpc.CallOption) (*ListPlansResponse, error)
+	GetPlan(ctx context.Context, in *EntityIdRequest, opts ...grpc.CallOption) (*PlanDetailResponse, error)
+	ListPlanPrices(ctx context.Context, in *EntityIdRequest, opts ...grpc.CallOption) (*ListPricesResponse, error)
 	ListOffers(ctx context.Context, in *ListOffersRequest, opts ...grpc.CallOption) (*ListOffersResponse, error)
 	ListTrialPolicies(ctx context.Context, in *ListPoliciesRequest, opts ...grpc.CallOption) (*ListTrialPoliciesResponse, error)
 	ListBillingPolicies(ctx context.Context, in *ListPoliciesRequest, opts ...grpc.CallOption) (*ListBillingPoliciesResponse, error)
@@ -159,10 +171,40 @@ func (c *subscriptionBillingApiClient) CreatePrice(ctx context.Context, in *Crea
 	return out, nil
 }
 
+func (c *subscriptionBillingApiClient) SetDefaultPrice(ctx context.Context, in *EntityIdRequest, opts ...grpc.CallOption) (*PriceResponse, error) {
+	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
+	out := new(PriceResponse)
+	err := c.cc.Invoke(ctx, SubscriptionBillingApi_SetDefaultPrice_FullMethodName, in, out, cOpts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *subscriptionBillingApiClient) DeactivatePrice(ctx context.Context, in *EntityIdRequest, opts ...grpc.CallOption) (*PriceResponse, error) {
+	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
+	out := new(PriceResponse)
+	err := c.cc.Invoke(ctx, SubscriptionBillingApi_DeactivatePrice_FullMethodName, in, out, cOpts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
 func (c *subscriptionBillingApiClient) CreateOffer(ctx context.Context, in *CreateOfferRequest, opts ...grpc.CallOption) (*EntityResponse, error) {
 	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
 	out := new(EntityResponse)
 	err := c.cc.Invoke(ctx, SubscriptionBillingApi_CreateOffer_FullMethodName, in, out, cOpts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *subscriptionBillingApiClient) UpdateOffer(ctx context.Context, in *UpdateOfferRequest, opts ...grpc.CallOption) (*OfferResponse, error) {
+	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
+	out := new(OfferResponse)
+	err := c.cc.Invoke(ctx, SubscriptionBillingApi_UpdateOffer_FullMethodName, in, out, cOpts...)
 	if err != nil {
 		return nil, err
 	}
@@ -219,6 +261,16 @@ func (c *subscriptionBillingApiClient) AttachEntitlementToPlan(ctx context.Conte
 	return out, nil
 }
 
+func (c *subscriptionBillingApiClient) UpsertPlanEntitlement(ctx context.Context, in *UpsertPlanEntitlementRequest, opts ...grpc.CallOption) (*PlanEntitlementResponse, error) {
+	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
+	out := new(PlanEntitlementResponse)
+	err := c.cc.Invoke(ctx, SubscriptionBillingApi_UpsertPlanEntitlement_FullMethodName, in, out, cOpts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
 func (c *subscriptionBillingApiClient) ConfigureTrialPolicy(ctx context.Context, in *ConfigureTrialPolicyRequest, opts ...grpc.CallOption) (*EntityResponse, error) {
 	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
 	out := new(EntityResponse)
@@ -263,6 +315,26 @@ func (c *subscriptionBillingApiClient) ListPlans(ctx context.Context, in *ListPl
 	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
 	out := new(ListPlansResponse)
 	err := c.cc.Invoke(ctx, SubscriptionBillingApi_ListPlans_FullMethodName, in, out, cOpts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *subscriptionBillingApiClient) GetPlan(ctx context.Context, in *EntityIdRequest, opts ...grpc.CallOption) (*PlanDetailResponse, error) {
+	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
+	out := new(PlanDetailResponse)
+	err := c.cc.Invoke(ctx, SubscriptionBillingApi_GetPlan_FullMethodName, in, out, cOpts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *subscriptionBillingApiClient) ListPlanPrices(ctx context.Context, in *EntityIdRequest, opts ...grpc.CallOption) (*ListPricesResponse, error) {
+	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
+	out := new(ListPricesResponse)
+	err := c.cc.Invoke(ctx, SubscriptionBillingApi_ListPlanPrices_FullMethodName, in, out, cOpts...)
 	if err != nil {
 		return nil, err
 	}
@@ -606,17 +678,23 @@ type SubscriptionBillingApiServer interface {
 	CreateProduct(context.Context, *CreateProductRequest) (*EntityResponse, error)
 	CreatePlan(context.Context, *CreatePlanRequest) (*EntityResponse, error)
 	CreatePrice(context.Context, *CreatePriceRequest) (*EntityResponse, error)
+	SetDefaultPrice(context.Context, *EntityIdRequest) (*PriceResponse, error)
+	DeactivatePrice(context.Context, *EntityIdRequest) (*PriceResponse, error)
 	CreateOffer(context.Context, *CreateOfferRequest) (*EntityResponse, error)
+	UpdateOffer(context.Context, *UpdateOfferRequest) (*OfferResponse, error)
 	ConfigureOfferPhase(context.Context, *ConfigureOfferPhaseRequest) (*EntityResponse, error)
 	ConfigureCatalogPresentation(context.Context, *ConfigureCatalogPresentationRequest) (*EntityResponse, error)
 	EnableOffer(context.Context, *EntityIdRequest) (*EntityResponse, error)
 	DisableOffer(context.Context, *EntityIdRequest) (*EntityResponse, error)
 	AttachEntitlementToPlan(context.Context, *AttachEntitlementToPlanRequest) (*EntityResponse, error)
+	UpsertPlanEntitlement(context.Context, *UpsertPlanEntitlementRequest) (*PlanEntitlementResponse, error)
 	ConfigureTrialPolicy(context.Context, *ConfigureTrialPolicyRequest) (*EntityResponse, error)
 	ConfigureBillingPolicy(context.Context, *ConfigureBillingPolicyRequest) (*EntityResponse, error)
 	GetBillingSummary(context.Context, *BillingSummaryRequest) (*BillingSummaryResponse, error)
 	ListProducts(context.Context, *ListProductsRequest) (*ListProductsResponse, error)
 	ListPlans(context.Context, *ListPlansRequest) (*ListPlansResponse, error)
+	GetPlan(context.Context, *EntityIdRequest) (*PlanDetailResponse, error)
+	ListPlanPrices(context.Context, *EntityIdRequest) (*ListPricesResponse, error)
 	ListOffers(context.Context, *ListOffersRequest) (*ListOffersResponse, error)
 	ListTrialPolicies(context.Context, *ListPoliciesRequest) (*ListTrialPoliciesResponse, error)
 	ListBillingPolicies(context.Context, *ListPoliciesRequest) (*ListBillingPoliciesResponse, error)
@@ -669,8 +747,17 @@ func (UnimplementedSubscriptionBillingApiServer) CreatePlan(context.Context, *Cr
 func (UnimplementedSubscriptionBillingApiServer) CreatePrice(context.Context, *CreatePriceRequest) (*EntityResponse, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method CreatePrice not implemented")
 }
+func (UnimplementedSubscriptionBillingApiServer) SetDefaultPrice(context.Context, *EntityIdRequest) (*PriceResponse, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method SetDefaultPrice not implemented")
+}
+func (UnimplementedSubscriptionBillingApiServer) DeactivatePrice(context.Context, *EntityIdRequest) (*PriceResponse, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method DeactivatePrice not implemented")
+}
 func (UnimplementedSubscriptionBillingApiServer) CreateOffer(context.Context, *CreateOfferRequest) (*EntityResponse, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method CreateOffer not implemented")
+}
+func (UnimplementedSubscriptionBillingApiServer) UpdateOffer(context.Context, *UpdateOfferRequest) (*OfferResponse, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method UpdateOffer not implemented")
 }
 func (UnimplementedSubscriptionBillingApiServer) ConfigureOfferPhase(context.Context, *ConfigureOfferPhaseRequest) (*EntityResponse, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method ConfigureOfferPhase not implemented")
@@ -687,6 +774,9 @@ func (UnimplementedSubscriptionBillingApiServer) DisableOffer(context.Context, *
 func (UnimplementedSubscriptionBillingApiServer) AttachEntitlementToPlan(context.Context, *AttachEntitlementToPlanRequest) (*EntityResponse, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method AttachEntitlementToPlan not implemented")
 }
+func (UnimplementedSubscriptionBillingApiServer) UpsertPlanEntitlement(context.Context, *UpsertPlanEntitlementRequest) (*PlanEntitlementResponse, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method UpsertPlanEntitlement not implemented")
+}
 func (UnimplementedSubscriptionBillingApiServer) ConfigureTrialPolicy(context.Context, *ConfigureTrialPolicyRequest) (*EntityResponse, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method ConfigureTrialPolicy not implemented")
 }
@@ -701,6 +791,12 @@ func (UnimplementedSubscriptionBillingApiServer) ListProducts(context.Context, *
 }
 func (UnimplementedSubscriptionBillingApiServer) ListPlans(context.Context, *ListPlansRequest) (*ListPlansResponse, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method ListPlans not implemented")
+}
+func (UnimplementedSubscriptionBillingApiServer) GetPlan(context.Context, *EntityIdRequest) (*PlanDetailResponse, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method GetPlan not implemented")
+}
+func (UnimplementedSubscriptionBillingApiServer) ListPlanPrices(context.Context, *EntityIdRequest) (*ListPricesResponse, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method ListPlanPrices not implemented")
 }
 func (UnimplementedSubscriptionBillingApiServer) ListOffers(context.Context, *ListOffersRequest) (*ListOffersResponse, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method ListOffers not implemented")
@@ -877,6 +973,42 @@ func _SubscriptionBillingApi_CreatePrice_Handler(srv interface{}, ctx context.Co
 	return interceptor(ctx, in, info, handler)
 }
 
+func _SubscriptionBillingApi_SetDefaultPrice_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(EntityIdRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(SubscriptionBillingApiServer).SetDefaultPrice(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: SubscriptionBillingApi_SetDefaultPrice_FullMethodName,
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(SubscriptionBillingApiServer).SetDefaultPrice(ctx, req.(*EntityIdRequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _SubscriptionBillingApi_DeactivatePrice_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(EntityIdRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(SubscriptionBillingApiServer).DeactivatePrice(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: SubscriptionBillingApi_DeactivatePrice_FullMethodName,
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(SubscriptionBillingApiServer).DeactivatePrice(ctx, req.(*EntityIdRequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
 func _SubscriptionBillingApi_CreateOffer_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
 	in := new(CreateOfferRequest)
 	if err := dec(in); err != nil {
@@ -891,6 +1023,24 @@ func _SubscriptionBillingApi_CreateOffer_Handler(srv interface{}, ctx context.Co
 	}
 	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
 		return srv.(SubscriptionBillingApiServer).CreateOffer(ctx, req.(*CreateOfferRequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _SubscriptionBillingApi_UpdateOffer_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(UpdateOfferRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(SubscriptionBillingApiServer).UpdateOffer(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: SubscriptionBillingApi_UpdateOffer_FullMethodName,
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(SubscriptionBillingApiServer).UpdateOffer(ctx, req.(*UpdateOfferRequest))
 	}
 	return interceptor(ctx, in, info, handler)
 }
@@ -985,6 +1135,24 @@ func _SubscriptionBillingApi_AttachEntitlementToPlan_Handler(srv interface{}, ct
 	return interceptor(ctx, in, info, handler)
 }
 
+func _SubscriptionBillingApi_UpsertPlanEntitlement_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(UpsertPlanEntitlementRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(SubscriptionBillingApiServer).UpsertPlanEntitlement(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: SubscriptionBillingApi_UpsertPlanEntitlement_FullMethodName,
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(SubscriptionBillingApiServer).UpsertPlanEntitlement(ctx, req.(*UpsertPlanEntitlementRequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
 func _SubscriptionBillingApi_ConfigureTrialPolicy_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
 	in := new(ConfigureTrialPolicyRequest)
 	if err := dec(in); err != nil {
@@ -1071,6 +1239,42 @@ func _SubscriptionBillingApi_ListPlans_Handler(srv interface{}, ctx context.Cont
 	}
 	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
 		return srv.(SubscriptionBillingApiServer).ListPlans(ctx, req.(*ListPlansRequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _SubscriptionBillingApi_GetPlan_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(EntityIdRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(SubscriptionBillingApiServer).GetPlan(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: SubscriptionBillingApi_GetPlan_FullMethodName,
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(SubscriptionBillingApiServer).GetPlan(ctx, req.(*EntityIdRequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _SubscriptionBillingApi_ListPlanPrices_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(EntityIdRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(SubscriptionBillingApiServer).ListPlanPrices(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: SubscriptionBillingApi_ListPlanPrices_FullMethodName,
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(SubscriptionBillingApiServer).ListPlanPrices(ctx, req.(*EntityIdRequest))
 	}
 	return interceptor(ctx, in, info, handler)
 }
@@ -1689,8 +1893,20 @@ var SubscriptionBillingApi_ServiceDesc = grpc.ServiceDesc{
 			Handler:    _SubscriptionBillingApi_CreatePrice_Handler,
 		},
 		{
+			MethodName: "SetDefaultPrice",
+			Handler:    _SubscriptionBillingApi_SetDefaultPrice_Handler,
+		},
+		{
+			MethodName: "DeactivatePrice",
+			Handler:    _SubscriptionBillingApi_DeactivatePrice_Handler,
+		},
+		{
 			MethodName: "CreateOffer",
 			Handler:    _SubscriptionBillingApi_CreateOffer_Handler,
+		},
+		{
+			MethodName: "UpdateOffer",
+			Handler:    _SubscriptionBillingApi_UpdateOffer_Handler,
 		},
 		{
 			MethodName: "ConfigureOfferPhase",
@@ -1713,6 +1929,10 @@ var SubscriptionBillingApi_ServiceDesc = grpc.ServiceDesc{
 			Handler:    _SubscriptionBillingApi_AttachEntitlementToPlan_Handler,
 		},
 		{
+			MethodName: "UpsertPlanEntitlement",
+			Handler:    _SubscriptionBillingApi_UpsertPlanEntitlement_Handler,
+		},
+		{
 			MethodName: "ConfigureTrialPolicy",
 			Handler:    _SubscriptionBillingApi_ConfigureTrialPolicy_Handler,
 		},
@@ -1731,6 +1951,14 @@ var SubscriptionBillingApi_ServiceDesc = grpc.ServiceDesc{
 		{
 			MethodName: "ListPlans",
 			Handler:    _SubscriptionBillingApi_ListPlans_Handler,
+		},
+		{
+			MethodName: "GetPlan",
+			Handler:    _SubscriptionBillingApi_GetPlan_Handler,
+		},
+		{
+			MethodName: "ListPlanPrices",
+			Handler:    _SubscriptionBillingApi_ListPlanPrices_Handler,
 		},
 		{
 			MethodName: "ListOffers",
