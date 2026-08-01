@@ -117,7 +117,7 @@ message RequestEmailVerificationRequest {
 }
 
 message VerifyEmailRequest {
-  string code = 1;
+  string token = 1;
   RequestContext context = 2;
 }
 

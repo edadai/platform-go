@@ -603,7 +603,7 @@ func (x *RequestEmailVerificationRequest) GetContext() *RequestContext {
 
 type VerifyEmailRequest struct {
 	state         protoimpl.MessageState `protogen:"open.v1"`
-	Code          string                 `protobuf:"bytes,1,opt,name=code,proto3" json:"code,omitempty"`
+	Token         string                 `protobuf:"bytes,1,opt,name=token,proto3" json:"token,omitempty"`
 	Context       *RequestContext        `protobuf:"bytes,2,opt,name=context,proto3" json:"context,omitempty"`
 	unknownFields protoimpl.UnknownFields
 	sizeCache     protoimpl.SizeCache
@@ -639,9 +639,9 @@ func (*VerifyEmailRequest) Descriptor() ([]byte, []int) {
 	return file_proto_auth_v1_auth_proto_rawDescGZIP(), []int{7}
 }
 
-func (x *VerifyEmailRequest) GetCode() string {
+func (x *VerifyEmailRequest) GetToken() string {
 	if x != nil {
-		return x.Code
+		return x.Token
 	}
 	return ""
 }
@@ -3601,9 +3601,9 @@ const file_proto_auth_v1_auth_proto_rawDesc = "" +
 	"\acontext\x18\x06 \x01(\v2\x17.auth.v1.RequestContextR\acontext\"j\n" +
 	"\x1fRequestEmailVerificationRequest\x12\x14\n" +
 	"\x05email\x18\x01 \x01(\tR\x05email\x121\n" +
-	"\acontext\x18\x02 \x01(\v2\x17.auth.v1.RequestContextR\acontext\"[\n" +
-	"\x12VerifyEmailRequest\x12\x12\n" +
-	"\x04code\x18\x01 \x01(\tR\x04code\x121\n" +
+	"\acontext\x18\x02 \x01(\v2\x17.auth.v1.RequestContextR\acontext\"]\n" +
+	"\x12VerifyEmailRequest\x12\x14\n" +
+	"\x05token\x18\x01 \x01(\tR\x05token\x121\n" +
 	"\acontext\x18\x02 \x01(\v2\x17.auth.v1.RequestContextR\acontext\"\x9c\x01\n" +
 	"\x14LoginPasswordRequest\x12\x14\n" +
 	"\x05email\x18\x01 \x01(\tR\x05email\x12\x1a\n" +
