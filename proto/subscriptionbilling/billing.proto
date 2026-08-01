@@ -217,6 +217,7 @@ message OfferResponse {
   repeated OfferPhaseResponse phases = 10;
   CatalogPresentationResponse presentation = 11;
   repeated OfferPolicyResponse policies = 12;
+  int32 display_order = 13;
 }
 message ListOffersResponse { repeated OfferResponse offers = 1; }
 
@@ -296,6 +297,7 @@ message CreateOfferRequest {
   repeated ConfigureOfferPhaseRequest phases = 7;
   ConfigureCatalogPresentationRequest presentation = 8;
   repeated OfferPolicyConfiguration policies = 9;
+  int32 display_order = 10;
 }
 
 message OfferPolicyConfiguration {
@@ -308,6 +310,7 @@ message UpdateOfferRequest {
   string name = 2;
   string description = 3;
   RequestContext context = 4;
+  int32 display_order = 5;
 }
 
 message ConfigureOfferPhaseRequest {

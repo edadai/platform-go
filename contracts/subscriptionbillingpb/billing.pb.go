@@ -1567,6 +1567,7 @@ type OfferResponse struct {
 	Phases        []*OfferPhaseResponse        `protobuf:"bytes,10,rep,name=phases,proto3" json:"phases,omitempty"`
 	Presentation  *CatalogPresentationResponse `protobuf:"bytes,11,opt,name=presentation,proto3" json:"presentation,omitempty"`
 	Policies      []*OfferPolicyResponse       `protobuf:"bytes,12,rep,name=policies,proto3" json:"policies,omitempty"`
+	DisplayOrder  int32                        `protobuf:"varint,13,opt,name=display_order,json=displayOrder,proto3" json:"display_order,omitempty"`
 	unknownFields protoimpl.UnknownFields
 	sizeCache     protoimpl.SizeCache
 }
@@ -1683,6 +1684,13 @@ func (x *OfferResponse) GetPolicies() []*OfferPolicyResponse {
 		return x.Policies
 	}
 	return nil
+}
+
+func (x *OfferResponse) GetDisplayOrder() int32 {
+	if x != nil {
+		return x.DisplayOrder
+	}
+	return 0
 }
 
 type ListOffersResponse struct {
@@ -2428,6 +2436,7 @@ type CreateOfferRequest struct {
 	Phases        []*ConfigureOfferPhaseRequest        `protobuf:"bytes,7,rep,name=phases,proto3" json:"phases,omitempty"`
 	Presentation  *ConfigureCatalogPresentationRequest `protobuf:"bytes,8,opt,name=presentation,proto3" json:"presentation,omitempty"`
 	Policies      []*OfferPolicyConfiguration          `protobuf:"bytes,9,rep,name=policies,proto3" json:"policies,omitempty"`
+	DisplayOrder  int32                                `protobuf:"varint,10,opt,name=display_order,json=displayOrder,proto3" json:"display_order,omitempty"`
 	unknownFields protoimpl.UnknownFields
 	sizeCache     protoimpl.SizeCache
 }
@@ -2525,6 +2534,13 @@ func (x *CreateOfferRequest) GetPolicies() []*OfferPolicyConfiguration {
 	return nil
 }
 
+func (x *CreateOfferRequest) GetDisplayOrder() int32 {
+	if x != nil {
+		return x.DisplayOrder
+	}
+	return 0
+}
+
 type OfferPolicyConfiguration struct {
 	state         protoimpl.MessageState `protogen:"open.v1"`
 	PolicyKey     string                 `protobuf:"bytes,1,opt,name=policy_key,json=policyKey,proto3" json:"policy_key,omitempty"`
@@ -2583,6 +2599,7 @@ type UpdateOfferRequest struct {
 	Name          string                 `protobuf:"bytes,2,opt,name=name,proto3" json:"name,omitempty"`
 	Description   string                 `protobuf:"bytes,3,opt,name=description,proto3" json:"description,omitempty"`
 	Context       *RequestContext        `protobuf:"bytes,4,opt,name=context,proto3" json:"context,omitempty"`
+	DisplayOrder  int32                  `protobuf:"varint,5,opt,name=display_order,json=displayOrder,proto3" json:"display_order,omitempty"`
 	unknownFields protoimpl.UnknownFields
 	sizeCache     protoimpl.SizeCache
 }
@@ -2643,6 +2660,13 @@ func (x *UpdateOfferRequest) GetContext() *RequestContext {
 		return x.Context
 	}
 	return nil
+}
+
+func (x *UpdateOfferRequest) GetDisplayOrder() int32 {
+	if x != nil {
+		return x.DisplayOrder
+	}
+	return 0
 }
 
 type ConfigureOfferPhaseRequest struct {
@@ -5993,7 +6017,7 @@ const file_proto_subscriptionbilling_billing_proto_rawDesc = "" +
 	"\boffer_id\x18\x02 \x01(\tR\aofferId\x12\x1d\n" +
 	"\n" +
 	"policy_key\x18\x03 \x01(\tR\tpolicyKey\x12!\n" +
-	"\fpolicy_value\x18\x04 \x01(\tR\vpolicyValue\"\xe5\x03\n" +
+	"\fpolicy_value\x18\x04 \x01(\tR\vpolicyValue\"\x8a\x04\n" +
 	"\rOfferResponse\x12\x0e\n" +
 	"\x02id\x18\x01 \x01(\tR\x02id\x12\x17\n" +
 	"\aplan_id\x18\x02 \x01(\tR\x06planId\x12\x19\n" +
@@ -6008,7 +6032,8 @@ const file_proto_subscriptionbilling_billing_proto_rawDesc = "" +
 	"\x06phases\x18\n" +
 	" \x03(\v2'.subscriptionbilling.OfferPhaseResponseR\x06phases\x12T\n" +
 	"\fpresentation\x18\v \x01(\v20.subscriptionbilling.CatalogPresentationResponseR\fpresentation\x12D\n" +
-	"\bpolicies\x18\f \x03(\v2(.subscriptionbilling.OfferPolicyResponseR\bpolicies\"P\n" +
+	"\bpolicies\x18\f \x03(\v2(.subscriptionbilling.OfferPolicyResponseR\bpolicies\x12#\n" +
+	"\rdisplay_order\x18\r \x01(\x05R\fdisplayOrder\"P\n" +
 	"\x12ListOffersResponse\x12:\n" +
 	"\x06offers\x18\x01 \x03(\v2\".subscriptionbilling.OfferResponseR\x06offers\"\x15\n" +
 	"\x13ListPoliciesRequest\"\xc3\x02\n" +
@@ -6073,7 +6098,7 @@ const file_proto_subscriptionbilling_billing_proto_rawDesc = "" +
 	"\x0einterval_count\x18\x06 \x01(\x05R\rintervalCount\x12\x1d\n" +
 	"\n" +
 	"is_default\x18\a \x01(\bR\tisDefault\x12=\n" +
-	"\acontext\x18\b \x01(\v2#.subscriptionbilling.RequestContextR\acontext\"\xc3\x03\n" +
+	"\acontext\x18\b \x01(\v2#.subscriptionbilling.RequestContextR\acontext\"\xe8\x03\n" +
 	"\x12CreateOfferRequest\x12\x17\n" +
 	"\aplan_id\x18\x01 \x01(\tR\x06planId\x12\x19\n" +
 	"\bprice_id\x18\x02 \x01(\tR\apriceId\x12\x12\n" +
@@ -6083,16 +6108,19 @@ const file_proto_subscriptionbilling_billing_proto_rawDesc = "" +
 	"\acontext\x18\x06 \x01(\v2#.subscriptionbilling.RequestContextR\acontext\x12G\n" +
 	"\x06phases\x18\a \x03(\v2/.subscriptionbilling.ConfigureOfferPhaseRequestR\x06phases\x12\\\n" +
 	"\fpresentation\x18\b \x01(\v28.subscriptionbilling.ConfigureCatalogPresentationRequestR\fpresentation\x12I\n" +
-	"\bpolicies\x18\t \x03(\v2-.subscriptionbilling.OfferPolicyConfigurationR\bpolicies\"\\\n" +
+	"\bpolicies\x18\t \x03(\v2-.subscriptionbilling.OfferPolicyConfigurationR\bpolicies\x12#\n" +
+	"\rdisplay_order\x18\n" +
+	" \x01(\x05R\fdisplayOrder\"\\\n" +
 	"\x18OfferPolicyConfiguration\x12\x1d\n" +
 	"\n" +
 	"policy_key\x18\x01 \x01(\tR\tpolicyKey\x12!\n" +
-	"\fpolicy_value\x18\x02 \x01(\tR\vpolicyValue\"\x99\x01\n" +
+	"\fpolicy_value\x18\x02 \x01(\tR\vpolicyValue\"\xbe\x01\n" +
 	"\x12UpdateOfferRequest\x12\x0e\n" +
 	"\x02id\x18\x01 \x01(\tR\x02id\x12\x12\n" +
 	"\x04name\x18\x02 \x01(\tR\x04name\x12 \n" +
 	"\vdescription\x18\x03 \x01(\tR\vdescription\x12=\n" +
-	"\acontext\x18\x04 \x01(\v2#.subscriptionbilling.RequestContextR\acontext\"\xc5\x02\n" +
+	"\acontext\x18\x04 \x01(\v2#.subscriptionbilling.RequestContextR\acontext\x12#\n" +
+	"\rdisplay_order\x18\x05 \x01(\x05R\fdisplayOrder\"\xc5\x02\n" +
 	"\x1aConfigureOfferPhaseRequest\x12\x19\n" +
 	"\boffer_id\x18\x01 \x01(\tR\aofferId\x12\x12\n" +
 	"\x04kind\x18\x02 \x01(\tR\x04kind\x12\x1a\n" +
