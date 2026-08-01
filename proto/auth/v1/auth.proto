@@ -84,6 +84,9 @@ message UserMessage {
   repeated string roles = 6;
   repeated PermissionOverrideMessage permission_overrides = 7;
   repeated string effective_permissions = 8;
+  string first_name = 9;
+  string last_name = 10;
+  repeated string oauth_providers = 11;
 }
 
 message SessionMessage {
@@ -114,7 +117,7 @@ message RequestEmailVerificationRequest {
 }
 
 message VerifyEmailRequest {
-  string token = 1;
+  string code = 1;
   RequestContext context = 2;
 }
 
@@ -164,10 +167,9 @@ message ConfirmEmailChangeRequest {
 
 message StartOAuthRequest {
   string provider = 1;
-  string redirect_after_login = 2;
-  string purpose = 3;
-  string user_id = 4;
-  RequestContext context = 5;
+  string purpose = 2;
+  string user_id = 3;
+  RequestContext context = 4;
 }
 
 message StartOAuthResponse {

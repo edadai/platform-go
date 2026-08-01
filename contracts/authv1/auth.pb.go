@@ -235,6 +235,9 @@ type UserMessage struct {
 	Roles                []string                     `protobuf:"bytes,6,rep,name=roles,proto3" json:"roles,omitempty"`
 	PermissionOverrides  []*PermissionOverrideMessage `protobuf:"bytes,7,rep,name=permission_overrides,json=permissionOverrides,proto3" json:"permission_overrides,omitempty"`
 	EffectivePermissions []string                     `protobuf:"bytes,8,rep,name=effective_permissions,json=effectivePermissions,proto3" json:"effective_permissions,omitempty"`
+	FirstName            string                       `protobuf:"bytes,9,opt,name=first_name,json=firstName,proto3" json:"first_name,omitempty"`
+	LastName             string                       `protobuf:"bytes,10,opt,name=last_name,json=lastName,proto3" json:"last_name,omitempty"`
+	OauthProviders       []string                     `protobuf:"bytes,11,rep,name=oauth_providers,json=oauthProviders,proto3" json:"oauth_providers,omitempty"`
 	unknownFields        protoimpl.UnknownFields
 	sizeCache            protoimpl.SizeCache
 }
@@ -321,6 +324,27 @@ func (x *UserMessage) GetPermissionOverrides() []*PermissionOverrideMessage {
 func (x *UserMessage) GetEffectivePermissions() []string {
 	if x != nil {
 		return x.EffectivePermissions
+	}
+	return nil
+}
+
+func (x *UserMessage) GetFirstName() string {
+	if x != nil {
+		return x.FirstName
+	}
+	return ""
+}
+
+func (x *UserMessage) GetLastName() string {
+	if x != nil {
+		return x.LastName
+	}
+	return ""
+}
+
+func (x *UserMessage) GetOauthProviders() []string {
+	if x != nil {
+		return x.OauthProviders
 	}
 	return nil
 }
@@ -579,7 +603,7 @@ func (x *RequestEmailVerificationRequest) GetContext() *RequestContext {
 
 type VerifyEmailRequest struct {
 	state         protoimpl.MessageState `protogen:"open.v1"`
-	Token         string                 `protobuf:"bytes,1,opt,name=token,proto3" json:"token,omitempty"`
+	Code          string                 `protobuf:"bytes,1,opt,name=code,proto3" json:"code,omitempty"`
 	Context       *RequestContext        `protobuf:"bytes,2,opt,name=context,proto3" json:"context,omitempty"`
 	unknownFields protoimpl.UnknownFields
 	sizeCache     protoimpl.SizeCache
@@ -615,9 +639,9 @@ func (*VerifyEmailRequest) Descriptor() ([]byte, []int) {
 	return file_proto_auth_v1_auth_proto_rawDescGZIP(), []int{7}
 }
 
-func (x *VerifyEmailRequest) GetToken() string {
+func (x *VerifyEmailRequest) GetCode() string {
 	if x != nil {
-		return x.Token
+		return x.Code
 	}
 	return ""
 }
@@ -1078,14 +1102,13 @@ func (x *ConfirmEmailChangeRequest) GetContext() *RequestContext {
 }
 
 type StartOAuthRequest struct {
-	state              protoimpl.MessageState `protogen:"open.v1"`
-	Provider           string                 `protobuf:"bytes,1,opt,name=provider,proto3" json:"provider,omitempty"`
-	RedirectAfterLogin string                 `protobuf:"bytes,2,opt,name=redirect_after_login,json=redirectAfterLogin,proto3" json:"redirect_after_login,omitempty"`
-	Purpose            string                 `protobuf:"bytes,3,opt,name=purpose,proto3" json:"purpose,omitempty"`
-	UserId             string                 `protobuf:"bytes,4,opt,name=user_id,json=userId,proto3" json:"user_id,omitempty"`
-	Context            *RequestContext        `protobuf:"bytes,5,opt,name=context,proto3" json:"context,omitempty"`
-	unknownFields      protoimpl.UnknownFields
-	sizeCache          protoimpl.SizeCache
+	state         protoimpl.MessageState `protogen:"open.v1"`
+	Provider      string                 `protobuf:"bytes,1,opt,name=provider,proto3" json:"provider,omitempty"`
+	Purpose       string                 `protobuf:"bytes,2,opt,name=purpose,proto3" json:"purpose,omitempty"`
+	UserId        string                 `protobuf:"bytes,3,opt,name=user_id,json=userId,proto3" json:"user_id,omitempty"`
+	Context       *RequestContext        `protobuf:"bytes,4,opt,name=context,proto3" json:"context,omitempty"`
+	unknownFields protoimpl.UnknownFields
+	sizeCache     protoimpl.SizeCache
 }
 
 func (x *StartOAuthRequest) Reset() {
@@ -1121,13 +1144,6 @@ func (*StartOAuthRequest) Descriptor() ([]byte, []int) {
 func (x *StartOAuthRequest) GetProvider() string {
 	if x != nil {
 		return x.Provider
-	}
-	return ""
-}
-
-func (x *StartOAuthRequest) GetRedirectAfterLogin() string {
-	if x != nil {
-		return x.RedirectAfterLogin
 	}
 	return ""
 }
@@ -3544,7 +3560,7 @@ const file_proto_auth_v1_auth_proto_rawDesc = "" +
 	"\n" +
 	"session_id\x18\x04 \x01(\tR\tsessionId\x12>\n" +
 	"\x1caccess_token_expires_at_unix\x18\x05 \x01(\x03R\x18accessTokenExpiresAtUnix\x12@\n" +
-	"\x1drefresh_token_expires_at_unix\x18\x06 \x01(\x03R\x19refreshTokenExpiresAtUnix\"\xbc\x02\n" +
+	"\x1drefresh_token_expires_at_unix\x18\x06 \x01(\x03R\x19refreshTokenExpiresAtUnix\"\xa1\x03\n" +
 	"\vUserMessage\x12\x0e\n" +
 	"\x02id\x18\x01 \x01(\tR\x02id\x12\x14\n" +
 	"\x05email\x18\x02 \x01(\tR\x05email\x12%\n" +
@@ -3553,7 +3569,12 @@ const file_proto_auth_v1_auth_proto_rawDesc = "" +
 	"\x0fcreated_at_unix\x18\x05 \x01(\x03R\rcreatedAtUnix\x12\x14\n" +
 	"\x05roles\x18\x06 \x03(\tR\x05roles\x12U\n" +
 	"\x14permission_overrides\x18\a \x03(\v2\".auth.v1.PermissionOverrideMessageR\x13permissionOverrides\x123\n" +
-	"\x15effective_permissions\x18\b \x03(\tR\x14effectivePermissions\"\xd2\x02\n" +
+	"\x15effective_permissions\x18\b \x03(\tR\x14effectivePermissions\x12\x1d\n" +
+	"\n" +
+	"first_name\x18\t \x01(\tR\tfirstName\x12\x1b\n" +
+	"\tlast_name\x18\n" +
+	" \x01(\tR\blastName\x12'\n" +
+	"\x0foauth_providers\x18\v \x03(\tR\x0eoauthProviders\"\xd2\x02\n" +
 	"\x0eSessionMessage\x12\x0e\n" +
 	"\x02id\x18\x01 \x01(\tR\x02id\x12\x17\n" +
 	"\auser_id\x18\x02 \x01(\tR\x06userId\x12\x1f\n" +
@@ -3580,9 +3601,9 @@ const file_proto_auth_v1_auth_proto_rawDesc = "" +
 	"\acontext\x18\x06 \x01(\v2\x17.auth.v1.RequestContextR\acontext\"j\n" +
 	"\x1fRequestEmailVerificationRequest\x12\x14\n" +
 	"\x05email\x18\x01 \x01(\tR\x05email\x121\n" +
-	"\acontext\x18\x02 \x01(\v2\x17.auth.v1.RequestContextR\acontext\"]\n" +
-	"\x12VerifyEmailRequest\x12\x14\n" +
-	"\x05token\x18\x01 \x01(\tR\x05token\x121\n" +
+	"\acontext\x18\x02 \x01(\v2\x17.auth.v1.RequestContextR\acontext\"[\n" +
+	"\x12VerifyEmailRequest\x12\x12\n" +
+	"\x04code\x18\x01 \x01(\tR\x04code\x121\n" +
 	"\acontext\x18\x02 \x01(\v2\x17.auth.v1.RequestContextR\acontext\"\x9c\x01\n" +
 	"\x14LoginPasswordRequest\x12\x14\n" +
 	"\x05email\x18\x01 \x01(\tR\x05email\x12\x1a\n" +
@@ -3613,13 +3634,12 @@ const file_proto_auth_v1_auth_proto_rawDesc = "" +
 	"\acontext\x18\x03 \x01(\v2\x17.auth.v1.RequestContextR\acontext\"d\n" +
 	"\x19ConfirmEmailChangeRequest\x12\x14\n" +
 	"\x05token\x18\x01 \x01(\tR\x05token\x121\n" +
-	"\acontext\x18\x02 \x01(\v2\x17.auth.v1.RequestContextR\acontext\"\xc7\x01\n" +
+	"\acontext\x18\x02 \x01(\v2\x17.auth.v1.RequestContextR\acontext\"\x95\x01\n" +
 	"\x11StartOAuthRequest\x12\x1a\n" +
-	"\bprovider\x18\x01 \x01(\tR\bprovider\x120\n" +
-	"\x14redirect_after_login\x18\x02 \x01(\tR\x12redirectAfterLogin\x12\x18\n" +
-	"\apurpose\x18\x03 \x01(\tR\apurpose\x12\x17\n" +
-	"\auser_id\x18\x04 \x01(\tR\x06userId\x121\n" +
-	"\acontext\x18\x05 \x01(\v2\x17.auth.v1.RequestContextR\acontext\"W\n" +
+	"\bprovider\x18\x01 \x01(\tR\bprovider\x12\x18\n" +
+	"\apurpose\x18\x02 \x01(\tR\apurpose\x12\x17\n" +
+	"\auser_id\x18\x03 \x01(\tR\x06userId\x121\n" +
+	"\acontext\x18\x04 \x01(\v2\x17.auth.v1.RequestContextR\acontext\"W\n" +
 	"\x12StartOAuthResponse\x12+\n" +
 	"\x11authorization_url\x18\x01 \x01(\tR\x10authorizationUrl\x12\x14\n" +
 	"\x05state\x18\x02 \x01(\tR\x05state\"\xb0\x01\n" +
