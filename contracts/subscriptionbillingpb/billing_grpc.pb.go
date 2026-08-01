@@ -32,7 +32,7 @@ const (
 	SubscriptionBillingApi_DisableOffer_FullMethodName                 = "/subscriptionbilling.SubscriptionBillingApi/DisableOffer"
 	SubscriptionBillingApi_AttachEntitlementToPlan_FullMethodName      = "/subscriptionbilling.SubscriptionBillingApi/AttachEntitlementToPlan"
 	SubscriptionBillingApi_UpsertPlanEntitlement_FullMethodName        = "/subscriptionbilling.SubscriptionBillingApi/UpsertPlanEntitlement"
-	SubscriptionBillingApi_ConfigureTrialPolicy_FullMethodName         = "/subscriptionbilling.SubscriptionBillingApi/ConfigureTrialPolicy"
+	SubscriptionBillingApi_ConfigureOfferPolicy_FullMethodName         = "/subscriptionbilling.SubscriptionBillingApi/ConfigureOfferPolicy"
 	SubscriptionBillingApi_ConfigureBillingPolicy_FullMethodName       = "/subscriptionbilling.SubscriptionBillingApi/ConfigureBillingPolicy"
 	SubscriptionBillingApi_GetBillingSummary_FullMethodName            = "/subscriptionbilling.SubscriptionBillingApi/GetBillingSummary"
 	SubscriptionBillingApi_ListProducts_FullMethodName                 = "/subscriptionbilling.SubscriptionBillingApi/ListProducts"
@@ -40,13 +40,11 @@ const (
 	SubscriptionBillingApi_GetPlan_FullMethodName                      = "/subscriptionbilling.SubscriptionBillingApi/GetPlan"
 	SubscriptionBillingApi_ListPlanPrices_FullMethodName               = "/subscriptionbilling.SubscriptionBillingApi/ListPlanPrices"
 	SubscriptionBillingApi_ListOffers_FullMethodName                   = "/subscriptionbilling.SubscriptionBillingApi/ListOffers"
-	SubscriptionBillingApi_ListTrialPolicies_FullMethodName            = "/subscriptionbilling.SubscriptionBillingApi/ListTrialPolicies"
 	SubscriptionBillingApi_ListBillingPolicies_FullMethodName          = "/subscriptionbilling.SubscriptionBillingApi/ListBillingPolicies"
 	SubscriptionBillingApi_UpdatePlan_FullMethodName                   = "/subscriptionbilling.SubscriptionBillingApi/UpdatePlan"
 	SubscriptionBillingApi_PublishPlan_FullMethodName                  = "/subscriptionbilling.SubscriptionBillingApi/PublishPlan"
 	SubscriptionBillingApi_ArchivePlan_FullMethodName                  = "/subscriptionbilling.SubscriptionBillingApi/ArchivePlan"
 	SubscriptionBillingApi_ListSubscriptions_FullMethodName            = "/subscriptionbilling.SubscriptionBillingApi/ListSubscriptions"
-	SubscriptionBillingApi_StartTrial_FullMethodName                   = "/subscriptionbilling.SubscriptionBillingApi/StartTrial"
 	SubscriptionBillingApi_StartSubscription_FullMethodName            = "/subscriptionbilling.SubscriptionBillingApi/StartSubscription"
 	SubscriptionBillingApi_CancelSubscription_FullMethodName           = "/subscriptionbilling.SubscriptionBillingApi/CancelSubscription"
 	SubscriptionBillingApi_ChangePlan_FullMethodName                   = "/subscriptionbilling.SubscriptionBillingApi/ChangePlan"
@@ -92,7 +90,7 @@ type SubscriptionBillingApiClient interface {
 	DisableOffer(ctx context.Context, in *EntityIdRequest, opts ...grpc.CallOption) (*EntityResponse, error)
 	AttachEntitlementToPlan(ctx context.Context, in *AttachEntitlementToPlanRequest, opts ...grpc.CallOption) (*EntityResponse, error)
 	UpsertPlanEntitlement(ctx context.Context, in *UpsertPlanEntitlementRequest, opts ...grpc.CallOption) (*PlanEntitlementResponse, error)
-	ConfigureTrialPolicy(ctx context.Context, in *ConfigureTrialPolicyRequest, opts ...grpc.CallOption) (*EntityResponse, error)
+	ConfigureOfferPolicy(ctx context.Context, in *ConfigureOfferPolicyRequest, opts ...grpc.CallOption) (*EntityResponse, error)
 	ConfigureBillingPolicy(ctx context.Context, in *ConfigureBillingPolicyRequest, opts ...grpc.CallOption) (*EntityResponse, error)
 	GetBillingSummary(ctx context.Context, in *BillingSummaryRequest, opts ...grpc.CallOption) (*BillingSummaryResponse, error)
 	ListProducts(ctx context.Context, in *ListProductsRequest, opts ...grpc.CallOption) (*ListProductsResponse, error)
@@ -100,13 +98,11 @@ type SubscriptionBillingApiClient interface {
 	GetPlan(ctx context.Context, in *EntityIdRequest, opts ...grpc.CallOption) (*PlanDetailResponse, error)
 	ListPlanPrices(ctx context.Context, in *EntityIdRequest, opts ...grpc.CallOption) (*ListPricesResponse, error)
 	ListOffers(ctx context.Context, in *ListOffersRequest, opts ...grpc.CallOption) (*ListOffersResponse, error)
-	ListTrialPolicies(ctx context.Context, in *ListPoliciesRequest, opts ...grpc.CallOption) (*ListTrialPoliciesResponse, error)
 	ListBillingPolicies(ctx context.Context, in *ListPoliciesRequest, opts ...grpc.CallOption) (*ListBillingPoliciesResponse, error)
 	UpdatePlan(ctx context.Context, in *UpdatePlanRequest, opts ...grpc.CallOption) (*PlanResponse, error)
 	PublishPlan(ctx context.Context, in *EntityIdRequest, opts ...grpc.CallOption) (*PlanResponse, error)
 	ArchivePlan(ctx context.Context, in *EntityIdRequest, opts ...grpc.CallOption) (*PlanResponse, error)
 	ListSubscriptions(ctx context.Context, in *ListSubscriptionsRequest, opts ...grpc.CallOption) (*ListSubscriptionsResponse, error)
-	StartTrial(ctx context.Context, in *StartTrialRequest, opts ...grpc.CallOption) (*SubscriptionResponse, error)
 	StartSubscription(ctx context.Context, in *StartSubscriptionRequest, opts ...grpc.CallOption) (*SubscriptionResponse, error)
 	CancelSubscription(ctx context.Context, in *EntityIdRequest, opts ...grpc.CallOption) (*SubscriptionResponse, error)
 	ChangePlan(ctx context.Context, in *ChangePlanRequest, opts ...grpc.CallOption) (*SubscriptionResponse, error)
@@ -273,10 +269,10 @@ func (c *subscriptionBillingApiClient) UpsertPlanEntitlement(ctx context.Context
 	return out, nil
 }
 
-func (c *subscriptionBillingApiClient) ConfigureTrialPolicy(ctx context.Context, in *ConfigureTrialPolicyRequest, opts ...grpc.CallOption) (*EntityResponse, error) {
+func (c *subscriptionBillingApiClient) ConfigureOfferPolicy(ctx context.Context, in *ConfigureOfferPolicyRequest, opts ...grpc.CallOption) (*EntityResponse, error) {
 	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
 	out := new(EntityResponse)
-	err := c.cc.Invoke(ctx, SubscriptionBillingApi_ConfigureTrialPolicy_FullMethodName, in, out, cOpts...)
+	err := c.cc.Invoke(ctx, SubscriptionBillingApi_ConfigureOfferPolicy_FullMethodName, in, out, cOpts...)
 	if err != nil {
 		return nil, err
 	}
@@ -353,16 +349,6 @@ func (c *subscriptionBillingApiClient) ListOffers(ctx context.Context, in *ListO
 	return out, nil
 }
 
-func (c *subscriptionBillingApiClient) ListTrialPolicies(ctx context.Context, in *ListPoliciesRequest, opts ...grpc.CallOption) (*ListTrialPoliciesResponse, error) {
-	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
-	out := new(ListTrialPoliciesResponse)
-	err := c.cc.Invoke(ctx, SubscriptionBillingApi_ListTrialPolicies_FullMethodName, in, out, cOpts...)
-	if err != nil {
-		return nil, err
-	}
-	return out, nil
-}
-
 func (c *subscriptionBillingApiClient) ListBillingPolicies(ctx context.Context, in *ListPoliciesRequest, opts ...grpc.CallOption) (*ListBillingPoliciesResponse, error) {
 	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
 	out := new(ListBillingPoliciesResponse)
@@ -407,16 +393,6 @@ func (c *subscriptionBillingApiClient) ListSubscriptions(ctx context.Context, in
 	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
 	out := new(ListSubscriptionsResponse)
 	err := c.cc.Invoke(ctx, SubscriptionBillingApi_ListSubscriptions_FullMethodName, in, out, cOpts...)
-	if err != nil {
-		return nil, err
-	}
-	return out, nil
-}
-
-func (c *subscriptionBillingApiClient) StartTrial(ctx context.Context, in *StartTrialRequest, opts ...grpc.CallOption) (*SubscriptionResponse, error) {
-	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
-	out := new(SubscriptionResponse)
-	err := c.cc.Invoke(ctx, SubscriptionBillingApi_StartTrial_FullMethodName, in, out, cOpts...)
 	if err != nil {
 		return nil, err
 	}
@@ -700,7 +676,7 @@ type SubscriptionBillingApiServer interface {
 	DisableOffer(context.Context, *EntityIdRequest) (*EntityResponse, error)
 	AttachEntitlementToPlan(context.Context, *AttachEntitlementToPlanRequest) (*EntityResponse, error)
 	UpsertPlanEntitlement(context.Context, *UpsertPlanEntitlementRequest) (*PlanEntitlementResponse, error)
-	ConfigureTrialPolicy(context.Context, *ConfigureTrialPolicyRequest) (*EntityResponse, error)
+	ConfigureOfferPolicy(context.Context, *ConfigureOfferPolicyRequest) (*EntityResponse, error)
 	ConfigureBillingPolicy(context.Context, *ConfigureBillingPolicyRequest) (*EntityResponse, error)
 	GetBillingSummary(context.Context, *BillingSummaryRequest) (*BillingSummaryResponse, error)
 	ListProducts(context.Context, *ListProductsRequest) (*ListProductsResponse, error)
@@ -708,13 +684,11 @@ type SubscriptionBillingApiServer interface {
 	GetPlan(context.Context, *EntityIdRequest) (*PlanDetailResponse, error)
 	ListPlanPrices(context.Context, *EntityIdRequest) (*ListPricesResponse, error)
 	ListOffers(context.Context, *ListOffersRequest) (*ListOffersResponse, error)
-	ListTrialPolicies(context.Context, *ListPoliciesRequest) (*ListTrialPoliciesResponse, error)
 	ListBillingPolicies(context.Context, *ListPoliciesRequest) (*ListBillingPoliciesResponse, error)
 	UpdatePlan(context.Context, *UpdatePlanRequest) (*PlanResponse, error)
 	PublishPlan(context.Context, *EntityIdRequest) (*PlanResponse, error)
 	ArchivePlan(context.Context, *EntityIdRequest) (*PlanResponse, error)
 	ListSubscriptions(context.Context, *ListSubscriptionsRequest) (*ListSubscriptionsResponse, error)
-	StartTrial(context.Context, *StartTrialRequest) (*SubscriptionResponse, error)
 	StartSubscription(context.Context, *StartSubscriptionRequest) (*SubscriptionResponse, error)
 	CancelSubscription(context.Context, *EntityIdRequest) (*SubscriptionResponse, error)
 	ChangePlan(context.Context, *ChangePlanRequest) (*SubscriptionResponse, error)
@@ -790,8 +764,8 @@ func (UnimplementedSubscriptionBillingApiServer) AttachEntitlementToPlan(context
 func (UnimplementedSubscriptionBillingApiServer) UpsertPlanEntitlement(context.Context, *UpsertPlanEntitlementRequest) (*PlanEntitlementResponse, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method UpsertPlanEntitlement not implemented")
 }
-func (UnimplementedSubscriptionBillingApiServer) ConfigureTrialPolicy(context.Context, *ConfigureTrialPolicyRequest) (*EntityResponse, error) {
-	return nil, status.Errorf(codes.Unimplemented, "method ConfigureTrialPolicy not implemented")
+func (UnimplementedSubscriptionBillingApiServer) ConfigureOfferPolicy(context.Context, *ConfigureOfferPolicyRequest) (*EntityResponse, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method ConfigureOfferPolicy not implemented")
 }
 func (UnimplementedSubscriptionBillingApiServer) ConfigureBillingPolicy(context.Context, *ConfigureBillingPolicyRequest) (*EntityResponse, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method ConfigureBillingPolicy not implemented")
@@ -814,9 +788,6 @@ func (UnimplementedSubscriptionBillingApiServer) ListPlanPrices(context.Context,
 func (UnimplementedSubscriptionBillingApiServer) ListOffers(context.Context, *ListOffersRequest) (*ListOffersResponse, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method ListOffers not implemented")
 }
-func (UnimplementedSubscriptionBillingApiServer) ListTrialPolicies(context.Context, *ListPoliciesRequest) (*ListTrialPoliciesResponse, error) {
-	return nil, status.Errorf(codes.Unimplemented, "method ListTrialPolicies not implemented")
-}
 func (UnimplementedSubscriptionBillingApiServer) ListBillingPolicies(context.Context, *ListPoliciesRequest) (*ListBillingPoliciesResponse, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method ListBillingPolicies not implemented")
 }
@@ -831,9 +802,6 @@ func (UnimplementedSubscriptionBillingApiServer) ArchivePlan(context.Context, *E
 }
 func (UnimplementedSubscriptionBillingApiServer) ListSubscriptions(context.Context, *ListSubscriptionsRequest) (*ListSubscriptionsResponse, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method ListSubscriptions not implemented")
-}
-func (UnimplementedSubscriptionBillingApiServer) StartTrial(context.Context, *StartTrialRequest) (*SubscriptionResponse, error) {
-	return nil, status.Errorf(codes.Unimplemented, "method StartTrial not implemented")
 }
 func (UnimplementedSubscriptionBillingApiServer) StartSubscription(context.Context, *StartSubscriptionRequest) (*SubscriptionResponse, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method StartSubscription not implemented")
@@ -1169,20 +1137,20 @@ func _SubscriptionBillingApi_UpsertPlanEntitlement_Handler(srv interface{}, ctx 
 	return interceptor(ctx, in, info, handler)
 }
 
-func _SubscriptionBillingApi_ConfigureTrialPolicy_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
-	in := new(ConfigureTrialPolicyRequest)
+func _SubscriptionBillingApi_ConfigureOfferPolicy_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(ConfigureOfferPolicyRequest)
 	if err := dec(in); err != nil {
 		return nil, err
 	}
 	if interceptor == nil {
-		return srv.(SubscriptionBillingApiServer).ConfigureTrialPolicy(ctx, in)
+		return srv.(SubscriptionBillingApiServer).ConfigureOfferPolicy(ctx, in)
 	}
 	info := &grpc.UnaryServerInfo{
 		Server:     srv,
-		FullMethod: SubscriptionBillingApi_ConfigureTrialPolicy_FullMethodName,
+		FullMethod: SubscriptionBillingApi_ConfigureOfferPolicy_FullMethodName,
 	}
 	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
-		return srv.(SubscriptionBillingApiServer).ConfigureTrialPolicy(ctx, req.(*ConfigureTrialPolicyRequest))
+		return srv.(SubscriptionBillingApiServer).ConfigureOfferPolicy(ctx, req.(*ConfigureOfferPolicyRequest))
 	}
 	return interceptor(ctx, in, info, handler)
 }
@@ -1313,24 +1281,6 @@ func _SubscriptionBillingApi_ListOffers_Handler(srv interface{}, ctx context.Con
 	return interceptor(ctx, in, info, handler)
 }
 
-func _SubscriptionBillingApi_ListTrialPolicies_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
-	in := new(ListPoliciesRequest)
-	if err := dec(in); err != nil {
-		return nil, err
-	}
-	if interceptor == nil {
-		return srv.(SubscriptionBillingApiServer).ListTrialPolicies(ctx, in)
-	}
-	info := &grpc.UnaryServerInfo{
-		Server:     srv,
-		FullMethod: SubscriptionBillingApi_ListTrialPolicies_FullMethodName,
-	}
-	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
-		return srv.(SubscriptionBillingApiServer).ListTrialPolicies(ctx, req.(*ListPoliciesRequest))
-	}
-	return interceptor(ctx, in, info, handler)
-}
-
 func _SubscriptionBillingApi_ListBillingPolicies_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
 	in := new(ListPoliciesRequest)
 	if err := dec(in); err != nil {
@@ -1417,24 +1367,6 @@ func _SubscriptionBillingApi_ListSubscriptions_Handler(srv interface{}, ctx cont
 	}
 	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
 		return srv.(SubscriptionBillingApiServer).ListSubscriptions(ctx, req.(*ListSubscriptionsRequest))
-	}
-	return interceptor(ctx, in, info, handler)
-}
-
-func _SubscriptionBillingApi_StartTrial_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
-	in := new(StartTrialRequest)
-	if err := dec(in); err != nil {
-		return nil, err
-	}
-	if interceptor == nil {
-		return srv.(SubscriptionBillingApiServer).StartTrial(ctx, in)
-	}
-	info := &grpc.UnaryServerInfo{
-		Server:     srv,
-		FullMethod: SubscriptionBillingApi_StartTrial_FullMethodName,
-	}
-	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
-		return srv.(SubscriptionBillingApiServer).StartTrial(ctx, req.(*StartTrialRequest))
 	}
 	return interceptor(ctx, in, info, handler)
 }
@@ -1967,8 +1899,8 @@ var SubscriptionBillingApi_ServiceDesc = grpc.ServiceDesc{
 			Handler:    _SubscriptionBillingApi_UpsertPlanEntitlement_Handler,
 		},
 		{
-			MethodName: "ConfigureTrialPolicy",
-			Handler:    _SubscriptionBillingApi_ConfigureTrialPolicy_Handler,
+			MethodName: "ConfigureOfferPolicy",
+			Handler:    _SubscriptionBillingApi_ConfigureOfferPolicy_Handler,
 		},
 		{
 			MethodName: "ConfigureBillingPolicy",
@@ -1999,10 +1931,6 @@ var SubscriptionBillingApi_ServiceDesc = grpc.ServiceDesc{
 			Handler:    _SubscriptionBillingApi_ListOffers_Handler,
 		},
 		{
-			MethodName: "ListTrialPolicies",
-			Handler:    _SubscriptionBillingApi_ListTrialPolicies_Handler,
-		},
-		{
 			MethodName: "ListBillingPolicies",
 			Handler:    _SubscriptionBillingApi_ListBillingPolicies_Handler,
 		},
@@ -2021,10 +1949,6 @@ var SubscriptionBillingApi_ServiceDesc = grpc.ServiceDesc{
 		{
 			MethodName: "ListSubscriptions",
 			Handler:    _SubscriptionBillingApi_ListSubscriptions_Handler,
-		},
-		{
-			MethodName: "StartTrial",
-			Handler:    _SubscriptionBillingApi_StartTrial_Handler,
 		},
 		{
 			MethodName: "StartSubscription",

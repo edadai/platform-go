@@ -19,7 +19,7 @@ service SubscriptionBillingApi {
   rpc DisableOffer (EntityIdRequest) returns (EntityResponse);
   rpc AttachEntitlementToPlan (AttachEntitlementToPlanRequest) returns (EntityResponse);
   rpc UpsertPlanEntitlement (UpsertPlanEntitlementRequest) returns (PlanEntitlementResponse);
-  rpc ConfigureTrialPolicy (ConfigureTrialPolicyRequest) returns (EntityResponse);
+  rpc ConfigureOfferPolicy (ConfigureOfferPolicyRequest) returns (EntityResponse);
   rpc ConfigureBillingPolicy (ConfigureBillingPolicyRequest) returns (EntityResponse);
   rpc GetBillingSummary (BillingSummaryRequest) returns (BillingSummaryResponse);
   rpc ListProducts (ListProductsRequest) returns (ListProductsResponse);
@@ -27,14 +27,12 @@ service SubscriptionBillingApi {
   rpc GetPlan (EntityIdRequest) returns (PlanDetailResponse);
   rpc ListPlanPrices (EntityIdRequest) returns (ListPricesResponse);
   rpc ListOffers (ListOffersRequest) returns (ListOffersResponse);
-  rpc ListTrialPolicies (ListPoliciesRequest) returns (ListTrialPoliciesResponse);
   rpc ListBillingPolicies (ListPoliciesRequest) returns (ListBillingPoliciesResponse);
   rpc UpdatePlan (UpdatePlanRequest) returns (PlanResponse);
   rpc PublishPlan (EntityIdRequest) returns (PlanResponse);
   rpc ArchivePlan (EntityIdRequest) returns (PlanResponse);
 
   rpc ListSubscriptions (ListSubscriptionsRequest) returns (ListSubscriptionsResponse);
-  rpc StartTrial (StartTrialRequest) returns (SubscriptionResponse);
   rpc StartSubscription (StartSubscriptionRequest) returns (SubscriptionResponse);
   rpc CancelSubscription (EntityIdRequest) returns (SubscriptionResponse);
   rpc ChangePlan (ChangePlanRequest) returns (SubscriptionResponse);
@@ -133,9 +131,8 @@ message PlanResponse {
   string display_name = 28;
   string display_description = 29;
   string badge_text = 30;
-  int32 highlight_rank = 31;
-  bool is_recommended = 32;
-  string recommendation_reason = 33;
+  reserved 31, 32, 33;
+  reserved "highlight_rank", "is_recommended", "recommendation_reason";
   string terms_summary = 34;
   string disclosure_text = 35;
   string catalog_option_id = 36;
@@ -175,9 +172,8 @@ message CatalogPresentationResponse {
   string display_name = 4;
   string display_description = 5;
   string badge_text = 6;
-  int32 highlight_rank = 7;
-  bool is_recommended = 8;
-  string recommendation_reason = 9;
+  reserved 7, 8, 9;
+  reserved "highlight_rank", "is_recommended", "recommendation_reason";
   string terms_summary = 10;
   string disclosure_text = 11;
   bool is_enabled = 12;
@@ -202,6 +198,12 @@ message OfferPhaseResponse {
   int32 duration_count = 8;
   bool is_enabled = 9;
 }
+message OfferPolicyResponse {
+  string id = 1;
+  string offer_id = 2;
+  string policy_key = 3;
+  string policy_value = 4;
+}
 message OfferResponse {
   string id = 1;
   string plan_id = 2;
@@ -214,22 +216,11 @@ message OfferResponse {
   string updated_at_utc = 9;
   repeated OfferPhaseResponse phases = 10;
   CatalogPresentationResponse presentation = 11;
+  repeated OfferPolicyResponse policies = 12;
 }
 message ListOffersResponse { repeated OfferResponse offers = 1; }
 
 message ListPoliciesRequest {}
-message TrialPolicyResponse {
-  string id = 1;
-  string product_id = 2;
-  string plan_id = 3;
-  string price_id = 4;
-  string offer_id = 5;
-  string name = 6;
-  int32 trial_days = 7;
-  int32 max_redemptions_per_customer = 8;
-  bool is_enabled = 9;
-  string eligibility_rules_json = 10;
-}
 message BillingPolicyResponse {
   string id = 1;
   string product_id = 2;
@@ -241,7 +232,6 @@ message BillingPolicyResponse {
   string failure_access_behavior = 8;
   bool is_enabled = 9;
 }
-message ListTrialPoliciesResponse { repeated TrialPolicyResponse policies = 1; }
 message ListBillingPoliciesResponse { repeated BillingPolicyResponse policies = 1; }
 
 message RequestContext {
@@ -305,6 +295,12 @@ message CreateOfferRequest {
   RequestContext context = 6;
   repeated ConfigureOfferPhaseRequest phases = 7;
   ConfigureCatalogPresentationRequest presentation = 8;
+  repeated OfferPolicyConfiguration policies = 9;
+}
+
+message OfferPolicyConfiguration {
+  string policy_key = 1;
+  string policy_value = 2;
 }
 
 message UpdateOfferRequest {
@@ -332,9 +328,8 @@ message ConfigureCatalogPresentationRequest {
   string display_name = 3;
   string display_description = 4;
   string badge_text = 5;
-  int32 highlight_rank = 6;
-  bool is_recommended = 7;
-  string recommendation_reason = 8;
+  reserved 6, 7, 8;
+  reserved "highlight_rank", "is_recommended", "recommendation_reason";
   string terms_summary = 9;
   string disclosure_text = 10;
   bool is_enabled = 11;
@@ -360,17 +355,11 @@ message UpsertPlanEntitlementRequest {
   RequestContext context = 7;
 }
 
-message ConfigureTrialPolicyRequest {
-  string product_id = 1;
-  string plan_id = 2;
-  string price_id = 3;
-  string offer_id = 4;
-  string name = 5;
-  int32 trial_days = 6;
-  int32 max_redemptions_per_customer = 7;
-  bool is_enabled = 8;
-  string eligibility_rules_json = 9;
-  RequestContext context = 10;
+message ConfigureOfferPolicyRequest {
+  string offer_id = 1;
+  string policy_key = 2;
+  string policy_value = 3;
+  RequestContext context = 4;
 }
 
 message ConfigureBillingPolicyRequest {
@@ -383,17 +372,6 @@ message ConfigureBillingPolicyRequest {
   string failure_access_behavior = 7;
   bool is_enabled = 8;
   RequestContext context = 9;
-}
-
-message StartTrialRequest {
-  string customer_id = 1;
-  string product_id = 2;
-  string plan_id = 3;
-  string price_id = 4;
-  string offer_id = 5;
-  string payment_provider = 6;
-  string external_reference = 7;
-  RequestContext context = 8;
 }
 
 message StartSubscriptionRequest {
