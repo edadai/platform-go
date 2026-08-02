@@ -35,7 +35,7 @@ service SubscriptionBillingApi {
   rpc ListSubscriptions (ListSubscriptionsRequest) returns (ListSubscriptionsResponse);
   rpc StartSubscription (StartSubscriptionRequest) returns (SubscriptionResponse);
   rpc CancelSubscription (EntityIdRequest) returns (SubscriptionResponse);
-  rpc ChangePlan (ChangePlanRequest) returns (SubscriptionResponse);
+  rpc ChangePlan (ChangePlanRequest) returns (PlanChangeResponse);
   rpc GetSubscriptionStatus (EntityIdRequest) returns (SubscriptionStatusResponse);
   rpc GetCurrentSubscription (CustomerRequest) returns (SubscriptionResponse);
 
@@ -393,7 +393,9 @@ message ChangePlanRequest {
   string subscription_id = 1;
   string plan_id = 2;
   string price_id = 3;
-  RequestContext context = 4;
+  string callback_url = 4;
+  string idempotency_key = 5;
+  RequestContext context = 6;
 }
 
 message CheckEntitlementRequest {
@@ -531,6 +533,27 @@ message SubscriptionResponse {
   string current_period_start_utc = 10;
   string current_period_end_utc = 11;
   string trial_ends_at_utc = 12;
+}
+
+message PlanChangeResponse {
+  string id = 1;
+  string subscription_id = 2;
+  string from_plan_id = 3;
+  string from_price_id = 4;
+  string to_plan_id = 5;
+  string to_price_id = 6;
+  string kind = 7;
+  string status = 8;
+  string invoice_id = 9;
+  double unused_credit = 10;
+  double prorated_charge = 11;
+  double amount_due = 12;
+  string currency = 13;
+  string effective_at_utc = 14;
+  string applied_at_utc = 15;
+  string failure_reason = 16;
+  PaymentIntentResponse payment_intent = 17;
+  SubscriptionResponse subscription = 18;
 }
 
 message ListSubscriptionsResponse { repeated SubscriptionResponse subscriptions = 1; }

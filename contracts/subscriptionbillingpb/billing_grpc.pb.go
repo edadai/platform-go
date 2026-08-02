@@ -105,7 +105,7 @@ type SubscriptionBillingApiClient interface {
 	ListSubscriptions(ctx context.Context, in *ListSubscriptionsRequest, opts ...grpc.CallOption) (*ListSubscriptionsResponse, error)
 	StartSubscription(ctx context.Context, in *StartSubscriptionRequest, opts ...grpc.CallOption) (*SubscriptionResponse, error)
 	CancelSubscription(ctx context.Context, in *EntityIdRequest, opts ...grpc.CallOption) (*SubscriptionResponse, error)
-	ChangePlan(ctx context.Context, in *ChangePlanRequest, opts ...grpc.CallOption) (*SubscriptionResponse, error)
+	ChangePlan(ctx context.Context, in *ChangePlanRequest, opts ...grpc.CallOption) (*PlanChangeResponse, error)
 	GetSubscriptionStatus(ctx context.Context, in *EntityIdRequest, opts ...grpc.CallOption) (*SubscriptionStatusResponse, error)
 	GetCurrentSubscription(ctx context.Context, in *CustomerRequest, opts ...grpc.CallOption) (*SubscriptionResponse, error)
 	CheckEntitlement(ctx context.Context, in *CheckEntitlementRequest, opts ...grpc.CallOption) (*CheckEntitlementResponse, error)
@@ -419,9 +419,9 @@ func (c *subscriptionBillingApiClient) CancelSubscription(ctx context.Context, i
 	return out, nil
 }
 
-func (c *subscriptionBillingApiClient) ChangePlan(ctx context.Context, in *ChangePlanRequest, opts ...grpc.CallOption) (*SubscriptionResponse, error) {
+func (c *subscriptionBillingApiClient) ChangePlan(ctx context.Context, in *ChangePlanRequest, opts ...grpc.CallOption) (*PlanChangeResponse, error) {
 	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
-	out := new(SubscriptionResponse)
+	out := new(PlanChangeResponse)
 	err := c.cc.Invoke(ctx, SubscriptionBillingApi_ChangePlan_FullMethodName, in, out, cOpts...)
 	if err != nil {
 		return nil, err
@@ -691,7 +691,7 @@ type SubscriptionBillingApiServer interface {
 	ListSubscriptions(context.Context, *ListSubscriptionsRequest) (*ListSubscriptionsResponse, error)
 	StartSubscription(context.Context, *StartSubscriptionRequest) (*SubscriptionResponse, error)
 	CancelSubscription(context.Context, *EntityIdRequest) (*SubscriptionResponse, error)
-	ChangePlan(context.Context, *ChangePlanRequest) (*SubscriptionResponse, error)
+	ChangePlan(context.Context, *ChangePlanRequest) (*PlanChangeResponse, error)
 	GetSubscriptionStatus(context.Context, *EntityIdRequest) (*SubscriptionStatusResponse, error)
 	GetCurrentSubscription(context.Context, *CustomerRequest) (*SubscriptionResponse, error)
 	CheckEntitlement(context.Context, *CheckEntitlementRequest) (*CheckEntitlementResponse, error)
@@ -809,7 +809,7 @@ func (UnimplementedSubscriptionBillingApiServer) StartSubscription(context.Conte
 func (UnimplementedSubscriptionBillingApiServer) CancelSubscription(context.Context, *EntityIdRequest) (*SubscriptionResponse, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method CancelSubscription not implemented")
 }
-func (UnimplementedSubscriptionBillingApiServer) ChangePlan(context.Context, *ChangePlanRequest) (*SubscriptionResponse, error) {
+func (UnimplementedSubscriptionBillingApiServer) ChangePlan(context.Context, *ChangePlanRequest) (*PlanChangeResponse, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method ChangePlan not implemented")
 }
 func (UnimplementedSubscriptionBillingApiServer) GetSubscriptionStatus(context.Context, *EntityIdRequest) (*SubscriptionStatusResponse, error) {
