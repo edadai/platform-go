@@ -151,6 +151,9 @@ type SessionTokensResponse struct {
 	RefreshTokenExpiresAtUnix int64                  `protobuf:"varint,6,opt,name=refresh_token_expires_at_unix,json=refreshTokenExpiresAtUnix,proto3" json:"refresh_token_expires_at_unix,omitempty"`
 	IsNewUser                 bool                   `protobuf:"varint,7,opt,name=is_new_user,json=isNewUser,proto3" json:"is_new_user,omitempty"`
 	RegistrationEventId       string                 `protobuf:"bytes,8,opt,name=registration_event_id,json=registrationEventId,proto3" json:"registration_event_id,omitempty"`
+	PasswordAdded             bool                   `protobuf:"varint,9,opt,name=password_added,json=passwordAdded,proto3" json:"password_added,omitempty"`
+	IdentityReplaced          bool                   `protobuf:"varint,10,opt,name=identity_replaced,json=identityReplaced,proto3" json:"identity_replaced,omitempty"`
+	OauthOutcomeCode          string                 `protobuf:"bytes,11,opt,name=oauth_outcome_code,json=oauthOutcomeCode,proto3" json:"oauth_outcome_code,omitempty"`
 	unknownFields             protoimpl.UnknownFields
 	sizeCache                 protoimpl.SizeCache
 }
@@ -237,6 +240,27 @@ func (x *SessionTokensResponse) GetIsNewUser() bool {
 func (x *SessionTokensResponse) GetRegistrationEventId() string {
 	if x != nil {
 		return x.RegistrationEventId
+	}
+	return ""
+}
+
+func (x *SessionTokensResponse) GetPasswordAdded() bool {
+	if x != nil {
+		return x.PasswordAdded
+	}
+	return false
+}
+
+func (x *SessionTokensResponse) GetIdentityReplaced() bool {
+	if x != nil {
+		return x.IdentityReplaced
+	}
+	return false
+}
+
+func (x *SessionTokensResponse) GetOauthOutcomeCode() string {
+	if x != nil {
+		return x.OauthOutcomeCode
 	}
 	return ""
 }
@@ -3644,7 +3668,7 @@ const file_proto_auth_v1_auth_proto_rawDesc = "" +
 	"\n" +
 	"user_agent\x18\x05 \x01(\tR\tuserAgent\"2\n" +
 	"\x16GenericMessageResponse\x12\x18\n" +
-	"\amessage\x18\x01 \x01(\tR\amessage\"\xed\x02\n" +
+	"\amessage\x18\x01 \x01(\tR\amessage\"\xef\x03\n" +
 	"\x15SessionTokensResponse\x12!\n" +
 	"\faccess_token\x18\x01 \x01(\tR\vaccessToken\x12#\n" +
 	"\rrefresh_token\x18\x02 \x01(\tR\frefreshToken\x12\x17\n" +
@@ -3654,7 +3678,11 @@ const file_proto_auth_v1_auth_proto_rawDesc = "" +
 	"\x1caccess_token_expires_at_unix\x18\x05 \x01(\x03R\x18accessTokenExpiresAtUnix\x12@\n" +
 	"\x1drefresh_token_expires_at_unix\x18\x06 \x01(\x03R\x19refreshTokenExpiresAtUnix\x12\x1e\n" +
 	"\vis_new_user\x18\a \x01(\bR\tisNewUser\x122\n" +
-	"\x15registration_event_id\x18\b \x01(\tR\x13registrationEventId\"\xa1\x03\n" +
+	"\x15registration_event_id\x18\b \x01(\tR\x13registrationEventId\x12%\n" +
+	"\x0epassword_added\x18\t \x01(\bR\rpasswordAdded\x12+\n" +
+	"\x11identity_replaced\x18\n" +
+	" \x01(\bR\x10identityReplaced\x12,\n" +
+	"\x12oauth_outcome_code\x18\v \x01(\tR\x10oauthOutcomeCode\"\xa1\x03\n" +
 	"\vUserMessage\x12\x0e\n" +
 	"\x02id\x18\x01 \x01(\tR\x02id\x12\x14\n" +
 	"\x05email\x18\x02 \x01(\tR\x05email\x12%\n" +

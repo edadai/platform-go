@@ -75,6 +75,9 @@ message SessionTokensResponse {
   int64 refresh_token_expires_at_unix = 6;
   bool is_new_user = 7;
   string registration_event_id = 8;
+  bool password_added = 9;
+  bool identity_replaced = 10;
+  string oauth_outcome_code = 11;
 }
 
 message UserMessage {
