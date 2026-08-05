@@ -611,6 +611,7 @@ message CheckoutResponse {
   SubscriptionResponse subscription = 1;
   PaymentIntentResponse payment_intent = 2;
   bool requires_payment = 3;
+  string conversion_event_id = 4;
 }
 
 message PaymentResponse {
@@ -624,6 +625,8 @@ message PaymentResponse {
   string provider_reference = 8;
   string processed_at_utc = 9;
   string failure_reason = 10;
+  bool is_first_customer_payment = 11;
+  string conversion_event_id = 12;
 }
 
 message ListPaymentsResponse { repeated PaymentResponse payments = 1; }

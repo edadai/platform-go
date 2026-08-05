@@ -5430,12 +5430,13 @@ func (x *PaymentIntentResponse) GetCheckoutUrl() string {
 }
 
 type CheckoutResponse struct {
-	state           protoimpl.MessageState `protogen:"open.v1"`
-	Subscription    *SubscriptionResponse  `protobuf:"bytes,1,opt,name=subscription,proto3" json:"subscription,omitempty"`
-	PaymentIntent   *PaymentIntentResponse `protobuf:"bytes,2,opt,name=payment_intent,json=paymentIntent,proto3" json:"payment_intent,omitempty"`
-	RequiresPayment bool                   `protobuf:"varint,3,opt,name=requires_payment,json=requiresPayment,proto3" json:"requires_payment,omitempty"`
-	unknownFields   protoimpl.UnknownFields
-	sizeCache       protoimpl.SizeCache
+	state             protoimpl.MessageState `protogen:"open.v1"`
+	Subscription      *SubscriptionResponse  `protobuf:"bytes,1,opt,name=subscription,proto3" json:"subscription,omitempty"`
+	PaymentIntent     *PaymentIntentResponse `protobuf:"bytes,2,opt,name=payment_intent,json=paymentIntent,proto3" json:"payment_intent,omitempty"`
+	RequiresPayment   bool                   `protobuf:"varint,3,opt,name=requires_payment,json=requiresPayment,proto3" json:"requires_payment,omitempty"`
+	ConversionEventId string                 `protobuf:"bytes,4,opt,name=conversion_event_id,json=conversionEventId,proto3" json:"conversion_event_id,omitempty"`
+	unknownFields     protoimpl.UnknownFields
+	sizeCache         protoimpl.SizeCache
 }
 
 func (x *CheckoutResponse) Reset() {
@@ -5489,20 +5490,29 @@ func (x *CheckoutResponse) GetRequiresPayment() bool {
 	return false
 }
 
+func (x *CheckoutResponse) GetConversionEventId() string {
+	if x != nil {
+		return x.ConversionEventId
+	}
+	return ""
+}
+
 type PaymentResponse struct {
-	state             protoimpl.MessageState `protogen:"open.v1"`
-	Id                string                 `protobuf:"bytes,1,opt,name=id,proto3" json:"id,omitempty"`
-	InvoiceId         string                 `protobuf:"bytes,2,opt,name=invoice_id,json=invoiceId,proto3" json:"invoice_id,omitempty"`
-	SubscriptionId    string                 `protobuf:"bytes,3,opt,name=subscription_id,json=subscriptionId,proto3" json:"subscription_id,omitempty"`
-	Provider          string                 `protobuf:"bytes,4,opt,name=provider,proto3" json:"provider,omitempty"`
-	Status            string                 `protobuf:"bytes,5,opt,name=status,proto3" json:"status,omitempty"`
-	Amount            float64                `protobuf:"fixed64,6,opt,name=amount,proto3" json:"amount,omitempty"`
-	Currency          string                 `protobuf:"bytes,7,opt,name=currency,proto3" json:"currency,omitempty"`
-	ProviderReference string                 `protobuf:"bytes,8,opt,name=provider_reference,json=providerReference,proto3" json:"provider_reference,omitempty"`
-	ProcessedAtUtc    string                 `protobuf:"bytes,9,opt,name=processed_at_utc,json=processedAtUtc,proto3" json:"processed_at_utc,omitempty"`
-	FailureReason     string                 `protobuf:"bytes,10,opt,name=failure_reason,json=failureReason,proto3" json:"failure_reason,omitempty"`
-	unknownFields     protoimpl.UnknownFields
-	sizeCache         protoimpl.SizeCache
+	state                  protoimpl.MessageState `protogen:"open.v1"`
+	Id                     string                 `protobuf:"bytes,1,opt,name=id,proto3" json:"id,omitempty"`
+	InvoiceId              string                 `protobuf:"bytes,2,opt,name=invoice_id,json=invoiceId,proto3" json:"invoice_id,omitempty"`
+	SubscriptionId         string                 `protobuf:"bytes,3,opt,name=subscription_id,json=subscriptionId,proto3" json:"subscription_id,omitempty"`
+	Provider               string                 `protobuf:"bytes,4,opt,name=provider,proto3" json:"provider,omitempty"`
+	Status                 string                 `protobuf:"bytes,5,opt,name=status,proto3" json:"status,omitempty"`
+	Amount                 float64                `protobuf:"fixed64,6,opt,name=amount,proto3" json:"amount,omitempty"`
+	Currency               string                 `protobuf:"bytes,7,opt,name=currency,proto3" json:"currency,omitempty"`
+	ProviderReference      string                 `protobuf:"bytes,8,opt,name=provider_reference,json=providerReference,proto3" json:"provider_reference,omitempty"`
+	ProcessedAtUtc         string                 `protobuf:"bytes,9,opt,name=processed_at_utc,json=processedAtUtc,proto3" json:"processed_at_utc,omitempty"`
+	FailureReason          string                 `protobuf:"bytes,10,opt,name=failure_reason,json=failureReason,proto3" json:"failure_reason,omitempty"`
+	IsFirstCustomerPayment bool                   `protobuf:"varint,11,opt,name=is_first_customer_payment,json=isFirstCustomerPayment,proto3" json:"is_first_customer_payment,omitempty"`
+	ConversionEventId      string                 `protobuf:"bytes,12,opt,name=conversion_event_id,json=conversionEventId,proto3" json:"conversion_event_id,omitempty"`
+	unknownFields          protoimpl.UnknownFields
+	sizeCache              protoimpl.SizeCache
 }
 
 func (x *PaymentResponse) Reset() {
@@ -5601,6 +5611,20 @@ func (x *PaymentResponse) GetProcessedAtUtc() string {
 func (x *PaymentResponse) GetFailureReason() string {
 	if x != nil {
 		return x.FailureReason
+	}
+	return ""
+}
+
+func (x *PaymentResponse) GetIsFirstCustomerPayment() bool {
+	if x != nil {
+		return x.IsFirstCustomerPayment
+	}
+	return false
+}
+
+func (x *PaymentResponse) GetConversionEventId() string {
+	if x != nil {
+		return x.ConversionEventId
 	}
 	return ""
 }
@@ -6579,11 +6603,12 @@ const file_proto_subscriptionbilling_billing_proto_rawDesc = "" +
 	"\bprovider\x18\x04 \x01(\tR\bprovider\x12\x16\n" +
 	"\x06status\x18\x05 \x01(\tR\x06status\x12-\n" +
 	"\x12provider_reference\x18\x06 \x01(\tR\x11providerReference\x12!\n" +
-	"\fcheckout_url\x18\a \x01(\tR\vcheckoutUrl\"\xdf\x01\n" +
+	"\fcheckout_url\x18\a \x01(\tR\vcheckoutUrl\"\x8f\x02\n" +
 	"\x10CheckoutResponse\x12M\n" +
 	"\fsubscription\x18\x01 \x01(\v2).subscriptionbilling.SubscriptionResponseR\fsubscription\x12Q\n" +
 	"\x0epayment_intent\x18\x02 \x01(\v2*.subscriptionbilling.PaymentIntentResponseR\rpaymentIntent\x12)\n" +
-	"\x10requires_payment\x18\x03 \x01(\bR\x0frequiresPayment\"\xd1\x02\n" +
+	"\x10requires_payment\x18\x03 \x01(\bR\x0frequiresPayment\x12.\n" +
+	"\x13conversion_event_id\x18\x04 \x01(\tR\x11conversionEventId\"\xbc\x03\n" +
 	"\x0fPaymentResponse\x12\x0e\n" +
 	"\x02id\x18\x01 \x01(\tR\x02id\x12\x1d\n" +
 	"\n" +
@@ -6596,7 +6621,9 @@ const file_proto_subscriptionbilling_billing_proto_rawDesc = "" +
 	"\x12provider_reference\x18\b \x01(\tR\x11providerReference\x12(\n" +
 	"\x10processed_at_utc\x18\t \x01(\tR\x0eprocessedAtUtc\x12%\n" +
 	"\x0efailure_reason\x18\n" +
-	" \x01(\tR\rfailureReason\"X\n" +
+	" \x01(\tR\rfailureReason\x129\n" +
+	"\x19is_first_customer_payment\x18\v \x01(\bR\x16isFirstCustomerPayment\x12.\n" +
+	"\x13conversion_event_id\x18\f \x01(\tR\x11conversionEventId\"X\n" +
 	"\x14ListPaymentsResponse\x12@\n" +
 	"\bpayments\x18\x01 \x03(\v2$.subscriptionbilling.PaymentResponseR\bpayments\"\x1b\n" +
 	"\x19ListLedgerAccountsRequest\"\x88\x01\n" +

@@ -73,6 +73,8 @@ message SessionTokensResponse {
   string session_id = 4;
   int64 access_token_expires_at_unix = 5;
   int64 refresh_token_expires_at_unix = 6;
+  bool is_new_user = 7;
+  string registration_event_id = 8;
 }
 
 message UserMessage {
@@ -109,6 +111,7 @@ message RegisterRequest {
   string last_name = 4;
   string device_name = 5;
   RequestContext context = 6;
+  MarketingContext marketing = 7;
 }
 
 message RequestEmailVerificationRequest {
@@ -170,6 +173,7 @@ message StartOAuthRequest {
   string purpose = 2;
   string user_id = 3;
   RequestContext context = 4;
+  MarketingContext marketing = 5;
 }
 
 message StartOAuthResponse {
@@ -392,4 +396,10 @@ message DeleteUserRequest {
   string user_id = 1;
   string reason = 2;
   RequestContext context = 3;
+}
+
+message MarketingContext {
+  string attribution_id = 1;
+  string conversion_event_id = 2;
+  string event_source_url = 3;
 }
