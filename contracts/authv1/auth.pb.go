@@ -3653,6 +3653,74 @@ func (x *MarketingContext) GetEventSourceUrl() string {
 	return ""
 }
 
+type UpdateProfileRequest struct {
+	state         protoimpl.MessageState `protogen:"open.v1"`
+	UserId        string                 `protobuf:"bytes,1,opt,name=user_id,json=userId,proto3" json:"user_id,omitempty"`
+	FirstName     string                 `protobuf:"bytes,2,opt,name=first_name,json=firstName,proto3" json:"first_name,omitempty"`
+	LastName      string                 `protobuf:"bytes,3,opt,name=last_name,json=lastName,proto3" json:"last_name,omitempty"`
+	Context       *RequestContext        `protobuf:"bytes,4,opt,name=context,proto3" json:"context,omitempty"`
+	unknownFields protoimpl.UnknownFields
+	sizeCache     protoimpl.SizeCache
+}
+
+func (x *UpdateProfileRequest) Reset() {
+	*x = UpdateProfileRequest{}
+	mi := &file_proto_auth_v1_auth_proto_msgTypes[58]
+	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+	ms.StoreMessageInfo(mi)
+}
+
+func (x *UpdateProfileRequest) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*UpdateProfileRequest) ProtoMessage() {}
+
+func (x *UpdateProfileRequest) ProtoReflect() protoreflect.Message {
+	mi := &file_proto_auth_v1_auth_proto_msgTypes[58]
+	if x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use UpdateProfileRequest.ProtoReflect.Descriptor instead.
+func (*UpdateProfileRequest) Descriptor() ([]byte, []int) {
+	return file_proto_auth_v1_auth_proto_rawDescGZIP(), []int{58}
+}
+
+func (x *UpdateProfileRequest) GetUserId() string {
+	if x != nil {
+		return x.UserId
+	}
+	return ""
+}
+
+func (x *UpdateProfileRequest) GetFirstName() string {
+	if x != nil {
+		return x.FirstName
+	}
+	return ""
+}
+
+func (x *UpdateProfileRequest) GetLastName() string {
+	if x != nil {
+		return x.LastName
+	}
+	return ""
+}
+
+func (x *UpdateProfileRequest) GetContext() *RequestContext {
+	if x != nil {
+		return x.Context
+	}
+	return nil
+}
+
 var File_proto_auth_v1_auth_proto protoreflect.FileDescriptor
 
 const file_proto_auth_v1_auth_proto_rawDesc = "" +
@@ -3929,7 +3997,13 @@ const file_proto_auth_v1_auth_proto_rawDesc = "" +
 	"\x10MarketingContext\x12%\n" +
 	"\x0eattribution_id\x18\x01 \x01(\tR\rattributionId\x12.\n" +
 	"\x13conversion_event_id\x18\x02 \x01(\tR\x11conversionEventId\x12(\n" +
-	"\x10event_source_url\x18\x03 \x01(\tR\x0eeventSourceUrl2\xba\x17\n" +
+	"\x10event_source_url\x18\x03 \x01(\tR\x0eeventSourceUrl\"\x9e\x01\n" +
+	"\x14UpdateProfileRequest\x12\x17\n" +
+	"\auser_id\x18\x01 \x01(\tR\x06userId\x12\x1d\n" +
+	"\n" +
+	"first_name\x18\x02 \x01(\tR\tfirstName\x12\x1b\n" +
+	"\tlast_name\x18\x03 \x01(\tR\blastName\x121\n" +
+	"\acontext\x18\x04 \x01(\v2\x17.auth.v1.RequestContextR\acontext2\x82\x18\n" +
 	"\vAuthService\x12E\n" +
 	"\bRegister\x12\x18.auth.v1.RegisterRequest\x1a\x1f.auth.v1.GenericMessageResponse\x12e\n" +
 	"\x18RequestEmailVerification\x12(.auth.v1.RequestEmailVerificationRequest\x1a\x1f.auth.v1.GenericMessageResponse\x12K\n" +
@@ -3947,7 +4021,8 @@ const file_proto_auth_v1_auth_proto_rawDesc = "" +
 	"\rCompleteOAuth\x12\x1d.auth.v1.CompleteOAuthRequest\x1a\x1e.auth.v1.SessionTokensResponse\x12G\n" +
 	"\tLinkOAuth\x12\x19.auth.v1.LinkOAuthRequest\x1a\x1f.auth.v1.GenericMessageResponse\x12K\n" +
 	"\vUnlinkOAuth\x12\x1b.auth.v1.UnlinkOAuthRequest\x1a\x1f.auth.v1.GenericMessageResponse\x126\n" +
-	"\x05GetMe\x12\x15.auth.v1.GetMeRequest\x1a\x16.auth.v1.GetMeResponse\x12:\n" +
+	"\x05GetMe\x12\x15.auth.v1.GetMeRequest\x1a\x16.auth.v1.GetMeResponse\x12F\n" +
+	"\rUpdateProfile\x12\x1d.auth.v1.UpdateProfileRequest\x1a\x16.auth.v1.GetMeResponse\x12:\n" +
 	"\aGetUser\x12\x17.auth.v1.GetUserRequest\x1a\x16.auth.v1.GetMeResponse\x12B\n" +
 	"\tListUsers\x12\x19.auth.v1.ListUsersRequest\x1a\x1a.auth.v1.ListUsersResponse\x12@\n" +
 	"\n" +
@@ -3990,7 +4065,7 @@ func file_proto_auth_v1_auth_proto_rawDescGZIP() []byte {
 	return file_proto_auth_v1_auth_proto_rawDescData
 }
 
-var file_proto_auth_v1_auth_proto_msgTypes = make([]protoimpl.MessageInfo, 58)
+var file_proto_auth_v1_auth_proto_msgTypes = make([]protoimpl.MessageInfo, 59)
 var file_proto_auth_v1_auth_proto_goTypes = []any{
 	(*RequestContext)(nil),                      // 0: auth.v1.RequestContext
 	(*GenericMessageResponse)(nil),              // 1: auth.v1.GenericMessageResponse
@@ -4050,6 +4125,7 @@ var file_proto_auth_v1_auth_proto_goTypes = []any{
 	(*SuspendUserRequest)(nil),                  // 55: auth.v1.SuspendUserRequest
 	(*DeleteUserRequest)(nil),                   // 56: auth.v1.DeleteUserRequest
 	(*MarketingContext)(nil),                    // 57: auth.v1.MarketingContext
+	(*UpdateProfileRequest)(nil),                // 58: auth.v1.UpdateProfileRequest
 }
 var file_proto_auth_v1_auth_proto_depIdxs = []int32{
 	37, // 0: auth.v1.UserMessage.permission_overrides:type_name -> auth.v1.PermissionOverrideMessage
@@ -4099,87 +4175,90 @@ var file_proto_auth_v1_auth_proto_depIdxs = []int32{
 	0,  // 44: auth.v1.RemoveUserPermissionOverrideRequest.context:type_name -> auth.v1.RequestContext
 	0,  // 45: auth.v1.SuspendUserRequest.context:type_name -> auth.v1.RequestContext
 	0,  // 46: auth.v1.DeleteUserRequest.context:type_name -> auth.v1.RequestContext
-	5,  // 47: auth.v1.AuthService.Register:input_type -> auth.v1.RegisterRequest
-	6,  // 48: auth.v1.AuthService.RequestEmailVerification:input_type -> auth.v1.RequestEmailVerificationRequest
-	7,  // 49: auth.v1.AuthService.VerifyEmail:input_type -> auth.v1.VerifyEmailRequest
-	8,  // 50: auth.v1.AuthService.LoginPassword:input_type -> auth.v1.LoginPasswordRequest
-	9,  // 51: auth.v1.AuthService.RefreshSession:input_type -> auth.v1.RefreshSessionRequest
-	10, // 52: auth.v1.AuthService.Logout:input_type -> auth.v1.LogoutRequest
-	11, // 53: auth.v1.AuthService.LogoutAll:input_type -> auth.v1.LogoutAllRequest
-	12, // 54: auth.v1.AuthService.RequestPasswordReset:input_type -> auth.v1.RequestPasswordResetRequest
-	13, // 55: auth.v1.AuthService.ResetPassword:input_type -> auth.v1.ResetPasswordRequest
-	14, // 56: auth.v1.AuthService.RequestEmailChange:input_type -> auth.v1.RequestEmailChangeRequest
-	15, // 57: auth.v1.AuthService.ConfirmEmailChange:input_type -> auth.v1.ConfirmEmailChangeRequest
-	16, // 58: auth.v1.AuthService.StartOAuth:input_type -> auth.v1.StartOAuthRequest
-	18, // 59: auth.v1.AuthService.CompleteOAuth:input_type -> auth.v1.CompleteOAuthRequest
-	19, // 60: auth.v1.AuthService.LinkOAuth:input_type -> auth.v1.LinkOAuthRequest
-	20, // 61: auth.v1.AuthService.UnlinkOAuth:input_type -> auth.v1.UnlinkOAuthRequest
-	21, // 62: auth.v1.AuthService.GetMe:input_type -> auth.v1.GetMeRequest
-	22, // 63: auth.v1.AuthService.GetUser:input_type -> auth.v1.GetUserRequest
-	24, // 64: auth.v1.AuthService.ListUsers:input_type -> auth.v1.ListUsersRequest
-	26, // 65: auth.v1.AuthService.InviteUser:input_type -> auth.v1.InviteUserRequest
-	27, // 66: auth.v1.AuthService.ValidateAccessToken:input_type -> auth.v1.ValidateAccessTokenRequest
-	29, // 67: auth.v1.AuthService.ValidateSession:input_type -> auth.v1.ValidateSessionRequest
-	31, // 68: auth.v1.AuthService.CheckRole:input_type -> auth.v1.CheckRoleRequest
-	33, // 69: auth.v1.AuthService.CheckPermission:input_type -> auth.v1.CheckPermissionRequest
-	38, // 70: auth.v1.AuthService.ListRoles:input_type -> auth.v1.ListRolesRequest
-	40, // 71: auth.v1.AuthService.ListPermissions:input_type -> auth.v1.ListPermissionsRequest
-	42, // 72: auth.v1.AuthService.GetUserAccess:input_type -> auth.v1.GetUserAccessRequest
-	44, // 73: auth.v1.AuthService.CreateRole:input_type -> auth.v1.CreateRoleRequest
-	45, // 74: auth.v1.AuthService.UpdateRole:input_type -> auth.v1.UpdateRoleRequest
-	46, // 75: auth.v1.AuthService.DeleteRole:input_type -> auth.v1.DeleteRoleRequest
-	47, // 76: auth.v1.AuthService.ListSessions:input_type -> auth.v1.ListSessionsRequest
-	49, // 77: auth.v1.AuthService.RevokeSession:input_type -> auth.v1.RevokeSessionRequest
-	50, // 78: auth.v1.AuthService.AssignRole:input_type -> auth.v1.AssignRoleRequest
-	51, // 79: auth.v1.AuthService.RevokeRole:input_type -> auth.v1.RevokeRoleRequest
-	52, // 80: auth.v1.AuthService.GrantUserPermission:input_type -> auth.v1.GrantUserPermissionRequest
-	53, // 81: auth.v1.AuthService.DenyUserPermission:input_type -> auth.v1.DenyUserPermissionRequest
-	54, // 82: auth.v1.AuthService.RemoveUserPermissionOverride:input_type -> auth.v1.RemoveUserPermissionOverrideRequest
-	55, // 83: auth.v1.AuthService.SuspendUser:input_type -> auth.v1.SuspendUserRequest
-	56, // 84: auth.v1.AuthService.DeleteUser:input_type -> auth.v1.DeleteUserRequest
-	1,  // 85: auth.v1.AuthService.Register:output_type -> auth.v1.GenericMessageResponse
-	1,  // 86: auth.v1.AuthService.RequestEmailVerification:output_type -> auth.v1.GenericMessageResponse
-	1,  // 87: auth.v1.AuthService.VerifyEmail:output_type -> auth.v1.GenericMessageResponse
-	2,  // 88: auth.v1.AuthService.LoginPassword:output_type -> auth.v1.SessionTokensResponse
-	2,  // 89: auth.v1.AuthService.RefreshSession:output_type -> auth.v1.SessionTokensResponse
-	1,  // 90: auth.v1.AuthService.Logout:output_type -> auth.v1.GenericMessageResponse
-	1,  // 91: auth.v1.AuthService.LogoutAll:output_type -> auth.v1.GenericMessageResponse
-	1,  // 92: auth.v1.AuthService.RequestPasswordReset:output_type -> auth.v1.GenericMessageResponse
-	1,  // 93: auth.v1.AuthService.ResetPassword:output_type -> auth.v1.GenericMessageResponse
-	1,  // 94: auth.v1.AuthService.RequestEmailChange:output_type -> auth.v1.GenericMessageResponse
-	1,  // 95: auth.v1.AuthService.ConfirmEmailChange:output_type -> auth.v1.GenericMessageResponse
-	17, // 96: auth.v1.AuthService.StartOAuth:output_type -> auth.v1.StartOAuthResponse
-	2,  // 97: auth.v1.AuthService.CompleteOAuth:output_type -> auth.v1.SessionTokensResponse
-	1,  // 98: auth.v1.AuthService.LinkOAuth:output_type -> auth.v1.GenericMessageResponse
-	1,  // 99: auth.v1.AuthService.UnlinkOAuth:output_type -> auth.v1.GenericMessageResponse
-	23, // 100: auth.v1.AuthService.GetMe:output_type -> auth.v1.GetMeResponse
-	23, // 101: auth.v1.AuthService.GetUser:output_type -> auth.v1.GetMeResponse
-	25, // 102: auth.v1.AuthService.ListUsers:output_type -> auth.v1.ListUsersResponse
-	23, // 103: auth.v1.AuthService.InviteUser:output_type -> auth.v1.GetMeResponse
-	28, // 104: auth.v1.AuthService.ValidateAccessToken:output_type -> auth.v1.ValidateAccessTokenResponse
-	30, // 105: auth.v1.AuthService.ValidateSession:output_type -> auth.v1.ValidateSessionResponse
-	32, // 106: auth.v1.AuthService.CheckRole:output_type -> auth.v1.CheckRoleResponse
-	34, // 107: auth.v1.AuthService.CheckPermission:output_type -> auth.v1.CheckPermissionResponse
-	39, // 108: auth.v1.AuthService.ListRoles:output_type -> auth.v1.ListRolesResponse
-	41, // 109: auth.v1.AuthService.ListPermissions:output_type -> auth.v1.ListPermissionsResponse
-	43, // 110: auth.v1.AuthService.GetUserAccess:output_type -> auth.v1.UserAccessResponse
-	35, // 111: auth.v1.AuthService.CreateRole:output_type -> auth.v1.RoleMessage
-	35, // 112: auth.v1.AuthService.UpdateRole:output_type -> auth.v1.RoleMessage
-	1,  // 113: auth.v1.AuthService.DeleteRole:output_type -> auth.v1.GenericMessageResponse
-	48, // 114: auth.v1.AuthService.ListSessions:output_type -> auth.v1.ListSessionsResponse
-	1,  // 115: auth.v1.AuthService.RevokeSession:output_type -> auth.v1.GenericMessageResponse
-	1,  // 116: auth.v1.AuthService.AssignRole:output_type -> auth.v1.GenericMessageResponse
-	1,  // 117: auth.v1.AuthService.RevokeRole:output_type -> auth.v1.GenericMessageResponse
-	1,  // 118: auth.v1.AuthService.GrantUserPermission:output_type -> auth.v1.GenericMessageResponse
-	1,  // 119: auth.v1.AuthService.DenyUserPermission:output_type -> auth.v1.GenericMessageResponse
-	1,  // 120: auth.v1.AuthService.RemoveUserPermissionOverride:output_type -> auth.v1.GenericMessageResponse
-	1,  // 121: auth.v1.AuthService.SuspendUser:output_type -> auth.v1.GenericMessageResponse
-	1,  // 122: auth.v1.AuthService.DeleteUser:output_type -> auth.v1.GenericMessageResponse
-	85, // [85:123] is the sub-list for method output_type
-	47, // [47:85] is the sub-list for method input_type
-	47, // [47:47] is the sub-list for extension type_name
-	47, // [47:47] is the sub-list for extension extendee
-	0,  // [0:47] is the sub-list for field type_name
+	0,  // 47: auth.v1.UpdateProfileRequest.context:type_name -> auth.v1.RequestContext
+	5,  // 48: auth.v1.AuthService.Register:input_type -> auth.v1.RegisterRequest
+	6,  // 49: auth.v1.AuthService.RequestEmailVerification:input_type -> auth.v1.RequestEmailVerificationRequest
+	7,  // 50: auth.v1.AuthService.VerifyEmail:input_type -> auth.v1.VerifyEmailRequest
+	8,  // 51: auth.v1.AuthService.LoginPassword:input_type -> auth.v1.LoginPasswordRequest
+	9,  // 52: auth.v1.AuthService.RefreshSession:input_type -> auth.v1.RefreshSessionRequest
+	10, // 53: auth.v1.AuthService.Logout:input_type -> auth.v1.LogoutRequest
+	11, // 54: auth.v1.AuthService.LogoutAll:input_type -> auth.v1.LogoutAllRequest
+	12, // 55: auth.v1.AuthService.RequestPasswordReset:input_type -> auth.v1.RequestPasswordResetRequest
+	13, // 56: auth.v1.AuthService.ResetPassword:input_type -> auth.v1.ResetPasswordRequest
+	14, // 57: auth.v1.AuthService.RequestEmailChange:input_type -> auth.v1.RequestEmailChangeRequest
+	15, // 58: auth.v1.AuthService.ConfirmEmailChange:input_type -> auth.v1.ConfirmEmailChangeRequest
+	16, // 59: auth.v1.AuthService.StartOAuth:input_type -> auth.v1.StartOAuthRequest
+	18, // 60: auth.v1.AuthService.CompleteOAuth:input_type -> auth.v1.CompleteOAuthRequest
+	19, // 61: auth.v1.AuthService.LinkOAuth:input_type -> auth.v1.LinkOAuthRequest
+	20, // 62: auth.v1.AuthService.UnlinkOAuth:input_type -> auth.v1.UnlinkOAuthRequest
+	21, // 63: auth.v1.AuthService.GetMe:input_type -> auth.v1.GetMeRequest
+	58, // 64: auth.v1.AuthService.UpdateProfile:input_type -> auth.v1.UpdateProfileRequest
+	22, // 65: auth.v1.AuthService.GetUser:input_type -> auth.v1.GetUserRequest
+	24, // 66: auth.v1.AuthService.ListUsers:input_type -> auth.v1.ListUsersRequest
+	26, // 67: auth.v1.AuthService.InviteUser:input_type -> auth.v1.InviteUserRequest
+	27, // 68: auth.v1.AuthService.ValidateAccessToken:input_type -> auth.v1.ValidateAccessTokenRequest
+	29, // 69: auth.v1.AuthService.ValidateSession:input_type -> auth.v1.ValidateSessionRequest
+	31, // 70: auth.v1.AuthService.CheckRole:input_type -> auth.v1.CheckRoleRequest
+	33, // 71: auth.v1.AuthService.CheckPermission:input_type -> auth.v1.CheckPermissionRequest
+	38, // 72: auth.v1.AuthService.ListRoles:input_type -> auth.v1.ListRolesRequest
+	40, // 73: auth.v1.AuthService.ListPermissions:input_type -> auth.v1.ListPermissionsRequest
+	42, // 74: auth.v1.AuthService.GetUserAccess:input_type -> auth.v1.GetUserAccessRequest
+	44, // 75: auth.v1.AuthService.CreateRole:input_type -> auth.v1.CreateRoleRequest
+	45, // 76: auth.v1.AuthService.UpdateRole:input_type -> auth.v1.UpdateRoleRequest
+	46, // 77: auth.v1.AuthService.DeleteRole:input_type -> auth.v1.DeleteRoleRequest
+	47, // 78: auth.v1.AuthService.ListSessions:input_type -> auth.v1.ListSessionsRequest
+	49, // 79: auth.v1.AuthService.RevokeSession:input_type -> auth.v1.RevokeSessionRequest
+	50, // 80: auth.v1.AuthService.AssignRole:input_type -> auth.v1.AssignRoleRequest
+	51, // 81: auth.v1.AuthService.RevokeRole:input_type -> auth.v1.RevokeRoleRequest
+	52, // 82: auth.v1.AuthService.GrantUserPermission:input_type -> auth.v1.GrantUserPermissionRequest
+	53, // 83: auth.v1.AuthService.DenyUserPermission:input_type -> auth.v1.DenyUserPermissionRequest
+	54, // 84: auth.v1.AuthService.RemoveUserPermissionOverride:input_type -> auth.v1.RemoveUserPermissionOverrideRequest
+	55, // 85: auth.v1.AuthService.SuspendUser:input_type -> auth.v1.SuspendUserRequest
+	56, // 86: auth.v1.AuthService.DeleteUser:input_type -> auth.v1.DeleteUserRequest
+	1,  // 87: auth.v1.AuthService.Register:output_type -> auth.v1.GenericMessageResponse
+	1,  // 88: auth.v1.AuthService.RequestEmailVerification:output_type -> auth.v1.GenericMessageResponse
+	1,  // 89: auth.v1.AuthService.VerifyEmail:output_type -> auth.v1.GenericMessageResponse
+	2,  // 90: auth.v1.AuthService.LoginPassword:output_type -> auth.v1.SessionTokensResponse
+	2,  // 91: auth.v1.AuthService.RefreshSession:output_type -> auth.v1.SessionTokensResponse
+	1,  // 92: auth.v1.AuthService.Logout:output_type -> auth.v1.GenericMessageResponse
+	1,  // 93: auth.v1.AuthService.LogoutAll:output_type -> auth.v1.GenericMessageResponse
+	1,  // 94: auth.v1.AuthService.RequestPasswordReset:output_type -> auth.v1.GenericMessageResponse
+	1,  // 95: auth.v1.AuthService.ResetPassword:output_type -> auth.v1.GenericMessageResponse
+	1,  // 96: auth.v1.AuthService.RequestEmailChange:output_type -> auth.v1.GenericMessageResponse
+	1,  // 97: auth.v1.AuthService.ConfirmEmailChange:output_type -> auth.v1.GenericMessageResponse
+	17, // 98: auth.v1.AuthService.StartOAuth:output_type -> auth.v1.StartOAuthResponse
+	2,  // 99: auth.v1.AuthService.CompleteOAuth:output_type -> auth.v1.SessionTokensResponse
+	1,  // 100: auth.v1.AuthService.LinkOAuth:output_type -> auth.v1.GenericMessageResponse
+	1,  // 101: auth.v1.AuthService.UnlinkOAuth:output_type -> auth.v1.GenericMessageResponse
+	23, // 102: auth.v1.AuthService.GetMe:output_type -> auth.v1.GetMeResponse
+	23, // 103: auth.v1.AuthService.UpdateProfile:output_type -> auth.v1.GetMeResponse
+	23, // 104: auth.v1.AuthService.GetUser:output_type -> auth.v1.GetMeResponse
+	25, // 105: auth.v1.AuthService.ListUsers:output_type -> auth.v1.ListUsersResponse
+	23, // 106: auth.v1.AuthService.InviteUser:output_type -> auth.v1.GetMeResponse
+	28, // 107: auth.v1.AuthService.ValidateAccessToken:output_type -> auth.v1.ValidateAccessTokenResponse
+	30, // 108: auth.v1.AuthService.ValidateSession:output_type -> auth.v1.ValidateSessionResponse
+	32, // 109: auth.v1.AuthService.CheckRole:output_type -> auth.v1.CheckRoleResponse
+	34, // 110: auth.v1.AuthService.CheckPermission:output_type -> auth.v1.CheckPermissionResponse
+	39, // 111: auth.v1.AuthService.ListRoles:output_type -> auth.v1.ListRolesResponse
+	41, // 112: auth.v1.AuthService.ListPermissions:output_type -> auth.v1.ListPermissionsResponse
+	43, // 113: auth.v1.AuthService.GetUserAccess:output_type -> auth.v1.UserAccessResponse
+	35, // 114: auth.v1.AuthService.CreateRole:output_type -> auth.v1.RoleMessage
+	35, // 115: auth.v1.AuthService.UpdateRole:output_type -> auth.v1.RoleMessage
+	1,  // 116: auth.v1.AuthService.DeleteRole:output_type -> auth.v1.GenericMessageResponse
+	48, // 117: auth.v1.AuthService.ListSessions:output_type -> auth.v1.ListSessionsResponse
+	1,  // 118: auth.v1.AuthService.RevokeSession:output_type -> auth.v1.GenericMessageResponse
+	1,  // 119: auth.v1.AuthService.AssignRole:output_type -> auth.v1.GenericMessageResponse
+	1,  // 120: auth.v1.AuthService.RevokeRole:output_type -> auth.v1.GenericMessageResponse
+	1,  // 121: auth.v1.AuthService.GrantUserPermission:output_type -> auth.v1.GenericMessageResponse
+	1,  // 122: auth.v1.AuthService.DenyUserPermission:output_type -> auth.v1.GenericMessageResponse
+	1,  // 123: auth.v1.AuthService.RemoveUserPermissionOverride:output_type -> auth.v1.GenericMessageResponse
+	1,  // 124: auth.v1.AuthService.SuspendUser:output_type -> auth.v1.GenericMessageResponse
+	1,  // 125: auth.v1.AuthService.DeleteUser:output_type -> auth.v1.GenericMessageResponse
+	87, // [87:126] is the sub-list for method output_type
+	48, // [48:87] is the sub-list for method input_type
+	48, // [48:48] is the sub-list for extension type_name
+	48, // [48:48] is the sub-list for extension extendee
+	0,  // [0:48] is the sub-list for field type_name
 }
 
 func init() { file_proto_auth_v1_auth_proto_init() }
@@ -4193,7 +4272,7 @@ func file_proto_auth_v1_auth_proto_init() {
 			GoPackagePath: reflect.TypeOf(x{}).PkgPath(),
 			RawDescriptor: unsafe.Slice(unsafe.StringData(file_proto_auth_v1_auth_proto_rawDesc), len(file_proto_auth_v1_auth_proto_rawDesc)),
 			NumEnums:      0,
-			NumMessages:   58,
+			NumMessages:   59,
 			NumExtensions: 0,
 			NumServices:   1,
 		},

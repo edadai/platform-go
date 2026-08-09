@@ -26,6 +26,7 @@ service AuthService {
   rpc UnlinkOAuth(UnlinkOAuthRequest) returns (GenericMessageResponse);
 
   rpc GetMe(GetMeRequest) returns (GetMeResponse);
+  rpc UpdateProfile(UpdateProfileRequest) returns (GetMeResponse);
   rpc GetUser(GetUserRequest) returns (GetMeResponse);
   rpc ListUsers(ListUsersRequest) returns (ListUsersResponse);
   rpc InviteUser(InviteUserRequest) returns (GetMeResponse);
@@ -405,4 +406,11 @@ message MarketingContext {
   string attribution_id = 1;
   string conversion_event_id = 2;
   string event_source_url = 3;
+}
+
+message UpdateProfileRequest {
+  string user_id = 1;
+  string first_name = 2;
+  string last_name = 3;
+  RequestContext context = 4;
 }
