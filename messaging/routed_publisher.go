@@ -101,9 +101,17 @@ func (p *RoutedPublisher) publishOnce(ctx context.Context, exchange, routingKey 
 	defer timer.Stop()
 	select {
 	case returned, ok := <-p.returns:
-		if ok {
-			return &PublishError{code: "unroutable", detail: fmt.Sprintf("message returned by broker: %d %s", returned.ReplyCode, returned.ReplyText)}
+		if !ok {
+			return &PublishError{code: "return_channel_closed", detail: "publisher return channel closed"}
 		}
+		// RabbitMQ sends basic.return before the publisher confirmation for an
+		// unroutable mandatory publish. Drain that matching confirmation before
+		// returning; otherwise the next publish can consume the stale ack and be
+		// falsely reported as routed.
+		if err := awaitConfirmation(ctx, timer.C, p.confirms); err != nil {
+			return err
+		}
+		return unroutableError(returned)
 	case confirmation, ok := <-p.confirms:
 		if !ok {
 			return &PublishError{code: "confirmation_closed", detail: "publisher confirmation channel closed"}
@@ -112,8 +120,11 @@ func (p *RoutedPublisher) publishOnce(ctx context.Context, exchange, routingKey 
 			return &PublishError{code: "publish_rejected", detail: "broker rejected published message"}
 		}
 		select {
-		case returned := <-p.returns:
-			return &PublishError{code: "unroutable", detail: fmt.Sprintf("message returned by broker: %d %s", returned.ReplyCode, returned.ReplyText)}
+		case returned, ok := <-p.returns:
+			if !ok {
+				return &PublishError{code: "return_channel_closed", detail: "publisher return channel closed"}
+			}
+			return unroutableError(returned)
 		default:
 			return nil
 		}
@@ -122,7 +133,27 @@ func (p *RoutedPublisher) publishOnce(ctx context.Context, exchange, routingKey 
 	case <-timer.C:
 		return &PublishError{code: "confirmation_timeout", detail: "timed out waiting for publisher confirmation"}
 	}
-	return nil
+}
+
+func awaitConfirmation(ctx context.Context, timeout <-chan time.Time, confirms <-chan amqp.Confirmation) error {
+	select {
+	case confirmation, ok := <-confirms:
+		if !ok {
+			return &PublishError{code: "confirmation_closed", detail: "publisher confirmation channel closed"}
+		}
+		if !confirmation.Ack {
+			return &PublishError{code: "publish_rejected", detail: "broker rejected published message"}
+		}
+		return nil
+	case <-ctx.Done():
+		return &PublishError{code: "publish_context_done", detail: ctx.Err().Error()}
+	case <-timeout:
+		return &PublishError{code: "confirmation_timeout", detail: "timed out waiting for publisher confirmation"}
+	}
+}
+
+func unroutableError(returned amqp.Return) error {
+	return &PublishError{code: "unroutable", detail: fmt.Sprintf("message returned by broker: %d %s", returned.ReplyCode, returned.ReplyText)}
 }
 
 func (p *RoutedPublisher) reconnect() error {
