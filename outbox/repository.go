@@ -107,34 +107,3 @@ func (r *Repository) updateFailure(ctx context.Context, id uuid.UUID, status str
 		"last_error_code": code, "last_error_message": message, "updated_at": time.Now().UTC(),
 	}).Error
 }
-
-func (r *Repository) Reactivate(ctx context.Context, id uuid.UUID, at time.Time) error {
-	return r.db.WithContext(ctx).Model(&Event{}).Where("id = ? AND status = ?", id, StatusDead).Updates(map[string]any{
-		"status": StatusPending, "attempt_count": 0, "next_attempt_at": at.UTC(), "lease_until": nil,
-		"last_error_code": "", "last_error_message": "", "published_at": nil, "updated_at": at.UTC(),
-	}).Error
-}
-
-func (r *Repository) PendingCount(ctx context.Context) (int64, error) {
-	var count int64
-	err := r.db.WithContext(ctx).Model(&Event{}).Where("status IN ?", []string{StatusPending, StatusRetry, StatusProcessing}).Count(&count).Error
-	return count, err
-}
-
-func (r *Repository) DeadCount(ctx context.Context) (int64, error) {
-	var count int64
-	err := r.db.WithContext(ctx).Model(&Event{}).Where("status = ?", StatusDead).Count(&count).Error
-	return count, err
-}
-
-func (r *Repository) OldestPendingAge(ctx context.Context, now time.Time) (time.Duration, error) {
-	var event Event
-	err := r.db.WithContext(ctx).Where("status IN ?", []string{StatusPending, StatusRetry, StatusProcessing}).Order("created_at ASC").First(&event).Error
-	if errors.Is(err, gorm.ErrRecordNotFound) {
-		return 0, nil
-	}
-	if err != nil {
-		return 0, err
-	}
-	return now.UTC().Sub(event.CreatedAt), nil
-}
