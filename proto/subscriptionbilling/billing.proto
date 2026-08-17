@@ -35,6 +35,10 @@ service SubscriptionBillingApi {
   rpc ListSubscriptions (ListSubscriptionsRequest) returns (ListSubscriptionsResponse);
   rpc StartSubscription (StartSubscriptionRequest) returns (SubscriptionResponse);
   rpc CancelSubscription (EntityIdRequest) returns (SubscriptionResponse);
+  // Customer-initiated cancellation, honouring the period already paid for. CancelSubscription
+  // is the administrative one and blocks access immediately.
+  rpc ScheduleSubscriptionCancellation (EntityIdRequest) returns (SubscriptionResponse);
+  rpc ResumeSubscription (EntityIdRequest) returns (SubscriptionResponse);
   rpc ChangePlan (ChangePlanRequest) returns (PlanChangeResponse);
   rpc GetSubscriptionStatus (EntityIdRequest) returns (SubscriptionStatusResponse);
   rpc GetCurrentSubscription (CustomerRequest) returns (SubscriptionResponse);
@@ -49,6 +53,10 @@ service SubscriptionBillingApi {
   rpc ListAllInvoices (ListBillingDocumentsRequest) returns (ListInvoicesResponse);
   rpc ListInvoices (CustomerRequest) returns (ListInvoicesResponse);
   rpc MarkManualInvoicePaid (EntityIdRequest) returns (InvoiceResponse);
+  // Customer-driven recovery of an outstanding invoice: with the saved card, or by entering a
+  // new one at the provider. Both carry the customer id so the service scopes the invoice itself.
+  rpc PayInvoice (PayInvoiceRequest) returns (PaymentResponse);
+  rpc CreateInvoiceCheckout (CreateInvoiceCheckoutRequest) returns (PaymentIntentResponse);
   rpc ListPayments (ListBillingDocumentsRequest) returns (ListPaymentsResponse);
   rpc RefundPayment (RefundPaymentRequest) returns (EntityResponse);
   rpc RetryPayment (RetryPaymentRequest) returns (PaymentResponse);
@@ -431,6 +439,19 @@ message RetryPaymentRequest {
   RequestContext context = 3;
 }
 
+message PayInvoiceRequest {
+  string invoice_id = 1;
+  string customer_id = 2;
+  RequestContext context = 3;
+}
+
+message CreateInvoiceCheckoutRequest {
+  string invoice_id = 1;
+  string customer_id = 2;
+  string callback_url = 3;
+  RequestContext context = 4;
+}
+
 message ListPaymentRetryQueueRequest {
   string status = 1;
   int32 limit = 2;
@@ -533,6 +554,12 @@ message SubscriptionResponse {
   string current_period_start_utc = 10;
   string current_period_end_utc = 11;
   string trial_ends_at_utc = 12;
+  // Set when the customer has cancelled but still holds the period they paid for. The status
+  // stays Active until this passes, so it is the only thing that distinguishes the two.
+  string cancel_at_period_end_utc = 13;
+  // Whether there is a card the service can charge on its own, so the caller can offer the
+  // right recovery action instead of finding out after the customer presses Pay now.
+  bool has_reusable_payment_method = 14;
 }
 
 message PlanChangeResponse {
