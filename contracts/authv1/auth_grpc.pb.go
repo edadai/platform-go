@@ -2,7 +2,7 @@
 // versions:
 // - protoc-gen-go-grpc v1.5.1
 // - protoc             (unknown)
-// source: proto/auth/v1/auth.proto
+// source: auth/v1/auth.proto
 
 package authv1
 
@@ -38,6 +38,7 @@ const (
 	AuthService_UpdateProfile_FullMethodName                = "/auth.v1.AuthService/UpdateProfile"
 	AuthService_GetUser_FullMethodName                      = "/auth.v1.AuthService/GetUser"
 	AuthService_ListUsers_FullMethodName                    = "/auth.v1.AuthService/ListUsers"
+	AuthService_GetUserStats_FullMethodName                 = "/auth.v1.AuthService/GetUserStats"
 	AuthService_InviteUser_FullMethodName                   = "/auth.v1.AuthService/InviteUser"
 	AuthService_ValidateAccessToken_FullMethodName          = "/auth.v1.AuthService/ValidateAccessToken"
 	AuthService_ValidateSession_FullMethodName              = "/auth.v1.AuthService/ValidateSession"
@@ -83,6 +84,7 @@ type AuthServiceClient interface {
 	UpdateProfile(ctx context.Context, in *UpdateProfileRequest, opts ...grpc.CallOption) (*GetMeResponse, error)
 	GetUser(ctx context.Context, in *GetUserRequest, opts ...grpc.CallOption) (*GetMeResponse, error)
 	ListUsers(ctx context.Context, in *ListUsersRequest, opts ...grpc.CallOption) (*ListUsersResponse, error)
+	GetUserStats(ctx context.Context, in *GetUserStatsRequest, opts ...grpc.CallOption) (*GetUserStatsResponse, error)
 	InviteUser(ctx context.Context, in *InviteUserRequest, opts ...grpc.CallOption) (*GetMeResponse, error)
 	ValidateAccessToken(ctx context.Context, in *ValidateAccessTokenRequest, opts ...grpc.CallOption) (*ValidateAccessTokenResponse, error)
 	ValidateSession(ctx context.Context, in *ValidateSessionRequest, opts ...grpc.CallOption) (*ValidateSessionResponse, error)
@@ -297,6 +299,16 @@ func (c *authServiceClient) ListUsers(ctx context.Context, in *ListUsersRequest,
 	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
 	out := new(ListUsersResponse)
 	err := c.cc.Invoke(ctx, AuthService_ListUsers_FullMethodName, in, out, cOpts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *authServiceClient) GetUserStats(ctx context.Context, in *GetUserStatsRequest, opts ...grpc.CallOption) (*GetUserStatsResponse, error) {
+	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
+	out := new(GetUserStatsResponse)
+	err := c.cc.Invoke(ctx, AuthService_GetUserStats_FullMethodName, in, out, cOpts...)
 	if err != nil {
 		return nil, err
 	}
@@ -526,6 +538,7 @@ type AuthServiceServer interface {
 	UpdateProfile(context.Context, *UpdateProfileRequest) (*GetMeResponse, error)
 	GetUser(context.Context, *GetUserRequest) (*GetMeResponse, error)
 	ListUsers(context.Context, *ListUsersRequest) (*ListUsersResponse, error)
+	GetUserStats(context.Context, *GetUserStatsRequest) (*GetUserStatsResponse, error)
 	InviteUser(context.Context, *InviteUserRequest) (*GetMeResponse, error)
 	ValidateAccessToken(context.Context, *ValidateAccessTokenRequest) (*ValidateAccessTokenResponse, error)
 	ValidateSession(context.Context, *ValidateSessionRequest) (*ValidateSessionResponse, error)
@@ -612,6 +625,9 @@ func (UnimplementedAuthServiceServer) GetUser(context.Context, *GetUserRequest) 
 }
 func (UnimplementedAuthServiceServer) ListUsers(context.Context, *ListUsersRequest) (*ListUsersResponse, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method ListUsers not implemented")
+}
+func (UnimplementedAuthServiceServer) GetUserStats(context.Context, *GetUserStatsRequest) (*GetUserStatsResponse, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method GetUserStats not implemented")
 }
 func (UnimplementedAuthServiceServer) InviteUser(context.Context, *InviteUserRequest) (*GetMeResponse, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method InviteUser not implemented")
@@ -1032,6 +1048,24 @@ func _AuthService_ListUsers_Handler(srv interface{}, ctx context.Context, dec fu
 	}
 	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
 		return srv.(AuthServiceServer).ListUsers(ctx, req.(*ListUsersRequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _AuthService_GetUserStats_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(GetUserStatsRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(AuthServiceServer).GetUserStats(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: AuthService_GetUserStats_FullMethodName,
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(AuthServiceServer).GetUserStats(ctx, req.(*GetUserStatsRequest))
 	}
 	return interceptor(ctx, in, info, handler)
 }
@@ -1480,6 +1514,10 @@ var AuthService_ServiceDesc = grpc.ServiceDesc{
 			Handler:    _AuthService_ListUsers_Handler,
 		},
 		{
+			MethodName: "GetUserStats",
+			Handler:    _AuthService_GetUserStats_Handler,
+		},
+		{
 			MethodName: "InviteUser",
 			Handler:    _AuthService_InviteUser_Handler,
 		},
@@ -1561,5 +1599,5 @@ var AuthService_ServiceDesc = grpc.ServiceDesc{
 		},
 	},
 	Streams:  []grpc.StreamDesc{},
-	Metadata: "proto/auth/v1/auth.proto",
+	Metadata: "auth/v1/auth.proto",
 }

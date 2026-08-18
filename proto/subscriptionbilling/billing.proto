@@ -22,6 +22,9 @@ service SubscriptionBillingApi {
   rpc ConfigureOfferPolicy (ConfigureOfferPolicyRequest) returns (EntityResponse);
   rpc ConfigureBillingPolicy (ConfigureBillingPolicyRequest) returns (EntityResponse);
   rpc GetBillingSummary (BillingSummaryRequest) returns (BillingSummaryResponse);
+  rpc GetSubscriptionStats (SubscriptionStatsRequest) returns (SubscriptionStatsResponse);
+  rpc GetChurnStats (ChurnStatsRequest) returns (ChurnStatsResponse);
+  rpc GetPaymentStats (PaymentStatsRequest) returns (PaymentStatsResponse);
   rpc ListProducts (ListProductsRequest) returns (ListProductsResponse);
   rpc ListPlans (ListPlansRequest) returns (ListPlansResponse);
   rpc GetPlan (EntityIdRequest) returns (PlanDetailResponse);
@@ -84,6 +87,79 @@ message BillingSummaryResponse {
   double open_invoice_amount = 6;
   int32 succeeded_payment_count = 7;
   double succeeded_payment_amount = 8;
+  string currency = 9;
+}
+
+// Server-computed subscription aggregates. Timezone: Africa/Lagos.
+message SubscriptionStatsRequest {}
+message SubscriptionStatsResponse {
+  int32 total_count = 1;
+  int32 active_count = 2;
+  int32 trialing_count = 3;
+  int32 cancelled_count = 4;
+  int32 expired_count = 5;
+  int32 basic_count = 6;
+  int32 premium_count = 7;
+  int32 other_active_count = 8;
+  int32 new_this_month_count = 9;
+  int32 churned_this_month_count = 10;
+  double total_mrr = 11;
+  string currency = 12;
+  repeated SubscriptionPlanBreakdownRow plan_breakdown = 13;
+}
+
+message SubscriptionPlanBreakdownRow {
+  string plan_id = 1;
+  string plan_code = 2;
+  string plan_name = 3;
+  string plan_display_name = 4;
+  int32 active_subscribers = 5;
+  int32 trialing_subscribers = 6;
+  double plan_amount = 7;
+  double monthly_amount = 8;
+  double mrr = 9;
+  string currency = 10;
+}
+
+// Churn analysis aggregates. The registered/verified funnel steps are populated by
+// the caller from the user-stats endpoint since users live in auth-service; the fields
+// here cover the subscription-side of the funnel plus churn reasons.
+message ChurnStatsRequest {}
+message ChurnStatsResponse {
+  int32 subscription_started_customer_count = 1;
+  int32 currently_active_customer_count = 2;
+  int32 converted_to_paid_customer_count = 3;
+  int32 at_risk_active_count = 4;
+  int32 churned_this_month_count = 5;
+  string churn_rate = 6;
+  repeated ChurnReasonRow reasons = 7;
+  repeated ChurnPlanRow plan_breakdown = 8;
+}
+
+message ChurnReasonRow {
+  string label = 1;
+  int32 count = 2;
+}
+
+message ChurnPlanRow {
+  string plan_id = 1;
+  string label = 2;
+  int32 active = 3;
+  int32 churned = 4;
+  string churn_rate = 5;
+}
+
+// Payment workload + retry queue counters. Timezone: Africa/Lagos.
+message PaymentStatsRequest {}
+message PaymentStatsResponse {
+  int32 succeeded_count = 1;
+  int32 failed_count = 2;
+  int32 refunded_count = 3;
+  int32 processed_today_count = 4;
+  int32 resolved_today_count = 5;
+  int32 due_today_count = 6;
+  int32 open_invoice_count = 7;
+  double open_invoice_amount = 8;
   string currency = 9;
 }
 message ListProductsRequest { bool active_only = 1; }

@@ -29,6 +29,7 @@ service AuthService {
   rpc UpdateProfile(UpdateProfileRequest) returns (GetMeResponse);
   rpc GetUser(GetUserRequest) returns (GetMeResponse);
   rpc ListUsers(ListUsersRequest) returns (ListUsersResponse);
+  rpc GetUserStats(GetUserStatsRequest) returns (GetUserStatsResponse);
   rpc InviteUser(InviteUserRequest) returns (GetMeResponse);
   rpc ValidateAccessToken(ValidateAccessTokenRequest) returns (ValidateAccessTokenResponse);
   rpc ValidateSession(ValidateSessionRequest) returns (ValidateSessionResponse);
@@ -234,6 +235,32 @@ message ListUsersResponse {
   int32 page = 2;
   int32 page_size = 3;
   int64 total = 4;
+}
+
+// Server-computed user aggregates. Buckets in Africa/Lagos.
+message GetUserStatsRequest {
+  RequestContext context = 1;
+}
+
+message UserRegistrationBucket {
+  // ISO-like key: "YYYY-MM-DD" for daily, "YYYY-MM" for monthly.
+  string key = 1;
+  // Presentational label for the bucket (day-of-month or month short).
+  string label = 2;
+  int32 value = 3;
+}
+
+message GetUserStatsResponse {
+  int64 total_users = 1;
+  int64 registered_today = 2;
+  int64 registered_this_week = 3;
+  int64 registered_this_month = 4;
+  int64 verified_this_month = 5;
+  int64 unverified_this_month = 6;
+  // 30 buckets, oldest first, keyed by YYYY-MM-DD in Africa/Lagos.
+  repeated UserRegistrationBucket daily_registrations = 7;
+  // 12 buckets, oldest first, keyed by YYYY-MM in Africa/Lagos.
+  repeated UserRegistrationBucket monthly_registrations = 8;
 }
 
 message InviteUserRequest {

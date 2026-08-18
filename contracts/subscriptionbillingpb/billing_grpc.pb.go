@@ -2,7 +2,7 @@
 // versions:
 // - protoc-gen-go-grpc v1.5.1
 // - protoc             (unknown)
-// source: proto/subscriptionbilling/billing.proto
+// source: subscriptionbilling/billing.proto
 
 package subscriptionbillingpb
 
@@ -35,6 +35,9 @@ const (
 	SubscriptionBillingApi_ConfigureOfferPolicy_FullMethodName             = "/subscriptionbilling.SubscriptionBillingApi/ConfigureOfferPolicy"
 	SubscriptionBillingApi_ConfigureBillingPolicy_FullMethodName           = "/subscriptionbilling.SubscriptionBillingApi/ConfigureBillingPolicy"
 	SubscriptionBillingApi_GetBillingSummary_FullMethodName                = "/subscriptionbilling.SubscriptionBillingApi/GetBillingSummary"
+	SubscriptionBillingApi_GetSubscriptionStats_FullMethodName             = "/subscriptionbilling.SubscriptionBillingApi/GetSubscriptionStats"
+	SubscriptionBillingApi_GetChurnStats_FullMethodName                    = "/subscriptionbilling.SubscriptionBillingApi/GetChurnStats"
+	SubscriptionBillingApi_GetPaymentStats_FullMethodName                  = "/subscriptionbilling.SubscriptionBillingApi/GetPaymentStats"
 	SubscriptionBillingApi_ListProducts_FullMethodName                     = "/subscriptionbilling.SubscriptionBillingApi/ListProducts"
 	SubscriptionBillingApi_ListPlans_FullMethodName                        = "/subscriptionbilling.SubscriptionBillingApi/ListPlans"
 	SubscriptionBillingApi_GetPlan_FullMethodName                          = "/subscriptionbilling.SubscriptionBillingApi/GetPlan"
@@ -97,6 +100,9 @@ type SubscriptionBillingApiClient interface {
 	ConfigureOfferPolicy(ctx context.Context, in *ConfigureOfferPolicyRequest, opts ...grpc.CallOption) (*EntityResponse, error)
 	ConfigureBillingPolicy(ctx context.Context, in *ConfigureBillingPolicyRequest, opts ...grpc.CallOption) (*EntityResponse, error)
 	GetBillingSummary(ctx context.Context, in *BillingSummaryRequest, opts ...grpc.CallOption) (*BillingSummaryResponse, error)
+	GetSubscriptionStats(ctx context.Context, in *SubscriptionStatsRequest, opts ...grpc.CallOption) (*SubscriptionStatsResponse, error)
+	GetChurnStats(ctx context.Context, in *ChurnStatsRequest, opts ...grpc.CallOption) (*ChurnStatsResponse, error)
+	GetPaymentStats(ctx context.Context, in *PaymentStatsRequest, opts ...grpc.CallOption) (*PaymentStatsResponse, error)
 	ListProducts(ctx context.Context, in *ListProductsRequest, opts ...grpc.CallOption) (*ListProductsResponse, error)
 	ListPlans(ctx context.Context, in *ListPlansRequest, opts ...grpc.CallOption) (*ListPlansResponse, error)
 	GetPlan(ctx context.Context, in *EntityIdRequest, opts ...grpc.CallOption) (*PlanDetailResponse, error)
@@ -305,6 +311,36 @@ func (c *subscriptionBillingApiClient) GetBillingSummary(ctx context.Context, in
 	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
 	out := new(BillingSummaryResponse)
 	err := c.cc.Invoke(ctx, SubscriptionBillingApi_GetBillingSummary_FullMethodName, in, out, cOpts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *subscriptionBillingApiClient) GetSubscriptionStats(ctx context.Context, in *SubscriptionStatsRequest, opts ...grpc.CallOption) (*SubscriptionStatsResponse, error) {
+	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
+	out := new(SubscriptionStatsResponse)
+	err := c.cc.Invoke(ctx, SubscriptionBillingApi_GetSubscriptionStats_FullMethodName, in, out, cOpts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *subscriptionBillingApiClient) GetChurnStats(ctx context.Context, in *ChurnStatsRequest, opts ...grpc.CallOption) (*ChurnStatsResponse, error) {
+	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
+	out := new(ChurnStatsResponse)
+	err := c.cc.Invoke(ctx, SubscriptionBillingApi_GetChurnStats_FullMethodName, in, out, cOpts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *subscriptionBillingApiClient) GetPaymentStats(ctx context.Context, in *PaymentStatsRequest, opts ...grpc.CallOption) (*PaymentStatsResponse, error) {
+	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
+	out := new(PaymentStatsResponse)
+	err := c.cc.Invoke(ctx, SubscriptionBillingApi_GetPaymentStats_FullMethodName, in, out, cOpts...)
 	if err != nil {
 		return nil, err
 	}
@@ -731,6 +767,9 @@ type SubscriptionBillingApiServer interface {
 	ConfigureOfferPolicy(context.Context, *ConfigureOfferPolicyRequest) (*EntityResponse, error)
 	ConfigureBillingPolicy(context.Context, *ConfigureBillingPolicyRequest) (*EntityResponse, error)
 	GetBillingSummary(context.Context, *BillingSummaryRequest) (*BillingSummaryResponse, error)
+	GetSubscriptionStats(context.Context, *SubscriptionStatsRequest) (*SubscriptionStatsResponse, error)
+	GetChurnStats(context.Context, *ChurnStatsRequest) (*ChurnStatsResponse, error)
+	GetPaymentStats(context.Context, *PaymentStatsRequest) (*PaymentStatsResponse, error)
 	ListProducts(context.Context, *ListProductsRequest) (*ListProductsResponse, error)
 	ListPlans(context.Context, *ListPlansRequest) (*ListPlansResponse, error)
 	GetPlan(context.Context, *EntityIdRequest) (*PlanDetailResponse, error)
@@ -832,6 +871,15 @@ func (UnimplementedSubscriptionBillingApiServer) ConfigureBillingPolicy(context.
 }
 func (UnimplementedSubscriptionBillingApiServer) GetBillingSummary(context.Context, *BillingSummaryRequest) (*BillingSummaryResponse, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method GetBillingSummary not implemented")
+}
+func (UnimplementedSubscriptionBillingApiServer) GetSubscriptionStats(context.Context, *SubscriptionStatsRequest) (*SubscriptionStatsResponse, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method GetSubscriptionStats not implemented")
+}
+func (UnimplementedSubscriptionBillingApiServer) GetChurnStats(context.Context, *ChurnStatsRequest) (*ChurnStatsResponse, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method GetChurnStats not implemented")
+}
+func (UnimplementedSubscriptionBillingApiServer) GetPaymentStats(context.Context, *PaymentStatsRequest) (*PaymentStatsResponse, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method GetPaymentStats not implemented")
 }
 func (UnimplementedSubscriptionBillingApiServer) ListProducts(context.Context, *ListProductsRequest) (*ListProductsResponse, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method ListProducts not implemented")
@@ -1259,6 +1307,60 @@ func _SubscriptionBillingApi_GetBillingSummary_Handler(srv interface{}, ctx cont
 	}
 	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
 		return srv.(SubscriptionBillingApiServer).GetBillingSummary(ctx, req.(*BillingSummaryRequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _SubscriptionBillingApi_GetSubscriptionStats_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(SubscriptionStatsRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(SubscriptionBillingApiServer).GetSubscriptionStats(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: SubscriptionBillingApi_GetSubscriptionStats_FullMethodName,
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(SubscriptionBillingApiServer).GetSubscriptionStats(ctx, req.(*SubscriptionStatsRequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _SubscriptionBillingApi_GetChurnStats_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(ChurnStatsRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(SubscriptionBillingApiServer).GetChurnStats(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: SubscriptionBillingApi_GetChurnStats_FullMethodName,
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(SubscriptionBillingApiServer).GetChurnStats(ctx, req.(*ChurnStatsRequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _SubscriptionBillingApi_GetPaymentStats_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(PaymentStatsRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(SubscriptionBillingApiServer).GetPaymentStats(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: SubscriptionBillingApi_GetPaymentStats_FullMethodName,
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(SubscriptionBillingApiServer).GetPaymentStats(ctx, req.(*PaymentStatsRequest))
 	}
 	return interceptor(ctx, in, info, handler)
 }
@@ -2055,6 +2157,18 @@ var SubscriptionBillingApi_ServiceDesc = grpc.ServiceDesc{
 			Handler:    _SubscriptionBillingApi_GetBillingSummary_Handler,
 		},
 		{
+			MethodName: "GetSubscriptionStats",
+			Handler:    _SubscriptionBillingApi_GetSubscriptionStats_Handler,
+		},
+		{
+			MethodName: "GetChurnStats",
+			Handler:    _SubscriptionBillingApi_GetChurnStats_Handler,
+		},
+		{
+			MethodName: "GetPaymentStats",
+			Handler:    _SubscriptionBillingApi_GetPaymentStats_Handler,
+		},
+		{
 			MethodName: "ListProducts",
 			Handler:    _SubscriptionBillingApi_ListProducts_Handler,
 		},
@@ -2216,5 +2330,5 @@ var SubscriptionBillingApi_ServiceDesc = grpc.ServiceDesc{
 		},
 	},
 	Streams:  []grpc.StreamDesc{},
-	Metadata: "proto/subscriptionbilling/billing.proto",
+	Metadata: "subscriptionbilling/billing.proto",
 }
