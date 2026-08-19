@@ -1647,6 +1647,8 @@ type ListUsersRequest struct {
 	CreatedFromUnix int64                  `protobuf:"varint,6,opt,name=created_from_unix,json=createdFromUnix,proto3" json:"created_from_unix,omitempty"`
 	CreatedToUnix   int64                  `protobuf:"varint,7,opt,name=created_to_unix,json=createdToUnix,proto3" json:"created_to_unix,omitempty"`
 	AdminOnly       bool                   `protobuf:"varint,8,opt,name=admin_only,json=adminOnly,proto3" json:"admin_only,omitempty"`
+	Ids             []string               `protobuf:"bytes,9,rep,name=ids,proto3" json:"ids,omitempty"`
+	ExcludeIds      []string               `protobuf:"bytes,10,rep,name=exclude_ids,json=excludeIds,proto3" json:"exclude_ids,omitempty"`
 	unknownFields   protoimpl.UnknownFields
 	sizeCache       protoimpl.SizeCache
 }
@@ -1735,6 +1737,20 @@ func (x *ListUsersRequest) GetAdminOnly() bool {
 		return x.AdminOnly
 	}
 	return false
+}
+
+func (x *ListUsersRequest) GetIds() []string {
+	if x != nil {
+		return x.Ids
+	}
+	return nil
+}
+
+func (x *ListUsersRequest) GetExcludeIds() []string {
+	if x != nil {
+		return x.ExcludeIds
+	}
+	return nil
 }
 
 type ListUsersResponse struct {
@@ -1924,6 +1940,8 @@ type GetUserStatsResponse struct {
 	DailyRegistrations []*UserRegistrationBucket `protobuf:"bytes,7,rep,name=daily_registrations,json=dailyRegistrations,proto3" json:"daily_registrations,omitempty"`
 	// 12 buckets, oldest first, keyed by YYYY-MM in Africa/Lagos.
 	MonthlyRegistrations []*UserRegistrationBucket `protobuf:"bytes,8,rep,name=monthly_registrations,json=monthlyRegistrations,proto3" json:"monthly_registrations,omitempty"`
+	RegisteredThisYear   int64                     `protobuf:"varint,9,opt,name=registered_this_year,json=registeredThisYear,proto3" json:"registered_this_year,omitempty"`
+	VerifiedTotal        int64                     `protobuf:"varint,10,opt,name=verified_total,json=verifiedTotal,proto3" json:"verified_total,omitempty"`
 	unknownFields        protoimpl.UnknownFields
 	sizeCache            protoimpl.SizeCache
 }
@@ -2012,6 +2030,20 @@ func (x *GetUserStatsResponse) GetMonthlyRegistrations() []*UserRegistrationBuck
 		return x.MonthlyRegistrations
 	}
 	return nil
+}
+
+func (x *GetUserStatsResponse) GetRegisteredThisYear() int64 {
+	if x != nil {
+		return x.RegisteredThisYear
+	}
+	return 0
+}
+
+func (x *GetUserStatsResponse) GetVerifiedTotal() int64 {
+	if x != nil {
+		return x.VerifiedTotal
+	}
+	return 0
 }
 
 type InviteUserRequest struct {
@@ -4068,7 +4100,7 @@ const file_auth_v1_auth_proto_rawDesc = "" +
 	"\auser_id\x18\x01 \x01(\tR\x06userId\x121\n" +
 	"\acontext\x18\x02 \x01(\v2\x17.auth.v1.RequestContextR\acontext\"9\n" +
 	"\rGetMeResponse\x12(\n" +
-	"\x04user\x18\x01 \x01(\v2\x14.auth.v1.UserMessageR\x04user\"\x97\x02\n" +
+	"\x04user\x18\x01 \x01(\v2\x14.auth.v1.UserMessageR\x04user\"\xca\x02\n" +
 	"\x10ListUsersRequest\x12\x14\n" +
 	"\x05query\x18\x01 \x01(\tR\x05query\x12\x16\n" +
 	"\x06status\x18\x02 \x01(\tR\x06status\x12\x12\n" +
@@ -4078,7 +4110,11 @@ const file_auth_v1_auth_proto_rawDesc = "" +
 	"\x11created_from_unix\x18\x06 \x01(\x03R\x0fcreatedFromUnix\x12&\n" +
 	"\x0fcreated_to_unix\x18\a \x01(\x03R\rcreatedToUnix\x12\x1d\n" +
 	"\n" +
-	"admin_only\x18\b \x01(\bR\tadminOnly\"\x86\x01\n" +
+	"admin_only\x18\b \x01(\bR\tadminOnly\x12\x10\n" +
+	"\x03ids\x18\t \x03(\tR\x03ids\x12\x1f\n" +
+	"\vexclude_ids\x18\n" +
+	" \x03(\tR\n" +
+	"excludeIds\"\x86\x01\n" +
 	"\x11ListUsersResponse\x12*\n" +
 	"\x05users\x18\x01 \x03(\v2\x14.auth.v1.UserMessageR\x05users\x12\x12\n" +
 	"\x04page\x18\x02 \x01(\x05R\x04page\x12\x1b\n" +
@@ -4089,7 +4125,7 @@ const file_auth_v1_auth_proto_rawDesc = "" +
 	"\x16UserRegistrationBucket\x12\x10\n" +
 	"\x03key\x18\x01 \x01(\tR\x03key\x12\x14\n" +
 	"\x05label\x18\x02 \x01(\tR\x05label\x12\x14\n" +
-	"\x05value\x18\x03 \x01(\x05R\x05value\"\xd4\x03\n" +
+	"\x05value\x18\x03 \x01(\x05R\x05value\"\xad\x04\n" +
 	"\x14GetUserStatsResponse\x12\x1f\n" +
 	"\vtotal_users\x18\x01 \x01(\x03R\n" +
 	"totalUsers\x12)\n" +
@@ -4099,7 +4135,10 @@ const file_auth_v1_auth_proto_rawDesc = "" +
 	"\x13verified_this_month\x18\x05 \x01(\x03R\x11verifiedThisMonth\x122\n" +
 	"\x15unverified_this_month\x18\x06 \x01(\x03R\x13unverifiedThisMonth\x12P\n" +
 	"\x13daily_registrations\x18\a \x03(\v2\x1f.auth.v1.UserRegistrationBucketR\x12dailyRegistrations\x12T\n" +
-	"\x15monthly_registrations\x18\b \x03(\v2\x1f.auth.v1.UserRegistrationBucketR\x14monthlyRegistrations\"y\n" +
+	"\x15monthly_registrations\x18\b \x03(\v2\x1f.auth.v1.UserRegistrationBucketR\x14monthlyRegistrations\x120\n" +
+	"\x14registered_this_year\x18\t \x01(\x03R\x12registeredThisYear\x12%\n" +
+	"\x0everified_total\x18\n" +
+	" \x01(\x03R\rverifiedTotal\"y\n" +
 	"\x11InviteUserRequest\x12\x14\n" +
 	"\x05email\x18\x01 \x01(\tR\x05email\x12\x1b\n" +
 	"\trole_keys\x18\x02 \x03(\tR\broleKeys\x121\n" +

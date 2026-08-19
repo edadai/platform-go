@@ -228,6 +228,8 @@ message ListUsersRequest {
   int64 created_from_unix = 6;
   int64 created_to_unix = 7;
   bool admin_only = 8;
+  repeated string ids = 9;
+  repeated string exclude_ids = 10;
 }
 
 message ListUsersResponse {
@@ -261,6 +263,8 @@ message GetUserStatsResponse {
   repeated UserRegistrationBucket daily_registrations = 7;
   // 12 buckets, oldest first, keyed by YYYY-MM in Africa/Lagos.
   repeated UserRegistrationBucket monthly_registrations = 8;
+  int64 registered_this_year = 9;
+  int64 verified_total = 10;
 }
 
 message InviteUserRequest {

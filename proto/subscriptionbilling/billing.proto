@@ -106,6 +106,22 @@ message SubscriptionStatsResponse {
   double total_mrr = 11;
   string currency = 12;
   repeated SubscriptionPlanBreakdownRow plan_breakdown = 13;
+  double previous_month_mrr = 14;
+  repeated BillingStatsBucket mrr_trend = 15;
+  repeated RevenueMixBucket revenue_mix = 16;
+}
+
+message BillingStatsBucket {
+  string key = 1;
+  string label = 2;
+  double value = 3;
+}
+
+message RevenueMixBucket {
+  string key = 1;
+  string label = 2;
+  double new_amount = 3;
+  double recurring_amount = 4;
 }
 
 message SubscriptionPlanBreakdownRow {
@@ -343,6 +359,7 @@ message ListSubscriptionsRequest {
   string customer_id = 1;
   string status = 2;
   int32 limit = 3;
+  repeated string customer_ids = 4;
 }
 
 message CreateProductRequest {
@@ -532,6 +549,7 @@ message ListPaymentRetryQueueRequest {
   string status = 1;
   int32 limit = 2;
   RequestContext context = 3;
+  int32 offset = 4;
 }
 
 message PaymentRetryCaseResponse {
@@ -558,6 +576,17 @@ message PaymentRetryCaseResponse {
 
 message ListPaymentRetryQueueResponse {
   repeated PaymentRetryCaseResponse cases = 1;
+  PaymentRetryQueueSummary summary = 2;
+}
+
+message PaymentRetryQueueSummary {
+  int32 open_count = 1;
+  int32 due_now_count = 2;
+  int32 remaining_today_count = 3;
+  int32 completed_today_count = 4;
+  int32 rescheduled_count = 5;
+  int32 failed_count = 6;
+  int32 total_count = 7;
 }
 
 message ProcessPaymentRetryQueueRequest {
