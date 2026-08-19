@@ -550,6 +550,9 @@ type SubscriptionPlanBreakdownRow struct {
 	MonthlyAmount       float64                `protobuf:"fixed64,8,opt,name=monthly_amount,json=monthlyAmount,proto3" json:"monthly_amount,omitempty"`
 	Mrr                 float64                `protobuf:"fixed64,9,opt,name=mrr,proto3" json:"mrr,omitempty"`
 	Currency            string                 `protobuf:"bytes,10,opt,name=currency,proto3" json:"currency,omitempty"`
+	OfferId             string                 `protobuf:"bytes,11,opt,name=offer_id,json=offerId,proto3" json:"offer_id,omitempty"`
+	IsOffer             bool                   `protobuf:"varint,12,opt,name=is_offer,json=isOffer,proto3" json:"is_offer,omitempty"`
+	ParentPlanId        string                 `protobuf:"bytes,13,opt,name=parent_plan_id,json=parentPlanId,proto3" json:"parent_plan_id,omitempty"`
 	unknownFields       protoimpl.UnknownFields
 	sizeCache           protoimpl.SizeCache
 }
@@ -650,6 +653,27 @@ func (x *SubscriptionPlanBreakdownRow) GetMrr() float64 {
 func (x *SubscriptionPlanBreakdownRow) GetCurrency() string {
 	if x != nil {
 		return x.Currency
+	}
+	return ""
+}
+
+func (x *SubscriptionPlanBreakdownRow) GetOfferId() string {
+	if x != nil {
+		return x.OfferId
+	}
+	return ""
+}
+
+func (x *SubscriptionPlanBreakdownRow) GetIsOffer() bool {
+	if x != nil {
+		return x.IsOffer
+	}
+	return false
+}
+
+func (x *SubscriptionPlanBreakdownRow) GetParentPlanId() string {
+	if x != nil {
+		return x.ParentPlanId
 	}
 	return ""
 }
@@ -6632,6 +6656,7 @@ type PaymentResponse struct {
 	FailureReason          string                 `protobuf:"bytes,10,opt,name=failure_reason,json=failureReason,proto3" json:"failure_reason,omitempty"`
 	IsFirstCustomerPayment bool                   `protobuf:"varint,11,opt,name=is_first_customer_payment,json=isFirstCustomerPayment,proto3" json:"is_first_customer_payment,omitempty"`
 	ConversionEventId      string                 `protobuf:"bytes,12,opt,name=conversion_event_id,json=conversionEventId,proto3" json:"conversion_event_id,omitempty"`
+	CustomerId             string                 `protobuf:"bytes,13,opt,name=customer_id,json=customerId,proto3" json:"customer_id,omitempty"`
 	unknownFields          protoimpl.UnknownFields
 	sizeCache              protoimpl.SizeCache
 }
@@ -6746,6 +6771,13 @@ func (x *PaymentResponse) GetIsFirstCustomerPayment() bool {
 func (x *PaymentResponse) GetConversionEventId() string {
 	if x != nil {
 		return x.ConversionEventId
+	}
+	return ""
+}
+
+func (x *PaymentResponse) GetCustomerId() string {
+	if x != nil {
+		return x.CustomerId
 	}
 	return ""
 }
@@ -7256,7 +7288,7 @@ const file_subscriptionbilling_billing_proto_rawDesc = "" +
 	"\x05label\x18\x02 \x01(\tR\x05label\x12\x1d\n" +
 	"\n" +
 	"new_amount\x18\x03 \x01(\x01R\tnewAmount\x12)\n" +
-	"\x10recurring_amount\x18\x04 \x01(\x01R\x0frecurringAmount\"\xf5\x02\n" +
+	"\x10recurring_amount\x18\x04 \x01(\x01R\x0frecurringAmount\"\xd1\x03\n" +
 	"\x1cSubscriptionPlanBreakdownRow\x12\x17\n" +
 	"\aplan_id\x18\x01 \x01(\tR\x06planId\x12\x1b\n" +
 	"\tplan_code\x18\x02 \x01(\tR\bplanCode\x12\x1b\n" +
@@ -7269,7 +7301,10 @@ const file_subscriptionbilling_billing_proto_rawDesc = "" +
 	"\x0emonthly_amount\x18\b \x01(\x01R\rmonthlyAmount\x12\x10\n" +
 	"\x03mrr\x18\t \x01(\x01R\x03mrr\x12\x1a\n" +
 	"\bcurrency\x18\n" +
-	" \x01(\tR\bcurrency\"\x13\n" +
+	" \x01(\tR\bcurrency\x12\x19\n" +
+	"\boffer_id\x18\v \x01(\tR\aofferId\x12\x19\n" +
+	"\bis_offer\x18\f \x01(\bR\aisOffer\x12$\n" +
+	"\x0eparent_plan_id\x18\r \x01(\tR\fparentPlanId\"\x13\n" +
 	"\x11ChurnStatsRequest\"\x84\x04\n" +
 	"\x12ChurnStatsResponse\x12M\n" +
 	"#subscription_started_customer_count\x18\x01 \x01(\x05R subscriptionStartedCustomerCount\x12E\n" +
@@ -7834,7 +7869,7 @@ const file_subscriptionbilling_billing_proto_rawDesc = "" +
 	"\fsubscription\x18\x01 \x01(\v2).subscriptionbilling.SubscriptionResponseR\fsubscription\x12Q\n" +
 	"\x0epayment_intent\x18\x02 \x01(\v2*.subscriptionbilling.PaymentIntentResponseR\rpaymentIntent\x12)\n" +
 	"\x10requires_payment\x18\x03 \x01(\bR\x0frequiresPayment\x12.\n" +
-	"\x13conversion_event_id\x18\x04 \x01(\tR\x11conversionEventId\"\xbc\x03\n" +
+	"\x13conversion_event_id\x18\x04 \x01(\tR\x11conversionEventId\"\xdd\x03\n" +
 	"\x0fPaymentResponse\x12\x0e\n" +
 	"\x02id\x18\x01 \x01(\tR\x02id\x12\x1d\n" +
 	"\n" +
@@ -7849,7 +7884,9 @@ const file_subscriptionbilling_billing_proto_rawDesc = "" +
 	"\x0efailure_reason\x18\n" +
 	" \x01(\tR\rfailureReason\x129\n" +
 	"\x19is_first_customer_payment\x18\v \x01(\bR\x16isFirstCustomerPayment\x12.\n" +
-	"\x13conversion_event_id\x18\f \x01(\tR\x11conversionEventId\"X\n" +
+	"\x13conversion_event_id\x18\f \x01(\tR\x11conversionEventId\x12\x1f\n" +
+	"\vcustomer_id\x18\r \x01(\tR\n" +
+	"customerId\"X\n" +
 	"\x14ListPaymentsResponse\x12@\n" +
 	"\bpayments\x18\x01 \x03(\v2$.subscriptionbilling.PaymentResponseR\bpayments\"\x1b\n" +
 	"\x19ListLedgerAccountsRequest\"\x88\x01\n" +

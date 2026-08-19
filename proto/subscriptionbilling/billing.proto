@@ -135,6 +135,9 @@ message SubscriptionPlanBreakdownRow {
   double monthly_amount = 8;
   double mrr = 9;
   string currency = 10;
+  string offer_id = 11;
+  bool is_offer = 12;
+  string parent_plan_id = 13;
 }
 
 // Churn analysis aggregates. The registered/verified funnel steps are populated by
@@ -759,6 +762,7 @@ message PaymentResponse {
   string failure_reason = 10;
   bool is_first_customer_payment = 11;
   string conversion_event_id = 12;
+  string customer_id = 13;
 }
 
 message ListPaymentsResponse { repeated PaymentResponse payments = 1; }
