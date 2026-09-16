@@ -22,8 +22,11 @@ const (
 )
 
 type ListPlansRequest struct {
-	state         protoimpl.MessageState `protogen:"open.v1"`
-	PublicOnly    bool                   `protobuf:"varint,1,opt,name=public_only,json=publicOnly,proto3" json:"public_only,omitempty"`
+	state      protoimpl.MessageState `protogen:"open.v1"`
+	PublicOnly bool                   `protobuf:"varint,1,opt,name=public_only,json=publicOnly,proto3" json:"public_only,omitempty"`
+	// When set on a public listing, offers the customer has already redeemed
+	// (at MaxRedemptionsPerCustomer) are omitted. Empty for the anonymous catalog.
+	CustomerId    string `protobuf:"bytes,2,opt,name=customer_id,json=customerId,proto3" json:"customer_id,omitempty"`
 	unknownFields protoimpl.UnknownFields
 	sizeCache     protoimpl.SizeCache
 }
@@ -63,6 +66,13 @@ func (x *ListPlansRequest) GetPublicOnly() bool {
 		return x.PublicOnly
 	}
 	return false
+}
+
+func (x *ListPlansRequest) GetCustomerId() string {
+	if x != nil {
+		return x.CustomerId
+	}
+	return ""
 }
 
 type BillingSummaryRequest struct {
@@ -7242,10 +7252,12 @@ var File_subscriptionbilling_billing_proto protoreflect.FileDescriptor
 
 const file_subscriptionbilling_billing_proto_rawDesc = "" +
 	"\n" +
-	"!subscriptionbilling/billing.proto\x12\x13subscriptionbilling\"3\n" +
+	"!subscriptionbilling/billing.proto\x12\x13subscriptionbilling\"T\n" +
 	"\x10ListPlansRequest\x12\x1f\n" +
 	"\vpublic_only\x18\x01 \x01(\bR\n" +
-	"publicOnly\"\x17\n" +
+	"publicOnly\x12\x1f\n" +
+	"\vcustomer_id\x18\x02 \x01(\tR\n" +
+	"customerId\"\x17\n" +
 	"\x15BillingSummaryRequest\"\xd7\x03\n" +
 	"\x16BillingSummaryResponse\x12#\n" +
 	"\rproduct_count\x18\x01 \x01(\x05R\fproductCount\x120\n" +

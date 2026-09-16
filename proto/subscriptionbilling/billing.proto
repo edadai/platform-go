@@ -76,7 +76,10 @@ service SubscriptionBillingApi {
   rpc ReceivePaystackWebhook (ReceivePaystackWebhookRequest) returns (StatusResponse);
 }
 
-message ListPlansRequest { bool public_only = 1; }
+message ListPlansRequest {
+  bool public_only = 1;
+  string customer_id = 2;
+}
 message BillingSummaryRequest {}
 message BillingSummaryResponse {
   int32 product_count = 1;
