@@ -60,6 +60,8 @@ service SubscriptionBillingApi {
   // new one at the provider. Both carry the customer id so the service scopes the invoice itself.
   rpc PayInvoice (PayInvoiceRequest) returns (PaymentResponse);
   rpc CreateInvoiceCheckout (CreateInvoiceCheckoutRequest) returns (PaymentIntentResponse);
+  // Customer-driven checkout of the next period so a card can be saved before renewal.
+  rpc CreateUpcomingCheckout (CreateUpcomingCheckoutRequest) returns (PaymentIntentResponse);
   rpc ListPayments (ListBillingDocumentsRequest) returns (ListPaymentsResponse);
   rpc RefundPayment (RefundPaymentRequest) returns (EntityResponse);
   rpc RetryPayment (RetryPaymentRequest) returns (PaymentResponse);
@@ -549,6 +551,12 @@ message CreateInvoiceCheckoutRequest {
   string customer_id = 2;
   string callback_url = 3;
   RequestContext context = 4;
+}
+
+message CreateUpcomingCheckoutRequest {
+  string customer_id = 1;
+  string callback_url = 2;
+  RequestContext context = 3;
 }
 
 message ListPaymentRetryQueueRequest {
