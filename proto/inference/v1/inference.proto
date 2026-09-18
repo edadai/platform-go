@@ -20,6 +20,7 @@ service InferenceService {
   rpc GetLesson(GetLessonRequest) returns (Lesson);
 
   rpc GradeCheck(GradeCheckRequest) returns (GradeCheckResponse);
+  rpc CompleteLesson(GetLessonRequest) returns (Lesson);
   rpc SubmitTurn(SubmitTurnRequest) returns (stream TurnEvent);
 
   rpc GetJob(GetJobRequest) returns (Job);
@@ -221,6 +222,8 @@ message GradeCheckResponse {
   string selected = 2;
   string correct_answer = 3;
   string explanation = 4;
+  bool lesson_complete = 5;
+  int32 mastery = 6;
 }
 
 message SubmitTurnRequest {

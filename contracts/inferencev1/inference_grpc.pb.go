@@ -30,6 +30,7 @@ const (
 	InferenceService_StartLesson_FullMethodName         = "/edad.inference.v1.InferenceService/StartLesson"
 	InferenceService_GetLesson_FullMethodName           = "/edad.inference.v1.InferenceService/GetLesson"
 	InferenceService_GradeCheck_FullMethodName          = "/edad.inference.v1.InferenceService/GradeCheck"
+	InferenceService_CompleteLesson_FullMethodName      = "/edad.inference.v1.InferenceService/CompleteLesson"
 	InferenceService_SubmitTurn_FullMethodName          = "/edad.inference.v1.InferenceService/SubmitTurn"
 	InferenceService_GetJob_FullMethodName              = "/edad.inference.v1.InferenceService/GetJob"
 	InferenceService_WatchJob_FullMethodName            = "/edad.inference.v1.InferenceService/WatchJob"
@@ -50,6 +51,7 @@ type InferenceServiceClient interface {
 	StartLesson(ctx context.Context, in *StartLessonRequest, opts ...grpc.CallOption) (*Job, error)
 	GetLesson(ctx context.Context, in *GetLessonRequest, opts ...grpc.CallOption) (*Lesson, error)
 	GradeCheck(ctx context.Context, in *GradeCheckRequest, opts ...grpc.CallOption) (*GradeCheckResponse, error)
+	CompleteLesson(ctx context.Context, in *GetLessonRequest, opts ...grpc.CallOption) (*Lesson, error)
 	SubmitTurn(ctx context.Context, in *SubmitTurnRequest, opts ...grpc.CallOption) (grpc.ServerStreamingClient[TurnEvent], error)
 	GetJob(ctx context.Context, in *GetJobRequest, opts ...grpc.CallOption) (*Job, error)
 	WatchJob(ctx context.Context, in *GetJobRequest, opts ...grpc.CallOption) (grpc.ServerStreamingClient[Job], error)
@@ -173,6 +175,16 @@ func (c *inferenceServiceClient) GradeCheck(ctx context.Context, in *GradeCheckR
 	return out, nil
 }
 
+func (c *inferenceServiceClient) CompleteLesson(ctx context.Context, in *GetLessonRequest, opts ...grpc.CallOption) (*Lesson, error) {
+	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
+	out := new(Lesson)
+	err := c.cc.Invoke(ctx, InferenceService_CompleteLesson_FullMethodName, in, out, cOpts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
 func (c *inferenceServiceClient) SubmitTurn(ctx context.Context, in *SubmitTurnRequest, opts ...grpc.CallOption) (grpc.ServerStreamingClient[TurnEvent], error) {
 	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
 	stream, err := c.cc.NewStream(ctx, &InferenceService_ServiceDesc.Streams[0], InferenceService_SubmitTurn_FullMethodName, cOpts...)
@@ -236,6 +248,7 @@ type InferenceServiceServer interface {
 	StartLesson(context.Context, *StartLessonRequest) (*Job, error)
 	GetLesson(context.Context, *GetLessonRequest) (*Lesson, error)
 	GradeCheck(context.Context, *GradeCheckRequest) (*GradeCheckResponse, error)
+	CompleteLesson(context.Context, *GetLessonRequest) (*Lesson, error)
 	SubmitTurn(*SubmitTurnRequest, grpc.ServerStreamingServer[TurnEvent]) error
 	GetJob(context.Context, *GetJobRequest) (*Job, error)
 	WatchJob(*GetJobRequest, grpc.ServerStreamingServer[Job]) error
@@ -281,6 +294,9 @@ func (UnimplementedInferenceServiceServer) GetLesson(context.Context, *GetLesson
 }
 func (UnimplementedInferenceServiceServer) GradeCheck(context.Context, *GradeCheckRequest) (*GradeCheckResponse, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method GradeCheck not implemented")
+}
+func (UnimplementedInferenceServiceServer) CompleteLesson(context.Context, *GetLessonRequest) (*Lesson, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method CompleteLesson not implemented")
 }
 func (UnimplementedInferenceServiceServer) SubmitTurn(*SubmitTurnRequest, grpc.ServerStreamingServer[TurnEvent]) error {
 	return status.Errorf(codes.Unimplemented, "method SubmitTurn not implemented")
@@ -510,6 +526,24 @@ func _InferenceService_GradeCheck_Handler(srv interface{}, ctx context.Context, 
 	return interceptor(ctx, in, info, handler)
 }
 
+func _InferenceService_CompleteLesson_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(GetLessonRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(InferenceServiceServer).CompleteLesson(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: InferenceService_CompleteLesson_FullMethodName,
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(InferenceServiceServer).CompleteLesson(ctx, req.(*GetLessonRequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
 func _InferenceService_SubmitTurn_Handler(srv interface{}, stream grpc.ServerStream) error {
 	m := new(SubmitTurnRequest)
 	if err := stream.RecvMsg(m); err != nil {
@@ -600,6 +634,10 @@ var InferenceService_ServiceDesc = grpc.ServiceDesc{
 		{
 			MethodName: "GradeCheck",
 			Handler:    _InferenceService_GradeCheck_Handler,
+		},
+		{
+			MethodName: "CompleteLesson",
+			Handler:    _InferenceService_CompleteLesson_Handler,
 		},
 		{
 			MethodName: "GetJob",

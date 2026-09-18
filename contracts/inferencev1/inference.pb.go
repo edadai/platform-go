@@ -1830,13 +1830,15 @@ func (x *GradeCheckRequest) GetSelected() string {
 }
 
 type GradeCheckResponse struct {
-	state         protoimpl.MessageState `protogen:"open.v1"`
-	Correct       bool                   `protobuf:"varint,1,opt,name=correct,proto3" json:"correct,omitempty"`
-	Selected      string                 `protobuf:"bytes,2,opt,name=selected,proto3" json:"selected,omitempty"`
-	CorrectAnswer string                 `protobuf:"bytes,3,opt,name=correct_answer,json=correctAnswer,proto3" json:"correct_answer,omitempty"`
-	Explanation   string                 `protobuf:"bytes,4,opt,name=explanation,proto3" json:"explanation,omitempty"`
-	unknownFields protoimpl.UnknownFields
-	sizeCache     protoimpl.SizeCache
+	state          protoimpl.MessageState `protogen:"open.v1"`
+	Correct        bool                   `protobuf:"varint,1,opt,name=correct,proto3" json:"correct,omitempty"`
+	Selected       string                 `protobuf:"bytes,2,opt,name=selected,proto3" json:"selected,omitempty"`
+	CorrectAnswer  string                 `protobuf:"bytes,3,opt,name=correct_answer,json=correctAnswer,proto3" json:"correct_answer,omitempty"`
+	Explanation    string                 `protobuf:"bytes,4,opt,name=explanation,proto3" json:"explanation,omitempty"`
+	LessonComplete bool                   `protobuf:"varint,5,opt,name=lesson_complete,json=lessonComplete,proto3" json:"lesson_complete,omitempty"`
+	Mastery        int32                  `protobuf:"varint,6,opt,name=mastery,proto3" json:"mastery,omitempty"`
+	unknownFields  protoimpl.UnknownFields
+	sizeCache      protoimpl.SizeCache
 }
 
 func (x *GradeCheckResponse) Reset() {
@@ -1895,6 +1897,20 @@ func (x *GradeCheckResponse) GetExplanation() string {
 		return x.Explanation
 	}
 	return ""
+}
+
+func (x *GradeCheckResponse) GetLessonComplete() bool {
+	if x != nil {
+		return x.LessonComplete
+	}
+	return false
+}
+
+func (x *GradeCheckResponse) GetMastery() int32 {
+	if x != nil {
+		return x.Mastery
+	}
+	return 0
 }
 
 type SubmitTurnRequest struct {
@@ -2196,12 +2212,14 @@ const file_inference_v1_inference_proto_rawDesc = "" +
 	"\auser_id\x18\x01 \x01(\tR\x06userId\x12\x1b\n" +
 	"\tlesson_id\x18\x02 \x01(\tR\blessonId\x12\x19\n" +
 	"\bcheck_id\x18\x03 \x01(\tR\acheckId\x12\x1a\n" +
-	"\bselected\x18\x04 \x01(\tR\bselected\"\x93\x01\n" +
+	"\bselected\x18\x04 \x01(\tR\bselected\"\xd6\x01\n" +
 	"\x12GradeCheckResponse\x12\x18\n" +
 	"\acorrect\x18\x01 \x01(\bR\acorrect\x12\x1a\n" +
 	"\bselected\x18\x02 \x01(\tR\bselected\x12%\n" +
 	"\x0ecorrect_answer\x18\x03 \x01(\tR\rcorrectAnswer\x12 \n" +
-	"\vexplanation\x18\x04 \x01(\tR\vexplanation\"c\n" +
+	"\vexplanation\x18\x04 \x01(\tR\vexplanation\x12'\n" +
+	"\x0flesson_complete\x18\x05 \x01(\bR\x0elessonComplete\x12\x18\n" +
+	"\amastery\x18\x06 \x01(\x05R\amastery\"c\n" +
 	"\x11SubmitTurnRequest\x12\x17\n" +
 	"\auser_id\x18\x01 \x01(\tR\x06userId\x12\x1b\n" +
 	"\tlesson_id\x18\x02 \x01(\tR\blessonId\x12\x18\n" +
@@ -2209,7 +2227,7 @@ const file_inference_v1_inference_proto_rawDesc = "" +
 	"\tTurnEvent\x12\x14\n" +
 	"\x05token\x18\x01 \x01(\tR\x05token\x124\n" +
 	"\amessage\x18\x02 \x01(\v2\x1a.edad.inference.v1.MessageR\amessage\x121\n" +
-	"\x05check\x18\x03 \x01(\v2\x1b.edad.inference.v1.QuestionR\x05check2\x90\t\n" +
+	"\x05check\x18\x03 \x01(\v2\x1b.edad.inference.v1.QuestionR\x05check2\xe2\t\n" +
 	"\x10InferenceService\x12T\n" +
 	"\rCreateProgram\x12'.edad.inference.v1.CreateProgramRequest\x1a\x1a.edad.inference.v1.Program\x12R\n" +
 	"\n" +
@@ -2223,7 +2241,8 @@ const file_inference_v1_inference_proto_rawDesc = "" +
 	"\vStartLesson\x12%.edad.inference.v1.StartLessonRequest\x1a\x16.edad.inference.v1.Job\x12K\n" +
 	"\tGetLesson\x12#.edad.inference.v1.GetLessonRequest\x1a\x19.edad.inference.v1.Lesson\x12Y\n" +
 	"\n" +
-	"GradeCheck\x12$.edad.inference.v1.GradeCheckRequest\x1a%.edad.inference.v1.GradeCheckResponse\x12R\n" +
+	"GradeCheck\x12$.edad.inference.v1.GradeCheckRequest\x1a%.edad.inference.v1.GradeCheckResponse\x12P\n" +
+	"\x0eCompleteLesson\x12#.edad.inference.v1.GetLessonRequest\x1a\x19.edad.inference.v1.Lesson\x12R\n" +
 	"\n" +
 	"SubmitTurn\x12$.edad.inference.v1.SubmitTurnRequest\x1a\x1c.edad.inference.v1.TurnEvent0\x01\x12B\n" +
 	"\x06GetJob\x12 .edad.inference.v1.GetJobRequest\x1a\x16.edad.inference.v1.Job\x12F\n" +
@@ -2298,25 +2317,27 @@ var file_inference_v1_inference_proto_depIdxs = []int32{
 	6,  // 23: edad.inference.v1.InferenceService.StartLesson:input_type -> edad.inference.v1.StartLessonRequest
 	9,  // 24: edad.inference.v1.InferenceService.GetLesson:input_type -> edad.inference.v1.GetLessonRequest
 	23, // 25: edad.inference.v1.InferenceService.GradeCheck:input_type -> edad.inference.v1.GradeCheckRequest
-	25, // 26: edad.inference.v1.InferenceService.SubmitTurn:input_type -> edad.inference.v1.SubmitTurnRequest
-	10, // 27: edad.inference.v1.InferenceService.GetJob:input_type -> edad.inference.v1.GetJobRequest
-	10, // 28: edad.inference.v1.InferenceService.WatchJob:input_type -> edad.inference.v1.GetJobRequest
-	3,  // 29: edad.inference.v1.InferenceService.CreateProgram:output_type -> edad.inference.v1.Program
-	4,  // 30: edad.inference.v1.InferenceService.GetProgram:output_type -> edad.inference.v1.ProgramView
-	11, // 31: edad.inference.v1.InferenceService.StartKnowledgeCheck:output_type -> edad.inference.v1.Job
-	15, // 32: edad.inference.v1.InferenceService.GetKnowledgeCheck:output_type -> edad.inference.v1.KnowledgeCheck
-	17, // 33: edad.inference.v1.InferenceService.SubmitCheckAnswer:output_type -> edad.inference.v1.CheckAnswerResult
-	11, // 34: edad.inference.v1.InferenceService.StartDiagnosis:output_type -> edad.inference.v1.Job
-	11, // 35: edad.inference.v1.InferenceService.StartPath:output_type -> edad.inference.v1.Job
-	19, // 36: edad.inference.v1.InferenceService.GetPath:output_type -> edad.inference.v1.Path
-	11, // 37: edad.inference.v1.InferenceService.StartLesson:output_type -> edad.inference.v1.Job
-	22, // 38: edad.inference.v1.InferenceService.GetLesson:output_type -> edad.inference.v1.Lesson
-	24, // 39: edad.inference.v1.InferenceService.GradeCheck:output_type -> edad.inference.v1.GradeCheckResponse
-	26, // 40: edad.inference.v1.InferenceService.SubmitTurn:output_type -> edad.inference.v1.TurnEvent
-	11, // 41: edad.inference.v1.InferenceService.GetJob:output_type -> edad.inference.v1.Job
-	11, // 42: edad.inference.v1.InferenceService.WatchJob:output_type -> edad.inference.v1.Job
-	29, // [29:43] is the sub-list for method output_type
-	15, // [15:29] is the sub-list for method input_type
+	9,  // 26: edad.inference.v1.InferenceService.CompleteLesson:input_type -> edad.inference.v1.GetLessonRequest
+	25, // 27: edad.inference.v1.InferenceService.SubmitTurn:input_type -> edad.inference.v1.SubmitTurnRequest
+	10, // 28: edad.inference.v1.InferenceService.GetJob:input_type -> edad.inference.v1.GetJobRequest
+	10, // 29: edad.inference.v1.InferenceService.WatchJob:input_type -> edad.inference.v1.GetJobRequest
+	3,  // 30: edad.inference.v1.InferenceService.CreateProgram:output_type -> edad.inference.v1.Program
+	4,  // 31: edad.inference.v1.InferenceService.GetProgram:output_type -> edad.inference.v1.ProgramView
+	11, // 32: edad.inference.v1.InferenceService.StartKnowledgeCheck:output_type -> edad.inference.v1.Job
+	15, // 33: edad.inference.v1.InferenceService.GetKnowledgeCheck:output_type -> edad.inference.v1.KnowledgeCheck
+	17, // 34: edad.inference.v1.InferenceService.SubmitCheckAnswer:output_type -> edad.inference.v1.CheckAnswerResult
+	11, // 35: edad.inference.v1.InferenceService.StartDiagnosis:output_type -> edad.inference.v1.Job
+	11, // 36: edad.inference.v1.InferenceService.StartPath:output_type -> edad.inference.v1.Job
+	19, // 37: edad.inference.v1.InferenceService.GetPath:output_type -> edad.inference.v1.Path
+	11, // 38: edad.inference.v1.InferenceService.StartLesson:output_type -> edad.inference.v1.Job
+	22, // 39: edad.inference.v1.InferenceService.GetLesson:output_type -> edad.inference.v1.Lesson
+	24, // 40: edad.inference.v1.InferenceService.GradeCheck:output_type -> edad.inference.v1.GradeCheckResponse
+	22, // 41: edad.inference.v1.InferenceService.CompleteLesson:output_type -> edad.inference.v1.Lesson
+	26, // 42: edad.inference.v1.InferenceService.SubmitTurn:output_type -> edad.inference.v1.TurnEvent
+	11, // 43: edad.inference.v1.InferenceService.GetJob:output_type -> edad.inference.v1.Job
+	11, // 44: edad.inference.v1.InferenceService.WatchJob:output_type -> edad.inference.v1.Job
+	30, // [30:45] is the sub-list for method output_type
+	15, // [15:30] is the sub-list for method input_type
 	15, // [15:15] is the sub-list for extension type_name
 	15, // [15:15] is the sub-list for extension extendee
 	0,  // [0:15] is the sub-list for field type_name
