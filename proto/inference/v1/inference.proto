@@ -1,0 +1,236 @@
+syntax = "proto3";
+
+package edad.inference.v1;
+
+option go_package = "github.com/edadai/platform-go/contracts/inferencev1;inferencev1";
+
+service InferenceService {
+  rpc CreateProgram(CreateProgramRequest) returns (Program);
+  rpc GetProgram(GetProgramRequest) returns (ProgramView);
+
+  rpc StartKnowledgeCheck(StartJobRequest) returns (Job);
+  rpc GetKnowledgeCheck(GetKnowledgeCheckRequest) returns (KnowledgeCheck);
+  rpc SubmitCheckAnswer(SubmitCheckAnswerRequest) returns (CheckAnswerResult);
+
+  rpc StartDiagnosis(StartJobRequest) returns (Job);
+  rpc StartPath(StartJobRequest) returns (Job);
+  rpc GetPath(GetPathRequest) returns (Path);
+
+  rpc StartLesson(StartLessonRequest) returns (Job);
+  rpc GetLesson(GetLessonRequest) returns (Lesson);
+
+  rpc GradeCheck(GradeCheckRequest) returns (GradeCheckResponse);
+  rpc SubmitTurn(SubmitTurnRequest) returns (stream TurnEvent);
+
+  rpc GetJob(GetJobRequest) returns (Job);
+  rpc WatchJob(GetJobRequest) returns (stream Job);
+}
+
+message DocumentRef {
+  string document_id = 1;
+  string extraction_key = 2;
+}
+
+message CreateProgramRequest {
+  string user_id = 1;
+  string study_kit_id = 2;
+  repeated DocumentRef documents = 3;
+  string teaching_level = 4;
+}
+
+message GetProgramRequest {
+  string user_id = 1;
+  string study_kit_id = 2;
+  string program_id = 3;
+}
+
+message Program {
+  string id = 1;
+  string user_id = 2;
+  string study_kit_id = 3;
+  repeated string document_ids = 4;
+  string teaching_level = 5;
+  string status = 6;
+  string created_at = 7;
+  string updated_at = 8;
+}
+
+message ProgramView {
+  Program program = 1;
+  Job job = 2;
+  KnowledgeCheck knowledge_check = 3;
+  Path path = 4;
+  Lesson lesson = 5;
+}
+
+message StartJobRequest {
+  string user_id = 1;
+  string program_id = 2;
+}
+
+message StartLessonRequest {
+  string user_id = 1;
+  string program_id = 2;
+  string topic_id = 3;
+  string mode = 4;
+}
+
+message GetKnowledgeCheckRequest {
+  string user_id = 1;
+  string program_id = 2;
+  string check_id = 3;
+}
+
+message GetPathRequest {
+  string user_id = 1;
+  string program_id = 2;
+}
+
+message GetLessonRequest {
+  string user_id = 1;
+  string lesson_id = 2;
+}
+
+message GetJobRequest {
+  string user_id = 1;
+  string job_id = 2;
+}
+
+message Job {
+  string id = 1;
+  string program_id = 2;
+  string kind = 3;
+  string status = 4;
+  string result_id = 5;
+  string error_code = 6;
+  string error_message = 7;
+  string created_at = 8;
+  string updated_at = 9;
+}
+
+message Choice {
+  string id = 1;
+  string text = 2;
+}
+
+message Question {
+  string id = 1;
+  string prompt = 2;
+  repeated Choice options = 3;
+  string topic = 4;
+  string explanation = 5;
+  string selected = 6;
+  bool skipped = 7;
+  bool revealed = 8;
+  bool correct = 9;
+}
+
+message Diagnosis {
+  int32 overall_percent = 1;
+  repeated string strong_topics = 2;
+  repeated string attention_topics = 3;
+  string summary = 4;
+}
+
+message KnowledgeCheck {
+  string id = 1;
+  string program_id = 2;
+  string status = 3;
+  repeated Question questions = 4;
+  Diagnosis diagnosis = 5;
+  string created_at = 6;
+  string updated_at = 7;
+}
+
+message SubmitCheckAnswerRequest {
+  string user_id = 1;
+  string check_id = 2;
+  string question_id = 3;
+  string selected = 4;
+  bool skipped = 5;
+}
+
+message CheckAnswerResult {
+  string question_id = 1;
+  bool correct = 2;
+  string selected = 3;
+  string correct_answer = 4;
+  string explanation = 5;
+  bool complete = 6;
+}
+
+message PathTopic {
+  string id = 1;
+  string title = 2;
+  string summary = 3;
+  int32 sort_order = 4;
+  bool locked = 5;
+  int32 mastery = 6;
+  string lesson_id = 7;
+}
+
+message Path {
+  string id = 1;
+  string program_id = 2;
+  repeated PathTopic topics = 3;
+  string created_at = 4;
+  string updated_at = 5;
+}
+
+message LessonSection {
+  string id = 1;
+  string title = 2;
+  string body = 3;
+  repeated string key_points = 4;
+  Question check = 5;
+}
+
+message Message {
+  string id = 1;
+  string session_id = 2;
+  string role = 3;
+  string content = 4;
+  string model = 5;
+  string created_at = 6;
+  string updated_at = 7;
+}
+
+message Lesson {
+  string id = 1;
+  string program_id = 2;
+  string topic_id = 3;
+  string session_id = 4;
+  string mode = 5;
+  string title = 6;
+  string status = 7;
+  repeated LessonSection sections = 8;
+  repeated Message messages = 9;
+  string created_at = 10;
+  string updated_at = 11;
+}
+
+message GradeCheckRequest {
+  string user_id = 1;
+  string lesson_id = 2;
+  string check_id = 3;
+  string selected = 4;
+}
+
+message GradeCheckResponse {
+  bool correct = 1;
+  string selected = 2;
+  string correct_answer = 3;
+  string explanation = 4;
+}
+
+message SubmitTurnRequest {
+  string user_id = 1;
+  string lesson_id = 2;
+  string content = 3;
+}
+
+message TurnEvent {
+  string token = 1;
+  Message message = 2;
+  Question check = 3;
+}
