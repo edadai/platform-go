@@ -68,6 +68,10 @@ service SubscriptionBillingApi {
   rpc ListPaymentRetryQueue (ListPaymentRetryQueueRequest) returns (ListPaymentRetryQueueResponse);
   rpc ProcessPaymentRetryQueue (ProcessPaymentRetryQueueRequest) returns (PaymentRetryBatchResponse);
   rpc CancelPaymentRetry (CancelPaymentRetryRequest) returns (EntityResponse);
+  rpc ListPaymentReviewCases (ListPaymentReviewCasesRequest) returns (ListPaymentReviewCasesResponse);
+  rpc ResolvePaymentReviewCase (ResolvePaymentReviewCaseRequest) returns (PaymentReviewCaseResponse);
+  rpc PreviewSubscriptionReconciliation (SubscriptionReconciliationPreviewRequest) returns (SubscriptionReconciliationReportResponse);
+  rpc ApplySubscriptionReconciliation (ApplySubscriptionReconciliationRequest) returns (SubscriptionReconciliationReportResponse);
   rpc ListLedgerAccounts (ListLedgerAccountsRequest) returns (ListLedgerAccountsResponse);
   rpc ListLedgerTransactions (ListLedgerTransactionsRequest) returns (ListLedgerTransactionsResponse);
 
@@ -623,6 +627,73 @@ message CancelPaymentRetryRequest {
   string retry_case_id = 1;
   string reason = 2;
   RequestContext context = 3;
+}
+
+message ListPaymentReviewCasesRequest {
+  string status = 1;
+  int32 limit = 2;
+  RequestContext context = 3;
+}
+
+message ResolvePaymentReviewCaseRequest {
+  string review_case_id = 1;
+  string resolution = 2;
+  RequestContext context = 3;
+}
+
+message PaymentReviewCaseResponse {
+  string id = 1;
+  string payment_id = 2;
+  string invoice_id = 3;
+  string subscription_id = 4;
+  string customer_id = 5;
+  string reason = 6;
+  string status = 7;
+  string resolution = 8;
+  string resolved_by = 9;
+  string resolved_at_utc = 10;
+  double amount = 11;
+  string currency = 12;
+  string provider_reference = 13;
+  string created_at_utc = 14;
+}
+
+message ListPaymentReviewCasesResponse {
+  repeated PaymentReviewCaseResponse cases = 1;
+}
+
+message SubscriptionReconciliationPreviewRequest {
+  RequestContext context = 1;
+}
+
+message ApplySubscriptionReconciliationRequest {
+  string preview_run_id = 1;
+  string report_hash = 2;
+  RequestContext context = 3;
+}
+
+message SubscriptionReconciliationItemResponse {
+  string customer_id = 1;
+  string product_id = 2;
+  string classification = 3;
+  string keep_subscription_id = 4;
+  repeated string subscription_ids = 5;
+  repeated string cancel_subscription_ids = 6;
+  repeated string review_payment_ids = 7;
+  repeated string subscription_statuses = 8;
+}
+
+message SubscriptionReconciliationReportResponse {
+  string run_id = 1;
+  string policy_version = 2;
+  string mode = 3;
+  string source_run_id = 4;
+  string report_hash = 5;
+  string created_at_utc = 6;
+  int32 duplicate_group_count = 7;
+  int32 safe_action_count = 8;
+  int32 manual_review_count = 9;
+  repeated SubscriptionReconciliationItemResponse items = 10;
 }
 
 message CreateCheckoutRequest {
