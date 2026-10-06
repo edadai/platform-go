@@ -70,8 +70,11 @@ service SubscriptionBillingApi {
   rpc CancelPaymentRetry (CancelPaymentRetryRequest) returns (EntityResponse);
   rpc ListPaymentReviewCases (ListPaymentReviewCasesRequest) returns (ListPaymentReviewCasesResponse);
   rpc ResolvePaymentReviewCase (ResolvePaymentReviewCaseRequest) returns (PaymentReviewCaseResponse);
+  rpc RecordPaymentReviewRefund (RecordPaymentReviewRefundRequest) returns (PaymentReviewCaseResponse);
   rpc PreviewSubscriptionReconciliation (SubscriptionReconciliationPreviewRequest) returns (SubscriptionReconciliationReportResponse);
   rpc ApplySubscriptionReconciliation (ApplySubscriptionReconciliationRequest) returns (SubscriptionReconciliationReportResponse);
+  rpc PreviewRenewalPaymentReconciliation (RenewalPaymentReconciliationPreviewRequest) returns (RenewalPaymentReconciliationReportResponse);
+  rpc ApplyRenewalPaymentReconciliation (ApplyRenewalPaymentReconciliationRequest) returns (RenewalPaymentReconciliationReportResponse);
   rpc ListLedgerAccounts (ListLedgerAccountsRequest) returns (ListLedgerAccountsResponse);
   rpc ListLedgerTransactions (ListLedgerTransactionsRequest) returns (ListLedgerTransactionsResponse);
 
@@ -118,6 +121,7 @@ message SubscriptionStatsResponse {
   double previous_month_mrr = 14;
   repeated BillingStatsBucket mrr_trend = 15;
   repeated RevenueMixBucket revenue_mix = 16;
+  repeated OfferAcquisitionBreakdownRow offer_acquisition_breakdown = 17;
 }
 
 message BillingStatsBucket {
@@ -147,6 +151,17 @@ message SubscriptionPlanBreakdownRow {
   string offer_id = 11;
   bool is_offer = 12;
   string parent_plan_id = 13;
+}
+
+message OfferAcquisitionBreakdownRow {
+  string offer_id = 1;
+  string offer_code = 2;
+  string offer_name = 3;
+  string plan_id = 4;
+  string plan_display_name = 5;
+  int32 active_subscribers = 6;
+  int32 trialing_subscribers = 7;
+  int32 completed_offer_subscribers = 8;
 }
 
 // Churn analysis aggregates. The registered/verified funnel steps are populated by
@@ -641,6 +656,13 @@ message ResolvePaymentReviewCaseRequest {
   RequestContext context = 3;
 }
 
+message RecordPaymentReviewRefundRequest {
+  string review_case_id = 1;
+  string provider_refund_reference = 2;
+  string resolution = 3;
+  RequestContext context = 4;
+}
+
 message PaymentReviewCaseResponse {
   string id = 1;
   string payment_id = 2;
@@ -656,6 +678,12 @@ message PaymentReviewCaseResponse {
   string currency = 12;
   string provider_reference = 13;
   string created_at_utc = 14;
+  string ledger_treatment = 15;
+  string evidence_json = 16;
+  string source_reconciliation_run_id = 17;
+  string resolution_kind = 18;
+  double resolution_amount = 19;
+  string provider_refund_reference = 20;
 }
 
 message ListPaymentReviewCasesResponse {
@@ -694,6 +722,46 @@ message SubscriptionReconciliationReportResponse {
   int32 safe_action_count = 8;
   int32 manual_review_count = 9;
   repeated SubscriptionReconciliationItemResponse items = 10;
+}
+
+message RenewalPaymentReconciliationPreviewRequest {
+  RequestContext context = 1;
+}
+
+message ApplyRenewalPaymentReconciliationRequest {
+  string preview_run_id = 1;
+  string report_hash = 2;
+  RequestContext context = 3;
+}
+
+message RenewalPaymentReconciliationItemResponse {
+  string customer_id = 1;
+  string subscription_id = 2;
+  string original_invoice_id = 3;
+  string duplicate_invoice_id = 4;
+  string original_payment_id = 5;
+  string duplicate_payment_id = 6;
+  string original_provider_reference = 7;
+  string duplicate_provider_reference = 8;
+  double amount = 9;
+  string currency = 10;
+  string original_paid_at_utc = 11;
+  string duplicate_paid_at_utc = 12;
+  string classification = 13;
+  bool already_queued = 14;
+}
+
+message RenewalPaymentReconciliationReportResponse {
+  string run_id = 1;
+  string policy_version = 2;
+  string mode = 3;
+  string source_run_id = 4;
+  string report_hash = 5;
+  string created_at_utc = 6;
+  int32 candidate_count = 7;
+  int32 already_queued_count = 8;
+  int32 new_review_case_count = 9;
+  repeated RenewalPaymentReconciliationItemResponse items = 10;
 }
 
 message CreateCheckoutRequest {
