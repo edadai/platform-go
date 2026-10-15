@@ -31,6 +31,7 @@ service AuthService {
   rpc ListUsers(ListUsersRequest) returns (ListUsersResponse);
   rpc GetUserStats(GetUserStatsRequest) returns (GetUserStatsResponse);
   rpc InviteUser(InviteUserRequest) returns (GetMeResponse);
+  rpc ResendUserInvite(ResendUserInviteRequest) returns (GenericMessageResponse);
   rpc ValidateAccessToken(ValidateAccessTokenRequest) returns (ValidateAccessTokenResponse);
   rpc ValidateSession(ValidateSessionRequest) returns (ValidateSessionResponse);
 
@@ -94,6 +95,7 @@ message UserMessage {
   string first_name = 9;
   string last_name = 10;
   repeated string oauth_providers = 11;
+  bool has_password = 12;
 }
 
 message SessionMessage {
@@ -271,6 +273,11 @@ message InviteUserRequest {
   string email = 1;
   repeated string role_keys = 2;
   RequestContext context = 3;
+}
+
+message ResendUserInviteRequest {
+  string user_id = 1;
+  RequestContext context = 2;
 }
 
 message ValidateAccessTokenRequest {

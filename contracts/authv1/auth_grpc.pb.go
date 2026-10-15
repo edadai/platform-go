@@ -40,6 +40,7 @@ const (
 	AuthService_ListUsers_FullMethodName                    = "/auth.v1.AuthService/ListUsers"
 	AuthService_GetUserStats_FullMethodName                 = "/auth.v1.AuthService/GetUserStats"
 	AuthService_InviteUser_FullMethodName                   = "/auth.v1.AuthService/InviteUser"
+	AuthService_ResendUserInvite_FullMethodName             = "/auth.v1.AuthService/ResendUserInvite"
 	AuthService_ValidateAccessToken_FullMethodName          = "/auth.v1.AuthService/ValidateAccessToken"
 	AuthService_ValidateSession_FullMethodName              = "/auth.v1.AuthService/ValidateSession"
 	AuthService_CheckRole_FullMethodName                    = "/auth.v1.AuthService/CheckRole"
@@ -86,6 +87,7 @@ type AuthServiceClient interface {
 	ListUsers(ctx context.Context, in *ListUsersRequest, opts ...grpc.CallOption) (*ListUsersResponse, error)
 	GetUserStats(ctx context.Context, in *GetUserStatsRequest, opts ...grpc.CallOption) (*GetUserStatsResponse, error)
 	InviteUser(ctx context.Context, in *InviteUserRequest, opts ...grpc.CallOption) (*GetMeResponse, error)
+	ResendUserInvite(ctx context.Context, in *ResendUserInviteRequest, opts ...grpc.CallOption) (*GenericMessageResponse, error)
 	ValidateAccessToken(ctx context.Context, in *ValidateAccessTokenRequest, opts ...grpc.CallOption) (*ValidateAccessTokenResponse, error)
 	ValidateSession(ctx context.Context, in *ValidateSessionRequest, opts ...grpc.CallOption) (*ValidateSessionResponse, error)
 	CheckRole(ctx context.Context, in *CheckRoleRequest, opts ...grpc.CallOption) (*CheckRoleResponse, error)
@@ -325,6 +327,16 @@ func (c *authServiceClient) InviteUser(ctx context.Context, in *InviteUserReques
 	return out, nil
 }
 
+func (c *authServiceClient) ResendUserInvite(ctx context.Context, in *ResendUserInviteRequest, opts ...grpc.CallOption) (*GenericMessageResponse, error) {
+	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
+	out := new(GenericMessageResponse)
+	err := c.cc.Invoke(ctx, AuthService_ResendUserInvite_FullMethodName, in, out, cOpts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
 func (c *authServiceClient) ValidateAccessToken(ctx context.Context, in *ValidateAccessTokenRequest, opts ...grpc.CallOption) (*ValidateAccessTokenResponse, error) {
 	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
 	out := new(ValidateAccessTokenResponse)
@@ -540,6 +552,7 @@ type AuthServiceServer interface {
 	ListUsers(context.Context, *ListUsersRequest) (*ListUsersResponse, error)
 	GetUserStats(context.Context, *GetUserStatsRequest) (*GetUserStatsResponse, error)
 	InviteUser(context.Context, *InviteUserRequest) (*GetMeResponse, error)
+	ResendUserInvite(context.Context, *ResendUserInviteRequest) (*GenericMessageResponse, error)
 	ValidateAccessToken(context.Context, *ValidateAccessTokenRequest) (*ValidateAccessTokenResponse, error)
 	ValidateSession(context.Context, *ValidateSessionRequest) (*ValidateSessionResponse, error)
 	CheckRole(context.Context, *CheckRoleRequest) (*CheckRoleResponse, error)
@@ -631,6 +644,9 @@ func (UnimplementedAuthServiceServer) GetUserStats(context.Context, *GetUserStat
 }
 func (UnimplementedAuthServiceServer) InviteUser(context.Context, *InviteUserRequest) (*GetMeResponse, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method InviteUser not implemented")
+}
+func (UnimplementedAuthServiceServer) ResendUserInvite(context.Context, *ResendUserInviteRequest) (*GenericMessageResponse, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method ResendUserInvite not implemented")
 }
 func (UnimplementedAuthServiceServer) ValidateAccessToken(context.Context, *ValidateAccessTokenRequest) (*ValidateAccessTokenResponse, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method ValidateAccessToken not implemented")
@@ -1088,6 +1104,24 @@ func _AuthService_InviteUser_Handler(srv interface{}, ctx context.Context, dec f
 	return interceptor(ctx, in, info, handler)
 }
 
+func _AuthService_ResendUserInvite_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(ResendUserInviteRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(AuthServiceServer).ResendUserInvite(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: AuthService_ResendUserInvite_FullMethodName,
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(AuthServiceServer).ResendUserInvite(ctx, req.(*ResendUserInviteRequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
 func _AuthService_ValidateAccessToken_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
 	in := new(ValidateAccessTokenRequest)
 	if err := dec(in); err != nil {
@@ -1520,6 +1554,10 @@ var AuthService_ServiceDesc = grpc.ServiceDesc{
 		{
 			MethodName: "InviteUser",
 			Handler:    _AuthService_InviteUser_Handler,
+		},
+		{
+			MethodName: "ResendUserInvite",
+			Handler:    _AuthService_ResendUserInvite_Handler,
 		},
 		{
 			MethodName: "ValidateAccessToken",
