@@ -69,6 +69,7 @@ const (
 	SubscriptionBillingApi_ListAllInvoices_FullMethodName                     = "/subscriptionbilling.SubscriptionBillingApi/ListAllInvoices"
 	SubscriptionBillingApi_ListInvoices_FullMethodName                        = "/subscriptionbilling.SubscriptionBillingApi/ListInvoices"
 	SubscriptionBillingApi_MarkManualInvoicePaid_FullMethodName               = "/subscriptionbilling.SubscriptionBillingApi/MarkManualInvoicePaid"
+	SubscriptionBillingApi_VoidAbandonedCheckout_FullMethodName               = "/subscriptionbilling.SubscriptionBillingApi/VoidAbandonedCheckout"
 	SubscriptionBillingApi_PayInvoice_FullMethodName                          = "/subscriptionbilling.SubscriptionBillingApi/PayInvoice"
 	SubscriptionBillingApi_CreateInvoiceCheckout_FullMethodName               = "/subscriptionbilling.SubscriptionBillingApi/CreateInvoiceCheckout"
 	SubscriptionBillingApi_CreateUpcomingCheckout_FullMethodName              = "/subscriptionbilling.SubscriptionBillingApi/CreateUpcomingCheckout"
@@ -149,6 +150,7 @@ type SubscriptionBillingApiClient interface {
 	ListAllInvoices(ctx context.Context, in *ListBillingDocumentsRequest, opts ...grpc.CallOption) (*ListInvoicesResponse, error)
 	ListInvoices(ctx context.Context, in *CustomerRequest, opts ...grpc.CallOption) (*ListInvoicesResponse, error)
 	MarkManualInvoicePaid(ctx context.Context, in *EntityIdRequest, opts ...grpc.CallOption) (*InvoiceResponse, error)
+	VoidAbandonedCheckout(ctx context.Context, in *VoidAbandonedCheckoutRequest, opts ...grpc.CallOption) (*InvoiceResponse, error)
 	// Customer-driven recovery of an outstanding invoice: with the saved card, or by entering a
 	// new one at the provider. Both carry the customer id so the service scopes the invoice itself.
 	PayInvoice(ctx context.Context, in *PayInvoiceRequest, opts ...grpc.CallOption) (*PaymentResponse, error)
@@ -684,6 +686,16 @@ func (c *subscriptionBillingApiClient) MarkManualInvoicePaid(ctx context.Context
 	return out, nil
 }
 
+func (c *subscriptionBillingApiClient) VoidAbandonedCheckout(ctx context.Context, in *VoidAbandonedCheckoutRequest, opts ...grpc.CallOption) (*InvoiceResponse, error) {
+	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
+	out := new(InvoiceResponse)
+	err := c.cc.Invoke(ctx, SubscriptionBillingApi_VoidAbandonedCheckout_FullMethodName, in, out, cOpts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
 func (c *subscriptionBillingApiClient) PayInvoice(ctx context.Context, in *PayInvoiceRequest, opts ...grpc.CallOption) (*PaymentResponse, error) {
 	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
 	out := new(PaymentResponse)
@@ -960,6 +972,7 @@ type SubscriptionBillingApiServer interface {
 	ListAllInvoices(context.Context, *ListBillingDocumentsRequest) (*ListInvoicesResponse, error)
 	ListInvoices(context.Context, *CustomerRequest) (*ListInvoicesResponse, error)
 	MarkManualInvoicePaid(context.Context, *EntityIdRequest) (*InvoiceResponse, error)
+	VoidAbandonedCheckout(context.Context, *VoidAbandonedCheckoutRequest) (*InvoiceResponse, error)
 	// Customer-driven recovery of an outstanding invoice: with the saved card, or by entering a
 	// new one at the provider. Both carry the customer id so the service scopes the invoice itself.
 	PayInvoice(context.Context, *PayInvoiceRequest) (*PaymentResponse, error)
@@ -1144,6 +1157,9 @@ func (UnimplementedSubscriptionBillingApiServer) ListInvoices(context.Context, *
 }
 func (UnimplementedSubscriptionBillingApiServer) MarkManualInvoicePaid(context.Context, *EntityIdRequest) (*InvoiceResponse, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method MarkManualInvoicePaid not implemented")
+}
+func (UnimplementedSubscriptionBillingApiServer) VoidAbandonedCheckout(context.Context, *VoidAbandonedCheckoutRequest) (*InvoiceResponse, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method VoidAbandonedCheckout not implemented")
 }
 func (UnimplementedSubscriptionBillingApiServer) PayInvoice(context.Context, *PayInvoiceRequest) (*PaymentResponse, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method PayInvoice not implemented")
@@ -2133,6 +2149,24 @@ func _SubscriptionBillingApi_MarkManualInvoicePaid_Handler(srv interface{}, ctx 
 	return interceptor(ctx, in, info, handler)
 }
 
+func _SubscriptionBillingApi_VoidAbandonedCheckout_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(VoidAbandonedCheckoutRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(SubscriptionBillingApiServer).VoidAbandonedCheckout(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: SubscriptionBillingApi_VoidAbandonedCheckout_FullMethodName,
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(SubscriptionBillingApiServer).VoidAbandonedCheckout(ctx, req.(*VoidAbandonedCheckoutRequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
 func _SubscriptionBillingApi_PayInvoice_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
 	in := new(PayInvoiceRequest)
 	if err := dec(in); err != nil {
@@ -2735,6 +2769,10 @@ var SubscriptionBillingApi_ServiceDesc = grpc.ServiceDesc{
 		{
 			MethodName: "MarkManualInvoicePaid",
 			Handler:    _SubscriptionBillingApi_MarkManualInvoicePaid_Handler,
+		},
+		{
+			MethodName: "VoidAbandonedCheckout",
+			Handler:    _SubscriptionBillingApi_VoidAbandonedCheckout_Handler,
 		},
 		{
 			MethodName: "PayInvoice",

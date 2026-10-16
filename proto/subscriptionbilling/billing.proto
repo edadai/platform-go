@@ -61,6 +61,7 @@ service SubscriptionBillingApi {
   rpc ListAllInvoices (ListBillingDocumentsRequest) returns (ListInvoicesResponse);
   rpc ListInvoices (CustomerRequest) returns (ListInvoicesResponse);
   rpc MarkManualInvoicePaid (EntityIdRequest) returns (InvoiceResponse);
+  rpc VoidAbandonedCheckout (VoidAbandonedCheckoutRequest) returns (InvoiceResponse);
   // Customer-driven recovery of an outstanding invoice: with the saved card, or by entering a
   // new one at the provider. Both carry the customer id so the service scopes the invoice itself.
   rpc PayInvoice (PayInvoiceRequest) returns (PaymentResponse);
@@ -591,6 +592,12 @@ message RecordUsageRequest {
 message CreateInvoiceRequest {
   string subscription_id = 1;
   string description = 2;
+  RequestContext context = 3;
+}
+
+message VoidAbandonedCheckoutRequest {
+  string invoice_id = 1;
+  string reason = 2;
   RequestContext context = 3;
 }
 
