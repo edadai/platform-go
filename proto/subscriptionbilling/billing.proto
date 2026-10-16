@@ -45,6 +45,11 @@ service SubscriptionBillingApi {
   rpc ChangePlan (ChangePlanRequest) returns (PlanChangeResponse);
   rpc GetSubscriptionStatus (EntityIdRequest) returns (SubscriptionStatusResponse);
   rpc GetCurrentSubscription (CustomerRequest) returns (SubscriptionResponse);
+  rpc CreateComplimentaryAccess (CreateComplimentaryAccessRequest) returns (ComplimentaryAccessResponse);
+  rpc ListComplimentaryAccess (ListComplimentaryAccessRequest) returns (ListComplimentaryAccessResponse);
+  rpc GetCurrentComplimentaryAccess (CustomerRequest) returns (ComplimentaryAccessResponse);
+  rpc ExtendComplimentaryAccess (ExtendComplimentaryAccessRequest) returns (ComplimentaryAccessResponse);
+  rpc RevokeComplimentaryAccess (RevokeComplimentaryAccessRequest) returns (ComplimentaryAccessResponse);
 
   rpc CheckEntitlement (CheckEntitlementRequest) returns (CheckEntitlementResponse);
   rpc GetEntitlementSnapshot (EntityIdRequest) returns (EntitlementSnapshotResponse);
@@ -56,6 +61,7 @@ service SubscriptionBillingApi {
   rpc ListAllInvoices (ListBillingDocumentsRequest) returns (ListInvoicesResponse);
   rpc ListInvoices (CustomerRequest) returns (ListInvoicesResponse);
   rpc MarkManualInvoicePaid (EntityIdRequest) returns (InvoiceResponse);
+  rpc VoidAbandonedCheckout (VoidAbandonedCheckoutRequest) returns (InvoiceResponse);
   // Customer-driven recovery of an outstanding invoice: with the saved card, or by entering a
   // new one at the provider. Both carry the customer id so the service scopes the invoice itself.
   rpc PayInvoice (PayInvoiceRequest) returns (PaymentResponse);
@@ -122,6 +128,15 @@ message SubscriptionStatsResponse {
   repeated BillingStatsBucket mrr_trend = 15;
   repeated RevenueMixBucket revenue_mix = 16;
   repeated OfferAcquisitionBreakdownRow offer_acquisition_breakdown = 17;
+  int32 complimentary_access_count = 18;
+  repeated ComplimentaryAccessBreakdownRow complimentary_access_breakdown = 19;
+}
+
+message ComplimentaryAccessBreakdownRow {
+  string plan_id = 1;
+  string plan_name = 2;
+  string category = 3;
+  int32 active_grants = 4;
 }
 
 message BillingStatsBucket {
@@ -517,6 +532,39 @@ message StartSubscriptionRequest {
   RequestContext context = 9;
 }
 
+message CreateComplimentaryAccessRequest {
+  string customer_id = 1;
+  string product_id = 2;
+  string plan_id = 3;
+  string category = 4;
+  string expires_at_utc = 5;
+  string reason = 6;
+  string idempotency_key = 7;
+  RequestContext context = 8;
+}
+
+message ListComplimentaryAccessRequest {
+  string customer_id = 1;
+  string status = 2;
+  int32 limit = 3;
+  RequestContext context = 4;
+}
+
+message ExtendComplimentaryAccessRequest {
+  string id = 1;
+  string expires_at_utc = 2;
+  string reason = 3;
+  string idempotency_key = 4;
+  RequestContext context = 5;
+}
+
+message RevokeComplimentaryAccessRequest {
+  string id = 1;
+  string reason = 2;
+  string idempotency_key = 3;
+  RequestContext context = 4;
+}
+
 message ChangePlanRequest {
   string subscription_id = 1;
   string plan_id = 2;
@@ -544,6 +592,12 @@ message RecordUsageRequest {
 message CreateInvoiceRequest {
   string subscription_id = 1;
   string description = 2;
+  RequestContext context = 3;
+}
+
+message VoidAbandonedCheckoutRequest {
+  string invoice_id = 1;
+  string reason = 2;
   RequestContext context = 3;
 }
 
@@ -818,6 +872,29 @@ message SubscriptionResponse {
   // Whether there is a card the service can charge on its own, so the caller can offer the
   // right recovery action instead of finding out after the customer presses Pay now.
   bool has_reusable_payment_method = 14;
+  string source = 15;
+}
+
+message ComplimentaryAccessResponse {
+  string id = 1;
+  string subscription_id = 2;
+  string customer_id = 3;
+  string product_id = 4;
+  string plan_id = 5;
+  string category = 6;
+  string status = 7;
+  string reason = 8;
+  string granted_by = 9;
+  string starts_at_utc = 10;
+  string expires_at_utc = 11;
+  string reminder_sent_at_utc = 12;
+  string revoked_at_utc = 13;
+  string expired_at_utc = 14;
+  SubscriptionResponse subscription = 15;
+}
+
+message ListComplimentaryAccessResponse {
+  repeated ComplimentaryAccessResponse grants = 1;
 }
 
 message PlanChangeResponse {

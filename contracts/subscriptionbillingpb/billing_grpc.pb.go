@@ -55,6 +55,11 @@ const (
 	SubscriptionBillingApi_ChangePlan_FullMethodName                          = "/subscriptionbilling.SubscriptionBillingApi/ChangePlan"
 	SubscriptionBillingApi_GetSubscriptionStatus_FullMethodName               = "/subscriptionbilling.SubscriptionBillingApi/GetSubscriptionStatus"
 	SubscriptionBillingApi_GetCurrentSubscription_FullMethodName              = "/subscriptionbilling.SubscriptionBillingApi/GetCurrentSubscription"
+	SubscriptionBillingApi_CreateComplimentaryAccess_FullMethodName           = "/subscriptionbilling.SubscriptionBillingApi/CreateComplimentaryAccess"
+	SubscriptionBillingApi_ListComplimentaryAccess_FullMethodName             = "/subscriptionbilling.SubscriptionBillingApi/ListComplimentaryAccess"
+	SubscriptionBillingApi_GetCurrentComplimentaryAccess_FullMethodName       = "/subscriptionbilling.SubscriptionBillingApi/GetCurrentComplimentaryAccess"
+	SubscriptionBillingApi_ExtendComplimentaryAccess_FullMethodName           = "/subscriptionbilling.SubscriptionBillingApi/ExtendComplimentaryAccess"
+	SubscriptionBillingApi_RevokeComplimentaryAccess_FullMethodName           = "/subscriptionbilling.SubscriptionBillingApi/RevokeComplimentaryAccess"
 	SubscriptionBillingApi_CheckEntitlement_FullMethodName                    = "/subscriptionbilling.SubscriptionBillingApi/CheckEntitlement"
 	SubscriptionBillingApi_GetEntitlementSnapshot_FullMethodName              = "/subscriptionbilling.SubscriptionBillingApi/GetEntitlementSnapshot"
 	SubscriptionBillingApi_RefreshEntitlementSnapshot_FullMethodName          = "/subscriptionbilling.SubscriptionBillingApi/RefreshEntitlementSnapshot"
@@ -64,6 +69,7 @@ const (
 	SubscriptionBillingApi_ListAllInvoices_FullMethodName                     = "/subscriptionbilling.SubscriptionBillingApi/ListAllInvoices"
 	SubscriptionBillingApi_ListInvoices_FullMethodName                        = "/subscriptionbilling.SubscriptionBillingApi/ListInvoices"
 	SubscriptionBillingApi_MarkManualInvoicePaid_FullMethodName               = "/subscriptionbilling.SubscriptionBillingApi/MarkManualInvoicePaid"
+	SubscriptionBillingApi_VoidAbandonedCheckout_FullMethodName               = "/subscriptionbilling.SubscriptionBillingApi/VoidAbandonedCheckout"
 	SubscriptionBillingApi_PayInvoice_FullMethodName                          = "/subscriptionbilling.SubscriptionBillingApi/PayInvoice"
 	SubscriptionBillingApi_CreateInvoiceCheckout_FullMethodName               = "/subscriptionbilling.SubscriptionBillingApi/CreateInvoiceCheckout"
 	SubscriptionBillingApi_CreateUpcomingCheckout_FullMethodName              = "/subscriptionbilling.SubscriptionBillingApi/CreateUpcomingCheckout"
@@ -130,6 +136,11 @@ type SubscriptionBillingApiClient interface {
 	ChangePlan(ctx context.Context, in *ChangePlanRequest, opts ...grpc.CallOption) (*PlanChangeResponse, error)
 	GetSubscriptionStatus(ctx context.Context, in *EntityIdRequest, opts ...grpc.CallOption) (*SubscriptionStatusResponse, error)
 	GetCurrentSubscription(ctx context.Context, in *CustomerRequest, opts ...grpc.CallOption) (*SubscriptionResponse, error)
+	CreateComplimentaryAccess(ctx context.Context, in *CreateComplimentaryAccessRequest, opts ...grpc.CallOption) (*ComplimentaryAccessResponse, error)
+	ListComplimentaryAccess(ctx context.Context, in *ListComplimentaryAccessRequest, opts ...grpc.CallOption) (*ListComplimentaryAccessResponse, error)
+	GetCurrentComplimentaryAccess(ctx context.Context, in *CustomerRequest, opts ...grpc.CallOption) (*ComplimentaryAccessResponse, error)
+	ExtendComplimentaryAccess(ctx context.Context, in *ExtendComplimentaryAccessRequest, opts ...grpc.CallOption) (*ComplimentaryAccessResponse, error)
+	RevokeComplimentaryAccess(ctx context.Context, in *RevokeComplimentaryAccessRequest, opts ...grpc.CallOption) (*ComplimentaryAccessResponse, error)
 	CheckEntitlement(ctx context.Context, in *CheckEntitlementRequest, opts ...grpc.CallOption) (*CheckEntitlementResponse, error)
 	GetEntitlementSnapshot(ctx context.Context, in *EntityIdRequest, opts ...grpc.CallOption) (*EntitlementSnapshotResponse, error)
 	RefreshEntitlementSnapshot(ctx context.Context, in *EntityIdRequest, opts ...grpc.CallOption) (*EntitlementSnapshotResponse, error)
@@ -139,6 +150,7 @@ type SubscriptionBillingApiClient interface {
 	ListAllInvoices(ctx context.Context, in *ListBillingDocumentsRequest, opts ...grpc.CallOption) (*ListInvoicesResponse, error)
 	ListInvoices(ctx context.Context, in *CustomerRequest, opts ...grpc.CallOption) (*ListInvoicesResponse, error)
 	MarkManualInvoicePaid(ctx context.Context, in *EntityIdRequest, opts ...grpc.CallOption) (*InvoiceResponse, error)
+	VoidAbandonedCheckout(ctx context.Context, in *VoidAbandonedCheckoutRequest, opts ...grpc.CallOption) (*InvoiceResponse, error)
 	// Customer-driven recovery of an outstanding invoice: with the saved card, or by entering a
 	// new one at the provider. Both carry the customer id so the service scopes the invoice itself.
 	PayInvoice(ctx context.Context, in *PayInvoiceRequest, opts ...grpc.CallOption) (*PaymentResponse, error)
@@ -534,6 +546,56 @@ func (c *subscriptionBillingApiClient) GetCurrentSubscription(ctx context.Contex
 	return out, nil
 }
 
+func (c *subscriptionBillingApiClient) CreateComplimentaryAccess(ctx context.Context, in *CreateComplimentaryAccessRequest, opts ...grpc.CallOption) (*ComplimentaryAccessResponse, error) {
+	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
+	out := new(ComplimentaryAccessResponse)
+	err := c.cc.Invoke(ctx, SubscriptionBillingApi_CreateComplimentaryAccess_FullMethodName, in, out, cOpts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *subscriptionBillingApiClient) ListComplimentaryAccess(ctx context.Context, in *ListComplimentaryAccessRequest, opts ...grpc.CallOption) (*ListComplimentaryAccessResponse, error) {
+	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
+	out := new(ListComplimentaryAccessResponse)
+	err := c.cc.Invoke(ctx, SubscriptionBillingApi_ListComplimentaryAccess_FullMethodName, in, out, cOpts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *subscriptionBillingApiClient) GetCurrentComplimentaryAccess(ctx context.Context, in *CustomerRequest, opts ...grpc.CallOption) (*ComplimentaryAccessResponse, error) {
+	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
+	out := new(ComplimentaryAccessResponse)
+	err := c.cc.Invoke(ctx, SubscriptionBillingApi_GetCurrentComplimentaryAccess_FullMethodName, in, out, cOpts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *subscriptionBillingApiClient) ExtendComplimentaryAccess(ctx context.Context, in *ExtendComplimentaryAccessRequest, opts ...grpc.CallOption) (*ComplimentaryAccessResponse, error) {
+	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
+	out := new(ComplimentaryAccessResponse)
+	err := c.cc.Invoke(ctx, SubscriptionBillingApi_ExtendComplimentaryAccess_FullMethodName, in, out, cOpts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *subscriptionBillingApiClient) RevokeComplimentaryAccess(ctx context.Context, in *RevokeComplimentaryAccessRequest, opts ...grpc.CallOption) (*ComplimentaryAccessResponse, error) {
+	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
+	out := new(ComplimentaryAccessResponse)
+	err := c.cc.Invoke(ctx, SubscriptionBillingApi_RevokeComplimentaryAccess_FullMethodName, in, out, cOpts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
 func (c *subscriptionBillingApiClient) CheckEntitlement(ctx context.Context, in *CheckEntitlementRequest, opts ...grpc.CallOption) (*CheckEntitlementResponse, error) {
 	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
 	out := new(CheckEntitlementResponse)
@@ -618,6 +680,16 @@ func (c *subscriptionBillingApiClient) MarkManualInvoicePaid(ctx context.Context
 	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
 	out := new(InvoiceResponse)
 	err := c.cc.Invoke(ctx, SubscriptionBillingApi_MarkManualInvoicePaid_FullMethodName, in, out, cOpts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *subscriptionBillingApiClient) VoidAbandonedCheckout(ctx context.Context, in *VoidAbandonedCheckoutRequest, opts ...grpc.CallOption) (*InvoiceResponse, error) {
+	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
+	out := new(InvoiceResponse)
+	err := c.cc.Invoke(ctx, SubscriptionBillingApi_VoidAbandonedCheckout_FullMethodName, in, out, cOpts...)
 	if err != nil {
 		return nil, err
 	}
@@ -886,6 +958,11 @@ type SubscriptionBillingApiServer interface {
 	ChangePlan(context.Context, *ChangePlanRequest) (*PlanChangeResponse, error)
 	GetSubscriptionStatus(context.Context, *EntityIdRequest) (*SubscriptionStatusResponse, error)
 	GetCurrentSubscription(context.Context, *CustomerRequest) (*SubscriptionResponse, error)
+	CreateComplimentaryAccess(context.Context, *CreateComplimentaryAccessRequest) (*ComplimentaryAccessResponse, error)
+	ListComplimentaryAccess(context.Context, *ListComplimentaryAccessRequest) (*ListComplimentaryAccessResponse, error)
+	GetCurrentComplimentaryAccess(context.Context, *CustomerRequest) (*ComplimentaryAccessResponse, error)
+	ExtendComplimentaryAccess(context.Context, *ExtendComplimentaryAccessRequest) (*ComplimentaryAccessResponse, error)
+	RevokeComplimentaryAccess(context.Context, *RevokeComplimentaryAccessRequest) (*ComplimentaryAccessResponse, error)
 	CheckEntitlement(context.Context, *CheckEntitlementRequest) (*CheckEntitlementResponse, error)
 	GetEntitlementSnapshot(context.Context, *EntityIdRequest) (*EntitlementSnapshotResponse, error)
 	RefreshEntitlementSnapshot(context.Context, *EntityIdRequest) (*EntitlementSnapshotResponse, error)
@@ -895,6 +972,7 @@ type SubscriptionBillingApiServer interface {
 	ListAllInvoices(context.Context, *ListBillingDocumentsRequest) (*ListInvoicesResponse, error)
 	ListInvoices(context.Context, *CustomerRequest) (*ListInvoicesResponse, error)
 	MarkManualInvoicePaid(context.Context, *EntityIdRequest) (*InvoiceResponse, error)
+	VoidAbandonedCheckout(context.Context, *VoidAbandonedCheckoutRequest) (*InvoiceResponse, error)
 	// Customer-driven recovery of an outstanding invoice: with the saved card, or by entering a
 	// new one at the provider. Both carry the customer id so the service scopes the invoice itself.
 	PayInvoice(context.Context, *PayInvoiceRequest) (*PaymentResponse, error)
@@ -1038,6 +1116,21 @@ func (UnimplementedSubscriptionBillingApiServer) GetSubscriptionStatus(context.C
 func (UnimplementedSubscriptionBillingApiServer) GetCurrentSubscription(context.Context, *CustomerRequest) (*SubscriptionResponse, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method GetCurrentSubscription not implemented")
 }
+func (UnimplementedSubscriptionBillingApiServer) CreateComplimentaryAccess(context.Context, *CreateComplimentaryAccessRequest) (*ComplimentaryAccessResponse, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method CreateComplimentaryAccess not implemented")
+}
+func (UnimplementedSubscriptionBillingApiServer) ListComplimentaryAccess(context.Context, *ListComplimentaryAccessRequest) (*ListComplimentaryAccessResponse, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method ListComplimentaryAccess not implemented")
+}
+func (UnimplementedSubscriptionBillingApiServer) GetCurrentComplimentaryAccess(context.Context, *CustomerRequest) (*ComplimentaryAccessResponse, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method GetCurrentComplimentaryAccess not implemented")
+}
+func (UnimplementedSubscriptionBillingApiServer) ExtendComplimentaryAccess(context.Context, *ExtendComplimentaryAccessRequest) (*ComplimentaryAccessResponse, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method ExtendComplimentaryAccess not implemented")
+}
+func (UnimplementedSubscriptionBillingApiServer) RevokeComplimentaryAccess(context.Context, *RevokeComplimentaryAccessRequest) (*ComplimentaryAccessResponse, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method RevokeComplimentaryAccess not implemented")
+}
 func (UnimplementedSubscriptionBillingApiServer) CheckEntitlement(context.Context, *CheckEntitlementRequest) (*CheckEntitlementResponse, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method CheckEntitlement not implemented")
 }
@@ -1064,6 +1157,9 @@ func (UnimplementedSubscriptionBillingApiServer) ListInvoices(context.Context, *
 }
 func (UnimplementedSubscriptionBillingApiServer) MarkManualInvoicePaid(context.Context, *EntityIdRequest) (*InvoiceResponse, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method MarkManualInvoicePaid not implemented")
+}
+func (UnimplementedSubscriptionBillingApiServer) VoidAbandonedCheckout(context.Context, *VoidAbandonedCheckoutRequest) (*InvoiceResponse, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method VoidAbandonedCheckout not implemented")
 }
 func (UnimplementedSubscriptionBillingApiServer) PayInvoice(context.Context, *PayInvoiceRequest) (*PaymentResponse, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method PayInvoice not implemented")
@@ -1801,6 +1897,96 @@ func _SubscriptionBillingApi_GetCurrentSubscription_Handler(srv interface{}, ctx
 	return interceptor(ctx, in, info, handler)
 }
 
+func _SubscriptionBillingApi_CreateComplimentaryAccess_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(CreateComplimentaryAccessRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(SubscriptionBillingApiServer).CreateComplimentaryAccess(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: SubscriptionBillingApi_CreateComplimentaryAccess_FullMethodName,
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(SubscriptionBillingApiServer).CreateComplimentaryAccess(ctx, req.(*CreateComplimentaryAccessRequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _SubscriptionBillingApi_ListComplimentaryAccess_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(ListComplimentaryAccessRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(SubscriptionBillingApiServer).ListComplimentaryAccess(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: SubscriptionBillingApi_ListComplimentaryAccess_FullMethodName,
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(SubscriptionBillingApiServer).ListComplimentaryAccess(ctx, req.(*ListComplimentaryAccessRequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _SubscriptionBillingApi_GetCurrentComplimentaryAccess_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(CustomerRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(SubscriptionBillingApiServer).GetCurrentComplimentaryAccess(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: SubscriptionBillingApi_GetCurrentComplimentaryAccess_FullMethodName,
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(SubscriptionBillingApiServer).GetCurrentComplimentaryAccess(ctx, req.(*CustomerRequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _SubscriptionBillingApi_ExtendComplimentaryAccess_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(ExtendComplimentaryAccessRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(SubscriptionBillingApiServer).ExtendComplimentaryAccess(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: SubscriptionBillingApi_ExtendComplimentaryAccess_FullMethodName,
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(SubscriptionBillingApiServer).ExtendComplimentaryAccess(ctx, req.(*ExtendComplimentaryAccessRequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _SubscriptionBillingApi_RevokeComplimentaryAccess_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(RevokeComplimentaryAccessRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(SubscriptionBillingApiServer).RevokeComplimentaryAccess(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: SubscriptionBillingApi_RevokeComplimentaryAccess_FullMethodName,
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(SubscriptionBillingApiServer).RevokeComplimentaryAccess(ctx, req.(*RevokeComplimentaryAccessRequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
 func _SubscriptionBillingApi_CheckEntitlement_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
 	in := new(CheckEntitlementRequest)
 	if err := dec(in); err != nil {
@@ -1959,6 +2145,24 @@ func _SubscriptionBillingApi_MarkManualInvoicePaid_Handler(srv interface{}, ctx 
 	}
 	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
 		return srv.(SubscriptionBillingApiServer).MarkManualInvoicePaid(ctx, req.(*EntityIdRequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _SubscriptionBillingApi_VoidAbandonedCheckout_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(VoidAbandonedCheckoutRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(SubscriptionBillingApiServer).VoidAbandonedCheckout(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: SubscriptionBillingApi_VoidAbandonedCheckout_FullMethodName,
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(SubscriptionBillingApiServer).VoidAbandonedCheckout(ctx, req.(*VoidAbandonedCheckoutRequest))
 	}
 	return interceptor(ctx, in, info, handler)
 }
@@ -2511,6 +2715,26 @@ var SubscriptionBillingApi_ServiceDesc = grpc.ServiceDesc{
 			Handler:    _SubscriptionBillingApi_GetCurrentSubscription_Handler,
 		},
 		{
+			MethodName: "CreateComplimentaryAccess",
+			Handler:    _SubscriptionBillingApi_CreateComplimentaryAccess_Handler,
+		},
+		{
+			MethodName: "ListComplimentaryAccess",
+			Handler:    _SubscriptionBillingApi_ListComplimentaryAccess_Handler,
+		},
+		{
+			MethodName: "GetCurrentComplimentaryAccess",
+			Handler:    _SubscriptionBillingApi_GetCurrentComplimentaryAccess_Handler,
+		},
+		{
+			MethodName: "ExtendComplimentaryAccess",
+			Handler:    _SubscriptionBillingApi_ExtendComplimentaryAccess_Handler,
+		},
+		{
+			MethodName: "RevokeComplimentaryAccess",
+			Handler:    _SubscriptionBillingApi_RevokeComplimentaryAccess_Handler,
+		},
+		{
 			MethodName: "CheckEntitlement",
 			Handler:    _SubscriptionBillingApi_CheckEntitlement_Handler,
 		},
@@ -2545,6 +2769,10 @@ var SubscriptionBillingApi_ServiceDesc = grpc.ServiceDesc{
 		{
 			MethodName: "MarkManualInvoicePaid",
 			Handler:    _SubscriptionBillingApi_MarkManualInvoicePaid_Handler,
+		},
+		{
+			MethodName: "VoidAbandonedCheckout",
+			Handler:    _SubscriptionBillingApi_VoidAbandonedCheckout_Handler,
 		},
 		{
 			MethodName: "PayInvoice",
