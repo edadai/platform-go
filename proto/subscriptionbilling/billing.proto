@@ -66,7 +66,9 @@ service SubscriptionBillingApi {
   // new one at the provider. Both carry the customer id so the service scopes the invoice itself.
   rpc PayInvoice (PayInvoiceRequest) returns (PaymentResponse);
   rpc CreateInvoiceCheckout (CreateInvoiceCheckoutRequest) returns (PaymentIntentResponse);
-  // Customer-driven checkout of the next period so a card can be saved before renewal.
+  // Charges a small, non-refundable fee to capture a reusable card authorization.
+  rpc CreateCardVerificationCheckout (CreateCardVerificationCheckoutRequest) returns (PaymentIntentResponse);
+  // Deprecated: retained for old clients and always rejected.
   rpc CreateUpcomingCheckout (CreateUpcomingCheckoutRequest) returns (PaymentIntentResponse);
   rpc ListPayments (ListBillingDocumentsRequest) returns (ListPaymentsResponse);
   rpc RefundPayment (RefundPaymentRequest) returns (EntityResponse);
@@ -632,6 +634,12 @@ message CreateUpcomingCheckoutRequest {
   RequestContext context = 3;
 }
 
+message CreateCardVerificationCheckoutRequest {
+  string customer_id = 1;
+  string callback_url = 2;
+  RequestContext context = 3;
+}
+
 message ListPaymentRetryQueueRequest {
   string status = 1;
   int32 limit = 2;
@@ -946,6 +954,7 @@ message InvoiceResponse {
   string currency = 8;
   string due_at_utc = 9;
   string paid_at_utc = 10;
+  string invoice_type = 11;
 }
 
 message ListInvoicesResponse {

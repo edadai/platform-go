@@ -72,6 +72,7 @@ const (
 	SubscriptionBillingApi_VoidAbandonedCheckout_FullMethodName               = "/subscriptionbilling.SubscriptionBillingApi/VoidAbandonedCheckout"
 	SubscriptionBillingApi_PayInvoice_FullMethodName                          = "/subscriptionbilling.SubscriptionBillingApi/PayInvoice"
 	SubscriptionBillingApi_CreateInvoiceCheckout_FullMethodName               = "/subscriptionbilling.SubscriptionBillingApi/CreateInvoiceCheckout"
+	SubscriptionBillingApi_CreateCardVerificationCheckout_FullMethodName      = "/subscriptionbilling.SubscriptionBillingApi/CreateCardVerificationCheckout"
 	SubscriptionBillingApi_CreateUpcomingCheckout_FullMethodName              = "/subscriptionbilling.SubscriptionBillingApi/CreateUpcomingCheckout"
 	SubscriptionBillingApi_ListPayments_FullMethodName                        = "/subscriptionbilling.SubscriptionBillingApi/ListPayments"
 	SubscriptionBillingApi_RefundPayment_FullMethodName                       = "/subscriptionbilling.SubscriptionBillingApi/RefundPayment"
@@ -155,7 +156,9 @@ type SubscriptionBillingApiClient interface {
 	// new one at the provider. Both carry the customer id so the service scopes the invoice itself.
 	PayInvoice(ctx context.Context, in *PayInvoiceRequest, opts ...grpc.CallOption) (*PaymentResponse, error)
 	CreateInvoiceCheckout(ctx context.Context, in *CreateInvoiceCheckoutRequest, opts ...grpc.CallOption) (*PaymentIntentResponse, error)
-	// Customer-driven checkout of the next period so a card can be saved before renewal.
+	// Charges a small, non-refundable fee to capture a reusable card authorization.
+	CreateCardVerificationCheckout(ctx context.Context, in *CreateCardVerificationCheckoutRequest, opts ...grpc.CallOption) (*PaymentIntentResponse, error)
+	// Deprecated: retained for old clients and always rejected.
 	CreateUpcomingCheckout(ctx context.Context, in *CreateUpcomingCheckoutRequest, opts ...grpc.CallOption) (*PaymentIntentResponse, error)
 	ListPayments(ctx context.Context, in *ListBillingDocumentsRequest, opts ...grpc.CallOption) (*ListPaymentsResponse, error)
 	RefundPayment(ctx context.Context, in *RefundPaymentRequest, opts ...grpc.CallOption) (*EntityResponse, error)
@@ -716,6 +719,16 @@ func (c *subscriptionBillingApiClient) CreateInvoiceCheckout(ctx context.Context
 	return out, nil
 }
 
+func (c *subscriptionBillingApiClient) CreateCardVerificationCheckout(ctx context.Context, in *CreateCardVerificationCheckoutRequest, opts ...grpc.CallOption) (*PaymentIntentResponse, error) {
+	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
+	out := new(PaymentIntentResponse)
+	err := c.cc.Invoke(ctx, SubscriptionBillingApi_CreateCardVerificationCheckout_FullMethodName, in, out, cOpts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
 func (c *subscriptionBillingApiClient) CreateUpcomingCheckout(ctx context.Context, in *CreateUpcomingCheckoutRequest, opts ...grpc.CallOption) (*PaymentIntentResponse, error) {
 	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
 	out := new(PaymentIntentResponse)
@@ -977,7 +990,9 @@ type SubscriptionBillingApiServer interface {
 	// new one at the provider. Both carry the customer id so the service scopes the invoice itself.
 	PayInvoice(context.Context, *PayInvoiceRequest) (*PaymentResponse, error)
 	CreateInvoiceCheckout(context.Context, *CreateInvoiceCheckoutRequest) (*PaymentIntentResponse, error)
-	// Customer-driven checkout of the next period so a card can be saved before renewal.
+	// Charges a small, non-refundable fee to capture a reusable card authorization.
+	CreateCardVerificationCheckout(context.Context, *CreateCardVerificationCheckoutRequest) (*PaymentIntentResponse, error)
+	// Deprecated: retained for old clients and always rejected.
 	CreateUpcomingCheckout(context.Context, *CreateUpcomingCheckoutRequest) (*PaymentIntentResponse, error)
 	ListPayments(context.Context, *ListBillingDocumentsRequest) (*ListPaymentsResponse, error)
 	RefundPayment(context.Context, *RefundPaymentRequest) (*EntityResponse, error)
@@ -1166,6 +1181,9 @@ func (UnimplementedSubscriptionBillingApiServer) PayInvoice(context.Context, *Pa
 }
 func (UnimplementedSubscriptionBillingApiServer) CreateInvoiceCheckout(context.Context, *CreateInvoiceCheckoutRequest) (*PaymentIntentResponse, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method CreateInvoiceCheckout not implemented")
+}
+func (UnimplementedSubscriptionBillingApiServer) CreateCardVerificationCheckout(context.Context, *CreateCardVerificationCheckoutRequest) (*PaymentIntentResponse, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method CreateCardVerificationCheckout not implemented")
 }
 func (UnimplementedSubscriptionBillingApiServer) CreateUpcomingCheckout(context.Context, *CreateUpcomingCheckoutRequest) (*PaymentIntentResponse, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method CreateUpcomingCheckout not implemented")
@@ -2203,6 +2221,24 @@ func _SubscriptionBillingApi_CreateInvoiceCheckout_Handler(srv interface{}, ctx 
 	return interceptor(ctx, in, info, handler)
 }
 
+func _SubscriptionBillingApi_CreateCardVerificationCheckout_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(CreateCardVerificationCheckoutRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(SubscriptionBillingApiServer).CreateCardVerificationCheckout(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: SubscriptionBillingApi_CreateCardVerificationCheckout_FullMethodName,
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(SubscriptionBillingApiServer).CreateCardVerificationCheckout(ctx, req.(*CreateCardVerificationCheckoutRequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
 func _SubscriptionBillingApi_CreateUpcomingCheckout_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
 	in := new(CreateUpcomingCheckoutRequest)
 	if err := dec(in); err != nil {
@@ -2781,6 +2817,10 @@ var SubscriptionBillingApi_ServiceDesc = grpc.ServiceDesc{
 		{
 			MethodName: "CreateInvoiceCheckout",
 			Handler:    _SubscriptionBillingApi_CreateInvoiceCheckout_Handler,
+		},
+		{
+			MethodName: "CreateCardVerificationCheckout",
+			Handler:    _SubscriptionBillingApi_CreateCardVerificationCheckout_Handler,
 		},
 		{
 			MethodName: "CreateUpcomingCheckout",
