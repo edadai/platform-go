@@ -72,6 +72,7 @@ message CreateUploadRequest {
   string content_type = 3;
   int64 size_bytes = 4;
   string actor_id = 5;
+  string idempotency_key = 6;
 }
 
 message CreateUploadResponse {
@@ -80,6 +81,7 @@ message CreateUploadResponse {
   string url = 3;
   map<string, string> fields = 4;
   string expires_at = 5;
+  bool completed = 6;
 }
 
 message CompleteUploadRequest {
@@ -146,4 +148,6 @@ message CreateOriginalDownloadRequest {
 message CreateOriginalDownloadResponse {
   string url = 1;
   string expires_at = 2;
+  string source_version = 3;
+  int64 source_size = 4;
 }

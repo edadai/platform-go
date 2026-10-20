@@ -29,7 +29,7 @@ service InferenceService {
 
 message DocumentRef {
   string document_id = 1;
-  string extraction_key = 2;
+  string extraction_id = 2;
 }
 
 message CreateProgramRequest {

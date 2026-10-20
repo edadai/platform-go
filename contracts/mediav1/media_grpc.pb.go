@@ -31,6 +31,7 @@ const (
 	MediaService_ReferenceCandidates_FullMethodName    = "/media.v1.MediaService/ReferenceCandidates"
 	MediaService_ReconcileReference_FullMethodName     = "/media.v1.MediaService/ReconcileReference"
 	MediaService_CreateOriginalDownload_FullMethodName = "/media.v1.MediaService/CreateOriginalDownload"
+	MediaService_RequestSocialRendition_FullMethodName = "/media.v1.MediaService/RequestSocialRendition"
 )
 
 // MediaServiceClient is the client API for MediaService service.
@@ -49,6 +50,7 @@ type MediaServiceClient interface {
 	ReferenceCandidates(ctx context.Context, in *ReferenceCandidatesRequest, opts ...grpc.CallOption) (*ReferenceCandidatesResponse, error)
 	ReconcileReference(ctx context.Context, in *ReconcileReferenceRequest, opts ...grpc.CallOption) (*ReconcileReferenceResponse, error)
 	CreateOriginalDownload(ctx context.Context, in *CreateOriginalDownloadRequest, opts ...grpc.CallOption) (*CreateOriginalDownloadResponse, error)
+	RequestSocialRendition(ctx context.Context, in *RequestSocialRenditionRequest, opts ...grpc.CallOption) (*RequestSocialRenditionResponse, error)
 }
 
 type mediaServiceClient struct {
@@ -179,6 +181,16 @@ func (c *mediaServiceClient) CreateOriginalDownload(ctx context.Context, in *Cre
 	return out, nil
 }
 
+func (c *mediaServiceClient) RequestSocialRendition(ctx context.Context, in *RequestSocialRenditionRequest, opts ...grpc.CallOption) (*RequestSocialRenditionResponse, error) {
+	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
+	out := new(RequestSocialRenditionResponse)
+	err := c.cc.Invoke(ctx, MediaService_RequestSocialRendition_FullMethodName, in, out, cOpts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
 // MediaServiceServer is the server API for MediaService service.
 // All implementations must embed UnimplementedMediaServiceServer
 // for forward compatibility.
@@ -195,6 +207,7 @@ type MediaServiceServer interface {
 	ReferenceCandidates(context.Context, *ReferenceCandidatesRequest) (*ReferenceCandidatesResponse, error)
 	ReconcileReference(context.Context, *ReconcileReferenceRequest) (*ReconcileReferenceResponse, error)
 	CreateOriginalDownload(context.Context, *CreateOriginalDownloadRequest) (*CreateOriginalDownloadResponse, error)
+	RequestSocialRendition(context.Context, *RequestSocialRenditionRequest) (*RequestSocialRenditionResponse, error)
 	mustEmbedUnimplementedMediaServiceServer()
 }
 
@@ -240,6 +253,9 @@ func (UnimplementedMediaServiceServer) ReconcileReference(context.Context, *Reco
 }
 func (UnimplementedMediaServiceServer) CreateOriginalDownload(context.Context, *CreateOriginalDownloadRequest) (*CreateOriginalDownloadResponse, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method CreateOriginalDownload not implemented")
+}
+func (UnimplementedMediaServiceServer) RequestSocialRendition(context.Context, *RequestSocialRenditionRequest) (*RequestSocialRenditionResponse, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method RequestSocialRendition not implemented")
 }
 func (UnimplementedMediaServiceServer) mustEmbedUnimplementedMediaServiceServer() {}
 func (UnimplementedMediaServiceServer) testEmbeddedByValue()                      {}
@@ -478,6 +494,24 @@ func _MediaService_CreateOriginalDownload_Handler(srv interface{}, ctx context.C
 	return interceptor(ctx, in, info, handler)
 }
 
+func _MediaService_RequestSocialRendition_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(RequestSocialRenditionRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(MediaServiceServer).RequestSocialRendition(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: MediaService_RequestSocialRendition_FullMethodName,
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(MediaServiceServer).RequestSocialRendition(ctx, req.(*RequestSocialRenditionRequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
 // MediaService_ServiceDesc is the grpc.ServiceDesc for MediaService service.
 // It's only intended for direct use with grpc.RegisterService,
 // and not to be introspected or modified (even as a copy)
@@ -532,6 +566,10 @@ var MediaService_ServiceDesc = grpc.ServiceDesc{
 		{
 			MethodName: "CreateOriginalDownload",
 			Handler:    _MediaService_CreateOriginalDownload_Handler,
+		},
+		{
+			MethodName: "RequestSocialRendition",
+			Handler:    _MediaService_RequestSocialRendition_Handler,
 		},
 	},
 	Streams:  []grpc.StreamDesc{},

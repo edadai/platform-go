@@ -1,0 +1,92 @@
+syntax = "proto3";
+
+package studymaterials.v1;
+
+option go_package = "github.com/edadai/platform-go/contracts/studymaterialsv1;studymaterialsv1";
+
+service StudyMaterialsInternalService {
+  rpc GetExtractionSource(GetExtractionSourceRequest) returns (GetExtractionSourceResponse);
+  rpc PersistExtraction(stream PersistExtractionRequest) returns (PersistExtractionResponse);
+  rpc ReadExtraction(ReadExtractionRequest) returns (stream ReadExtractionResponse);
+  rpc LinkMigratedDocument(LinkMigratedDocumentRequest) returns (LinkMigratedDocumentResponse);
+}
+
+message GetExtractionSourceRequest {
+  string job_id = 1;
+  string document_id = 2;
+  string media_asset_id = 3;
+  string owner_id = 4;
+}
+
+message GetExtractionSourceResponse {
+  string url = 1;
+  string expires_at = 2;
+  string media_asset_id = 3;
+  string source_version = 4;
+  int64 source_size = 5;
+}
+
+message ExtractionHeader {
+  string idempotency_key = 1;
+  string extraction_id = 2;
+  string job_id = 3;
+  string document_id = 4;
+  string media_asset_id = 5;
+  string source_version = 6;
+  string source_sha256 = 7;
+  int64 source_size = 8;
+  string source_verification = 9;
+  string extractor_version = 10;
+  string filename = 11;
+  string media_type = 12;
+  string title = 13;
+  int32 page_count = 14;
+  repeated string warnings = 15;
+  string metadata_json = 16;
+  string content_sha256 = 17;
+}
+
+message ExtractionChunk {
+  int32 chunk_index = 1;
+  string content = 2;
+  int32 page_number = 3;
+  int32 page_start = 4;
+  int32 page_end = 5;
+  bool used_ocr = 6;
+  int32 char_count = 7;
+  optional int32 token_count = 8;
+  string section_ref = 9;
+  string metadata_json = 10;
+}
+
+message PersistExtractionRequest {
+  oneof payload {
+    ExtractionHeader header = 1;
+    ExtractionChunk chunk = 2;
+  }
+}
+
+message PersistExtractionResponse {
+  string extraction_id = 1;
+  bool replayed = 2;
+}
+
+message ReadExtractionRequest {
+  string extraction_id = 1;
+  string document_id = 2;
+}
+
+message ReadExtractionResponse {
+  oneof payload {
+    ExtractionHeader header = 1;
+    ExtractionChunk chunk = 2;
+  }
+}
+
+message LinkMigratedDocumentRequest {
+  string document_id = 1;
+  string media_asset_id = 2;
+  string extraction_id = 3;
+}
+
+message LinkMigratedDocumentResponse { bool linked = 1; }

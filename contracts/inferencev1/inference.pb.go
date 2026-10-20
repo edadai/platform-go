@@ -24,7 +24,7 @@ const (
 type DocumentRef struct {
 	state         protoimpl.MessageState `protogen:"open.v1"`
 	DocumentId    string                 `protobuf:"bytes,1,opt,name=document_id,json=documentId,proto3" json:"document_id,omitempty"`
-	ExtractionKey string                 `protobuf:"bytes,2,opt,name=extraction_key,json=extractionKey,proto3" json:"extraction_key,omitempty"`
+	ExtractionId  string                 `protobuf:"bytes,2,opt,name=extraction_id,json=extractionId,proto3" json:"extraction_id,omitempty"`
 	unknownFields protoimpl.UnknownFields
 	sizeCache     protoimpl.SizeCache
 }
@@ -66,9 +66,9 @@ func (x *DocumentRef) GetDocumentId() string {
 	return ""
 }
 
-func (x *DocumentRef) GetExtractionKey() string {
+func (x *DocumentRef) GetExtractionId() string {
 	if x != nil {
-		return x.ExtractionKey
+		return x.ExtractionId
 	}
 	return ""
 }
@@ -2037,11 +2037,11 @@ var File_inference_v1_inference_proto protoreflect.FileDescriptor
 
 const file_inference_v1_inference_proto_rawDesc = "" +
 	"\n" +
-	"\x1cinference/v1/inference.proto\x12\x11edad.inference.v1\"U\n" +
+	"\x1cinference/v1/inference.proto\x12\x11edad.inference.v1\"S\n" +
 	"\vDocumentRef\x12\x1f\n" +
 	"\vdocument_id\x18\x01 \x01(\tR\n" +
-	"documentId\x12%\n" +
-	"\x0eextraction_key\x18\x02 \x01(\tR\rextractionKey\"\xb6\x01\n" +
+	"documentId\x12#\n" +
+	"\rextraction_id\x18\x02 \x01(\tR\fextractionId\"\xb6\x01\n" +
 	"\x14CreateProgramRequest\x12\x17\n" +
 	"\auser_id\x18\x01 \x01(\tR\x06userId\x12 \n" +
 	"\fstudy_kit_id\x18\x02 \x01(\tR\n" +

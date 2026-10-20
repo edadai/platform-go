@@ -21,6 +21,186 @@ const (
 	_ = protoimpl.EnforceVersion(protoimpl.MaxVersion - 20)
 )
 
+type SocialRendition struct {
+	state         protoimpl.MessageState `protogen:"open.v1"`
+	Status        string                 `protobuf:"bytes,1,opt,name=status,proto3" json:"status,omitempty"`
+	PublicPath    string                 `protobuf:"bytes,2,opt,name=public_path,json=publicPath,proto3" json:"public_path,omitempty"`
+	FailureReason string                 `protobuf:"bytes,3,opt,name=failure_reason,json=failureReason,proto3" json:"failure_reason,omitempty"`
+	unknownFields protoimpl.UnknownFields
+	sizeCache     protoimpl.SizeCache
+}
+
+func (x *SocialRendition) Reset() {
+	*x = SocialRendition{}
+	mi := &file_media_v1_media_proto_msgTypes[0]
+	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+	ms.StoreMessageInfo(mi)
+}
+
+func (x *SocialRendition) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*SocialRendition) ProtoMessage() {}
+
+func (x *SocialRendition) ProtoReflect() protoreflect.Message {
+	mi := &file_media_v1_media_proto_msgTypes[0]
+	if x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use SocialRendition.ProtoReflect.Descriptor instead.
+func (*SocialRendition) Descriptor() ([]byte, []int) {
+	return file_media_v1_media_proto_rawDescGZIP(), []int{0}
+}
+
+func (x *SocialRendition) GetStatus() string {
+	if x != nil {
+		return x.Status
+	}
+	return ""
+}
+
+func (x *SocialRendition) GetPublicPath() string {
+	if x != nil {
+		return x.PublicPath
+	}
+	return ""
+}
+
+func (x *SocialRendition) GetFailureReason() string {
+	if x != nil {
+		return x.FailureReason
+	}
+	return ""
+}
+
+type RequestSocialRenditionRequest struct {
+	state         protoimpl.MessageState `protogen:"open.v1"`
+	AssetId       string                 `protobuf:"bytes,1,opt,name=asset_id,json=assetId,proto3" json:"asset_id,omitempty"`
+	Consumer      string                 `protobuf:"bytes,2,opt,name=consumer,proto3" json:"consumer,omitempty"`
+	ResourceId    string                 `protobuf:"bytes,3,opt,name=resource_id,json=resourceId,proto3" json:"resource_id,omitempty"`
+	FocalX        float64                `protobuf:"fixed64,4,opt,name=focal_x,json=focalX,proto3" json:"focal_x,omitempty"`
+	FocalY        float64                `protobuf:"fixed64,5,opt,name=focal_y,json=focalY,proto3" json:"focal_y,omitempty"`
+	unknownFields protoimpl.UnknownFields
+	sizeCache     protoimpl.SizeCache
+}
+
+func (x *RequestSocialRenditionRequest) Reset() {
+	*x = RequestSocialRenditionRequest{}
+	mi := &file_media_v1_media_proto_msgTypes[1]
+	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+	ms.StoreMessageInfo(mi)
+}
+
+func (x *RequestSocialRenditionRequest) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*RequestSocialRenditionRequest) ProtoMessage() {}
+
+func (x *RequestSocialRenditionRequest) ProtoReflect() protoreflect.Message {
+	mi := &file_media_v1_media_proto_msgTypes[1]
+	if x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use RequestSocialRenditionRequest.ProtoReflect.Descriptor instead.
+func (*RequestSocialRenditionRequest) Descriptor() ([]byte, []int) {
+	return file_media_v1_media_proto_rawDescGZIP(), []int{1}
+}
+
+func (x *RequestSocialRenditionRequest) GetAssetId() string {
+	if x != nil {
+		return x.AssetId
+	}
+	return ""
+}
+
+func (x *RequestSocialRenditionRequest) GetConsumer() string {
+	if x != nil {
+		return x.Consumer
+	}
+	return ""
+}
+
+func (x *RequestSocialRenditionRequest) GetResourceId() string {
+	if x != nil {
+		return x.ResourceId
+	}
+	return ""
+}
+
+func (x *RequestSocialRenditionRequest) GetFocalX() float64 {
+	if x != nil {
+		return x.FocalX
+	}
+	return 0
+}
+
+func (x *RequestSocialRenditionRequest) GetFocalY() float64 {
+	if x != nil {
+		return x.FocalY
+	}
+	return 0
+}
+
+type RequestSocialRenditionResponse struct {
+	state         protoimpl.MessageState `protogen:"open.v1"`
+	Rendition     *SocialRendition       `protobuf:"bytes,1,opt,name=rendition,proto3" json:"rendition,omitempty"`
+	unknownFields protoimpl.UnknownFields
+	sizeCache     protoimpl.SizeCache
+}
+
+func (x *RequestSocialRenditionResponse) Reset() {
+	*x = RequestSocialRenditionResponse{}
+	mi := &file_media_v1_media_proto_msgTypes[2]
+	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+	ms.StoreMessageInfo(mi)
+}
+
+func (x *RequestSocialRenditionResponse) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*RequestSocialRenditionResponse) ProtoMessage() {}
+
+func (x *RequestSocialRenditionResponse) ProtoReflect() protoreflect.Message {
+	mi := &file_media_v1_media_proto_msgTypes[2]
+	if x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use RequestSocialRenditionResponse.ProtoReflect.Descriptor instead.
+func (*RequestSocialRenditionResponse) Descriptor() ([]byte, []int) {
+	return file_media_v1_media_proto_rawDescGZIP(), []int{2}
+}
+
+func (x *RequestSocialRenditionResponse) GetRendition() *SocialRendition {
+	if x != nil {
+		return x.Rendition
+	}
+	return nil
+}
+
 type Rendition struct {
 	state         protoimpl.MessageState `protogen:"open.v1"`
 	Recipe        string                 `protobuf:"bytes,1,opt,name=recipe,proto3" json:"recipe,omitempty"`
@@ -35,7 +215,7 @@ type Rendition struct {
 
 func (x *Rendition) Reset() {
 	*x = Rendition{}
-	mi := &file_media_v1_media_proto_msgTypes[0]
+	mi := &file_media_v1_media_proto_msgTypes[3]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -47,7 +227,7 @@ func (x *Rendition) String() string {
 func (*Rendition) ProtoMessage() {}
 
 func (x *Rendition) ProtoReflect() protoreflect.Message {
-	mi := &file_media_v1_media_proto_msgTypes[0]
+	mi := &file_media_v1_media_proto_msgTypes[3]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -60,7 +240,7 @@ func (x *Rendition) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use Rendition.ProtoReflect.Descriptor instead.
 func (*Rendition) Descriptor() ([]byte, []int) {
-	return file_media_v1_media_proto_rawDescGZIP(), []int{0}
+	return file_media_v1_media_proto_rawDescGZIP(), []int{3}
 }
 
 func (x *Rendition) GetRecipe() string {
@@ -132,7 +312,7 @@ type Asset struct {
 
 func (x *Asset) Reset() {
 	*x = Asset{}
-	mi := &file_media_v1_media_proto_msgTypes[1]
+	mi := &file_media_v1_media_proto_msgTypes[4]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -144,7 +324,7 @@ func (x *Asset) String() string {
 func (*Asset) ProtoMessage() {}
 
 func (x *Asset) ProtoReflect() protoreflect.Message {
-	mi := &file_media_v1_media_proto_msgTypes[1]
+	mi := &file_media_v1_media_proto_msgTypes[4]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -157,7 +337,7 @@ func (x *Asset) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use Asset.ProtoReflect.Descriptor instead.
 func (*Asset) Descriptor() ([]byte, []int) {
-	return file_media_v1_media_proto_rawDescGZIP(), []int{1}
+	return file_media_v1_media_proto_rawDescGZIP(), []int{4}
 }
 
 func (x *Asset) GetId() string {
@@ -294,19 +474,20 @@ func (x *Asset) GetRenditions() []*Rendition {
 }
 
 type CreateUploadRequest struct {
-	state         protoimpl.MessageState `protogen:"open.v1"`
-	Purpose       string                 `protobuf:"bytes,1,opt,name=purpose,proto3" json:"purpose,omitempty"`
-	Filename      string                 `protobuf:"bytes,2,opt,name=filename,proto3" json:"filename,omitempty"`
-	ContentType   string                 `protobuf:"bytes,3,opt,name=content_type,json=contentType,proto3" json:"content_type,omitempty"`
-	SizeBytes     int64                  `protobuf:"varint,4,opt,name=size_bytes,json=sizeBytes,proto3" json:"size_bytes,omitempty"`
-	ActorId       string                 `protobuf:"bytes,5,opt,name=actor_id,json=actorId,proto3" json:"actor_id,omitempty"`
-	unknownFields protoimpl.UnknownFields
-	sizeCache     protoimpl.SizeCache
+	state          protoimpl.MessageState `protogen:"open.v1"`
+	Purpose        string                 `protobuf:"bytes,1,opt,name=purpose,proto3" json:"purpose,omitempty"`
+	Filename       string                 `protobuf:"bytes,2,opt,name=filename,proto3" json:"filename,omitempty"`
+	ContentType    string                 `protobuf:"bytes,3,opt,name=content_type,json=contentType,proto3" json:"content_type,omitempty"`
+	SizeBytes      int64                  `protobuf:"varint,4,opt,name=size_bytes,json=sizeBytes,proto3" json:"size_bytes,omitempty"`
+	ActorId        string                 `protobuf:"bytes,5,opt,name=actor_id,json=actorId,proto3" json:"actor_id,omitempty"`
+	IdempotencyKey string                 `protobuf:"bytes,6,opt,name=idempotency_key,json=idempotencyKey,proto3" json:"idempotency_key,omitempty"`
+	unknownFields  protoimpl.UnknownFields
+	sizeCache      protoimpl.SizeCache
 }
 
 func (x *CreateUploadRequest) Reset() {
 	*x = CreateUploadRequest{}
-	mi := &file_media_v1_media_proto_msgTypes[2]
+	mi := &file_media_v1_media_proto_msgTypes[5]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -318,7 +499,7 @@ func (x *CreateUploadRequest) String() string {
 func (*CreateUploadRequest) ProtoMessage() {}
 
 func (x *CreateUploadRequest) ProtoReflect() protoreflect.Message {
-	mi := &file_media_v1_media_proto_msgTypes[2]
+	mi := &file_media_v1_media_proto_msgTypes[5]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -331,7 +512,7 @@ func (x *CreateUploadRequest) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use CreateUploadRequest.ProtoReflect.Descriptor instead.
 func (*CreateUploadRequest) Descriptor() ([]byte, []int) {
-	return file_media_v1_media_proto_rawDescGZIP(), []int{2}
+	return file_media_v1_media_proto_rawDescGZIP(), []int{5}
 }
 
 func (x *CreateUploadRequest) GetPurpose() string {
@@ -369,6 +550,13 @@ func (x *CreateUploadRequest) GetActorId() string {
 	return ""
 }
 
+func (x *CreateUploadRequest) GetIdempotencyKey() string {
+	if x != nil {
+		return x.IdempotencyKey
+	}
+	return ""
+}
+
 type CreateUploadResponse struct {
 	state         protoimpl.MessageState `protogen:"open.v1"`
 	Id            string                 `protobuf:"bytes,1,opt,name=id,proto3" json:"id,omitempty"`
@@ -376,13 +564,14 @@ type CreateUploadResponse struct {
 	Url           string                 `protobuf:"bytes,3,opt,name=url,proto3" json:"url,omitempty"`
 	Fields        map[string]string      `protobuf:"bytes,4,rep,name=fields,proto3" json:"fields,omitempty" protobuf_key:"bytes,1,opt,name=key" protobuf_val:"bytes,2,opt,name=value"`
 	ExpiresAt     string                 `protobuf:"bytes,5,opt,name=expires_at,json=expiresAt,proto3" json:"expires_at,omitempty"`
+	Completed     bool                   `protobuf:"varint,6,opt,name=completed,proto3" json:"completed,omitempty"`
 	unknownFields protoimpl.UnknownFields
 	sizeCache     protoimpl.SizeCache
 }
 
 func (x *CreateUploadResponse) Reset() {
 	*x = CreateUploadResponse{}
-	mi := &file_media_v1_media_proto_msgTypes[3]
+	mi := &file_media_v1_media_proto_msgTypes[6]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -394,7 +583,7 @@ func (x *CreateUploadResponse) String() string {
 func (*CreateUploadResponse) ProtoMessage() {}
 
 func (x *CreateUploadResponse) ProtoReflect() protoreflect.Message {
-	mi := &file_media_v1_media_proto_msgTypes[3]
+	mi := &file_media_v1_media_proto_msgTypes[6]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -407,7 +596,7 @@ func (x *CreateUploadResponse) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use CreateUploadResponse.ProtoReflect.Descriptor instead.
 func (*CreateUploadResponse) Descriptor() ([]byte, []int) {
-	return file_media_v1_media_proto_rawDescGZIP(), []int{3}
+	return file_media_v1_media_proto_rawDescGZIP(), []int{6}
 }
 
 func (x *CreateUploadResponse) GetId() string {
@@ -445,6 +634,13 @@ func (x *CreateUploadResponse) GetExpiresAt() string {
 	return ""
 }
 
+func (x *CreateUploadResponse) GetCompleted() bool {
+	if x != nil {
+		return x.Completed
+	}
+	return false
+}
+
 type CompleteUploadRequest struct {
 	state         protoimpl.MessageState `protogen:"open.v1"`
 	SessionId     string                 `protobuf:"bytes,1,opt,name=session_id,json=sessionId,proto3" json:"session_id,omitempty"`
@@ -456,7 +652,7 @@ type CompleteUploadRequest struct {
 
 func (x *CompleteUploadRequest) Reset() {
 	*x = CompleteUploadRequest{}
-	mi := &file_media_v1_media_proto_msgTypes[4]
+	mi := &file_media_v1_media_proto_msgTypes[7]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -468,7 +664,7 @@ func (x *CompleteUploadRequest) String() string {
 func (*CompleteUploadRequest) ProtoMessage() {}
 
 func (x *CompleteUploadRequest) ProtoReflect() protoreflect.Message {
-	mi := &file_media_v1_media_proto_msgTypes[4]
+	mi := &file_media_v1_media_proto_msgTypes[7]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -481,7 +677,7 @@ func (x *CompleteUploadRequest) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use CompleteUploadRequest.ProtoReflect.Descriptor instead.
 func (*CompleteUploadRequest) Descriptor() ([]byte, []int) {
-	return file_media_v1_media_proto_rawDescGZIP(), []int{4}
+	return file_media_v1_media_proto_rawDescGZIP(), []int{7}
 }
 
 func (x *CompleteUploadRequest) GetSessionId() string {
@@ -514,7 +710,7 @@ type CompleteUploadResponse struct {
 
 func (x *CompleteUploadResponse) Reset() {
 	*x = CompleteUploadResponse{}
-	mi := &file_media_v1_media_proto_msgTypes[5]
+	mi := &file_media_v1_media_proto_msgTypes[8]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -526,7 +722,7 @@ func (x *CompleteUploadResponse) String() string {
 func (*CompleteUploadResponse) ProtoMessage() {}
 
 func (x *CompleteUploadResponse) ProtoReflect() protoreflect.Message {
-	mi := &file_media_v1_media_proto_msgTypes[5]
+	mi := &file_media_v1_media_proto_msgTypes[8]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -539,7 +735,7 @@ func (x *CompleteUploadResponse) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use CompleteUploadResponse.ProtoReflect.Descriptor instead.
 func (*CompleteUploadResponse) Descriptor() ([]byte, []int) {
-	return file_media_v1_media_proto_rawDescGZIP(), []int{5}
+	return file_media_v1_media_proto_rawDescGZIP(), []int{8}
 }
 
 func (x *CompleteUploadResponse) GetAsset() *Asset {
@@ -559,7 +755,7 @@ type ListAssetsRequest struct {
 
 func (x *ListAssetsRequest) Reset() {
 	*x = ListAssetsRequest{}
-	mi := &file_media_v1_media_proto_msgTypes[6]
+	mi := &file_media_v1_media_proto_msgTypes[9]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -571,7 +767,7 @@ func (x *ListAssetsRequest) String() string {
 func (*ListAssetsRequest) ProtoMessage() {}
 
 func (x *ListAssetsRequest) ProtoReflect() protoreflect.Message {
-	mi := &file_media_v1_media_proto_msgTypes[6]
+	mi := &file_media_v1_media_proto_msgTypes[9]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -584,7 +780,7 @@ func (x *ListAssetsRequest) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use ListAssetsRequest.ProtoReflect.Descriptor instead.
 func (*ListAssetsRequest) Descriptor() ([]byte, []int) {
-	return file_media_v1_media_proto_rawDescGZIP(), []int{6}
+	return file_media_v1_media_proto_rawDescGZIP(), []int{9}
 }
 
 func (x *ListAssetsRequest) GetPurpose() string {
@@ -610,7 +806,7 @@ type ListAssetsResponse struct {
 
 func (x *ListAssetsResponse) Reset() {
 	*x = ListAssetsResponse{}
-	mi := &file_media_v1_media_proto_msgTypes[7]
+	mi := &file_media_v1_media_proto_msgTypes[10]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -622,7 +818,7 @@ func (x *ListAssetsResponse) String() string {
 func (*ListAssetsResponse) ProtoMessage() {}
 
 func (x *ListAssetsResponse) ProtoReflect() protoreflect.Message {
-	mi := &file_media_v1_media_proto_msgTypes[7]
+	mi := &file_media_v1_media_proto_msgTypes[10]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -635,7 +831,7 @@ func (x *ListAssetsResponse) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use ListAssetsResponse.ProtoReflect.Descriptor instead.
 func (*ListAssetsResponse) Descriptor() ([]byte, []int) {
-	return file_media_v1_media_proto_rawDescGZIP(), []int{7}
+	return file_media_v1_media_proto_rawDescGZIP(), []int{10}
 }
 
 func (x *ListAssetsResponse) GetAssets() []*Asset {
@@ -654,7 +850,7 @@ type GetAssetRequest struct {
 
 func (x *GetAssetRequest) Reset() {
 	*x = GetAssetRequest{}
-	mi := &file_media_v1_media_proto_msgTypes[8]
+	mi := &file_media_v1_media_proto_msgTypes[11]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -666,7 +862,7 @@ func (x *GetAssetRequest) String() string {
 func (*GetAssetRequest) ProtoMessage() {}
 
 func (x *GetAssetRequest) ProtoReflect() protoreflect.Message {
-	mi := &file_media_v1_media_proto_msgTypes[8]
+	mi := &file_media_v1_media_proto_msgTypes[11]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -679,7 +875,7 @@ func (x *GetAssetRequest) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use GetAssetRequest.ProtoReflect.Descriptor instead.
 func (*GetAssetRequest) Descriptor() ([]byte, []int) {
-	return file_media_v1_media_proto_rawDescGZIP(), []int{8}
+	return file_media_v1_media_proto_rawDescGZIP(), []int{11}
 }
 
 func (x *GetAssetRequest) GetId() string {
@@ -698,7 +894,7 @@ type GetAssetResponse struct {
 
 func (x *GetAssetResponse) Reset() {
 	*x = GetAssetResponse{}
-	mi := &file_media_v1_media_proto_msgTypes[9]
+	mi := &file_media_v1_media_proto_msgTypes[12]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -710,7 +906,7 @@ func (x *GetAssetResponse) String() string {
 func (*GetAssetResponse) ProtoMessage() {}
 
 func (x *GetAssetResponse) ProtoReflect() protoreflect.Message {
-	mi := &file_media_v1_media_proto_msgTypes[9]
+	mi := &file_media_v1_media_proto_msgTypes[12]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -723,7 +919,7 @@ func (x *GetAssetResponse) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use GetAssetResponse.ProtoReflect.Descriptor instead.
 func (*GetAssetResponse) Descriptor() ([]byte, []int) {
-	return file_media_v1_media_proto_rawDescGZIP(), []int{9}
+	return file_media_v1_media_proto_rawDescGZIP(), []int{12}
 }
 
 func (x *GetAssetResponse) GetAsset() *Asset {
@@ -742,7 +938,7 @@ type BatchGetAssetsRequest struct {
 
 func (x *BatchGetAssetsRequest) Reset() {
 	*x = BatchGetAssetsRequest{}
-	mi := &file_media_v1_media_proto_msgTypes[10]
+	mi := &file_media_v1_media_proto_msgTypes[13]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -754,7 +950,7 @@ func (x *BatchGetAssetsRequest) String() string {
 func (*BatchGetAssetsRequest) ProtoMessage() {}
 
 func (x *BatchGetAssetsRequest) ProtoReflect() protoreflect.Message {
-	mi := &file_media_v1_media_proto_msgTypes[10]
+	mi := &file_media_v1_media_proto_msgTypes[13]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -767,7 +963,7 @@ func (x *BatchGetAssetsRequest) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use BatchGetAssetsRequest.ProtoReflect.Descriptor instead.
 func (*BatchGetAssetsRequest) Descriptor() ([]byte, []int) {
-	return file_media_v1_media_proto_rawDescGZIP(), []int{10}
+	return file_media_v1_media_proto_rawDescGZIP(), []int{13}
 }
 
 func (x *BatchGetAssetsRequest) GetIds() []string {
@@ -786,7 +982,7 @@ type BatchGetAssetsResponse struct {
 
 func (x *BatchGetAssetsResponse) Reset() {
 	*x = BatchGetAssetsResponse{}
-	mi := &file_media_v1_media_proto_msgTypes[11]
+	mi := &file_media_v1_media_proto_msgTypes[14]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -798,7 +994,7 @@ func (x *BatchGetAssetsResponse) String() string {
 func (*BatchGetAssetsResponse) ProtoMessage() {}
 
 func (x *BatchGetAssetsResponse) ProtoReflect() protoreflect.Message {
-	mi := &file_media_v1_media_proto_msgTypes[11]
+	mi := &file_media_v1_media_proto_msgTypes[14]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -811,7 +1007,7 @@ func (x *BatchGetAssetsResponse) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use BatchGetAssetsResponse.ProtoReflect.Descriptor instead.
 func (*BatchGetAssetsResponse) Descriptor() ([]byte, []int) {
-	return file_media_v1_media_proto_rawDescGZIP(), []int{11}
+	return file_media_v1_media_proto_rawDescGZIP(), []int{14}
 }
 
 func (x *BatchGetAssetsResponse) GetAssets() map[string]*Asset {
@@ -835,7 +1031,7 @@ type UpdateAssetRequest struct {
 
 func (x *UpdateAssetRequest) Reset() {
 	*x = UpdateAssetRequest{}
-	mi := &file_media_v1_media_proto_msgTypes[12]
+	mi := &file_media_v1_media_proto_msgTypes[15]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -847,7 +1043,7 @@ func (x *UpdateAssetRequest) String() string {
 func (*UpdateAssetRequest) ProtoMessage() {}
 
 func (x *UpdateAssetRequest) ProtoReflect() protoreflect.Message {
-	mi := &file_media_v1_media_proto_msgTypes[12]
+	mi := &file_media_v1_media_proto_msgTypes[15]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -860,7 +1056,7 @@ func (x *UpdateAssetRequest) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use UpdateAssetRequest.ProtoReflect.Descriptor instead.
 func (*UpdateAssetRequest) Descriptor() ([]byte, []int) {
-	return file_media_v1_media_proto_rawDescGZIP(), []int{12}
+	return file_media_v1_media_proto_rawDescGZIP(), []int{15}
 }
 
 func (x *UpdateAssetRequest) GetId() string {
@@ -914,7 +1110,7 @@ type UpdateAssetResponse struct {
 
 func (x *UpdateAssetResponse) Reset() {
 	*x = UpdateAssetResponse{}
-	mi := &file_media_v1_media_proto_msgTypes[13]
+	mi := &file_media_v1_media_proto_msgTypes[16]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -926,7 +1122,7 @@ func (x *UpdateAssetResponse) String() string {
 func (*UpdateAssetResponse) ProtoMessage() {}
 
 func (x *UpdateAssetResponse) ProtoReflect() protoreflect.Message {
-	mi := &file_media_v1_media_proto_msgTypes[13]
+	mi := &file_media_v1_media_proto_msgTypes[16]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -939,7 +1135,7 @@ func (x *UpdateAssetResponse) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use UpdateAssetResponse.ProtoReflect.Descriptor instead.
 func (*UpdateAssetResponse) Descriptor() ([]byte, []int) {
-	return file_media_v1_media_proto_rawDescGZIP(), []int{13}
+	return file_media_v1_media_proto_rawDescGZIP(), []int{16}
 }
 
 func (x *UpdateAssetResponse) GetAsset() *Asset {
@@ -959,7 +1155,7 @@ type RetryAssetRequest struct {
 
 func (x *RetryAssetRequest) Reset() {
 	*x = RetryAssetRequest{}
-	mi := &file_media_v1_media_proto_msgTypes[14]
+	mi := &file_media_v1_media_proto_msgTypes[17]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -971,7 +1167,7 @@ func (x *RetryAssetRequest) String() string {
 func (*RetryAssetRequest) ProtoMessage() {}
 
 func (x *RetryAssetRequest) ProtoReflect() protoreflect.Message {
-	mi := &file_media_v1_media_proto_msgTypes[14]
+	mi := &file_media_v1_media_proto_msgTypes[17]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -984,7 +1180,7 @@ func (x *RetryAssetRequest) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use RetryAssetRequest.ProtoReflect.Descriptor instead.
 func (*RetryAssetRequest) Descriptor() ([]byte, []int) {
-	return file_media_v1_media_proto_rawDescGZIP(), []int{14}
+	return file_media_v1_media_proto_rawDescGZIP(), []int{17}
 }
 
 func (x *RetryAssetRequest) GetId() string {
@@ -1010,7 +1206,7 @@ type RetryAssetResponse struct {
 
 func (x *RetryAssetResponse) Reset() {
 	*x = RetryAssetResponse{}
-	mi := &file_media_v1_media_proto_msgTypes[15]
+	mi := &file_media_v1_media_proto_msgTypes[18]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -1022,7 +1218,7 @@ func (x *RetryAssetResponse) String() string {
 func (*RetryAssetResponse) ProtoMessage() {}
 
 func (x *RetryAssetResponse) ProtoReflect() protoreflect.Message {
-	mi := &file_media_v1_media_proto_msgTypes[15]
+	mi := &file_media_v1_media_proto_msgTypes[18]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -1035,7 +1231,7 @@ func (x *RetryAssetResponse) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use RetryAssetResponse.ProtoReflect.Descriptor instead.
 func (*RetryAssetResponse) Descriptor() ([]byte, []int) {
-	return file_media_v1_media_proto_rawDescGZIP(), []int{15}
+	return file_media_v1_media_proto_rawDescGZIP(), []int{18}
 }
 
 func (x *RetryAssetResponse) GetOk() bool {
@@ -1055,7 +1251,7 @@ type DeleteAssetRequest struct {
 
 func (x *DeleteAssetRequest) Reset() {
 	*x = DeleteAssetRequest{}
-	mi := &file_media_v1_media_proto_msgTypes[16]
+	mi := &file_media_v1_media_proto_msgTypes[19]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -1067,7 +1263,7 @@ func (x *DeleteAssetRequest) String() string {
 func (*DeleteAssetRequest) ProtoMessage() {}
 
 func (x *DeleteAssetRequest) ProtoReflect() protoreflect.Message {
-	mi := &file_media_v1_media_proto_msgTypes[16]
+	mi := &file_media_v1_media_proto_msgTypes[19]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -1080,7 +1276,7 @@ func (x *DeleteAssetRequest) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use DeleteAssetRequest.ProtoReflect.Descriptor instead.
 func (*DeleteAssetRequest) Descriptor() ([]byte, []int) {
-	return file_media_v1_media_proto_rawDescGZIP(), []int{16}
+	return file_media_v1_media_proto_rawDescGZIP(), []int{19}
 }
 
 func (x *DeleteAssetRequest) GetId() string {
@@ -1106,7 +1302,7 @@ type DeleteAssetResponse struct {
 
 func (x *DeleteAssetResponse) Reset() {
 	*x = DeleteAssetResponse{}
-	mi := &file_media_v1_media_proto_msgTypes[17]
+	mi := &file_media_v1_media_proto_msgTypes[20]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -1118,7 +1314,7 @@ func (x *DeleteAssetResponse) String() string {
 func (*DeleteAssetResponse) ProtoMessage() {}
 
 func (x *DeleteAssetResponse) ProtoReflect() protoreflect.Message {
-	mi := &file_media_v1_media_proto_msgTypes[17]
+	mi := &file_media_v1_media_proto_msgTypes[20]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -1131,7 +1327,7 @@ func (x *DeleteAssetResponse) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use DeleteAssetResponse.ProtoReflect.Descriptor instead.
 func (*DeleteAssetResponse) Descriptor() ([]byte, []int) {
-	return file_media_v1_media_proto_rawDescGZIP(), []int{17}
+	return file_media_v1_media_proto_rawDescGZIP(), []int{20}
 }
 
 func (x *DeleteAssetResponse) GetOk() bool {
@@ -1152,7 +1348,7 @@ type ReserveReferencesRequest struct {
 
 func (x *ReserveReferencesRequest) Reset() {
 	*x = ReserveReferencesRequest{}
-	mi := &file_media_v1_media_proto_msgTypes[18]
+	mi := &file_media_v1_media_proto_msgTypes[21]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -1164,7 +1360,7 @@ func (x *ReserveReferencesRequest) String() string {
 func (*ReserveReferencesRequest) ProtoMessage() {}
 
 func (x *ReserveReferencesRequest) ProtoReflect() protoreflect.Message {
-	mi := &file_media_v1_media_proto_msgTypes[18]
+	mi := &file_media_v1_media_proto_msgTypes[21]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -1177,7 +1373,7 @@ func (x *ReserveReferencesRequest) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use ReserveReferencesRequest.ProtoReflect.Descriptor instead.
 func (*ReserveReferencesRequest) Descriptor() ([]byte, []int) {
-	return file_media_v1_media_proto_rawDescGZIP(), []int{18}
+	return file_media_v1_media_proto_rawDescGZIP(), []int{21}
 }
 
 func (x *ReserveReferencesRequest) GetConsumer() string {
@@ -1210,7 +1406,7 @@ type ReserveReferencesResponse struct {
 
 func (x *ReserveReferencesResponse) Reset() {
 	*x = ReserveReferencesResponse{}
-	mi := &file_media_v1_media_proto_msgTypes[19]
+	mi := &file_media_v1_media_proto_msgTypes[22]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -1222,7 +1418,7 @@ func (x *ReserveReferencesResponse) String() string {
 func (*ReserveReferencesResponse) ProtoMessage() {}
 
 func (x *ReserveReferencesResponse) ProtoReflect() protoreflect.Message {
-	mi := &file_media_v1_media_proto_msgTypes[19]
+	mi := &file_media_v1_media_proto_msgTypes[22]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -1235,7 +1431,7 @@ func (x *ReserveReferencesResponse) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use ReserveReferencesResponse.ProtoReflect.Descriptor instead.
 func (*ReserveReferencesResponse) Descriptor() ([]byte, []int) {
-	return file_media_v1_media_proto_rawDescGZIP(), []int{19}
+	return file_media_v1_media_proto_rawDescGZIP(), []int{22}
 }
 
 func (x *ReserveReferencesResponse) GetOk() bool {
@@ -1254,7 +1450,7 @@ type ReferenceCandidatesRequest struct {
 
 func (x *ReferenceCandidatesRequest) Reset() {
 	*x = ReferenceCandidatesRequest{}
-	mi := &file_media_v1_media_proto_msgTypes[20]
+	mi := &file_media_v1_media_proto_msgTypes[23]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -1266,7 +1462,7 @@ func (x *ReferenceCandidatesRequest) String() string {
 func (*ReferenceCandidatesRequest) ProtoMessage() {}
 
 func (x *ReferenceCandidatesRequest) ProtoReflect() protoreflect.Message {
-	mi := &file_media_v1_media_proto_msgTypes[20]
+	mi := &file_media_v1_media_proto_msgTypes[23]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -1279,7 +1475,7 @@ func (x *ReferenceCandidatesRequest) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use ReferenceCandidatesRequest.ProtoReflect.Descriptor instead.
 func (*ReferenceCandidatesRequest) Descriptor() ([]byte, []int) {
-	return file_media_v1_media_proto_rawDescGZIP(), []int{20}
+	return file_media_v1_media_proto_rawDescGZIP(), []int{23}
 }
 
 func (x *ReferenceCandidatesRequest) GetConsumer() string {
@@ -1298,7 +1494,7 @@ type ReferenceCandidatesResponse struct {
 
 func (x *ReferenceCandidatesResponse) Reset() {
 	*x = ReferenceCandidatesResponse{}
-	mi := &file_media_v1_media_proto_msgTypes[21]
+	mi := &file_media_v1_media_proto_msgTypes[24]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -1310,7 +1506,7 @@ func (x *ReferenceCandidatesResponse) String() string {
 func (*ReferenceCandidatesResponse) ProtoMessage() {}
 
 func (x *ReferenceCandidatesResponse) ProtoReflect() protoreflect.Message {
-	mi := &file_media_v1_media_proto_msgTypes[21]
+	mi := &file_media_v1_media_proto_msgTypes[24]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -1323,7 +1519,7 @@ func (x *ReferenceCandidatesResponse) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use ReferenceCandidatesResponse.ProtoReflect.Descriptor instead.
 func (*ReferenceCandidatesResponse) Descriptor() ([]byte, []int) {
-	return file_media_v1_media_proto_rawDescGZIP(), []int{21}
+	return file_media_v1_media_proto_rawDescGZIP(), []int{24}
 }
 
 func (x *ReferenceCandidatesResponse) GetResourceIds() []string {
@@ -1344,7 +1540,7 @@ type ReconcileReferenceRequest struct {
 
 func (x *ReconcileReferenceRequest) Reset() {
 	*x = ReconcileReferenceRequest{}
-	mi := &file_media_v1_media_proto_msgTypes[22]
+	mi := &file_media_v1_media_proto_msgTypes[25]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -1356,7 +1552,7 @@ func (x *ReconcileReferenceRequest) String() string {
 func (*ReconcileReferenceRequest) ProtoMessage() {}
 
 func (x *ReconcileReferenceRequest) ProtoReflect() protoreflect.Message {
-	mi := &file_media_v1_media_proto_msgTypes[22]
+	mi := &file_media_v1_media_proto_msgTypes[25]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -1369,7 +1565,7 @@ func (x *ReconcileReferenceRequest) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use ReconcileReferenceRequest.ProtoReflect.Descriptor instead.
 func (*ReconcileReferenceRequest) Descriptor() ([]byte, []int) {
-	return file_media_v1_media_proto_rawDescGZIP(), []int{22}
+	return file_media_v1_media_proto_rawDescGZIP(), []int{25}
 }
 
 func (x *ReconcileReferenceRequest) GetConsumer() string {
@@ -1402,7 +1598,7 @@ type ReconcileReferenceResponse struct {
 
 func (x *ReconcileReferenceResponse) Reset() {
 	*x = ReconcileReferenceResponse{}
-	mi := &file_media_v1_media_proto_msgTypes[23]
+	mi := &file_media_v1_media_proto_msgTypes[26]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -1414,7 +1610,7 @@ func (x *ReconcileReferenceResponse) String() string {
 func (*ReconcileReferenceResponse) ProtoMessage() {}
 
 func (x *ReconcileReferenceResponse) ProtoReflect() protoreflect.Message {
-	mi := &file_media_v1_media_proto_msgTypes[23]
+	mi := &file_media_v1_media_proto_msgTypes[26]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -1427,7 +1623,7 @@ func (x *ReconcileReferenceResponse) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use ReconcileReferenceResponse.ProtoReflect.Descriptor instead.
 func (*ReconcileReferenceResponse) Descriptor() ([]byte, []int) {
-	return file_media_v1_media_proto_rawDescGZIP(), []int{23}
+	return file_media_v1_media_proto_rawDescGZIP(), []int{26}
 }
 
 func (x *ReconcileReferenceResponse) GetOk() bool {
@@ -1447,7 +1643,7 @@ type CreateOriginalDownloadRequest struct {
 
 func (x *CreateOriginalDownloadRequest) Reset() {
 	*x = CreateOriginalDownloadRequest{}
-	mi := &file_media_v1_media_proto_msgTypes[24]
+	mi := &file_media_v1_media_proto_msgTypes[27]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -1459,7 +1655,7 @@ func (x *CreateOriginalDownloadRequest) String() string {
 func (*CreateOriginalDownloadRequest) ProtoMessage() {}
 
 func (x *CreateOriginalDownloadRequest) ProtoReflect() protoreflect.Message {
-	mi := &file_media_v1_media_proto_msgTypes[24]
+	mi := &file_media_v1_media_proto_msgTypes[27]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -1472,7 +1668,7 @@ func (x *CreateOriginalDownloadRequest) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use CreateOriginalDownloadRequest.ProtoReflect.Descriptor instead.
 func (*CreateOriginalDownloadRequest) Descriptor() ([]byte, []int) {
-	return file_media_v1_media_proto_rawDescGZIP(), []int{24}
+	return file_media_v1_media_proto_rawDescGZIP(), []int{27}
 }
 
 func (x *CreateOriginalDownloadRequest) GetId() string {
@@ -1493,13 +1689,15 @@ type CreateOriginalDownloadResponse struct {
 	state         protoimpl.MessageState `protogen:"open.v1"`
 	Url           string                 `protobuf:"bytes,1,opt,name=url,proto3" json:"url,omitempty"`
 	ExpiresAt     string                 `protobuf:"bytes,2,opt,name=expires_at,json=expiresAt,proto3" json:"expires_at,omitempty"`
+	SourceVersion string                 `protobuf:"bytes,3,opt,name=source_version,json=sourceVersion,proto3" json:"source_version,omitempty"`
+	SourceSize    int64                  `protobuf:"varint,4,opt,name=source_size,json=sourceSize,proto3" json:"source_size,omitempty"`
 	unknownFields protoimpl.UnknownFields
 	sizeCache     protoimpl.SizeCache
 }
 
 func (x *CreateOriginalDownloadResponse) Reset() {
 	*x = CreateOriginalDownloadResponse{}
-	mi := &file_media_v1_media_proto_msgTypes[25]
+	mi := &file_media_v1_media_proto_msgTypes[28]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -1511,7 +1709,7 @@ func (x *CreateOriginalDownloadResponse) String() string {
 func (*CreateOriginalDownloadResponse) ProtoMessage() {}
 
 func (x *CreateOriginalDownloadResponse) ProtoReflect() protoreflect.Message {
-	mi := &file_media_v1_media_proto_msgTypes[25]
+	mi := &file_media_v1_media_proto_msgTypes[28]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -1524,7 +1722,7 @@ func (x *CreateOriginalDownloadResponse) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use CreateOriginalDownloadResponse.ProtoReflect.Descriptor instead.
 func (*CreateOriginalDownloadResponse) Descriptor() ([]byte, []int) {
-	return file_media_v1_media_proto_rawDescGZIP(), []int{25}
+	return file_media_v1_media_proto_rawDescGZIP(), []int{28}
 }
 
 func (x *CreateOriginalDownloadResponse) GetUrl() string {
@@ -1541,11 +1739,39 @@ func (x *CreateOriginalDownloadResponse) GetExpiresAt() string {
 	return ""
 }
 
+func (x *CreateOriginalDownloadResponse) GetSourceVersion() string {
+	if x != nil {
+		return x.SourceVersion
+	}
+	return ""
+}
+
+func (x *CreateOriginalDownloadResponse) GetSourceSize() int64 {
+	if x != nil {
+		return x.SourceSize
+	}
+	return 0
+}
+
 var File_media_v1_media_proto protoreflect.FileDescriptor
 
 const file_media_v1_media_proto_rawDesc = "" +
 	"\n" +
-	"\x14media/v1/media.proto\x12\bmedia.v1\"\xaf\x01\n" +
+	"\x14media/v1/media.proto\x12\bmedia.v1\"q\n" +
+	"\x0fSocialRendition\x12\x16\n" +
+	"\x06status\x18\x01 \x01(\tR\x06status\x12\x1f\n" +
+	"\vpublic_path\x18\x02 \x01(\tR\n" +
+	"publicPath\x12%\n" +
+	"\x0efailure_reason\x18\x03 \x01(\tR\rfailureReason\"\xa9\x01\n" +
+	"\x1dRequestSocialRenditionRequest\x12\x19\n" +
+	"\basset_id\x18\x01 \x01(\tR\aassetId\x12\x1a\n" +
+	"\bconsumer\x18\x02 \x01(\tR\bconsumer\x12\x1f\n" +
+	"\vresource_id\x18\x03 \x01(\tR\n" +
+	"resourceId\x12\x17\n" +
+	"\afocal_x\x18\x04 \x01(\x01R\x06focalX\x12\x17\n" +
+	"\afocal_y\x18\x05 \x01(\x01R\x06focalY\"Y\n" +
+	"\x1eRequestSocialRenditionResponse\x127\n" +
+	"\trendition\x18\x01 \x01(\v2\x19.media.v1.SocialRenditionR\trendition\"\xaf\x01\n" +
 	"\tRendition\x12\x16\n" +
 	"\x06recipe\x18\x01 \x01(\tR\x06recipe\x12\x1f\n" +
 	"\vpublic_path\x18\x02 \x01(\tR\n" +
@@ -1580,21 +1806,23 @@ const file_media_v1_media_proto_rawDesc = "" +
 	"last_error\x18\x12 \x01(\tR\tlastError\x123\n" +
 	"\n" +
 	"renditions\x18\x13 \x03(\v2\x13.media.v1.RenditionR\n" +
-	"renditions\"\xa8\x01\n" +
+	"renditions\"\xd1\x01\n" +
 	"\x13CreateUploadRequest\x12\x18\n" +
 	"\apurpose\x18\x01 \x01(\tR\apurpose\x12\x1a\n" +
 	"\bfilename\x18\x02 \x01(\tR\bfilename\x12!\n" +
 	"\fcontent_type\x18\x03 \x01(\tR\vcontentType\x12\x1d\n" +
 	"\n" +
 	"size_bytes\x18\x04 \x01(\x03R\tsizeBytes\x12\x19\n" +
-	"\bactor_id\x18\x05 \x01(\tR\aactorId\"\xf1\x01\n" +
+	"\bactor_id\x18\x05 \x01(\tR\aactorId\x12'\n" +
+	"\x0fidempotency_key\x18\x06 \x01(\tR\x0eidempotencyKey\"\x8f\x02\n" +
 	"\x14CreateUploadResponse\x12\x0e\n" +
 	"\x02id\x18\x01 \x01(\tR\x02id\x12\x19\n" +
 	"\basset_id\x18\x02 \x01(\tR\aassetId\x12\x10\n" +
 	"\x03url\x18\x03 \x01(\tR\x03url\x12B\n" +
 	"\x06fields\x18\x04 \x03(\v2*.media.v1.CreateUploadResponse.FieldsEntryR\x06fields\x12\x1d\n" +
 	"\n" +
-	"expires_at\x18\x05 \x01(\tR\texpiresAt\x1a9\n" +
+	"expires_at\x18\x05 \x01(\tR\texpiresAt\x12\x1c\n" +
+	"\tcompleted\x18\x06 \x01(\bR\tcompleted\x1a9\n" +
 	"\vFieldsEntry\x12\x10\n" +
 	"\x03key\x18\x01 \x01(\tR\x03key\x12\x14\n" +
 	"\x05value\x18\x02 \x01(\tR\x05value:\x028\x01\"k\n" +
@@ -1660,11 +1888,14 @@ const file_media_v1_media_proto_rawDesc = "" +
 	"\x02ok\x18\x01 \x01(\bR\x02ok\"J\n" +
 	"\x1dCreateOriginalDownloadRequest\x12\x0e\n" +
 	"\x02id\x18\x01 \x01(\tR\x02id\x12\x19\n" +
-	"\bactor_id\x18\x02 \x01(\tR\aactorId\"Q\n" +
+	"\bactor_id\x18\x02 \x01(\tR\aactorId\"\x99\x01\n" +
 	"\x1eCreateOriginalDownloadResponse\x12\x10\n" +
 	"\x03url\x18\x01 \x01(\tR\x03url\x12\x1d\n" +
 	"\n" +
-	"expires_at\x18\x02 \x01(\tR\texpiresAt2\x84\b\n" +
+	"expires_at\x18\x02 \x01(\tR\texpiresAt\x12%\n" +
+	"\x0esource_version\x18\x03 \x01(\tR\rsourceVersion\x12\x1f\n" +
+	"\vsource_size\x18\x04 \x01(\x03R\n" +
+	"sourceSize2\xf1\b\n" +
 	"\fMediaService\x12M\n" +
 	"\fCreateUpload\x12\x1d.media.v1.CreateUploadRequest\x1a\x1e.media.v1.CreateUploadResponse\x12S\n" +
 	"\x0eCompleteUpload\x12\x1f.media.v1.CompleteUploadRequest\x1a .media.v1.CompleteUploadResponse\x12G\n" +
@@ -1679,7 +1910,8 @@ const file_media_v1_media_proto_rawDesc = "" +
 	"\x11ReserveReferences\x12\".media.v1.ReserveReferencesRequest\x1a#.media.v1.ReserveReferencesResponse\x12b\n" +
 	"\x13ReferenceCandidates\x12$.media.v1.ReferenceCandidatesRequest\x1a%.media.v1.ReferenceCandidatesResponse\x12_\n" +
 	"\x12ReconcileReference\x12#.media.v1.ReconcileReferenceRequest\x1a$.media.v1.ReconcileReferenceResponse\x12k\n" +
-	"\x16CreateOriginalDownload\x12'.media.v1.CreateOriginalDownloadRequest\x1a(.media.v1.CreateOriginalDownloadResponseB9Z7github.com/edadai/platform-go/contracts/mediav1;mediav1b\x06proto3"
+	"\x16CreateOriginalDownload\x12'.media.v1.CreateOriginalDownloadRequest\x1a(.media.v1.CreateOriginalDownloadResponse\x12k\n" +
+	"\x16RequestSocialRendition\x12'.media.v1.RequestSocialRenditionRequest\x1a(.media.v1.RequestSocialRenditionResponseB9Z7github.com/edadai/platform-go/contracts/mediav1;mediav1b\x06proto3"
 
 var (
 	file_media_v1_media_proto_rawDescOnce sync.Once
@@ -1693,75 +1925,81 @@ func file_media_v1_media_proto_rawDescGZIP() []byte {
 	return file_media_v1_media_proto_rawDescData
 }
 
-var file_media_v1_media_proto_msgTypes = make([]protoimpl.MessageInfo, 28)
+var file_media_v1_media_proto_msgTypes = make([]protoimpl.MessageInfo, 31)
 var file_media_v1_media_proto_goTypes = []any{
-	(*Rendition)(nil),                      // 0: media.v1.Rendition
-	(*Asset)(nil),                          // 1: media.v1.Asset
-	(*CreateUploadRequest)(nil),            // 2: media.v1.CreateUploadRequest
-	(*CreateUploadResponse)(nil),           // 3: media.v1.CreateUploadResponse
-	(*CompleteUploadRequest)(nil),          // 4: media.v1.CompleteUploadRequest
-	(*CompleteUploadResponse)(nil),         // 5: media.v1.CompleteUploadResponse
-	(*ListAssetsRequest)(nil),              // 6: media.v1.ListAssetsRequest
-	(*ListAssetsResponse)(nil),             // 7: media.v1.ListAssetsResponse
-	(*GetAssetRequest)(nil),                // 8: media.v1.GetAssetRequest
-	(*GetAssetResponse)(nil),               // 9: media.v1.GetAssetResponse
-	(*BatchGetAssetsRequest)(nil),          // 10: media.v1.BatchGetAssetsRequest
-	(*BatchGetAssetsResponse)(nil),         // 11: media.v1.BatchGetAssetsResponse
-	(*UpdateAssetRequest)(nil),             // 12: media.v1.UpdateAssetRequest
-	(*UpdateAssetResponse)(nil),            // 13: media.v1.UpdateAssetResponse
-	(*RetryAssetRequest)(nil),              // 14: media.v1.RetryAssetRequest
-	(*RetryAssetResponse)(nil),             // 15: media.v1.RetryAssetResponse
-	(*DeleteAssetRequest)(nil),             // 16: media.v1.DeleteAssetRequest
-	(*DeleteAssetResponse)(nil),            // 17: media.v1.DeleteAssetResponse
-	(*ReserveReferencesRequest)(nil),       // 18: media.v1.ReserveReferencesRequest
-	(*ReserveReferencesResponse)(nil),      // 19: media.v1.ReserveReferencesResponse
-	(*ReferenceCandidatesRequest)(nil),     // 20: media.v1.ReferenceCandidatesRequest
-	(*ReferenceCandidatesResponse)(nil),    // 21: media.v1.ReferenceCandidatesResponse
-	(*ReconcileReferenceRequest)(nil),      // 22: media.v1.ReconcileReferenceRequest
-	(*ReconcileReferenceResponse)(nil),     // 23: media.v1.ReconcileReferenceResponse
-	(*CreateOriginalDownloadRequest)(nil),  // 24: media.v1.CreateOriginalDownloadRequest
-	(*CreateOriginalDownloadResponse)(nil), // 25: media.v1.CreateOriginalDownloadResponse
-	nil,                                    // 26: media.v1.CreateUploadResponse.FieldsEntry
-	nil,                                    // 27: media.v1.BatchGetAssetsResponse.AssetsEntry
+	(*SocialRendition)(nil),                // 0: media.v1.SocialRendition
+	(*RequestSocialRenditionRequest)(nil),  // 1: media.v1.RequestSocialRenditionRequest
+	(*RequestSocialRenditionResponse)(nil), // 2: media.v1.RequestSocialRenditionResponse
+	(*Rendition)(nil),                      // 3: media.v1.Rendition
+	(*Asset)(nil),                          // 4: media.v1.Asset
+	(*CreateUploadRequest)(nil),            // 5: media.v1.CreateUploadRequest
+	(*CreateUploadResponse)(nil),           // 6: media.v1.CreateUploadResponse
+	(*CompleteUploadRequest)(nil),          // 7: media.v1.CompleteUploadRequest
+	(*CompleteUploadResponse)(nil),         // 8: media.v1.CompleteUploadResponse
+	(*ListAssetsRequest)(nil),              // 9: media.v1.ListAssetsRequest
+	(*ListAssetsResponse)(nil),             // 10: media.v1.ListAssetsResponse
+	(*GetAssetRequest)(nil),                // 11: media.v1.GetAssetRequest
+	(*GetAssetResponse)(nil),               // 12: media.v1.GetAssetResponse
+	(*BatchGetAssetsRequest)(nil),          // 13: media.v1.BatchGetAssetsRequest
+	(*BatchGetAssetsResponse)(nil),         // 14: media.v1.BatchGetAssetsResponse
+	(*UpdateAssetRequest)(nil),             // 15: media.v1.UpdateAssetRequest
+	(*UpdateAssetResponse)(nil),            // 16: media.v1.UpdateAssetResponse
+	(*RetryAssetRequest)(nil),              // 17: media.v1.RetryAssetRequest
+	(*RetryAssetResponse)(nil),             // 18: media.v1.RetryAssetResponse
+	(*DeleteAssetRequest)(nil),             // 19: media.v1.DeleteAssetRequest
+	(*DeleteAssetResponse)(nil),            // 20: media.v1.DeleteAssetResponse
+	(*ReserveReferencesRequest)(nil),       // 21: media.v1.ReserveReferencesRequest
+	(*ReserveReferencesResponse)(nil),      // 22: media.v1.ReserveReferencesResponse
+	(*ReferenceCandidatesRequest)(nil),     // 23: media.v1.ReferenceCandidatesRequest
+	(*ReferenceCandidatesResponse)(nil),    // 24: media.v1.ReferenceCandidatesResponse
+	(*ReconcileReferenceRequest)(nil),      // 25: media.v1.ReconcileReferenceRequest
+	(*ReconcileReferenceResponse)(nil),     // 26: media.v1.ReconcileReferenceResponse
+	(*CreateOriginalDownloadRequest)(nil),  // 27: media.v1.CreateOriginalDownloadRequest
+	(*CreateOriginalDownloadResponse)(nil), // 28: media.v1.CreateOriginalDownloadResponse
+	nil,                                    // 29: media.v1.CreateUploadResponse.FieldsEntry
+	nil,                                    // 30: media.v1.BatchGetAssetsResponse.AssetsEntry
 }
 var file_media_v1_media_proto_depIdxs = []int32{
-	0,  // 0: media.v1.Asset.renditions:type_name -> media.v1.Rendition
-	26, // 1: media.v1.CreateUploadResponse.fields:type_name -> media.v1.CreateUploadResponse.FieldsEntry
-	1,  // 2: media.v1.CompleteUploadResponse.asset:type_name -> media.v1.Asset
-	1,  // 3: media.v1.ListAssetsResponse.assets:type_name -> media.v1.Asset
-	1,  // 4: media.v1.GetAssetResponse.asset:type_name -> media.v1.Asset
-	27, // 5: media.v1.BatchGetAssetsResponse.assets:type_name -> media.v1.BatchGetAssetsResponse.AssetsEntry
-	1,  // 6: media.v1.UpdateAssetResponse.asset:type_name -> media.v1.Asset
-	1,  // 7: media.v1.BatchGetAssetsResponse.AssetsEntry.value:type_name -> media.v1.Asset
-	2,  // 8: media.v1.MediaService.CreateUpload:input_type -> media.v1.CreateUploadRequest
-	4,  // 9: media.v1.MediaService.CompleteUpload:input_type -> media.v1.CompleteUploadRequest
-	6,  // 10: media.v1.MediaService.ListAssets:input_type -> media.v1.ListAssetsRequest
-	8,  // 11: media.v1.MediaService.GetAsset:input_type -> media.v1.GetAssetRequest
-	10, // 12: media.v1.MediaService.BatchGetAssets:input_type -> media.v1.BatchGetAssetsRequest
-	12, // 13: media.v1.MediaService.UpdateAsset:input_type -> media.v1.UpdateAssetRequest
-	14, // 14: media.v1.MediaService.RetryAsset:input_type -> media.v1.RetryAssetRequest
-	16, // 15: media.v1.MediaService.DeleteAsset:input_type -> media.v1.DeleteAssetRequest
-	18, // 16: media.v1.MediaService.ReserveReferences:input_type -> media.v1.ReserveReferencesRequest
-	20, // 17: media.v1.MediaService.ReferenceCandidates:input_type -> media.v1.ReferenceCandidatesRequest
-	22, // 18: media.v1.MediaService.ReconcileReference:input_type -> media.v1.ReconcileReferenceRequest
-	24, // 19: media.v1.MediaService.CreateOriginalDownload:input_type -> media.v1.CreateOriginalDownloadRequest
-	3,  // 20: media.v1.MediaService.CreateUpload:output_type -> media.v1.CreateUploadResponse
-	5,  // 21: media.v1.MediaService.CompleteUpload:output_type -> media.v1.CompleteUploadResponse
-	7,  // 22: media.v1.MediaService.ListAssets:output_type -> media.v1.ListAssetsResponse
-	9,  // 23: media.v1.MediaService.GetAsset:output_type -> media.v1.GetAssetResponse
-	11, // 24: media.v1.MediaService.BatchGetAssets:output_type -> media.v1.BatchGetAssetsResponse
-	13, // 25: media.v1.MediaService.UpdateAsset:output_type -> media.v1.UpdateAssetResponse
-	15, // 26: media.v1.MediaService.RetryAsset:output_type -> media.v1.RetryAssetResponse
-	17, // 27: media.v1.MediaService.DeleteAsset:output_type -> media.v1.DeleteAssetResponse
-	19, // 28: media.v1.MediaService.ReserveReferences:output_type -> media.v1.ReserveReferencesResponse
-	21, // 29: media.v1.MediaService.ReferenceCandidates:output_type -> media.v1.ReferenceCandidatesResponse
-	23, // 30: media.v1.MediaService.ReconcileReference:output_type -> media.v1.ReconcileReferenceResponse
-	25, // 31: media.v1.MediaService.CreateOriginalDownload:output_type -> media.v1.CreateOriginalDownloadResponse
-	20, // [20:32] is the sub-list for method output_type
-	8,  // [8:20] is the sub-list for method input_type
-	8,  // [8:8] is the sub-list for extension type_name
-	8,  // [8:8] is the sub-list for extension extendee
-	0,  // [0:8] is the sub-list for field type_name
+	0,  // 0: media.v1.RequestSocialRenditionResponse.rendition:type_name -> media.v1.SocialRendition
+	3,  // 1: media.v1.Asset.renditions:type_name -> media.v1.Rendition
+	29, // 2: media.v1.CreateUploadResponse.fields:type_name -> media.v1.CreateUploadResponse.FieldsEntry
+	4,  // 3: media.v1.CompleteUploadResponse.asset:type_name -> media.v1.Asset
+	4,  // 4: media.v1.ListAssetsResponse.assets:type_name -> media.v1.Asset
+	4,  // 5: media.v1.GetAssetResponse.asset:type_name -> media.v1.Asset
+	30, // 6: media.v1.BatchGetAssetsResponse.assets:type_name -> media.v1.BatchGetAssetsResponse.AssetsEntry
+	4,  // 7: media.v1.UpdateAssetResponse.asset:type_name -> media.v1.Asset
+	4,  // 8: media.v1.BatchGetAssetsResponse.AssetsEntry.value:type_name -> media.v1.Asset
+	5,  // 9: media.v1.MediaService.CreateUpload:input_type -> media.v1.CreateUploadRequest
+	7,  // 10: media.v1.MediaService.CompleteUpload:input_type -> media.v1.CompleteUploadRequest
+	9,  // 11: media.v1.MediaService.ListAssets:input_type -> media.v1.ListAssetsRequest
+	11, // 12: media.v1.MediaService.GetAsset:input_type -> media.v1.GetAssetRequest
+	13, // 13: media.v1.MediaService.BatchGetAssets:input_type -> media.v1.BatchGetAssetsRequest
+	15, // 14: media.v1.MediaService.UpdateAsset:input_type -> media.v1.UpdateAssetRequest
+	17, // 15: media.v1.MediaService.RetryAsset:input_type -> media.v1.RetryAssetRequest
+	19, // 16: media.v1.MediaService.DeleteAsset:input_type -> media.v1.DeleteAssetRequest
+	21, // 17: media.v1.MediaService.ReserveReferences:input_type -> media.v1.ReserveReferencesRequest
+	23, // 18: media.v1.MediaService.ReferenceCandidates:input_type -> media.v1.ReferenceCandidatesRequest
+	25, // 19: media.v1.MediaService.ReconcileReference:input_type -> media.v1.ReconcileReferenceRequest
+	27, // 20: media.v1.MediaService.CreateOriginalDownload:input_type -> media.v1.CreateOriginalDownloadRequest
+	1,  // 21: media.v1.MediaService.RequestSocialRendition:input_type -> media.v1.RequestSocialRenditionRequest
+	6,  // 22: media.v1.MediaService.CreateUpload:output_type -> media.v1.CreateUploadResponse
+	8,  // 23: media.v1.MediaService.CompleteUpload:output_type -> media.v1.CompleteUploadResponse
+	10, // 24: media.v1.MediaService.ListAssets:output_type -> media.v1.ListAssetsResponse
+	12, // 25: media.v1.MediaService.GetAsset:output_type -> media.v1.GetAssetResponse
+	14, // 26: media.v1.MediaService.BatchGetAssets:output_type -> media.v1.BatchGetAssetsResponse
+	16, // 27: media.v1.MediaService.UpdateAsset:output_type -> media.v1.UpdateAssetResponse
+	18, // 28: media.v1.MediaService.RetryAsset:output_type -> media.v1.RetryAssetResponse
+	20, // 29: media.v1.MediaService.DeleteAsset:output_type -> media.v1.DeleteAssetResponse
+	22, // 30: media.v1.MediaService.ReserveReferences:output_type -> media.v1.ReserveReferencesResponse
+	24, // 31: media.v1.MediaService.ReferenceCandidates:output_type -> media.v1.ReferenceCandidatesResponse
+	26, // 32: media.v1.MediaService.ReconcileReference:output_type -> media.v1.ReconcileReferenceResponse
+	28, // 33: media.v1.MediaService.CreateOriginalDownload:output_type -> media.v1.CreateOriginalDownloadResponse
+	2,  // 34: media.v1.MediaService.RequestSocialRendition:output_type -> media.v1.RequestSocialRenditionResponse
+	22, // [22:35] is the sub-list for method output_type
+	9,  // [9:22] is the sub-list for method input_type
+	9,  // [9:9] is the sub-list for extension type_name
+	9,  // [9:9] is the sub-list for extension extendee
+	0,  // [0:9] is the sub-list for field type_name
 }
 
 func init() { file_media_v1_media_proto_init() }
@@ -1775,7 +2013,7 @@ func file_media_v1_media_proto_init() {
 			GoPackagePath: reflect.TypeOf(x{}).PkgPath(),
 			RawDescriptor: unsafe.Slice(unsafe.StringData(file_media_v1_media_proto_rawDesc), len(file_media_v1_media_proto_rawDesc)),
 			NumEnums:      0,
-			NumMessages:   28,
+			NumMessages:   31,
 			NumExtensions: 0,
 			NumServices:   1,
 		},
