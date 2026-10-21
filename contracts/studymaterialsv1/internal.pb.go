@@ -721,110 +721,6 @@ func (*ReadExtractionResponse_Header) isReadExtractionResponse_Payload() {}
 
 func (*ReadExtractionResponse_Chunk) isReadExtractionResponse_Payload() {}
 
-type LinkMigratedDocumentRequest struct {
-	state         protoimpl.MessageState `protogen:"open.v1"`
-	DocumentId    string                 `protobuf:"bytes,1,opt,name=document_id,json=documentId,proto3" json:"document_id,omitempty"`
-	MediaAssetId  string                 `protobuf:"bytes,2,opt,name=media_asset_id,json=mediaAssetId,proto3" json:"media_asset_id,omitempty"`
-	ExtractionId  string                 `protobuf:"bytes,3,opt,name=extraction_id,json=extractionId,proto3" json:"extraction_id,omitempty"`
-	unknownFields protoimpl.UnknownFields
-	sizeCache     protoimpl.SizeCache
-}
-
-func (x *LinkMigratedDocumentRequest) Reset() {
-	*x = LinkMigratedDocumentRequest{}
-	mi := &file_studymaterials_v1_internal_proto_msgTypes[8]
-	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
-	ms.StoreMessageInfo(mi)
-}
-
-func (x *LinkMigratedDocumentRequest) String() string {
-	return protoimpl.X.MessageStringOf(x)
-}
-
-func (*LinkMigratedDocumentRequest) ProtoMessage() {}
-
-func (x *LinkMigratedDocumentRequest) ProtoReflect() protoreflect.Message {
-	mi := &file_studymaterials_v1_internal_proto_msgTypes[8]
-	if x != nil {
-		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
-		if ms.LoadMessageInfo() == nil {
-			ms.StoreMessageInfo(mi)
-		}
-		return ms
-	}
-	return mi.MessageOf(x)
-}
-
-// Deprecated: Use LinkMigratedDocumentRequest.ProtoReflect.Descriptor instead.
-func (*LinkMigratedDocumentRequest) Descriptor() ([]byte, []int) {
-	return file_studymaterials_v1_internal_proto_rawDescGZIP(), []int{8}
-}
-
-func (x *LinkMigratedDocumentRequest) GetDocumentId() string {
-	if x != nil {
-		return x.DocumentId
-	}
-	return ""
-}
-
-func (x *LinkMigratedDocumentRequest) GetMediaAssetId() string {
-	if x != nil {
-		return x.MediaAssetId
-	}
-	return ""
-}
-
-func (x *LinkMigratedDocumentRequest) GetExtractionId() string {
-	if x != nil {
-		return x.ExtractionId
-	}
-	return ""
-}
-
-type LinkMigratedDocumentResponse struct {
-	state         protoimpl.MessageState `protogen:"open.v1"`
-	Linked        bool                   `protobuf:"varint,1,opt,name=linked,proto3" json:"linked,omitempty"`
-	unknownFields protoimpl.UnknownFields
-	sizeCache     protoimpl.SizeCache
-}
-
-func (x *LinkMigratedDocumentResponse) Reset() {
-	*x = LinkMigratedDocumentResponse{}
-	mi := &file_studymaterials_v1_internal_proto_msgTypes[9]
-	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
-	ms.StoreMessageInfo(mi)
-}
-
-func (x *LinkMigratedDocumentResponse) String() string {
-	return protoimpl.X.MessageStringOf(x)
-}
-
-func (*LinkMigratedDocumentResponse) ProtoMessage() {}
-
-func (x *LinkMigratedDocumentResponse) ProtoReflect() protoreflect.Message {
-	mi := &file_studymaterials_v1_internal_proto_msgTypes[9]
-	if x != nil {
-		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
-		if ms.LoadMessageInfo() == nil {
-			ms.StoreMessageInfo(mi)
-		}
-		return ms
-	}
-	return mi.MessageOf(x)
-}
-
-// Deprecated: Use LinkMigratedDocumentResponse.ProtoReflect.Descriptor instead.
-func (*LinkMigratedDocumentResponse) Descriptor() ([]byte, []int) {
-	return file_studymaterials_v1_internal_proto_rawDescGZIP(), []int{9}
-}
-
-func (x *LinkMigratedDocumentResponse) GetLinked() bool {
-	if x != nil {
-		return x.Linked
-	}
-	return false
-}
-
 var File_studymaterials_v1_internal_proto protoreflect.FileDescriptor
 
 const file_studymaterials_v1_internal_proto_rawDesc = "" +
@@ -900,19 +796,11 @@ const file_studymaterials_v1_internal_proto_rawDesc = "" +
 	"\x16ReadExtractionResponse\x12=\n" +
 	"\x06header\x18\x01 \x01(\v2#.studymaterials.v1.ExtractionHeaderH\x00R\x06header\x12:\n" +
 	"\x05chunk\x18\x02 \x01(\v2\".studymaterials.v1.ExtractionChunkH\x00R\x05chunkB\t\n" +
-	"\apayload\"\x89\x01\n" +
-	"\x1bLinkMigratedDocumentRequest\x12\x1f\n" +
-	"\vdocument_id\x18\x01 \x01(\tR\n" +
-	"documentId\x12$\n" +
-	"\x0emedia_asset_id\x18\x02 \x01(\tR\fmediaAssetId\x12#\n" +
-	"\rextraction_id\x18\x03 \x01(\tR\fextractionId\"6\n" +
-	"\x1cLinkMigratedDocumentResponse\x12\x16\n" +
-	"\x06linked\x18\x01 \x01(\bR\x06linked2\xe9\x03\n" +
+	"\apayload2\xf0\x02\n" +
 	"\x1dStudyMaterialsInternalService\x12t\n" +
 	"\x13GetExtractionSource\x12-.studymaterials.v1.GetExtractionSourceRequest\x1a..studymaterials.v1.GetExtractionSourceResponse\x12p\n" +
 	"\x11PersistExtraction\x12+.studymaterials.v1.PersistExtractionRequest\x1a,.studymaterials.v1.PersistExtractionResponse(\x01\x12g\n" +
-	"\x0eReadExtraction\x12(.studymaterials.v1.ReadExtractionRequest\x1a).studymaterials.v1.ReadExtractionResponse0\x01\x12w\n" +
-	"\x14LinkMigratedDocument\x12..studymaterials.v1.LinkMigratedDocumentRequest\x1a/.studymaterials.v1.LinkMigratedDocumentResponseBKZIgithub.com/edadai/platform-go/contracts/studymaterialsv1;studymaterialsv1b\x06proto3"
+	"\x0eReadExtraction\x12(.studymaterials.v1.ReadExtractionRequest\x1a).studymaterials.v1.ReadExtractionResponse0\x01BKZIgithub.com/edadai/platform-go/contracts/studymaterialsv1;studymaterialsv1b\x06proto3"
 
 var (
 	file_studymaterials_v1_internal_proto_rawDescOnce sync.Once
@@ -926,18 +814,16 @@ func file_studymaterials_v1_internal_proto_rawDescGZIP() []byte {
 	return file_studymaterials_v1_internal_proto_rawDescData
 }
 
-var file_studymaterials_v1_internal_proto_msgTypes = make([]protoimpl.MessageInfo, 10)
+var file_studymaterials_v1_internal_proto_msgTypes = make([]protoimpl.MessageInfo, 8)
 var file_studymaterials_v1_internal_proto_goTypes = []any{
-	(*GetExtractionSourceRequest)(nil),   // 0: studymaterials.v1.GetExtractionSourceRequest
-	(*GetExtractionSourceResponse)(nil),  // 1: studymaterials.v1.GetExtractionSourceResponse
-	(*ExtractionHeader)(nil),             // 2: studymaterials.v1.ExtractionHeader
-	(*ExtractionChunk)(nil),              // 3: studymaterials.v1.ExtractionChunk
-	(*PersistExtractionRequest)(nil),     // 4: studymaterials.v1.PersistExtractionRequest
-	(*PersistExtractionResponse)(nil),    // 5: studymaterials.v1.PersistExtractionResponse
-	(*ReadExtractionRequest)(nil),        // 6: studymaterials.v1.ReadExtractionRequest
-	(*ReadExtractionResponse)(nil),       // 7: studymaterials.v1.ReadExtractionResponse
-	(*LinkMigratedDocumentRequest)(nil),  // 8: studymaterials.v1.LinkMigratedDocumentRequest
-	(*LinkMigratedDocumentResponse)(nil), // 9: studymaterials.v1.LinkMigratedDocumentResponse
+	(*GetExtractionSourceRequest)(nil),  // 0: studymaterials.v1.GetExtractionSourceRequest
+	(*GetExtractionSourceResponse)(nil), // 1: studymaterials.v1.GetExtractionSourceResponse
+	(*ExtractionHeader)(nil),            // 2: studymaterials.v1.ExtractionHeader
+	(*ExtractionChunk)(nil),             // 3: studymaterials.v1.ExtractionChunk
+	(*PersistExtractionRequest)(nil),    // 4: studymaterials.v1.PersistExtractionRequest
+	(*PersistExtractionResponse)(nil),   // 5: studymaterials.v1.PersistExtractionResponse
+	(*ReadExtractionRequest)(nil),       // 6: studymaterials.v1.ReadExtractionRequest
+	(*ReadExtractionResponse)(nil),      // 7: studymaterials.v1.ReadExtractionResponse
 }
 var file_studymaterials_v1_internal_proto_depIdxs = []int32{
 	2, // 0: studymaterials.v1.PersistExtractionRequest.header:type_name -> studymaterials.v1.ExtractionHeader
@@ -947,13 +833,11 @@ var file_studymaterials_v1_internal_proto_depIdxs = []int32{
 	0, // 4: studymaterials.v1.StudyMaterialsInternalService.GetExtractionSource:input_type -> studymaterials.v1.GetExtractionSourceRequest
 	4, // 5: studymaterials.v1.StudyMaterialsInternalService.PersistExtraction:input_type -> studymaterials.v1.PersistExtractionRequest
 	6, // 6: studymaterials.v1.StudyMaterialsInternalService.ReadExtraction:input_type -> studymaterials.v1.ReadExtractionRequest
-	8, // 7: studymaterials.v1.StudyMaterialsInternalService.LinkMigratedDocument:input_type -> studymaterials.v1.LinkMigratedDocumentRequest
-	1, // 8: studymaterials.v1.StudyMaterialsInternalService.GetExtractionSource:output_type -> studymaterials.v1.GetExtractionSourceResponse
-	5, // 9: studymaterials.v1.StudyMaterialsInternalService.PersistExtraction:output_type -> studymaterials.v1.PersistExtractionResponse
-	7, // 10: studymaterials.v1.StudyMaterialsInternalService.ReadExtraction:output_type -> studymaterials.v1.ReadExtractionResponse
-	9, // 11: studymaterials.v1.StudyMaterialsInternalService.LinkMigratedDocument:output_type -> studymaterials.v1.LinkMigratedDocumentResponse
-	8, // [8:12] is the sub-list for method output_type
-	4, // [4:8] is the sub-list for method input_type
+	1, // 7: studymaterials.v1.StudyMaterialsInternalService.GetExtractionSource:output_type -> studymaterials.v1.GetExtractionSourceResponse
+	5, // 8: studymaterials.v1.StudyMaterialsInternalService.PersistExtraction:output_type -> studymaterials.v1.PersistExtractionResponse
+	7, // 9: studymaterials.v1.StudyMaterialsInternalService.ReadExtraction:output_type -> studymaterials.v1.ReadExtractionResponse
+	7, // [7:10] is the sub-list for method output_type
+	4, // [4:7] is the sub-list for method input_type
 	4, // [4:4] is the sub-list for extension type_name
 	4, // [4:4] is the sub-list for extension extendee
 	0, // [0:4] is the sub-list for field type_name
@@ -979,7 +863,7 @@ func file_studymaterials_v1_internal_proto_init() {
 			GoPackagePath: reflect.TypeOf(x{}).PkgPath(),
 			RawDescriptor: unsafe.Slice(unsafe.StringData(file_studymaterials_v1_internal_proto_rawDesc), len(file_studymaterials_v1_internal_proto_rawDesc)),
 			NumEnums:      0,
-			NumMessages:   10,
+			NumMessages:   8,
 			NumExtensions: 0,
 			NumServices:   1,
 		},

@@ -19,10 +19,9 @@ import (
 const _ = grpc.SupportPackageIsVersion9
 
 const (
-	StudyMaterialsInternalService_GetExtractionSource_FullMethodName  = "/studymaterials.v1.StudyMaterialsInternalService/GetExtractionSource"
-	StudyMaterialsInternalService_PersistExtraction_FullMethodName    = "/studymaterials.v1.StudyMaterialsInternalService/PersistExtraction"
-	StudyMaterialsInternalService_ReadExtraction_FullMethodName       = "/studymaterials.v1.StudyMaterialsInternalService/ReadExtraction"
-	StudyMaterialsInternalService_LinkMigratedDocument_FullMethodName = "/studymaterials.v1.StudyMaterialsInternalService/LinkMigratedDocument"
+	StudyMaterialsInternalService_GetExtractionSource_FullMethodName = "/studymaterials.v1.StudyMaterialsInternalService/GetExtractionSource"
+	StudyMaterialsInternalService_PersistExtraction_FullMethodName   = "/studymaterials.v1.StudyMaterialsInternalService/PersistExtraction"
+	StudyMaterialsInternalService_ReadExtraction_FullMethodName      = "/studymaterials.v1.StudyMaterialsInternalService/ReadExtraction"
 )
 
 // StudyMaterialsInternalServiceClient is the client API for StudyMaterialsInternalService service.
@@ -32,7 +31,6 @@ type StudyMaterialsInternalServiceClient interface {
 	GetExtractionSource(ctx context.Context, in *GetExtractionSourceRequest, opts ...grpc.CallOption) (*GetExtractionSourceResponse, error)
 	PersistExtraction(ctx context.Context, opts ...grpc.CallOption) (grpc.ClientStreamingClient[PersistExtractionRequest, PersistExtractionResponse], error)
 	ReadExtraction(ctx context.Context, in *ReadExtractionRequest, opts ...grpc.CallOption) (grpc.ServerStreamingClient[ReadExtractionResponse], error)
-	LinkMigratedDocument(ctx context.Context, in *LinkMigratedDocumentRequest, opts ...grpc.CallOption) (*LinkMigratedDocumentResponse, error)
 }
 
 type studyMaterialsInternalServiceClient struct {
@@ -85,16 +83,6 @@ func (c *studyMaterialsInternalServiceClient) ReadExtraction(ctx context.Context
 // This type alias is provided for backwards compatibility with existing code that references the prior non-generic stream type by name.
 type StudyMaterialsInternalService_ReadExtractionClient = grpc.ServerStreamingClient[ReadExtractionResponse]
 
-func (c *studyMaterialsInternalServiceClient) LinkMigratedDocument(ctx context.Context, in *LinkMigratedDocumentRequest, opts ...grpc.CallOption) (*LinkMigratedDocumentResponse, error) {
-	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
-	out := new(LinkMigratedDocumentResponse)
-	err := c.cc.Invoke(ctx, StudyMaterialsInternalService_LinkMigratedDocument_FullMethodName, in, out, cOpts...)
-	if err != nil {
-		return nil, err
-	}
-	return out, nil
-}
-
 // StudyMaterialsInternalServiceServer is the server API for StudyMaterialsInternalService service.
 // All implementations must embed UnimplementedStudyMaterialsInternalServiceServer
 // for forward compatibility.
@@ -102,7 +90,6 @@ type StudyMaterialsInternalServiceServer interface {
 	GetExtractionSource(context.Context, *GetExtractionSourceRequest) (*GetExtractionSourceResponse, error)
 	PersistExtraction(grpc.ClientStreamingServer[PersistExtractionRequest, PersistExtractionResponse]) error
 	ReadExtraction(*ReadExtractionRequest, grpc.ServerStreamingServer[ReadExtractionResponse]) error
-	LinkMigratedDocument(context.Context, *LinkMigratedDocumentRequest) (*LinkMigratedDocumentResponse, error)
 	mustEmbedUnimplementedStudyMaterialsInternalServiceServer()
 }
 
@@ -121,9 +108,6 @@ func (UnimplementedStudyMaterialsInternalServiceServer) PersistExtraction(grpc.C
 }
 func (UnimplementedStudyMaterialsInternalServiceServer) ReadExtraction(*ReadExtractionRequest, grpc.ServerStreamingServer[ReadExtractionResponse]) error {
 	return status.Errorf(codes.Unimplemented, "method ReadExtraction not implemented")
-}
-func (UnimplementedStudyMaterialsInternalServiceServer) LinkMigratedDocument(context.Context, *LinkMigratedDocumentRequest) (*LinkMigratedDocumentResponse, error) {
-	return nil, status.Errorf(codes.Unimplemented, "method LinkMigratedDocument not implemented")
 }
 func (UnimplementedStudyMaterialsInternalServiceServer) mustEmbedUnimplementedStudyMaterialsInternalServiceServer() {
 }
@@ -183,24 +167,6 @@ func _StudyMaterialsInternalService_ReadExtraction_Handler(srv interface{}, stre
 // This type alias is provided for backwards compatibility with existing code that references the prior non-generic stream type by name.
 type StudyMaterialsInternalService_ReadExtractionServer = grpc.ServerStreamingServer[ReadExtractionResponse]
 
-func _StudyMaterialsInternalService_LinkMigratedDocument_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
-	in := new(LinkMigratedDocumentRequest)
-	if err := dec(in); err != nil {
-		return nil, err
-	}
-	if interceptor == nil {
-		return srv.(StudyMaterialsInternalServiceServer).LinkMigratedDocument(ctx, in)
-	}
-	info := &grpc.UnaryServerInfo{
-		Server:     srv,
-		FullMethod: StudyMaterialsInternalService_LinkMigratedDocument_FullMethodName,
-	}
-	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
-		return srv.(StudyMaterialsInternalServiceServer).LinkMigratedDocument(ctx, req.(*LinkMigratedDocumentRequest))
-	}
-	return interceptor(ctx, in, info, handler)
-}
-
 // StudyMaterialsInternalService_ServiceDesc is the grpc.ServiceDesc for StudyMaterialsInternalService service.
 // It's only intended for direct use with grpc.RegisterService,
 // and not to be introspected or modified (even as a copy)
@@ -211,10 +177,6 @@ var StudyMaterialsInternalService_ServiceDesc = grpc.ServiceDesc{
 		{
 			MethodName: "GetExtractionSource",
 			Handler:    _StudyMaterialsInternalService_GetExtractionSource_Handler,
-		},
-		{
-			MethodName: "LinkMigratedDocument",
-			Handler:    _StudyMaterialsInternalService_LinkMigratedDocument_Handler,
 		},
 	},
 	Streams: []grpc.StreamDesc{

@@ -8,7 +8,6 @@ service StudyMaterialsInternalService {
   rpc GetExtractionSource(GetExtractionSourceRequest) returns (GetExtractionSourceResponse);
   rpc PersistExtraction(stream PersistExtractionRequest) returns (PersistExtractionResponse);
   rpc ReadExtraction(ReadExtractionRequest) returns (stream ReadExtractionResponse);
-  rpc LinkMigratedDocument(LinkMigratedDocumentRequest) returns (LinkMigratedDocumentResponse);
 }
 
 message GetExtractionSourceRequest {
@@ -82,11 +81,3 @@ message ReadExtractionResponse {
     ExtractionChunk chunk = 2;
   }
 }
-
-message LinkMigratedDocumentRequest {
-  string document_id = 1;
-  string media_asset_id = 2;
-  string extraction_id = 3;
-}
-
-message LinkMigratedDocumentResponse { bool linked = 1; }
