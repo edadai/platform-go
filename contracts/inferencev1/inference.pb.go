@@ -74,13 +74,15 @@ func (x *DocumentRef) GetExtractionId() string {
 }
 
 type CreateProgramRequest struct {
-	state         protoimpl.MessageState `protogen:"open.v1"`
-	UserId        string                 `protobuf:"bytes,1,opt,name=user_id,json=userId,proto3" json:"user_id,omitempty"`
-	StudyKitId    string                 `protobuf:"bytes,2,opt,name=study_kit_id,json=studyKitId,proto3" json:"study_kit_id,omitempty"`
-	Documents     []*DocumentRef         `protobuf:"bytes,3,rep,name=documents,proto3" json:"documents,omitempty"`
-	TeachingLevel string                 `protobuf:"bytes,4,opt,name=teaching_level,json=teachingLevel,proto3" json:"teaching_level,omitempty"`
-	unknownFields protoimpl.UnknownFields
-	sizeCache     protoimpl.SizeCache
+	state                protoimpl.MessageState `protogen:"open.v1"`
+	UserId               string                 `protobuf:"bytes,1,opt,name=user_id,json=userId,proto3" json:"user_id,omitempty"`
+	StudyKitId           string                 `protobuf:"bytes,2,opt,name=study_kit_id,json=studyKitId,proto3" json:"study_kit_id,omitempty"`
+	Documents            []*DocumentRef         `protobuf:"bytes,3,rep,name=documents,proto3" json:"documents,omitempty"`
+	TeachingLevel        string                 `protobuf:"bytes,4,opt,name=teaching_level,json=teachingLevel,proto3" json:"teaching_level,omitempty"`
+	SourceVersionIds     []string               `protobuf:"bytes,5,rep,name=source_version_ids,json=sourceVersionIds,proto3" json:"source_version_ids,omitempty"`
+	SourceManifestSha256 string                 `protobuf:"bytes,6,opt,name=source_manifest_sha256,json=sourceManifestSha256,proto3" json:"source_manifest_sha256,omitempty"`
+	unknownFields        protoimpl.UnknownFields
+	sizeCache            protoimpl.SizeCache
 }
 
 func (x *CreateProgramRequest) Reset() {
@@ -137,6 +139,20 @@ func (x *CreateProgramRequest) GetDocuments() []*DocumentRef {
 func (x *CreateProgramRequest) GetTeachingLevel() string {
 	if x != nil {
 		return x.TeachingLevel
+	}
+	return ""
+}
+
+func (x *CreateProgramRequest) GetSourceVersionIds() []string {
+	if x != nil {
+		return x.SourceVersionIds
+	}
+	return nil
+}
+
+func (x *CreateProgramRequest) GetSourceManifestSha256() string {
+	if x != nil {
+		return x.SourceManifestSha256
 	}
 	return ""
 }
@@ -202,17 +218,21 @@ func (x *GetProgramRequest) GetProgramId() string {
 }
 
 type Program struct {
-	state         protoimpl.MessageState `protogen:"open.v1"`
-	Id            string                 `protobuf:"bytes,1,opt,name=id,proto3" json:"id,omitempty"`
-	UserId        string                 `protobuf:"bytes,2,opt,name=user_id,json=userId,proto3" json:"user_id,omitempty"`
-	StudyKitId    string                 `protobuf:"bytes,3,opt,name=study_kit_id,json=studyKitId,proto3" json:"study_kit_id,omitempty"`
-	DocumentIds   []string               `protobuf:"bytes,4,rep,name=document_ids,json=documentIds,proto3" json:"document_ids,omitempty"`
-	TeachingLevel string                 `protobuf:"bytes,5,opt,name=teaching_level,json=teachingLevel,proto3" json:"teaching_level,omitempty"`
-	Status        string                 `protobuf:"bytes,6,opt,name=status,proto3" json:"status,omitempty"`
-	CreatedAt     string                 `protobuf:"bytes,7,opt,name=created_at,json=createdAt,proto3" json:"created_at,omitempty"`
-	UpdatedAt     string                 `protobuf:"bytes,8,opt,name=updated_at,json=updatedAt,proto3" json:"updated_at,omitempty"`
-	unknownFields protoimpl.UnknownFields
-	sizeCache     protoimpl.SizeCache
+	state                protoimpl.MessageState `protogen:"open.v1"`
+	Id                   string                 `protobuf:"bytes,1,opt,name=id,proto3" json:"id,omitempty"`
+	UserId               string                 `protobuf:"bytes,2,opt,name=user_id,json=userId,proto3" json:"user_id,omitempty"`
+	StudyKitId           string                 `protobuf:"bytes,3,opt,name=study_kit_id,json=studyKitId,proto3" json:"study_kit_id,omitempty"`
+	DocumentIds          []string               `protobuf:"bytes,4,rep,name=document_ids,json=documentIds,proto3" json:"document_ids,omitempty"`
+	TeachingLevel        string                 `protobuf:"bytes,5,opt,name=teaching_level,json=teachingLevel,proto3" json:"teaching_level,omitempty"`
+	Status               string                 `protobuf:"bytes,6,opt,name=status,proto3" json:"status,omitempty"`
+	CreatedAt            string                 `protobuf:"bytes,7,opt,name=created_at,json=createdAt,proto3" json:"created_at,omitempty"`
+	UpdatedAt            string                 `protobuf:"bytes,8,opt,name=updated_at,json=updatedAt,proto3" json:"updated_at,omitempty"`
+	SourceVersionIds     []string               `protobuf:"bytes,9,rep,name=source_version_ids,json=sourceVersionIds,proto3" json:"source_version_ids,omitempty"`
+	SourceManifestSha256 string                 `protobuf:"bytes,10,opt,name=source_manifest_sha256,json=sourceManifestSha256,proto3" json:"source_manifest_sha256,omitempty"`
+	Revision             int32                  `protobuf:"varint,11,opt,name=revision,proto3" json:"revision,omitempty"`
+	Stale                bool                   `protobuf:"varint,12,opt,name=stale,proto3" json:"stale,omitempty"`
+	unknownFields        protoimpl.UnknownFields
+	sizeCache            protoimpl.SizeCache
 }
 
 func (x *Program) Reset() {
@@ -299,6 +319,34 @@ func (x *Program) GetUpdatedAt() string {
 		return x.UpdatedAt
 	}
 	return ""
+}
+
+func (x *Program) GetSourceVersionIds() []string {
+	if x != nil {
+		return x.SourceVersionIds
+	}
+	return nil
+}
+
+func (x *Program) GetSourceManifestSha256() string {
+	if x != nil {
+		return x.SourceManifestSha256
+	}
+	return ""
+}
+
+func (x *Program) GetRevision() int32 {
+	if x != nil {
+		return x.Revision
+	}
+	return 0
+}
+
+func (x *Program) GetStale() bool {
+	if x != nil {
+		return x.Stale
+	}
+	return false
 }
 
 type ProgramView struct {
@@ -1310,6 +1358,7 @@ type PathTopic struct {
 	Locked        bool                   `protobuf:"varint,5,opt,name=locked,proto3" json:"locked,omitempty"`
 	Mastery       int32                  `protobuf:"varint,6,opt,name=mastery,proto3" json:"mastery,omitempty"`
 	LessonId      string                 `protobuf:"bytes,7,opt,name=lesson_id,json=lessonId,proto3" json:"lesson_id,omitempty"`
+	LessonStatus  string                 `protobuf:"bytes,8,opt,name=lesson_status,json=lessonStatus,proto3" json:"lesson_status,omitempty"`
 	unknownFields protoimpl.UnknownFields
 	sizeCache     protoimpl.SizeCache
 }
@@ -1389,6 +1438,13 @@ func (x *PathTopic) GetMastery() int32 {
 func (x *PathTopic) GetLessonId() string {
 	if x != nil {
 		return x.LessonId
+	}
+	return ""
+}
+
+func (x *PathTopic) GetLessonStatus() string {
+	if x != nil {
+		return x.LessonStatus
 	}
 	return ""
 }
@@ -1476,6 +1532,7 @@ type LessonSection struct {
 	Body          string                 `protobuf:"bytes,3,opt,name=body,proto3" json:"body,omitempty"`
 	KeyPoints     []string               `protobuf:"bytes,4,rep,name=key_points,json=keyPoints,proto3" json:"key_points,omitempty"`
 	Check         *Question              `protobuf:"bytes,5,opt,name=check,proto3" json:"check,omitempty"`
+	HelperPrompt  string                 `protobuf:"bytes,6,opt,name=helper_prompt,json=helperPrompt,proto3" json:"helper_prompt,omitempty"`
 	unknownFields protoimpl.UnknownFields
 	sizeCache     protoimpl.SizeCache
 }
@@ -1545,17 +1602,27 @@ func (x *LessonSection) GetCheck() *Question {
 	return nil
 }
 
+func (x *LessonSection) GetHelperPrompt() string {
+	if x != nil {
+		return x.HelperPrompt
+	}
+	return ""
+}
+
 type Message struct {
-	state         protoimpl.MessageState `protogen:"open.v1"`
-	Id            string                 `protobuf:"bytes,1,opt,name=id,proto3" json:"id,omitempty"`
-	SessionId     string                 `protobuf:"bytes,2,opt,name=session_id,json=sessionId,proto3" json:"session_id,omitempty"`
-	Role          string                 `protobuf:"bytes,3,opt,name=role,proto3" json:"role,omitempty"`
-	Content       string                 `protobuf:"bytes,4,opt,name=content,proto3" json:"content,omitempty"`
-	Model         string                 `protobuf:"bytes,5,opt,name=model,proto3" json:"model,omitempty"`
-	CreatedAt     string                 `protobuf:"bytes,6,opt,name=created_at,json=createdAt,proto3" json:"created_at,omitempty"`
-	UpdatedAt     string                 `protobuf:"bytes,7,opt,name=updated_at,json=updatedAt,proto3" json:"updated_at,omitempty"`
-	unknownFields protoimpl.UnknownFields
-	sizeCache     protoimpl.SizeCache
+	state                protoimpl.MessageState `protogen:"open.v1"`
+	Id                   string                 `protobuf:"bytes,1,opt,name=id,proto3" json:"id,omitempty"`
+	SessionId            string                 `protobuf:"bytes,2,opt,name=session_id,json=sessionId,proto3" json:"session_id,omitempty"`
+	Role                 string                 `protobuf:"bytes,3,opt,name=role,proto3" json:"role,omitempty"`
+	Content              string                 `protobuf:"bytes,4,opt,name=content,proto3" json:"content,omitempty"`
+	Model                string                 `protobuf:"bytes,5,opt,name=model,proto3" json:"model,omitempty"`
+	CreatedAt            string                 `protobuf:"bytes,6,opt,name=created_at,json=createdAt,proto3" json:"created_at,omitempty"`
+	UpdatedAt            string                 `protobuf:"bytes,7,opt,name=updated_at,json=updatedAt,proto3" json:"updated_at,omitempty"`
+	CitationIds          []string               `protobuf:"bytes,8,rep,name=citation_ids,json=citationIds,proto3" json:"citation_ids,omitempty"`
+	Partial              bool                   `protobuf:"varint,9,opt,name=partial,proto3" json:"partial,omitempty"`
+	RetrievalUnavailable bool                   `protobuf:"varint,10,opt,name=retrieval_unavailable,json=retrievalUnavailable,proto3" json:"retrieval_unavailable,omitempty"`
+	unknownFields        protoimpl.UnknownFields
+	sizeCache            protoimpl.SizeCache
 }
 
 func (x *Message) Reset() {
@@ -1637,21 +1704,43 @@ func (x *Message) GetUpdatedAt() string {
 	return ""
 }
 
+func (x *Message) GetCitationIds() []string {
+	if x != nil {
+		return x.CitationIds
+	}
+	return nil
+}
+
+func (x *Message) GetPartial() bool {
+	if x != nil {
+		return x.Partial
+	}
+	return false
+}
+
+func (x *Message) GetRetrievalUnavailable() bool {
+	if x != nil {
+		return x.RetrievalUnavailable
+	}
+	return false
+}
+
 type Lesson struct {
-	state         protoimpl.MessageState `protogen:"open.v1"`
-	Id            string                 `protobuf:"bytes,1,opt,name=id,proto3" json:"id,omitempty"`
-	ProgramId     string                 `protobuf:"bytes,2,opt,name=program_id,json=programId,proto3" json:"program_id,omitempty"`
-	TopicId       string                 `protobuf:"bytes,3,opt,name=topic_id,json=topicId,proto3" json:"topic_id,omitempty"`
-	SessionId     string                 `protobuf:"bytes,4,opt,name=session_id,json=sessionId,proto3" json:"session_id,omitempty"`
-	Mode          string                 `protobuf:"bytes,5,opt,name=mode,proto3" json:"mode,omitempty"`
-	Title         string                 `protobuf:"bytes,6,opt,name=title,proto3" json:"title,omitempty"`
-	Status        string                 `protobuf:"bytes,7,opt,name=status,proto3" json:"status,omitempty"`
-	Sections      []*LessonSection       `protobuf:"bytes,8,rep,name=sections,proto3" json:"sections,omitempty"`
-	Messages      []*Message             `protobuf:"bytes,9,rep,name=messages,proto3" json:"messages,omitempty"`
-	CreatedAt     string                 `protobuf:"bytes,10,opt,name=created_at,json=createdAt,proto3" json:"created_at,omitempty"`
-	UpdatedAt     string                 `protobuf:"bytes,11,opt,name=updated_at,json=updatedAt,proto3" json:"updated_at,omitempty"`
-	unknownFields protoimpl.UnknownFields
-	sizeCache     protoimpl.SizeCache
+	state            protoimpl.MessageState `protogen:"open.v1"`
+	Id               string                 `protobuf:"bytes,1,opt,name=id,proto3" json:"id,omitempty"`
+	ProgramId        string                 `protobuf:"bytes,2,opt,name=program_id,json=programId,proto3" json:"program_id,omitempty"`
+	TopicId          string                 `protobuf:"bytes,3,opt,name=topic_id,json=topicId,proto3" json:"topic_id,omitempty"`
+	SessionId        string                 `protobuf:"bytes,4,opt,name=session_id,json=sessionId,proto3" json:"session_id,omitempty"`
+	Mode             string                 `protobuf:"bytes,5,opt,name=mode,proto3" json:"mode,omitempty"`
+	Title            string                 `protobuf:"bytes,6,opt,name=title,proto3" json:"title,omitempty"`
+	Status           string                 `protobuf:"bytes,7,opt,name=status,proto3" json:"status,omitempty"`
+	Sections         []*LessonSection       `protobuf:"bytes,8,rep,name=sections,proto3" json:"sections,omitempty"`
+	Messages         []*Message             `protobuf:"bytes,9,rep,name=messages,proto3" json:"messages,omitempty"`
+	CreatedAt        string                 `protobuf:"bytes,10,opt,name=created_at,json=createdAt,proto3" json:"created_at,omitempty"`
+	UpdatedAt        string                 `protobuf:"bytes,11,opt,name=updated_at,json=updatedAt,proto3" json:"updated_at,omitempty"`
+	LatestAssessment *LessonAssessment      `protobuf:"bytes,12,opt,name=latest_assessment,json=latestAssessment,proto3" json:"latest_assessment,omitempty"`
+	unknownFields    protoimpl.UnknownFields
+	sizeCache        protoimpl.SizeCache
 }
 
 func (x *Lesson) Reset() {
@@ -1761,6 +1850,793 @@ func (x *Lesson) GetUpdatedAt() string {
 	return ""
 }
 
+func (x *Lesson) GetLatestAssessment() *LessonAssessment {
+	if x != nil {
+		return x.LatestAssessment
+	}
+	return nil
+}
+
+type AssessmentReviewItem struct {
+	state         protoimpl.MessageState `protogen:"open.v1"`
+	Concept       string                 `protobuf:"bytes,1,opt,name=concept,proto3" json:"concept,omitempty"`
+	SectionId     string                 `protobuf:"bytes,2,opt,name=section_id,json=sectionId,proto3" json:"section_id,omitempty"`
+	SectionTitle  string                 `protobuf:"bytes,3,opt,name=section_title,json=sectionTitle,proto3" json:"section_title,omitempty"`
+	unknownFields protoimpl.UnknownFields
+	sizeCache     protoimpl.SizeCache
+}
+
+func (x *AssessmentReviewItem) Reset() {
+	*x = AssessmentReviewItem{}
+	mi := &file_inference_v1_inference_proto_msgTypes[23]
+	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+	ms.StoreMessageInfo(mi)
+}
+
+func (x *AssessmentReviewItem) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*AssessmentReviewItem) ProtoMessage() {}
+
+func (x *AssessmentReviewItem) ProtoReflect() protoreflect.Message {
+	mi := &file_inference_v1_inference_proto_msgTypes[23]
+	if x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use AssessmentReviewItem.ProtoReflect.Descriptor instead.
+func (*AssessmentReviewItem) Descriptor() ([]byte, []int) {
+	return file_inference_v1_inference_proto_rawDescGZIP(), []int{23}
+}
+
+func (x *AssessmentReviewItem) GetConcept() string {
+	if x != nil {
+		return x.Concept
+	}
+	return ""
+}
+
+func (x *AssessmentReviewItem) GetSectionId() string {
+	if x != nil {
+		return x.SectionId
+	}
+	return ""
+}
+
+func (x *AssessmentReviewItem) GetSectionTitle() string {
+	if x != nil {
+		return x.SectionTitle
+	}
+	return ""
+}
+
+type LessonAssessment struct {
+	state         protoimpl.MessageState  `protogen:"open.v1"`
+	Id            string                  `protobuf:"bytes,1,opt,name=id,proto3" json:"id,omitempty"`
+	LessonId      string                  `protobuf:"bytes,2,opt,name=lesson_id,json=lessonId,proto3" json:"lesson_id,omitempty"`
+	QuestionCount int32                   `protobuf:"varint,3,opt,name=question_count,json=questionCount,proto3" json:"question_count,omitempty"`
+	AttemptNumber int32                   `protobuf:"varint,4,opt,name=attempt_number,json=attemptNumber,proto3" json:"attempt_number,omitempty"`
+	Status        string                  `protobuf:"bytes,5,opt,name=status,proto3" json:"status,omitempty"`
+	Questions     []*Question             `protobuf:"bytes,6,rep,name=questions,proto3" json:"questions,omitempty"`
+	Score         int32                   `protobuf:"varint,7,opt,name=score,proto3" json:"score,omitempty"`
+	Passed        bool                    `protobuf:"varint,8,opt,name=passed,proto3" json:"passed,omitempty"`
+	ReviewPlan    []*AssessmentReviewItem `protobuf:"bytes,9,rep,name=review_plan,json=reviewPlan,proto3" json:"review_plan,omitempty"`
+	ErrorMessage  string                  `protobuf:"bytes,10,opt,name=error_message,json=errorMessage,proto3" json:"error_message,omitempty"`
+	CreatedAt     string                  `protobuf:"bytes,11,opt,name=created_at,json=createdAt,proto3" json:"created_at,omitempty"`
+	UpdatedAt     string                  `protobuf:"bytes,12,opt,name=updated_at,json=updatedAt,proto3" json:"updated_at,omitempty"`
+	unknownFields protoimpl.UnknownFields
+	sizeCache     protoimpl.SizeCache
+}
+
+func (x *LessonAssessment) Reset() {
+	*x = LessonAssessment{}
+	mi := &file_inference_v1_inference_proto_msgTypes[24]
+	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+	ms.StoreMessageInfo(mi)
+}
+
+func (x *LessonAssessment) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*LessonAssessment) ProtoMessage() {}
+
+func (x *LessonAssessment) ProtoReflect() protoreflect.Message {
+	mi := &file_inference_v1_inference_proto_msgTypes[24]
+	if x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use LessonAssessment.ProtoReflect.Descriptor instead.
+func (*LessonAssessment) Descriptor() ([]byte, []int) {
+	return file_inference_v1_inference_proto_rawDescGZIP(), []int{24}
+}
+
+func (x *LessonAssessment) GetId() string {
+	if x != nil {
+		return x.Id
+	}
+	return ""
+}
+
+func (x *LessonAssessment) GetLessonId() string {
+	if x != nil {
+		return x.LessonId
+	}
+	return ""
+}
+
+func (x *LessonAssessment) GetQuestionCount() int32 {
+	if x != nil {
+		return x.QuestionCount
+	}
+	return 0
+}
+
+func (x *LessonAssessment) GetAttemptNumber() int32 {
+	if x != nil {
+		return x.AttemptNumber
+	}
+	return 0
+}
+
+func (x *LessonAssessment) GetStatus() string {
+	if x != nil {
+		return x.Status
+	}
+	return ""
+}
+
+func (x *LessonAssessment) GetQuestions() []*Question {
+	if x != nil {
+		return x.Questions
+	}
+	return nil
+}
+
+func (x *LessonAssessment) GetScore() int32 {
+	if x != nil {
+		return x.Score
+	}
+	return 0
+}
+
+func (x *LessonAssessment) GetPassed() bool {
+	if x != nil {
+		return x.Passed
+	}
+	return false
+}
+
+func (x *LessonAssessment) GetReviewPlan() []*AssessmentReviewItem {
+	if x != nil {
+		return x.ReviewPlan
+	}
+	return nil
+}
+
+func (x *LessonAssessment) GetErrorMessage() string {
+	if x != nil {
+		return x.ErrorMessage
+	}
+	return ""
+}
+
+func (x *LessonAssessment) GetCreatedAt() string {
+	if x != nil {
+		return x.CreatedAt
+	}
+	return ""
+}
+
+func (x *LessonAssessment) GetUpdatedAt() string {
+	if x != nil {
+		return x.UpdatedAt
+	}
+	return ""
+}
+
+type CreateLessonAssessmentRequest struct {
+	state         protoimpl.MessageState `protogen:"open.v1"`
+	UserId        string                 `protobuf:"bytes,1,opt,name=user_id,json=userId,proto3" json:"user_id,omitempty"`
+	LessonId      string                 `protobuf:"bytes,2,opt,name=lesson_id,json=lessonId,proto3" json:"lesson_id,omitempty"`
+	QuestionCount int32                  `protobuf:"varint,3,opt,name=question_count,json=questionCount,proto3" json:"question_count,omitempty"`
+	unknownFields protoimpl.UnknownFields
+	sizeCache     protoimpl.SizeCache
+}
+
+func (x *CreateLessonAssessmentRequest) Reset() {
+	*x = CreateLessonAssessmentRequest{}
+	mi := &file_inference_v1_inference_proto_msgTypes[25]
+	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+	ms.StoreMessageInfo(mi)
+}
+
+func (x *CreateLessonAssessmentRequest) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*CreateLessonAssessmentRequest) ProtoMessage() {}
+
+func (x *CreateLessonAssessmentRequest) ProtoReflect() protoreflect.Message {
+	mi := &file_inference_v1_inference_proto_msgTypes[25]
+	if x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use CreateLessonAssessmentRequest.ProtoReflect.Descriptor instead.
+func (*CreateLessonAssessmentRequest) Descriptor() ([]byte, []int) {
+	return file_inference_v1_inference_proto_rawDescGZIP(), []int{25}
+}
+
+func (x *CreateLessonAssessmentRequest) GetUserId() string {
+	if x != nil {
+		return x.UserId
+	}
+	return ""
+}
+
+func (x *CreateLessonAssessmentRequest) GetLessonId() string {
+	if x != nil {
+		return x.LessonId
+	}
+	return ""
+}
+
+func (x *CreateLessonAssessmentRequest) GetQuestionCount() int32 {
+	if x != nil {
+		return x.QuestionCount
+	}
+	return 0
+}
+
+type GetLessonAssessmentRequest struct {
+	state         protoimpl.MessageState `protogen:"open.v1"`
+	UserId        string                 `protobuf:"bytes,1,opt,name=user_id,json=userId,proto3" json:"user_id,omitempty"`
+	AssessmentId  string                 `protobuf:"bytes,2,opt,name=assessment_id,json=assessmentId,proto3" json:"assessment_id,omitempty"`
+	unknownFields protoimpl.UnknownFields
+	sizeCache     protoimpl.SizeCache
+}
+
+func (x *GetLessonAssessmentRequest) Reset() {
+	*x = GetLessonAssessmentRequest{}
+	mi := &file_inference_v1_inference_proto_msgTypes[26]
+	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+	ms.StoreMessageInfo(mi)
+}
+
+func (x *GetLessonAssessmentRequest) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*GetLessonAssessmentRequest) ProtoMessage() {}
+
+func (x *GetLessonAssessmentRequest) ProtoReflect() protoreflect.Message {
+	mi := &file_inference_v1_inference_proto_msgTypes[26]
+	if x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use GetLessonAssessmentRequest.ProtoReflect.Descriptor instead.
+func (*GetLessonAssessmentRequest) Descriptor() ([]byte, []int) {
+	return file_inference_v1_inference_proto_rawDescGZIP(), []int{26}
+}
+
+func (x *GetLessonAssessmentRequest) GetUserId() string {
+	if x != nil {
+		return x.UserId
+	}
+	return ""
+}
+
+func (x *GetLessonAssessmentRequest) GetAssessmentId() string {
+	if x != nil {
+		return x.AssessmentId
+	}
+	return ""
+}
+
+type LessonAssessmentAnswer struct {
+	state         protoimpl.MessageState `protogen:"open.v1"`
+	QuestionId    string                 `protobuf:"bytes,1,opt,name=question_id,json=questionId,proto3" json:"question_id,omitempty"`
+	Selected      string                 `protobuf:"bytes,2,opt,name=selected,proto3" json:"selected,omitempty"`
+	unknownFields protoimpl.UnknownFields
+	sizeCache     protoimpl.SizeCache
+}
+
+func (x *LessonAssessmentAnswer) Reset() {
+	*x = LessonAssessmentAnswer{}
+	mi := &file_inference_v1_inference_proto_msgTypes[27]
+	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+	ms.StoreMessageInfo(mi)
+}
+
+func (x *LessonAssessmentAnswer) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*LessonAssessmentAnswer) ProtoMessage() {}
+
+func (x *LessonAssessmentAnswer) ProtoReflect() protoreflect.Message {
+	mi := &file_inference_v1_inference_proto_msgTypes[27]
+	if x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use LessonAssessmentAnswer.ProtoReflect.Descriptor instead.
+func (*LessonAssessmentAnswer) Descriptor() ([]byte, []int) {
+	return file_inference_v1_inference_proto_rawDescGZIP(), []int{27}
+}
+
+func (x *LessonAssessmentAnswer) GetQuestionId() string {
+	if x != nil {
+		return x.QuestionId
+	}
+	return ""
+}
+
+func (x *LessonAssessmentAnswer) GetSelected() string {
+	if x != nil {
+		return x.Selected
+	}
+	return ""
+}
+
+type SubmitLessonAssessmentRequest struct {
+	state         protoimpl.MessageState    `protogen:"open.v1"`
+	UserId        string                    `protobuf:"bytes,1,opt,name=user_id,json=userId,proto3" json:"user_id,omitempty"`
+	AssessmentId  string                    `protobuf:"bytes,2,opt,name=assessment_id,json=assessmentId,proto3" json:"assessment_id,omitempty"`
+	Answers       []*LessonAssessmentAnswer `protobuf:"bytes,3,rep,name=answers,proto3" json:"answers,omitempty"`
+	unknownFields protoimpl.UnknownFields
+	sizeCache     protoimpl.SizeCache
+}
+
+func (x *SubmitLessonAssessmentRequest) Reset() {
+	*x = SubmitLessonAssessmentRequest{}
+	mi := &file_inference_v1_inference_proto_msgTypes[28]
+	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+	ms.StoreMessageInfo(mi)
+}
+
+func (x *SubmitLessonAssessmentRequest) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*SubmitLessonAssessmentRequest) ProtoMessage() {}
+
+func (x *SubmitLessonAssessmentRequest) ProtoReflect() protoreflect.Message {
+	mi := &file_inference_v1_inference_proto_msgTypes[28]
+	if x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use SubmitLessonAssessmentRequest.ProtoReflect.Descriptor instead.
+func (*SubmitLessonAssessmentRequest) Descriptor() ([]byte, []int) {
+	return file_inference_v1_inference_proto_rawDescGZIP(), []int{28}
+}
+
+func (x *SubmitLessonAssessmentRequest) GetUserId() string {
+	if x != nil {
+		return x.UserId
+	}
+	return ""
+}
+
+func (x *SubmitLessonAssessmentRequest) GetAssessmentId() string {
+	if x != nil {
+		return x.AssessmentId
+	}
+	return ""
+}
+
+func (x *SubmitLessonAssessmentRequest) GetAnswers() []*LessonAssessmentAnswer {
+	if x != nil {
+		return x.Answers
+	}
+	return nil
+}
+
+type Conversation struct {
+	state         protoimpl.MessageState `protogen:"open.v1"`
+	Id            string                 `protobuf:"bytes,1,opt,name=id,proto3" json:"id,omitempty"`
+	UserId        string                 `protobuf:"bytes,2,opt,name=user_id,json=userId,proto3" json:"user_id,omitempty"`
+	LessonId      string                 `protobuf:"bytes,3,opt,name=lesson_id,json=lessonId,proto3" json:"lesson_id,omitempty"`
+	SectionId     string                 `protobuf:"bytes,4,opt,name=section_id,json=sectionId,proto3" json:"section_id,omitempty"`
+	Scope         string                 `protobuf:"bytes,5,opt,name=scope,proto3" json:"scope,omitempty"`
+	Title         string                 `protobuf:"bytes,6,opt,name=title,proto3" json:"title,omitempty"`
+	TitleSource   string                 `protobuf:"bytes,7,opt,name=title_source,json=titleSource,proto3" json:"title_source,omitempty"`
+	Archived      bool                   `protobuf:"varint,8,opt,name=archived,proto3" json:"archived,omitempty"`
+	Messages      []*Message             `protobuf:"bytes,9,rep,name=messages,proto3" json:"messages,omitempty"`
+	CreatedAt     string                 `protobuf:"bytes,10,opt,name=created_at,json=createdAt,proto3" json:"created_at,omitempty"`
+	UpdatedAt     string                 `protobuf:"bytes,11,opt,name=updated_at,json=updatedAt,proto3" json:"updated_at,omitempty"`
+	unknownFields protoimpl.UnknownFields
+	sizeCache     protoimpl.SizeCache
+}
+
+func (x *Conversation) Reset() {
+	*x = Conversation{}
+	mi := &file_inference_v1_inference_proto_msgTypes[29]
+	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+	ms.StoreMessageInfo(mi)
+}
+
+func (x *Conversation) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*Conversation) ProtoMessage() {}
+
+func (x *Conversation) ProtoReflect() protoreflect.Message {
+	mi := &file_inference_v1_inference_proto_msgTypes[29]
+	if x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use Conversation.ProtoReflect.Descriptor instead.
+func (*Conversation) Descriptor() ([]byte, []int) {
+	return file_inference_v1_inference_proto_rawDescGZIP(), []int{29}
+}
+
+func (x *Conversation) GetId() string {
+	if x != nil {
+		return x.Id
+	}
+	return ""
+}
+
+func (x *Conversation) GetUserId() string {
+	if x != nil {
+		return x.UserId
+	}
+	return ""
+}
+
+func (x *Conversation) GetLessonId() string {
+	if x != nil {
+		return x.LessonId
+	}
+	return ""
+}
+
+func (x *Conversation) GetSectionId() string {
+	if x != nil {
+		return x.SectionId
+	}
+	return ""
+}
+
+func (x *Conversation) GetScope() string {
+	if x != nil {
+		return x.Scope
+	}
+	return ""
+}
+
+func (x *Conversation) GetTitle() string {
+	if x != nil {
+		return x.Title
+	}
+	return ""
+}
+
+func (x *Conversation) GetTitleSource() string {
+	if x != nil {
+		return x.TitleSource
+	}
+	return ""
+}
+
+func (x *Conversation) GetArchived() bool {
+	if x != nil {
+		return x.Archived
+	}
+	return false
+}
+
+func (x *Conversation) GetMessages() []*Message {
+	if x != nil {
+		return x.Messages
+	}
+	return nil
+}
+
+func (x *Conversation) GetCreatedAt() string {
+	if x != nil {
+		return x.CreatedAt
+	}
+	return ""
+}
+
+func (x *Conversation) GetUpdatedAt() string {
+	if x != nil {
+		return x.UpdatedAt
+	}
+	return ""
+}
+
+type ConversationList struct {
+	state         protoimpl.MessageState `protogen:"open.v1"`
+	Conversations []*Conversation        `protobuf:"bytes,1,rep,name=conversations,proto3" json:"conversations,omitempty"`
+	unknownFields protoimpl.UnknownFields
+	sizeCache     protoimpl.SizeCache
+}
+
+func (x *ConversationList) Reset() {
+	*x = ConversationList{}
+	mi := &file_inference_v1_inference_proto_msgTypes[30]
+	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+	ms.StoreMessageInfo(mi)
+}
+
+func (x *ConversationList) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*ConversationList) ProtoMessage() {}
+
+func (x *ConversationList) ProtoReflect() protoreflect.Message {
+	mi := &file_inference_v1_inference_proto_msgTypes[30]
+	if x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use ConversationList.ProtoReflect.Descriptor instead.
+func (*ConversationList) Descriptor() ([]byte, []int) {
+	return file_inference_v1_inference_proto_rawDescGZIP(), []int{30}
+}
+
+func (x *ConversationList) GetConversations() []*Conversation {
+	if x != nil {
+		return x.Conversations
+	}
+	return nil
+}
+
+type CreateLessonConversationRequest struct {
+	state         protoimpl.MessageState `protogen:"open.v1"`
+	UserId        string                 `protobuf:"bytes,1,opt,name=user_id,json=userId,proto3" json:"user_id,omitempty"`
+	LessonId      string                 `protobuf:"bytes,2,opt,name=lesson_id,json=lessonId,proto3" json:"lesson_id,omitempty"`
+	Title         string                 `protobuf:"bytes,3,opt,name=title,proto3" json:"title,omitempty"`
+	unknownFields protoimpl.UnknownFields
+	sizeCache     protoimpl.SizeCache
+}
+
+func (x *CreateLessonConversationRequest) Reset() {
+	*x = CreateLessonConversationRequest{}
+	mi := &file_inference_v1_inference_proto_msgTypes[31]
+	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+	ms.StoreMessageInfo(mi)
+}
+
+func (x *CreateLessonConversationRequest) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*CreateLessonConversationRequest) ProtoMessage() {}
+
+func (x *CreateLessonConversationRequest) ProtoReflect() protoreflect.Message {
+	mi := &file_inference_v1_inference_proto_msgTypes[31]
+	if x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use CreateLessonConversationRequest.ProtoReflect.Descriptor instead.
+func (*CreateLessonConversationRequest) Descriptor() ([]byte, []int) {
+	return file_inference_v1_inference_proto_rawDescGZIP(), []int{31}
+}
+
+func (x *CreateLessonConversationRequest) GetUserId() string {
+	if x != nil {
+		return x.UserId
+	}
+	return ""
+}
+
+func (x *CreateLessonConversationRequest) GetLessonId() string {
+	if x != nil {
+		return x.LessonId
+	}
+	return ""
+}
+
+func (x *CreateLessonConversationRequest) GetTitle() string {
+	if x != nil {
+		return x.Title
+	}
+	return ""
+}
+
+type GetLessonConversationRequest struct {
+	state          protoimpl.MessageState `protogen:"open.v1"`
+	UserId         string                 `protobuf:"bytes,1,opt,name=user_id,json=userId,proto3" json:"user_id,omitempty"`
+	LessonId       string                 `protobuf:"bytes,2,opt,name=lesson_id,json=lessonId,proto3" json:"lesson_id,omitempty"`
+	ConversationId string                 `protobuf:"bytes,3,opt,name=conversation_id,json=conversationId,proto3" json:"conversation_id,omitempty"`
+	unknownFields  protoimpl.UnknownFields
+	sizeCache      protoimpl.SizeCache
+}
+
+func (x *GetLessonConversationRequest) Reset() {
+	*x = GetLessonConversationRequest{}
+	mi := &file_inference_v1_inference_proto_msgTypes[32]
+	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+	ms.StoreMessageInfo(mi)
+}
+
+func (x *GetLessonConversationRequest) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*GetLessonConversationRequest) ProtoMessage() {}
+
+func (x *GetLessonConversationRequest) ProtoReflect() protoreflect.Message {
+	mi := &file_inference_v1_inference_proto_msgTypes[32]
+	if x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use GetLessonConversationRequest.ProtoReflect.Descriptor instead.
+func (*GetLessonConversationRequest) Descriptor() ([]byte, []int) {
+	return file_inference_v1_inference_proto_rawDescGZIP(), []int{32}
+}
+
+func (x *GetLessonConversationRequest) GetUserId() string {
+	if x != nil {
+		return x.UserId
+	}
+	return ""
+}
+
+func (x *GetLessonConversationRequest) GetLessonId() string {
+	if x != nil {
+		return x.LessonId
+	}
+	return ""
+}
+
+func (x *GetLessonConversationRequest) GetConversationId() string {
+	if x != nil {
+		return x.ConversationId
+	}
+	return ""
+}
+
+type UpdateLessonConversationRequest struct {
+	state          protoimpl.MessageState `protogen:"open.v1"`
+	UserId         string                 `protobuf:"bytes,1,opt,name=user_id,json=userId,proto3" json:"user_id,omitempty"`
+	LessonId       string                 `protobuf:"bytes,2,opt,name=lesson_id,json=lessonId,proto3" json:"lesson_id,omitempty"`
+	ConversationId string                 `protobuf:"bytes,3,opt,name=conversation_id,json=conversationId,proto3" json:"conversation_id,omitempty"`
+	Title          string                 `protobuf:"bytes,4,opt,name=title,proto3" json:"title,omitempty"`
+	Archived       *bool                  `protobuf:"varint,5,opt,name=archived,proto3,oneof" json:"archived,omitempty"`
+	unknownFields  protoimpl.UnknownFields
+	sizeCache      protoimpl.SizeCache
+}
+
+func (x *UpdateLessonConversationRequest) Reset() {
+	*x = UpdateLessonConversationRequest{}
+	mi := &file_inference_v1_inference_proto_msgTypes[33]
+	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+	ms.StoreMessageInfo(mi)
+}
+
+func (x *UpdateLessonConversationRequest) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*UpdateLessonConversationRequest) ProtoMessage() {}
+
+func (x *UpdateLessonConversationRequest) ProtoReflect() protoreflect.Message {
+	mi := &file_inference_v1_inference_proto_msgTypes[33]
+	if x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use UpdateLessonConversationRequest.ProtoReflect.Descriptor instead.
+func (*UpdateLessonConversationRequest) Descriptor() ([]byte, []int) {
+	return file_inference_v1_inference_proto_rawDescGZIP(), []int{33}
+}
+
+func (x *UpdateLessonConversationRequest) GetUserId() string {
+	if x != nil {
+		return x.UserId
+	}
+	return ""
+}
+
+func (x *UpdateLessonConversationRequest) GetLessonId() string {
+	if x != nil {
+		return x.LessonId
+	}
+	return ""
+}
+
+func (x *UpdateLessonConversationRequest) GetConversationId() string {
+	if x != nil {
+		return x.ConversationId
+	}
+	return ""
+}
+
+func (x *UpdateLessonConversationRequest) GetTitle() string {
+	if x != nil {
+		return x.Title
+	}
+	return ""
+}
+
+func (x *UpdateLessonConversationRequest) GetArchived() bool {
+	if x != nil && x.Archived != nil {
+		return *x.Archived
+	}
+	return false
+}
+
 type GradeCheckRequest struct {
 	state         protoimpl.MessageState `protogen:"open.v1"`
 	UserId        string                 `protobuf:"bytes,1,opt,name=user_id,json=userId,proto3" json:"user_id,omitempty"`
@@ -1773,7 +2649,7 @@ type GradeCheckRequest struct {
 
 func (x *GradeCheckRequest) Reset() {
 	*x = GradeCheckRequest{}
-	mi := &file_inference_v1_inference_proto_msgTypes[23]
+	mi := &file_inference_v1_inference_proto_msgTypes[34]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -1785,7 +2661,7 @@ func (x *GradeCheckRequest) String() string {
 func (*GradeCheckRequest) ProtoMessage() {}
 
 func (x *GradeCheckRequest) ProtoReflect() protoreflect.Message {
-	mi := &file_inference_v1_inference_proto_msgTypes[23]
+	mi := &file_inference_v1_inference_proto_msgTypes[34]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -1798,7 +2674,7 @@ func (x *GradeCheckRequest) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use GradeCheckRequest.ProtoReflect.Descriptor instead.
 func (*GradeCheckRequest) Descriptor() ([]byte, []int) {
-	return file_inference_v1_inference_proto_rawDescGZIP(), []int{23}
+	return file_inference_v1_inference_proto_rawDescGZIP(), []int{34}
 }
 
 func (x *GradeCheckRequest) GetUserId() string {
@@ -1843,7 +2719,7 @@ type GradeCheckResponse struct {
 
 func (x *GradeCheckResponse) Reset() {
 	*x = GradeCheckResponse{}
-	mi := &file_inference_v1_inference_proto_msgTypes[24]
+	mi := &file_inference_v1_inference_proto_msgTypes[35]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -1855,7 +2731,7 @@ func (x *GradeCheckResponse) String() string {
 func (*GradeCheckResponse) ProtoMessage() {}
 
 func (x *GradeCheckResponse) ProtoReflect() protoreflect.Message {
-	mi := &file_inference_v1_inference_proto_msgTypes[24]
+	mi := &file_inference_v1_inference_proto_msgTypes[35]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -1868,7 +2744,7 @@ func (x *GradeCheckResponse) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use GradeCheckResponse.ProtoReflect.Descriptor instead.
 func (*GradeCheckResponse) Descriptor() ([]byte, []int) {
-	return file_inference_v1_inference_proto_rawDescGZIP(), []int{24}
+	return file_inference_v1_inference_proto_rawDescGZIP(), []int{35}
 }
 
 func (x *GradeCheckResponse) GetCorrect() bool {
@@ -1914,17 +2790,20 @@ func (x *GradeCheckResponse) GetMastery() int32 {
 }
 
 type SubmitTurnRequest struct {
-	state         protoimpl.MessageState `protogen:"open.v1"`
-	UserId        string                 `protobuf:"bytes,1,opt,name=user_id,json=userId,proto3" json:"user_id,omitempty"`
-	LessonId      string                 `protobuf:"bytes,2,opt,name=lesson_id,json=lessonId,proto3" json:"lesson_id,omitempty"`
-	Content       string                 `protobuf:"bytes,3,opt,name=content,proto3" json:"content,omitempty"`
-	unknownFields protoimpl.UnknownFields
-	sizeCache     protoimpl.SizeCache
+	state           protoimpl.MessageState `protogen:"open.v1"`
+	UserId          string                 `protobuf:"bytes,1,opt,name=user_id,json=userId,proto3" json:"user_id,omitempty"`
+	LessonId        string                 `protobuf:"bytes,2,opt,name=lesson_id,json=lessonId,proto3" json:"lesson_id,omitempty"`
+	Content         string                 `protobuf:"bytes,3,opt,name=content,proto3" json:"content,omitempty"`
+	ResumeMessageId string                 `protobuf:"bytes,4,opt,name=resume_message_id,json=resumeMessageId,proto3" json:"resume_message_id,omitempty"`
+	ConversationId  string                 `protobuf:"bytes,5,opt,name=conversation_id,json=conversationId,proto3" json:"conversation_id,omitempty"`
+	SectionId       string                 `protobuf:"bytes,6,opt,name=section_id,json=sectionId,proto3" json:"section_id,omitempty"`
+	unknownFields   protoimpl.UnknownFields
+	sizeCache       protoimpl.SizeCache
 }
 
 func (x *SubmitTurnRequest) Reset() {
 	*x = SubmitTurnRequest{}
-	mi := &file_inference_v1_inference_proto_msgTypes[25]
+	mi := &file_inference_v1_inference_proto_msgTypes[36]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -1936,7 +2815,7 @@ func (x *SubmitTurnRequest) String() string {
 func (*SubmitTurnRequest) ProtoMessage() {}
 
 func (x *SubmitTurnRequest) ProtoReflect() protoreflect.Message {
-	mi := &file_inference_v1_inference_proto_msgTypes[25]
+	mi := &file_inference_v1_inference_proto_msgTypes[36]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -1949,7 +2828,7 @@ func (x *SubmitTurnRequest) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use SubmitTurnRequest.ProtoReflect.Descriptor instead.
 func (*SubmitTurnRequest) Descriptor() ([]byte, []int) {
-	return file_inference_v1_inference_proto_rawDescGZIP(), []int{25}
+	return file_inference_v1_inference_proto_rawDescGZIP(), []int{36}
 }
 
 func (x *SubmitTurnRequest) GetUserId() string {
@@ -1973,6 +2852,27 @@ func (x *SubmitTurnRequest) GetContent() string {
 	return ""
 }
 
+func (x *SubmitTurnRequest) GetResumeMessageId() string {
+	if x != nil {
+		return x.ResumeMessageId
+	}
+	return ""
+}
+
+func (x *SubmitTurnRequest) GetConversationId() string {
+	if x != nil {
+		return x.ConversationId
+	}
+	return ""
+}
+
+func (x *SubmitTurnRequest) GetSectionId() string {
+	if x != nil {
+		return x.SectionId
+	}
+	return ""
+}
+
 type TurnEvent struct {
 	state         protoimpl.MessageState `protogen:"open.v1"`
 	Token         string                 `protobuf:"bytes,1,opt,name=token,proto3" json:"token,omitempty"`
@@ -1984,7 +2884,7 @@ type TurnEvent struct {
 
 func (x *TurnEvent) Reset() {
 	*x = TurnEvent{}
-	mi := &file_inference_v1_inference_proto_msgTypes[26]
+	mi := &file_inference_v1_inference_proto_msgTypes[37]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -1996,7 +2896,7 @@ func (x *TurnEvent) String() string {
 func (*TurnEvent) ProtoMessage() {}
 
 func (x *TurnEvent) ProtoReflect() protoreflect.Message {
-	mi := &file_inference_v1_inference_proto_msgTypes[26]
+	mi := &file_inference_v1_inference_proto_msgTypes[37]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -2009,7 +2909,7 @@ func (x *TurnEvent) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use TurnEvent.ProtoReflect.Descriptor instead.
 func (*TurnEvent) Descriptor() ([]byte, []int) {
-	return file_inference_v1_inference_proto_rawDescGZIP(), []int{26}
+	return file_inference_v1_inference_proto_rawDescGZIP(), []int{37}
 }
 
 func (x *TurnEvent) GetToken() string {
@@ -2041,19 +2941,21 @@ const file_inference_v1_inference_proto_rawDesc = "" +
 	"\vDocumentRef\x12\x1f\n" +
 	"\vdocument_id\x18\x01 \x01(\tR\n" +
 	"documentId\x12#\n" +
-	"\rextraction_id\x18\x02 \x01(\tR\fextractionId\"\xb6\x01\n" +
+	"\rextraction_id\x18\x02 \x01(\tR\fextractionId\"\x9a\x02\n" +
 	"\x14CreateProgramRequest\x12\x17\n" +
 	"\auser_id\x18\x01 \x01(\tR\x06userId\x12 \n" +
 	"\fstudy_kit_id\x18\x02 \x01(\tR\n" +
 	"studyKitId\x12<\n" +
 	"\tdocuments\x18\x03 \x03(\v2\x1e.edad.inference.v1.DocumentRefR\tdocuments\x12%\n" +
-	"\x0eteaching_level\x18\x04 \x01(\tR\rteachingLevel\"m\n" +
+	"\x0eteaching_level\x18\x04 \x01(\tR\rteachingLevel\x12,\n" +
+	"\x12source_version_ids\x18\x05 \x03(\tR\x10sourceVersionIds\x124\n" +
+	"\x16source_manifest_sha256\x18\x06 \x01(\tR\x14sourceManifestSha256\"m\n" +
 	"\x11GetProgramRequest\x12\x17\n" +
 	"\auser_id\x18\x01 \x01(\tR\x06userId\x12 \n" +
 	"\fstudy_kit_id\x18\x02 \x01(\tR\n" +
 	"studyKitId\x12\x1d\n" +
 	"\n" +
-	"program_id\x18\x03 \x01(\tR\tprogramId\"\xf4\x01\n" +
+	"program_id\x18\x03 \x01(\tR\tprogramId\"\x8a\x03\n" +
 	"\aProgram\x12\x0e\n" +
 	"\x02id\x18\x01 \x01(\tR\x02id\x12\x17\n" +
 	"\auser_id\x18\x02 \x01(\tR\x06userId\x12 \n" +
@@ -2065,7 +2967,12 @@ const file_inference_v1_inference_proto_rawDesc = "" +
 	"\n" +
 	"created_at\x18\a \x01(\tR\tcreatedAt\x12\x1d\n" +
 	"\n" +
-	"updated_at\x18\b \x01(\tR\tupdatedAt\"\x99\x02\n" +
+	"updated_at\x18\b \x01(\tR\tupdatedAt\x12,\n" +
+	"\x12source_version_ids\x18\t \x03(\tR\x10sourceVersionIds\x124\n" +
+	"\x16source_manifest_sha256\x18\n" +
+	" \x01(\tR\x14sourceManifestSha256\x12\x1a\n" +
+	"\brevision\x18\v \x01(\x05R\brevision\x12\x14\n" +
+	"\x05stale\x18\f \x01(\bR\x05stale\"\x99\x02\n" +
 	"\vProgramView\x124\n" +
 	"\aprogram\x18\x01 \x01(\v2\x1a.edad.inference.v1.ProgramR\aprogram\x12(\n" +
 	"\x03job\x18\x02 \x01(\v2\x16.edad.inference.v1.JobR\x03job\x12J\n" +
@@ -2154,7 +3061,7 @@ const file_inference_v1_inference_proto_rawDesc = "" +
 	"\bselected\x18\x03 \x01(\tR\bselected\x12%\n" +
 	"\x0ecorrect_answer\x18\x04 \x01(\tR\rcorrectAnswer\x12 \n" +
 	"\vexplanation\x18\x05 \x01(\tR\vexplanation\x12\x1a\n" +
-	"\bcomplete\x18\x06 \x01(\bR\bcomplete\"\xb9\x01\n" +
+	"\bcomplete\x18\x06 \x01(\bR\bcomplete\"\xde\x01\n" +
 	"\tPathTopic\x12\x0e\n" +
 	"\x02id\x18\x01 \x01(\tR\x02id\x12\x14\n" +
 	"\x05title\x18\x02 \x01(\tR\x05title\x12\x18\n" +
@@ -2163,7 +3070,8 @@ const file_inference_v1_inference_proto_rawDesc = "" +
 	"sort_order\x18\x04 \x01(\x05R\tsortOrder\x12\x16\n" +
 	"\x06locked\x18\x05 \x01(\bR\x06locked\x12\x18\n" +
 	"\amastery\x18\x06 \x01(\x05R\amastery\x12\x1b\n" +
-	"\tlesson_id\x18\a \x01(\tR\blessonId\"\xa9\x01\n" +
+	"\tlesson_id\x18\a \x01(\tR\blessonId\x12#\n" +
+	"\rlesson_status\x18\b \x01(\tR\flessonStatus\"\xa9\x01\n" +
 	"\x04Path\x12\x0e\n" +
 	"\x02id\x18\x01 \x01(\tR\x02id\x12\x1d\n" +
 	"\n" +
@@ -2172,14 +3080,15 @@ const file_inference_v1_inference_proto_rawDesc = "" +
 	"\n" +
 	"created_at\x18\x04 \x01(\tR\tcreatedAt\x12\x1d\n" +
 	"\n" +
-	"updated_at\x18\x05 \x01(\tR\tupdatedAt\"\x9b\x01\n" +
+	"updated_at\x18\x05 \x01(\tR\tupdatedAt\"\xc0\x01\n" +
 	"\rLessonSection\x12\x0e\n" +
 	"\x02id\x18\x01 \x01(\tR\x02id\x12\x14\n" +
 	"\x05title\x18\x02 \x01(\tR\x05title\x12\x12\n" +
 	"\x04body\x18\x03 \x01(\tR\x04body\x12\x1d\n" +
 	"\n" +
 	"key_points\x18\x04 \x03(\tR\tkeyPoints\x121\n" +
-	"\x05check\x18\x05 \x01(\v2\x1b.edad.inference.v1.QuestionR\x05check\"\xba\x01\n" +
+	"\x05check\x18\x05 \x01(\v2\x1b.edad.inference.v1.QuestionR\x05check\x12#\n" +
+	"\rhelper_prompt\x18\x06 \x01(\tR\fhelperPrompt\"\xac\x02\n" +
 	"\aMessage\x12\x0e\n" +
 	"\x02id\x18\x01 \x01(\tR\x02id\x12\x1d\n" +
 	"\n" +
@@ -2190,7 +3099,11 @@ const file_inference_v1_inference_proto_rawDesc = "" +
 	"\n" +
 	"created_at\x18\x06 \x01(\tR\tcreatedAt\x12\x1d\n" +
 	"\n" +
-	"updated_at\x18\a \x01(\tR\tupdatedAt\"\xe7\x02\n" +
+	"updated_at\x18\a \x01(\tR\tupdatedAt\x12!\n" +
+	"\fcitation_ids\x18\b \x03(\tR\vcitationIds\x12\x18\n" +
+	"\apartial\x18\t \x01(\bR\apartial\x123\n" +
+	"\x15retrieval_unavailable\x18\n" +
+	" \x01(\bR\x14retrievalUnavailable\"\xb9\x03\n" +
 	"\x06Lesson\x12\x0e\n" +
 	"\x02id\x18\x01 \x01(\tR\x02id\x12\x1d\n" +
 	"\n" +
@@ -2207,7 +3120,78 @@ const file_inference_v1_inference_proto_rawDesc = "" +
 	"created_at\x18\n" +
 	" \x01(\tR\tcreatedAt\x12\x1d\n" +
 	"\n" +
-	"updated_at\x18\v \x01(\tR\tupdatedAt\"\x80\x01\n" +
+	"updated_at\x18\v \x01(\tR\tupdatedAt\x12P\n" +
+	"\x11latest_assessment\x18\f \x01(\v2#.edad.inference.v1.LessonAssessmentR\x10latestAssessment\"t\n" +
+	"\x14AssessmentReviewItem\x12\x18\n" +
+	"\aconcept\x18\x01 \x01(\tR\aconcept\x12\x1d\n" +
+	"\n" +
+	"section_id\x18\x02 \x01(\tR\tsectionId\x12#\n" +
+	"\rsection_title\x18\x03 \x01(\tR\fsectionTitle\"\xbb\x03\n" +
+	"\x10LessonAssessment\x12\x0e\n" +
+	"\x02id\x18\x01 \x01(\tR\x02id\x12\x1b\n" +
+	"\tlesson_id\x18\x02 \x01(\tR\blessonId\x12%\n" +
+	"\x0equestion_count\x18\x03 \x01(\x05R\rquestionCount\x12%\n" +
+	"\x0eattempt_number\x18\x04 \x01(\x05R\rattemptNumber\x12\x16\n" +
+	"\x06status\x18\x05 \x01(\tR\x06status\x129\n" +
+	"\tquestions\x18\x06 \x03(\v2\x1b.edad.inference.v1.QuestionR\tquestions\x12\x14\n" +
+	"\x05score\x18\a \x01(\x05R\x05score\x12\x16\n" +
+	"\x06passed\x18\b \x01(\bR\x06passed\x12H\n" +
+	"\vreview_plan\x18\t \x03(\v2'.edad.inference.v1.AssessmentReviewItemR\n" +
+	"reviewPlan\x12#\n" +
+	"\rerror_message\x18\n" +
+	" \x01(\tR\ferrorMessage\x12\x1d\n" +
+	"\n" +
+	"created_at\x18\v \x01(\tR\tcreatedAt\x12\x1d\n" +
+	"\n" +
+	"updated_at\x18\f \x01(\tR\tupdatedAt\"|\n" +
+	"\x1dCreateLessonAssessmentRequest\x12\x17\n" +
+	"\auser_id\x18\x01 \x01(\tR\x06userId\x12\x1b\n" +
+	"\tlesson_id\x18\x02 \x01(\tR\blessonId\x12%\n" +
+	"\x0equestion_count\x18\x03 \x01(\x05R\rquestionCount\"Z\n" +
+	"\x1aGetLessonAssessmentRequest\x12\x17\n" +
+	"\auser_id\x18\x01 \x01(\tR\x06userId\x12#\n" +
+	"\rassessment_id\x18\x02 \x01(\tR\fassessmentId\"U\n" +
+	"\x16LessonAssessmentAnswer\x12\x1f\n" +
+	"\vquestion_id\x18\x01 \x01(\tR\n" +
+	"questionId\x12\x1a\n" +
+	"\bselected\x18\x02 \x01(\tR\bselected\"\xa2\x01\n" +
+	"\x1dSubmitLessonAssessmentRequest\x12\x17\n" +
+	"\auser_id\x18\x01 \x01(\tR\x06userId\x12#\n" +
+	"\rassessment_id\x18\x02 \x01(\tR\fassessmentId\x12C\n" +
+	"\aanswers\x18\x03 \x03(\v2).edad.inference.v1.LessonAssessmentAnswerR\aanswers\"\xd4\x02\n" +
+	"\fConversation\x12\x0e\n" +
+	"\x02id\x18\x01 \x01(\tR\x02id\x12\x17\n" +
+	"\auser_id\x18\x02 \x01(\tR\x06userId\x12\x1b\n" +
+	"\tlesson_id\x18\x03 \x01(\tR\blessonId\x12\x1d\n" +
+	"\n" +
+	"section_id\x18\x04 \x01(\tR\tsectionId\x12\x14\n" +
+	"\x05scope\x18\x05 \x01(\tR\x05scope\x12\x14\n" +
+	"\x05title\x18\x06 \x01(\tR\x05title\x12!\n" +
+	"\ftitle_source\x18\a \x01(\tR\vtitleSource\x12\x1a\n" +
+	"\barchived\x18\b \x01(\bR\barchived\x126\n" +
+	"\bmessages\x18\t \x03(\v2\x1a.edad.inference.v1.MessageR\bmessages\x12\x1d\n" +
+	"\n" +
+	"created_at\x18\n" +
+	" \x01(\tR\tcreatedAt\x12\x1d\n" +
+	"\n" +
+	"updated_at\x18\v \x01(\tR\tupdatedAt\"Y\n" +
+	"\x10ConversationList\x12E\n" +
+	"\rconversations\x18\x01 \x03(\v2\x1f.edad.inference.v1.ConversationR\rconversations\"m\n" +
+	"\x1fCreateLessonConversationRequest\x12\x17\n" +
+	"\auser_id\x18\x01 \x01(\tR\x06userId\x12\x1b\n" +
+	"\tlesson_id\x18\x02 \x01(\tR\blessonId\x12\x14\n" +
+	"\x05title\x18\x03 \x01(\tR\x05title\"}\n" +
+	"\x1cGetLessonConversationRequest\x12\x17\n" +
+	"\auser_id\x18\x01 \x01(\tR\x06userId\x12\x1b\n" +
+	"\tlesson_id\x18\x02 \x01(\tR\blessonId\x12'\n" +
+	"\x0fconversation_id\x18\x03 \x01(\tR\x0econversationId\"\xc4\x01\n" +
+	"\x1fUpdateLessonConversationRequest\x12\x17\n" +
+	"\auser_id\x18\x01 \x01(\tR\x06userId\x12\x1b\n" +
+	"\tlesson_id\x18\x02 \x01(\tR\blessonId\x12'\n" +
+	"\x0fconversation_id\x18\x03 \x01(\tR\x0econversationId\x12\x14\n" +
+	"\x05title\x18\x04 \x01(\tR\x05title\x12\x1f\n" +
+	"\barchived\x18\x05 \x01(\bH\x00R\barchived\x88\x01\x01B\v\n" +
+	"\t_archived\"\x80\x01\n" +
 	"\x11GradeCheckRequest\x12\x17\n" +
 	"\auser_id\x18\x01 \x01(\tR\x06userId\x12\x1b\n" +
 	"\tlesson_id\x18\x02 \x01(\tR\blessonId\x12\x19\n" +
@@ -2219,15 +3203,19 @@ const file_inference_v1_inference_proto_rawDesc = "" +
 	"\x0ecorrect_answer\x18\x03 \x01(\tR\rcorrectAnswer\x12 \n" +
 	"\vexplanation\x18\x04 \x01(\tR\vexplanation\x12'\n" +
 	"\x0flesson_complete\x18\x05 \x01(\bR\x0elessonComplete\x12\x18\n" +
-	"\amastery\x18\x06 \x01(\x05R\amastery\"c\n" +
+	"\amastery\x18\x06 \x01(\x05R\amastery\"\xd7\x01\n" +
 	"\x11SubmitTurnRequest\x12\x17\n" +
 	"\auser_id\x18\x01 \x01(\tR\x06userId\x12\x1b\n" +
 	"\tlesson_id\x18\x02 \x01(\tR\blessonId\x12\x18\n" +
-	"\acontent\x18\x03 \x01(\tR\acontent\"\x8a\x01\n" +
+	"\acontent\x18\x03 \x01(\tR\acontent\x12*\n" +
+	"\x11resume_message_id\x18\x04 \x01(\tR\x0fresumeMessageId\x12'\n" +
+	"\x0fconversation_id\x18\x05 \x01(\tR\x0econversationId\x12\x1d\n" +
+	"\n" +
+	"section_id\x18\x06 \x01(\tR\tsectionId\"\x8a\x01\n" +
 	"\tTurnEvent\x12\x14\n" +
 	"\x05token\x18\x01 \x01(\tR\x05token\x124\n" +
 	"\amessage\x18\x02 \x01(\v2\x1a.edad.inference.v1.MessageR\amessage\x121\n" +
-	"\x05check\x18\x03 \x01(\v2\x1b.edad.inference.v1.QuestionR\x05check2\xe2\t\n" +
+	"\x05check\x18\x03 \x01(\v2\x1b.edad.inference.v1.QuestionR\x05check2\xe1\x0f\n" +
 	"\x10InferenceService\x12T\n" +
 	"\rCreateProgram\x12'.edad.inference.v1.CreateProgramRequest\x1a\x1a.edad.inference.v1.Program\x12R\n" +
 	"\n" +
@@ -2242,7 +3230,14 @@ const file_inference_v1_inference_proto_rawDesc = "" +
 	"\tGetLesson\x12#.edad.inference.v1.GetLessonRequest\x1a\x19.edad.inference.v1.Lesson\x12Y\n" +
 	"\n" +
 	"GradeCheck\x12$.edad.inference.v1.GradeCheckRequest\x1a%.edad.inference.v1.GradeCheckResponse\x12P\n" +
-	"\x0eCompleteLesson\x12#.edad.inference.v1.GetLessonRequest\x1a\x19.edad.inference.v1.Lesson\x12R\n" +
+	"\x0eCompleteLesson\x12#.edad.inference.v1.GetLessonRequest\x1a\x19.edad.inference.v1.Lesson\x12o\n" +
+	"\x16CreateLessonAssessment\x120.edad.inference.v1.CreateLessonAssessmentRequest\x1a#.edad.inference.v1.LessonAssessment\x12i\n" +
+	"\x13GetLessonAssessment\x12-.edad.inference.v1.GetLessonAssessmentRequest\x1a#.edad.inference.v1.LessonAssessment\x12o\n" +
+	"\x16SubmitLessonAssessment\x120.edad.inference.v1.SubmitLessonAssessmentRequest\x1a#.edad.inference.v1.LessonAssessment\x12c\n" +
+	"\x17ListLessonConversations\x12#.edad.inference.v1.GetLessonRequest\x1a#.edad.inference.v1.ConversationList\x12o\n" +
+	"\x18CreateLessonConversation\x122.edad.inference.v1.CreateLessonConversationRequest\x1a\x1f.edad.inference.v1.Conversation\x12i\n" +
+	"\x15GetLessonConversation\x12/.edad.inference.v1.GetLessonConversationRequest\x1a\x1f.edad.inference.v1.Conversation\x12o\n" +
+	"\x18UpdateLessonConversation\x122.edad.inference.v1.UpdateLessonConversationRequest\x1a\x1f.edad.inference.v1.Conversation\x12R\n" +
 	"\n" +
 	"SubmitTurn\x12$.edad.inference.v1.SubmitTurnRequest\x1a\x1c.edad.inference.v1.TurnEvent0\x01\x12B\n" +
 	"\x06GetJob\x12 .edad.inference.v1.GetJobRequest\x1a\x16.edad.inference.v1.Job\x12F\n" +
@@ -2260,35 +3255,46 @@ func file_inference_v1_inference_proto_rawDescGZIP() []byte {
 	return file_inference_v1_inference_proto_rawDescData
 }
 
-var file_inference_v1_inference_proto_msgTypes = make([]protoimpl.MessageInfo, 27)
+var file_inference_v1_inference_proto_msgTypes = make([]protoimpl.MessageInfo, 38)
 var file_inference_v1_inference_proto_goTypes = []any{
-	(*DocumentRef)(nil),              // 0: edad.inference.v1.DocumentRef
-	(*CreateProgramRequest)(nil),     // 1: edad.inference.v1.CreateProgramRequest
-	(*GetProgramRequest)(nil),        // 2: edad.inference.v1.GetProgramRequest
-	(*Program)(nil),                  // 3: edad.inference.v1.Program
-	(*ProgramView)(nil),              // 4: edad.inference.v1.ProgramView
-	(*StartJobRequest)(nil),          // 5: edad.inference.v1.StartJobRequest
-	(*StartLessonRequest)(nil),       // 6: edad.inference.v1.StartLessonRequest
-	(*GetKnowledgeCheckRequest)(nil), // 7: edad.inference.v1.GetKnowledgeCheckRequest
-	(*GetPathRequest)(nil),           // 8: edad.inference.v1.GetPathRequest
-	(*GetLessonRequest)(nil),         // 9: edad.inference.v1.GetLessonRequest
-	(*GetJobRequest)(nil),            // 10: edad.inference.v1.GetJobRequest
-	(*Job)(nil),                      // 11: edad.inference.v1.Job
-	(*Choice)(nil),                   // 12: edad.inference.v1.Choice
-	(*Question)(nil),                 // 13: edad.inference.v1.Question
-	(*Diagnosis)(nil),                // 14: edad.inference.v1.Diagnosis
-	(*KnowledgeCheck)(nil),           // 15: edad.inference.v1.KnowledgeCheck
-	(*SubmitCheckAnswerRequest)(nil), // 16: edad.inference.v1.SubmitCheckAnswerRequest
-	(*CheckAnswerResult)(nil),        // 17: edad.inference.v1.CheckAnswerResult
-	(*PathTopic)(nil),                // 18: edad.inference.v1.PathTopic
-	(*Path)(nil),                     // 19: edad.inference.v1.Path
-	(*LessonSection)(nil),            // 20: edad.inference.v1.LessonSection
-	(*Message)(nil),                  // 21: edad.inference.v1.Message
-	(*Lesson)(nil),                   // 22: edad.inference.v1.Lesson
-	(*GradeCheckRequest)(nil),        // 23: edad.inference.v1.GradeCheckRequest
-	(*GradeCheckResponse)(nil),       // 24: edad.inference.v1.GradeCheckResponse
-	(*SubmitTurnRequest)(nil),        // 25: edad.inference.v1.SubmitTurnRequest
-	(*TurnEvent)(nil),                // 26: edad.inference.v1.TurnEvent
+	(*DocumentRef)(nil),                     // 0: edad.inference.v1.DocumentRef
+	(*CreateProgramRequest)(nil),            // 1: edad.inference.v1.CreateProgramRequest
+	(*GetProgramRequest)(nil),               // 2: edad.inference.v1.GetProgramRequest
+	(*Program)(nil),                         // 3: edad.inference.v1.Program
+	(*ProgramView)(nil),                     // 4: edad.inference.v1.ProgramView
+	(*StartJobRequest)(nil),                 // 5: edad.inference.v1.StartJobRequest
+	(*StartLessonRequest)(nil),              // 6: edad.inference.v1.StartLessonRequest
+	(*GetKnowledgeCheckRequest)(nil),        // 7: edad.inference.v1.GetKnowledgeCheckRequest
+	(*GetPathRequest)(nil),                  // 8: edad.inference.v1.GetPathRequest
+	(*GetLessonRequest)(nil),                // 9: edad.inference.v1.GetLessonRequest
+	(*GetJobRequest)(nil),                   // 10: edad.inference.v1.GetJobRequest
+	(*Job)(nil),                             // 11: edad.inference.v1.Job
+	(*Choice)(nil),                          // 12: edad.inference.v1.Choice
+	(*Question)(nil),                        // 13: edad.inference.v1.Question
+	(*Diagnosis)(nil),                       // 14: edad.inference.v1.Diagnosis
+	(*KnowledgeCheck)(nil),                  // 15: edad.inference.v1.KnowledgeCheck
+	(*SubmitCheckAnswerRequest)(nil),        // 16: edad.inference.v1.SubmitCheckAnswerRequest
+	(*CheckAnswerResult)(nil),               // 17: edad.inference.v1.CheckAnswerResult
+	(*PathTopic)(nil),                       // 18: edad.inference.v1.PathTopic
+	(*Path)(nil),                            // 19: edad.inference.v1.Path
+	(*LessonSection)(nil),                   // 20: edad.inference.v1.LessonSection
+	(*Message)(nil),                         // 21: edad.inference.v1.Message
+	(*Lesson)(nil),                          // 22: edad.inference.v1.Lesson
+	(*AssessmentReviewItem)(nil),            // 23: edad.inference.v1.AssessmentReviewItem
+	(*LessonAssessment)(nil),                // 24: edad.inference.v1.LessonAssessment
+	(*CreateLessonAssessmentRequest)(nil),   // 25: edad.inference.v1.CreateLessonAssessmentRequest
+	(*GetLessonAssessmentRequest)(nil),      // 26: edad.inference.v1.GetLessonAssessmentRequest
+	(*LessonAssessmentAnswer)(nil),          // 27: edad.inference.v1.LessonAssessmentAnswer
+	(*SubmitLessonAssessmentRequest)(nil),   // 28: edad.inference.v1.SubmitLessonAssessmentRequest
+	(*Conversation)(nil),                    // 29: edad.inference.v1.Conversation
+	(*ConversationList)(nil),                // 30: edad.inference.v1.ConversationList
+	(*CreateLessonConversationRequest)(nil), // 31: edad.inference.v1.CreateLessonConversationRequest
+	(*GetLessonConversationRequest)(nil),    // 32: edad.inference.v1.GetLessonConversationRequest
+	(*UpdateLessonConversationRequest)(nil), // 33: edad.inference.v1.UpdateLessonConversationRequest
+	(*GradeCheckRequest)(nil),               // 34: edad.inference.v1.GradeCheckRequest
+	(*GradeCheckResponse)(nil),              // 35: edad.inference.v1.GradeCheckResponse
+	(*SubmitTurnRequest)(nil),               // 36: edad.inference.v1.SubmitTurnRequest
+	(*TurnEvent)(nil),                       // 37: edad.inference.v1.TurnEvent
 }
 var file_inference_v1_inference_proto_depIdxs = []int32{
 	0,  // 0: edad.inference.v1.CreateProgramRequest.documents:type_name -> edad.inference.v1.DocumentRef
@@ -2304,43 +3310,63 @@ var file_inference_v1_inference_proto_depIdxs = []int32{
 	13, // 10: edad.inference.v1.LessonSection.check:type_name -> edad.inference.v1.Question
 	20, // 11: edad.inference.v1.Lesson.sections:type_name -> edad.inference.v1.LessonSection
 	21, // 12: edad.inference.v1.Lesson.messages:type_name -> edad.inference.v1.Message
-	21, // 13: edad.inference.v1.TurnEvent.message:type_name -> edad.inference.v1.Message
-	13, // 14: edad.inference.v1.TurnEvent.check:type_name -> edad.inference.v1.Question
-	1,  // 15: edad.inference.v1.InferenceService.CreateProgram:input_type -> edad.inference.v1.CreateProgramRequest
-	2,  // 16: edad.inference.v1.InferenceService.GetProgram:input_type -> edad.inference.v1.GetProgramRequest
-	5,  // 17: edad.inference.v1.InferenceService.StartKnowledgeCheck:input_type -> edad.inference.v1.StartJobRequest
-	7,  // 18: edad.inference.v1.InferenceService.GetKnowledgeCheck:input_type -> edad.inference.v1.GetKnowledgeCheckRequest
-	16, // 19: edad.inference.v1.InferenceService.SubmitCheckAnswer:input_type -> edad.inference.v1.SubmitCheckAnswerRequest
-	5,  // 20: edad.inference.v1.InferenceService.StartDiagnosis:input_type -> edad.inference.v1.StartJobRequest
-	5,  // 21: edad.inference.v1.InferenceService.StartPath:input_type -> edad.inference.v1.StartJobRequest
-	8,  // 22: edad.inference.v1.InferenceService.GetPath:input_type -> edad.inference.v1.GetPathRequest
-	6,  // 23: edad.inference.v1.InferenceService.StartLesson:input_type -> edad.inference.v1.StartLessonRequest
-	9,  // 24: edad.inference.v1.InferenceService.GetLesson:input_type -> edad.inference.v1.GetLessonRequest
-	23, // 25: edad.inference.v1.InferenceService.GradeCheck:input_type -> edad.inference.v1.GradeCheckRequest
-	9,  // 26: edad.inference.v1.InferenceService.CompleteLesson:input_type -> edad.inference.v1.GetLessonRequest
-	25, // 27: edad.inference.v1.InferenceService.SubmitTurn:input_type -> edad.inference.v1.SubmitTurnRequest
-	10, // 28: edad.inference.v1.InferenceService.GetJob:input_type -> edad.inference.v1.GetJobRequest
-	10, // 29: edad.inference.v1.InferenceService.WatchJob:input_type -> edad.inference.v1.GetJobRequest
-	3,  // 30: edad.inference.v1.InferenceService.CreateProgram:output_type -> edad.inference.v1.Program
-	4,  // 31: edad.inference.v1.InferenceService.GetProgram:output_type -> edad.inference.v1.ProgramView
-	11, // 32: edad.inference.v1.InferenceService.StartKnowledgeCheck:output_type -> edad.inference.v1.Job
-	15, // 33: edad.inference.v1.InferenceService.GetKnowledgeCheck:output_type -> edad.inference.v1.KnowledgeCheck
-	17, // 34: edad.inference.v1.InferenceService.SubmitCheckAnswer:output_type -> edad.inference.v1.CheckAnswerResult
-	11, // 35: edad.inference.v1.InferenceService.StartDiagnosis:output_type -> edad.inference.v1.Job
-	11, // 36: edad.inference.v1.InferenceService.StartPath:output_type -> edad.inference.v1.Job
-	19, // 37: edad.inference.v1.InferenceService.GetPath:output_type -> edad.inference.v1.Path
-	11, // 38: edad.inference.v1.InferenceService.StartLesson:output_type -> edad.inference.v1.Job
-	22, // 39: edad.inference.v1.InferenceService.GetLesson:output_type -> edad.inference.v1.Lesson
-	24, // 40: edad.inference.v1.InferenceService.GradeCheck:output_type -> edad.inference.v1.GradeCheckResponse
-	22, // 41: edad.inference.v1.InferenceService.CompleteLesson:output_type -> edad.inference.v1.Lesson
-	26, // 42: edad.inference.v1.InferenceService.SubmitTurn:output_type -> edad.inference.v1.TurnEvent
-	11, // 43: edad.inference.v1.InferenceService.GetJob:output_type -> edad.inference.v1.Job
-	11, // 44: edad.inference.v1.InferenceService.WatchJob:output_type -> edad.inference.v1.Job
-	30, // [30:45] is the sub-list for method output_type
-	15, // [15:30] is the sub-list for method input_type
-	15, // [15:15] is the sub-list for extension type_name
-	15, // [15:15] is the sub-list for extension extendee
-	0,  // [0:15] is the sub-list for field type_name
+	24, // 13: edad.inference.v1.Lesson.latest_assessment:type_name -> edad.inference.v1.LessonAssessment
+	13, // 14: edad.inference.v1.LessonAssessment.questions:type_name -> edad.inference.v1.Question
+	23, // 15: edad.inference.v1.LessonAssessment.review_plan:type_name -> edad.inference.v1.AssessmentReviewItem
+	27, // 16: edad.inference.v1.SubmitLessonAssessmentRequest.answers:type_name -> edad.inference.v1.LessonAssessmentAnswer
+	21, // 17: edad.inference.v1.Conversation.messages:type_name -> edad.inference.v1.Message
+	29, // 18: edad.inference.v1.ConversationList.conversations:type_name -> edad.inference.v1.Conversation
+	21, // 19: edad.inference.v1.TurnEvent.message:type_name -> edad.inference.v1.Message
+	13, // 20: edad.inference.v1.TurnEvent.check:type_name -> edad.inference.v1.Question
+	1,  // 21: edad.inference.v1.InferenceService.CreateProgram:input_type -> edad.inference.v1.CreateProgramRequest
+	2,  // 22: edad.inference.v1.InferenceService.GetProgram:input_type -> edad.inference.v1.GetProgramRequest
+	5,  // 23: edad.inference.v1.InferenceService.StartKnowledgeCheck:input_type -> edad.inference.v1.StartJobRequest
+	7,  // 24: edad.inference.v1.InferenceService.GetKnowledgeCheck:input_type -> edad.inference.v1.GetKnowledgeCheckRequest
+	16, // 25: edad.inference.v1.InferenceService.SubmitCheckAnswer:input_type -> edad.inference.v1.SubmitCheckAnswerRequest
+	5,  // 26: edad.inference.v1.InferenceService.StartDiagnosis:input_type -> edad.inference.v1.StartJobRequest
+	5,  // 27: edad.inference.v1.InferenceService.StartPath:input_type -> edad.inference.v1.StartJobRequest
+	8,  // 28: edad.inference.v1.InferenceService.GetPath:input_type -> edad.inference.v1.GetPathRequest
+	6,  // 29: edad.inference.v1.InferenceService.StartLesson:input_type -> edad.inference.v1.StartLessonRequest
+	9,  // 30: edad.inference.v1.InferenceService.GetLesson:input_type -> edad.inference.v1.GetLessonRequest
+	34, // 31: edad.inference.v1.InferenceService.GradeCheck:input_type -> edad.inference.v1.GradeCheckRequest
+	9,  // 32: edad.inference.v1.InferenceService.CompleteLesson:input_type -> edad.inference.v1.GetLessonRequest
+	25, // 33: edad.inference.v1.InferenceService.CreateLessonAssessment:input_type -> edad.inference.v1.CreateLessonAssessmentRequest
+	26, // 34: edad.inference.v1.InferenceService.GetLessonAssessment:input_type -> edad.inference.v1.GetLessonAssessmentRequest
+	28, // 35: edad.inference.v1.InferenceService.SubmitLessonAssessment:input_type -> edad.inference.v1.SubmitLessonAssessmentRequest
+	9,  // 36: edad.inference.v1.InferenceService.ListLessonConversations:input_type -> edad.inference.v1.GetLessonRequest
+	31, // 37: edad.inference.v1.InferenceService.CreateLessonConversation:input_type -> edad.inference.v1.CreateLessonConversationRequest
+	32, // 38: edad.inference.v1.InferenceService.GetLessonConversation:input_type -> edad.inference.v1.GetLessonConversationRequest
+	33, // 39: edad.inference.v1.InferenceService.UpdateLessonConversation:input_type -> edad.inference.v1.UpdateLessonConversationRequest
+	36, // 40: edad.inference.v1.InferenceService.SubmitTurn:input_type -> edad.inference.v1.SubmitTurnRequest
+	10, // 41: edad.inference.v1.InferenceService.GetJob:input_type -> edad.inference.v1.GetJobRequest
+	10, // 42: edad.inference.v1.InferenceService.WatchJob:input_type -> edad.inference.v1.GetJobRequest
+	3,  // 43: edad.inference.v1.InferenceService.CreateProgram:output_type -> edad.inference.v1.Program
+	4,  // 44: edad.inference.v1.InferenceService.GetProgram:output_type -> edad.inference.v1.ProgramView
+	11, // 45: edad.inference.v1.InferenceService.StartKnowledgeCheck:output_type -> edad.inference.v1.Job
+	15, // 46: edad.inference.v1.InferenceService.GetKnowledgeCheck:output_type -> edad.inference.v1.KnowledgeCheck
+	17, // 47: edad.inference.v1.InferenceService.SubmitCheckAnswer:output_type -> edad.inference.v1.CheckAnswerResult
+	11, // 48: edad.inference.v1.InferenceService.StartDiagnosis:output_type -> edad.inference.v1.Job
+	11, // 49: edad.inference.v1.InferenceService.StartPath:output_type -> edad.inference.v1.Job
+	19, // 50: edad.inference.v1.InferenceService.GetPath:output_type -> edad.inference.v1.Path
+	11, // 51: edad.inference.v1.InferenceService.StartLesson:output_type -> edad.inference.v1.Job
+	22, // 52: edad.inference.v1.InferenceService.GetLesson:output_type -> edad.inference.v1.Lesson
+	35, // 53: edad.inference.v1.InferenceService.GradeCheck:output_type -> edad.inference.v1.GradeCheckResponse
+	22, // 54: edad.inference.v1.InferenceService.CompleteLesson:output_type -> edad.inference.v1.Lesson
+	24, // 55: edad.inference.v1.InferenceService.CreateLessonAssessment:output_type -> edad.inference.v1.LessonAssessment
+	24, // 56: edad.inference.v1.InferenceService.GetLessonAssessment:output_type -> edad.inference.v1.LessonAssessment
+	24, // 57: edad.inference.v1.InferenceService.SubmitLessonAssessment:output_type -> edad.inference.v1.LessonAssessment
+	30, // 58: edad.inference.v1.InferenceService.ListLessonConversations:output_type -> edad.inference.v1.ConversationList
+	29, // 59: edad.inference.v1.InferenceService.CreateLessonConversation:output_type -> edad.inference.v1.Conversation
+	29, // 60: edad.inference.v1.InferenceService.GetLessonConversation:output_type -> edad.inference.v1.Conversation
+	29, // 61: edad.inference.v1.InferenceService.UpdateLessonConversation:output_type -> edad.inference.v1.Conversation
+	37, // 62: edad.inference.v1.InferenceService.SubmitTurn:output_type -> edad.inference.v1.TurnEvent
+	11, // 63: edad.inference.v1.InferenceService.GetJob:output_type -> edad.inference.v1.Job
+	11, // 64: edad.inference.v1.InferenceService.WatchJob:output_type -> edad.inference.v1.Job
+	43, // [43:65] is the sub-list for method output_type
+	21, // [21:43] is the sub-list for method input_type
+	21, // [21:21] is the sub-list for extension type_name
+	21, // [21:21] is the sub-list for extension extendee
+	0,  // [0:21] is the sub-list for field type_name
 }
 
 func init() { file_inference_v1_inference_proto_init() }
@@ -2348,13 +3374,14 @@ func file_inference_v1_inference_proto_init() {
 	if File_inference_v1_inference_proto != nil {
 		return
 	}
+	file_inference_v1_inference_proto_msgTypes[33].OneofWrappers = []any{}
 	type x struct{}
 	out := protoimpl.TypeBuilder{
 		File: protoimpl.DescBuilder{
 			GoPackagePath: reflect.TypeOf(x{}).PkgPath(),
 			RawDescriptor: unsafe.Slice(unsafe.StringData(file_inference_v1_inference_proto_rawDesc), len(file_inference_v1_inference_proto_rawDesc)),
 			NumEnums:      0,
-			NumMessages:   27,
+			NumMessages:   38,
 			NumExtensions: 0,
 			NumServices:   1,
 		},

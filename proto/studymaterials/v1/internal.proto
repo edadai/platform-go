@@ -8,6 +8,121 @@ service StudyMaterialsInternalService {
   rpc GetExtractionSource(GetExtractionSourceRequest) returns (GetExtractionSourceResponse);
   rpc PersistExtraction(stream PersistExtractionRequest) returns (PersistExtractionResponse);
   rpc ReadExtraction(ReadExtractionRequest) returns (stream ReadExtractionResponse);
+  rpc GetSourceMedia(GetSourceMediaRequest) returns (GetSourceMediaResponse);
+  rpc AuthorizeAudioTranscription(AuthorizeAudioTranscriptionRequest) returns (AuthorizeAudioTranscriptionResponse);
+  rpc RegisterAudioTranscription(RegisterAudioTranscriptionRequest) returns (RegisterAudioTranscriptionResponse);
+  rpc PersistAudioTranscript(PersistAudioTranscriptRequest) returns (PersistAudioTranscriptResponse);
+  rpc ReportAudioTranscriptionFailure(ReportAudioTranscriptionFailureRequest) returns (ReportAudioTranscriptionFailureResponse);
+  rpc GetStudyKitTitleContext(GetStudyKitTitleContextRequest) returns (GetStudyKitTitleContextResponse);
+  rpc GetGenerationControl(GetGenerationControlRequest) returns (GetGenerationControlResponse);
+}
+
+message GetSourceMediaRequest {
+  string transcription_job_id = 1;
+  string source_version_id = 2;
+  string media_asset_id = 3;
+}
+
+message GetSourceMediaResponse {
+  string url = 1;
+  string expires_at = 2;
+  string media_asset_id = 3;
+  string source_version = 4;
+  int64 source_size = 5;
+}
+
+message AuthorizeAudioTranscriptionRequest {
+  string transcription_job_id = 1;
+  string source_version_id = 2;
+}
+
+message AuthorizeAudioTranscriptionResponse {
+  bool authorized = 1;
+  string status = 2;
+  string provider = 3;
+  string provider_job_id = 4;
+  string callback_id = 5;
+  string media_asset_id = 6;
+  string model = 7;
+  bool speaker_labels = 8;
+  string deadline_at = 9;
+  int64 fencing_token = 10;
+}
+
+message RegisterAudioTranscriptionRequest {
+  string transcription_job_id = 1;
+  string source_version_id = 2;
+  string provider = 3;
+  string provider_job_id = 4;
+  string provider_status = 5;
+  int64 fencing_token = 6;
+}
+
+message RegisterAudioTranscriptionResponse {
+  bool replayed = 1;
+  string status = 2;
+}
+
+message AudioTranscriptChunk {
+  int32 chunk_index = 1;
+  string content = 2;
+  int64 start_ms = 3;
+  int64 end_ms = 4;
+  string speaker_label = 5;
+  double confidence = 6;
+}
+
+message PersistAudioTranscriptRequest {
+  string transcription_job_id = 1;
+  string source_version_id = 2;
+  string provider = 3;
+  string provider_job_id = 4;
+  string model = 5;
+  int64 duration_ms = 6;
+  string language_code = 7;
+  string transcript_sha256 = 8;
+  int64 fencing_token = 9;
+  repeated AudioTranscriptChunk chunks = 10;
+}
+
+message PersistAudioTranscriptResponse {
+  bool replayed = 1;
+  int32 chunk_count = 2;
+}
+
+message ReportAudioTranscriptionFailureRequest {
+  string transcription_job_id = 1;
+  string source_version_id = 2;
+  string provider_job_id = 3;
+  string error_code = 4;
+  string error_message = 5;
+  bool retryable = 6;
+  string next_poll_at = 7;
+  int64 fencing_token = 8;
+}
+
+message ReportAudioTranscriptionFailureResponse {
+  string status = 1;
+}
+
+message GetStudyKitTitleContextRequest {
+  string study_kit_id = 1;
+  int64 expected_revision = 2;
+}
+
+message GetStudyKitTitleContextResponse {
+  bool eligible = 1;
+  string current_title = 2;
+  int64 title_revision = 3;
+  repeated string excerpts = 4;
+}
+
+message GetGenerationControlRequest { string job_id = 1; }
+
+message GetGenerationControlResponse {
+  string status = 1;
+  bool cancellation_requested = 2;
+  string cancellation_requested_at = 3;
 }
 
 message GetExtractionSourceRequest {

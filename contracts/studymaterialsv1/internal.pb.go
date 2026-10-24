@@ -21,6 +21,1066 @@ const (
 	_ = protoimpl.EnforceVersion(protoimpl.MaxVersion - 20)
 )
 
+type GetSourceMediaRequest struct {
+	state              protoimpl.MessageState `protogen:"open.v1"`
+	TranscriptionJobId string                 `protobuf:"bytes,1,opt,name=transcription_job_id,json=transcriptionJobId,proto3" json:"transcription_job_id,omitempty"`
+	SourceVersionId    string                 `protobuf:"bytes,2,opt,name=source_version_id,json=sourceVersionId,proto3" json:"source_version_id,omitempty"`
+	MediaAssetId       string                 `protobuf:"bytes,3,opt,name=media_asset_id,json=mediaAssetId,proto3" json:"media_asset_id,omitempty"`
+	unknownFields      protoimpl.UnknownFields
+	sizeCache          protoimpl.SizeCache
+}
+
+func (x *GetSourceMediaRequest) Reset() {
+	*x = GetSourceMediaRequest{}
+	mi := &file_studymaterials_v1_internal_proto_msgTypes[0]
+	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+	ms.StoreMessageInfo(mi)
+}
+
+func (x *GetSourceMediaRequest) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*GetSourceMediaRequest) ProtoMessage() {}
+
+func (x *GetSourceMediaRequest) ProtoReflect() protoreflect.Message {
+	mi := &file_studymaterials_v1_internal_proto_msgTypes[0]
+	if x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use GetSourceMediaRequest.ProtoReflect.Descriptor instead.
+func (*GetSourceMediaRequest) Descriptor() ([]byte, []int) {
+	return file_studymaterials_v1_internal_proto_rawDescGZIP(), []int{0}
+}
+
+func (x *GetSourceMediaRequest) GetTranscriptionJobId() string {
+	if x != nil {
+		return x.TranscriptionJobId
+	}
+	return ""
+}
+
+func (x *GetSourceMediaRequest) GetSourceVersionId() string {
+	if x != nil {
+		return x.SourceVersionId
+	}
+	return ""
+}
+
+func (x *GetSourceMediaRequest) GetMediaAssetId() string {
+	if x != nil {
+		return x.MediaAssetId
+	}
+	return ""
+}
+
+type GetSourceMediaResponse struct {
+	state         protoimpl.MessageState `protogen:"open.v1"`
+	Url           string                 `protobuf:"bytes,1,opt,name=url,proto3" json:"url,omitempty"`
+	ExpiresAt     string                 `protobuf:"bytes,2,opt,name=expires_at,json=expiresAt,proto3" json:"expires_at,omitempty"`
+	MediaAssetId  string                 `protobuf:"bytes,3,opt,name=media_asset_id,json=mediaAssetId,proto3" json:"media_asset_id,omitempty"`
+	SourceVersion string                 `protobuf:"bytes,4,opt,name=source_version,json=sourceVersion,proto3" json:"source_version,omitempty"`
+	SourceSize    int64                  `protobuf:"varint,5,opt,name=source_size,json=sourceSize,proto3" json:"source_size,omitempty"`
+	unknownFields protoimpl.UnknownFields
+	sizeCache     protoimpl.SizeCache
+}
+
+func (x *GetSourceMediaResponse) Reset() {
+	*x = GetSourceMediaResponse{}
+	mi := &file_studymaterials_v1_internal_proto_msgTypes[1]
+	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+	ms.StoreMessageInfo(mi)
+}
+
+func (x *GetSourceMediaResponse) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*GetSourceMediaResponse) ProtoMessage() {}
+
+func (x *GetSourceMediaResponse) ProtoReflect() protoreflect.Message {
+	mi := &file_studymaterials_v1_internal_proto_msgTypes[1]
+	if x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use GetSourceMediaResponse.ProtoReflect.Descriptor instead.
+func (*GetSourceMediaResponse) Descriptor() ([]byte, []int) {
+	return file_studymaterials_v1_internal_proto_rawDescGZIP(), []int{1}
+}
+
+func (x *GetSourceMediaResponse) GetUrl() string {
+	if x != nil {
+		return x.Url
+	}
+	return ""
+}
+
+func (x *GetSourceMediaResponse) GetExpiresAt() string {
+	if x != nil {
+		return x.ExpiresAt
+	}
+	return ""
+}
+
+func (x *GetSourceMediaResponse) GetMediaAssetId() string {
+	if x != nil {
+		return x.MediaAssetId
+	}
+	return ""
+}
+
+func (x *GetSourceMediaResponse) GetSourceVersion() string {
+	if x != nil {
+		return x.SourceVersion
+	}
+	return ""
+}
+
+func (x *GetSourceMediaResponse) GetSourceSize() int64 {
+	if x != nil {
+		return x.SourceSize
+	}
+	return 0
+}
+
+type AuthorizeAudioTranscriptionRequest struct {
+	state              protoimpl.MessageState `protogen:"open.v1"`
+	TranscriptionJobId string                 `protobuf:"bytes,1,opt,name=transcription_job_id,json=transcriptionJobId,proto3" json:"transcription_job_id,omitempty"`
+	SourceVersionId    string                 `protobuf:"bytes,2,opt,name=source_version_id,json=sourceVersionId,proto3" json:"source_version_id,omitempty"`
+	unknownFields      protoimpl.UnknownFields
+	sizeCache          protoimpl.SizeCache
+}
+
+func (x *AuthorizeAudioTranscriptionRequest) Reset() {
+	*x = AuthorizeAudioTranscriptionRequest{}
+	mi := &file_studymaterials_v1_internal_proto_msgTypes[2]
+	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+	ms.StoreMessageInfo(mi)
+}
+
+func (x *AuthorizeAudioTranscriptionRequest) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*AuthorizeAudioTranscriptionRequest) ProtoMessage() {}
+
+func (x *AuthorizeAudioTranscriptionRequest) ProtoReflect() protoreflect.Message {
+	mi := &file_studymaterials_v1_internal_proto_msgTypes[2]
+	if x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use AuthorizeAudioTranscriptionRequest.ProtoReflect.Descriptor instead.
+func (*AuthorizeAudioTranscriptionRequest) Descriptor() ([]byte, []int) {
+	return file_studymaterials_v1_internal_proto_rawDescGZIP(), []int{2}
+}
+
+func (x *AuthorizeAudioTranscriptionRequest) GetTranscriptionJobId() string {
+	if x != nil {
+		return x.TranscriptionJobId
+	}
+	return ""
+}
+
+func (x *AuthorizeAudioTranscriptionRequest) GetSourceVersionId() string {
+	if x != nil {
+		return x.SourceVersionId
+	}
+	return ""
+}
+
+type AuthorizeAudioTranscriptionResponse struct {
+	state         protoimpl.MessageState `protogen:"open.v1"`
+	Authorized    bool                   `protobuf:"varint,1,opt,name=authorized,proto3" json:"authorized,omitempty"`
+	Status        string                 `protobuf:"bytes,2,opt,name=status,proto3" json:"status,omitempty"`
+	Provider      string                 `protobuf:"bytes,3,opt,name=provider,proto3" json:"provider,omitempty"`
+	ProviderJobId string                 `protobuf:"bytes,4,opt,name=provider_job_id,json=providerJobId,proto3" json:"provider_job_id,omitempty"`
+	CallbackId    string                 `protobuf:"bytes,5,opt,name=callback_id,json=callbackId,proto3" json:"callback_id,omitempty"`
+	MediaAssetId  string                 `protobuf:"bytes,6,opt,name=media_asset_id,json=mediaAssetId,proto3" json:"media_asset_id,omitempty"`
+	Model         string                 `protobuf:"bytes,7,opt,name=model,proto3" json:"model,omitempty"`
+	SpeakerLabels bool                   `protobuf:"varint,8,opt,name=speaker_labels,json=speakerLabels,proto3" json:"speaker_labels,omitempty"`
+	DeadlineAt    string                 `protobuf:"bytes,9,opt,name=deadline_at,json=deadlineAt,proto3" json:"deadline_at,omitempty"`
+	FencingToken  int64                  `protobuf:"varint,10,opt,name=fencing_token,json=fencingToken,proto3" json:"fencing_token,omitempty"`
+	unknownFields protoimpl.UnknownFields
+	sizeCache     protoimpl.SizeCache
+}
+
+func (x *AuthorizeAudioTranscriptionResponse) Reset() {
+	*x = AuthorizeAudioTranscriptionResponse{}
+	mi := &file_studymaterials_v1_internal_proto_msgTypes[3]
+	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+	ms.StoreMessageInfo(mi)
+}
+
+func (x *AuthorizeAudioTranscriptionResponse) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*AuthorizeAudioTranscriptionResponse) ProtoMessage() {}
+
+func (x *AuthorizeAudioTranscriptionResponse) ProtoReflect() protoreflect.Message {
+	mi := &file_studymaterials_v1_internal_proto_msgTypes[3]
+	if x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use AuthorizeAudioTranscriptionResponse.ProtoReflect.Descriptor instead.
+func (*AuthorizeAudioTranscriptionResponse) Descriptor() ([]byte, []int) {
+	return file_studymaterials_v1_internal_proto_rawDescGZIP(), []int{3}
+}
+
+func (x *AuthorizeAudioTranscriptionResponse) GetAuthorized() bool {
+	if x != nil {
+		return x.Authorized
+	}
+	return false
+}
+
+func (x *AuthorizeAudioTranscriptionResponse) GetStatus() string {
+	if x != nil {
+		return x.Status
+	}
+	return ""
+}
+
+func (x *AuthorizeAudioTranscriptionResponse) GetProvider() string {
+	if x != nil {
+		return x.Provider
+	}
+	return ""
+}
+
+func (x *AuthorizeAudioTranscriptionResponse) GetProviderJobId() string {
+	if x != nil {
+		return x.ProviderJobId
+	}
+	return ""
+}
+
+func (x *AuthorizeAudioTranscriptionResponse) GetCallbackId() string {
+	if x != nil {
+		return x.CallbackId
+	}
+	return ""
+}
+
+func (x *AuthorizeAudioTranscriptionResponse) GetMediaAssetId() string {
+	if x != nil {
+		return x.MediaAssetId
+	}
+	return ""
+}
+
+func (x *AuthorizeAudioTranscriptionResponse) GetModel() string {
+	if x != nil {
+		return x.Model
+	}
+	return ""
+}
+
+func (x *AuthorizeAudioTranscriptionResponse) GetSpeakerLabels() bool {
+	if x != nil {
+		return x.SpeakerLabels
+	}
+	return false
+}
+
+func (x *AuthorizeAudioTranscriptionResponse) GetDeadlineAt() string {
+	if x != nil {
+		return x.DeadlineAt
+	}
+	return ""
+}
+
+func (x *AuthorizeAudioTranscriptionResponse) GetFencingToken() int64 {
+	if x != nil {
+		return x.FencingToken
+	}
+	return 0
+}
+
+type RegisterAudioTranscriptionRequest struct {
+	state              protoimpl.MessageState `protogen:"open.v1"`
+	TranscriptionJobId string                 `protobuf:"bytes,1,opt,name=transcription_job_id,json=transcriptionJobId,proto3" json:"transcription_job_id,omitempty"`
+	SourceVersionId    string                 `protobuf:"bytes,2,opt,name=source_version_id,json=sourceVersionId,proto3" json:"source_version_id,omitempty"`
+	Provider           string                 `protobuf:"bytes,3,opt,name=provider,proto3" json:"provider,omitempty"`
+	ProviderJobId      string                 `protobuf:"bytes,4,opt,name=provider_job_id,json=providerJobId,proto3" json:"provider_job_id,omitempty"`
+	ProviderStatus     string                 `protobuf:"bytes,5,opt,name=provider_status,json=providerStatus,proto3" json:"provider_status,omitempty"`
+	FencingToken       int64                  `protobuf:"varint,6,opt,name=fencing_token,json=fencingToken,proto3" json:"fencing_token,omitempty"`
+	unknownFields      protoimpl.UnknownFields
+	sizeCache          protoimpl.SizeCache
+}
+
+func (x *RegisterAudioTranscriptionRequest) Reset() {
+	*x = RegisterAudioTranscriptionRequest{}
+	mi := &file_studymaterials_v1_internal_proto_msgTypes[4]
+	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+	ms.StoreMessageInfo(mi)
+}
+
+func (x *RegisterAudioTranscriptionRequest) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*RegisterAudioTranscriptionRequest) ProtoMessage() {}
+
+func (x *RegisterAudioTranscriptionRequest) ProtoReflect() protoreflect.Message {
+	mi := &file_studymaterials_v1_internal_proto_msgTypes[4]
+	if x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use RegisterAudioTranscriptionRequest.ProtoReflect.Descriptor instead.
+func (*RegisterAudioTranscriptionRequest) Descriptor() ([]byte, []int) {
+	return file_studymaterials_v1_internal_proto_rawDescGZIP(), []int{4}
+}
+
+func (x *RegisterAudioTranscriptionRequest) GetTranscriptionJobId() string {
+	if x != nil {
+		return x.TranscriptionJobId
+	}
+	return ""
+}
+
+func (x *RegisterAudioTranscriptionRequest) GetSourceVersionId() string {
+	if x != nil {
+		return x.SourceVersionId
+	}
+	return ""
+}
+
+func (x *RegisterAudioTranscriptionRequest) GetProvider() string {
+	if x != nil {
+		return x.Provider
+	}
+	return ""
+}
+
+func (x *RegisterAudioTranscriptionRequest) GetProviderJobId() string {
+	if x != nil {
+		return x.ProviderJobId
+	}
+	return ""
+}
+
+func (x *RegisterAudioTranscriptionRequest) GetProviderStatus() string {
+	if x != nil {
+		return x.ProviderStatus
+	}
+	return ""
+}
+
+func (x *RegisterAudioTranscriptionRequest) GetFencingToken() int64 {
+	if x != nil {
+		return x.FencingToken
+	}
+	return 0
+}
+
+type RegisterAudioTranscriptionResponse struct {
+	state         protoimpl.MessageState `protogen:"open.v1"`
+	Replayed      bool                   `protobuf:"varint,1,opt,name=replayed,proto3" json:"replayed,omitempty"`
+	Status        string                 `protobuf:"bytes,2,opt,name=status,proto3" json:"status,omitempty"`
+	unknownFields protoimpl.UnknownFields
+	sizeCache     protoimpl.SizeCache
+}
+
+func (x *RegisterAudioTranscriptionResponse) Reset() {
+	*x = RegisterAudioTranscriptionResponse{}
+	mi := &file_studymaterials_v1_internal_proto_msgTypes[5]
+	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+	ms.StoreMessageInfo(mi)
+}
+
+func (x *RegisterAudioTranscriptionResponse) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*RegisterAudioTranscriptionResponse) ProtoMessage() {}
+
+func (x *RegisterAudioTranscriptionResponse) ProtoReflect() protoreflect.Message {
+	mi := &file_studymaterials_v1_internal_proto_msgTypes[5]
+	if x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use RegisterAudioTranscriptionResponse.ProtoReflect.Descriptor instead.
+func (*RegisterAudioTranscriptionResponse) Descriptor() ([]byte, []int) {
+	return file_studymaterials_v1_internal_proto_rawDescGZIP(), []int{5}
+}
+
+func (x *RegisterAudioTranscriptionResponse) GetReplayed() bool {
+	if x != nil {
+		return x.Replayed
+	}
+	return false
+}
+
+func (x *RegisterAudioTranscriptionResponse) GetStatus() string {
+	if x != nil {
+		return x.Status
+	}
+	return ""
+}
+
+type AudioTranscriptChunk struct {
+	state         protoimpl.MessageState `protogen:"open.v1"`
+	ChunkIndex    int32                  `protobuf:"varint,1,opt,name=chunk_index,json=chunkIndex,proto3" json:"chunk_index,omitempty"`
+	Content       string                 `protobuf:"bytes,2,opt,name=content,proto3" json:"content,omitempty"`
+	StartMs       int64                  `protobuf:"varint,3,opt,name=start_ms,json=startMs,proto3" json:"start_ms,omitempty"`
+	EndMs         int64                  `protobuf:"varint,4,opt,name=end_ms,json=endMs,proto3" json:"end_ms,omitempty"`
+	SpeakerLabel  string                 `protobuf:"bytes,5,opt,name=speaker_label,json=speakerLabel,proto3" json:"speaker_label,omitempty"`
+	Confidence    float64                `protobuf:"fixed64,6,opt,name=confidence,proto3" json:"confidence,omitempty"`
+	unknownFields protoimpl.UnknownFields
+	sizeCache     protoimpl.SizeCache
+}
+
+func (x *AudioTranscriptChunk) Reset() {
+	*x = AudioTranscriptChunk{}
+	mi := &file_studymaterials_v1_internal_proto_msgTypes[6]
+	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+	ms.StoreMessageInfo(mi)
+}
+
+func (x *AudioTranscriptChunk) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*AudioTranscriptChunk) ProtoMessage() {}
+
+func (x *AudioTranscriptChunk) ProtoReflect() protoreflect.Message {
+	mi := &file_studymaterials_v1_internal_proto_msgTypes[6]
+	if x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use AudioTranscriptChunk.ProtoReflect.Descriptor instead.
+func (*AudioTranscriptChunk) Descriptor() ([]byte, []int) {
+	return file_studymaterials_v1_internal_proto_rawDescGZIP(), []int{6}
+}
+
+func (x *AudioTranscriptChunk) GetChunkIndex() int32 {
+	if x != nil {
+		return x.ChunkIndex
+	}
+	return 0
+}
+
+func (x *AudioTranscriptChunk) GetContent() string {
+	if x != nil {
+		return x.Content
+	}
+	return ""
+}
+
+func (x *AudioTranscriptChunk) GetStartMs() int64 {
+	if x != nil {
+		return x.StartMs
+	}
+	return 0
+}
+
+func (x *AudioTranscriptChunk) GetEndMs() int64 {
+	if x != nil {
+		return x.EndMs
+	}
+	return 0
+}
+
+func (x *AudioTranscriptChunk) GetSpeakerLabel() string {
+	if x != nil {
+		return x.SpeakerLabel
+	}
+	return ""
+}
+
+func (x *AudioTranscriptChunk) GetConfidence() float64 {
+	if x != nil {
+		return x.Confidence
+	}
+	return 0
+}
+
+type PersistAudioTranscriptRequest struct {
+	state              protoimpl.MessageState  `protogen:"open.v1"`
+	TranscriptionJobId string                  `protobuf:"bytes,1,opt,name=transcription_job_id,json=transcriptionJobId,proto3" json:"transcription_job_id,omitempty"`
+	SourceVersionId    string                  `protobuf:"bytes,2,opt,name=source_version_id,json=sourceVersionId,proto3" json:"source_version_id,omitempty"`
+	Provider           string                  `protobuf:"bytes,3,opt,name=provider,proto3" json:"provider,omitempty"`
+	ProviderJobId      string                  `protobuf:"bytes,4,opt,name=provider_job_id,json=providerJobId,proto3" json:"provider_job_id,omitempty"`
+	Model              string                  `protobuf:"bytes,5,opt,name=model,proto3" json:"model,omitempty"`
+	DurationMs         int64                   `protobuf:"varint,6,opt,name=duration_ms,json=durationMs,proto3" json:"duration_ms,omitempty"`
+	LanguageCode       string                  `protobuf:"bytes,7,opt,name=language_code,json=languageCode,proto3" json:"language_code,omitempty"`
+	TranscriptSha256   string                  `protobuf:"bytes,8,opt,name=transcript_sha256,json=transcriptSha256,proto3" json:"transcript_sha256,omitempty"`
+	FencingToken       int64                   `protobuf:"varint,9,opt,name=fencing_token,json=fencingToken,proto3" json:"fencing_token,omitempty"`
+	Chunks             []*AudioTranscriptChunk `protobuf:"bytes,10,rep,name=chunks,proto3" json:"chunks,omitempty"`
+	unknownFields      protoimpl.UnknownFields
+	sizeCache          protoimpl.SizeCache
+}
+
+func (x *PersistAudioTranscriptRequest) Reset() {
+	*x = PersistAudioTranscriptRequest{}
+	mi := &file_studymaterials_v1_internal_proto_msgTypes[7]
+	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+	ms.StoreMessageInfo(mi)
+}
+
+func (x *PersistAudioTranscriptRequest) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*PersistAudioTranscriptRequest) ProtoMessage() {}
+
+func (x *PersistAudioTranscriptRequest) ProtoReflect() protoreflect.Message {
+	mi := &file_studymaterials_v1_internal_proto_msgTypes[7]
+	if x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use PersistAudioTranscriptRequest.ProtoReflect.Descriptor instead.
+func (*PersistAudioTranscriptRequest) Descriptor() ([]byte, []int) {
+	return file_studymaterials_v1_internal_proto_rawDescGZIP(), []int{7}
+}
+
+func (x *PersistAudioTranscriptRequest) GetTranscriptionJobId() string {
+	if x != nil {
+		return x.TranscriptionJobId
+	}
+	return ""
+}
+
+func (x *PersistAudioTranscriptRequest) GetSourceVersionId() string {
+	if x != nil {
+		return x.SourceVersionId
+	}
+	return ""
+}
+
+func (x *PersistAudioTranscriptRequest) GetProvider() string {
+	if x != nil {
+		return x.Provider
+	}
+	return ""
+}
+
+func (x *PersistAudioTranscriptRequest) GetProviderJobId() string {
+	if x != nil {
+		return x.ProviderJobId
+	}
+	return ""
+}
+
+func (x *PersistAudioTranscriptRequest) GetModel() string {
+	if x != nil {
+		return x.Model
+	}
+	return ""
+}
+
+func (x *PersistAudioTranscriptRequest) GetDurationMs() int64 {
+	if x != nil {
+		return x.DurationMs
+	}
+	return 0
+}
+
+func (x *PersistAudioTranscriptRequest) GetLanguageCode() string {
+	if x != nil {
+		return x.LanguageCode
+	}
+	return ""
+}
+
+func (x *PersistAudioTranscriptRequest) GetTranscriptSha256() string {
+	if x != nil {
+		return x.TranscriptSha256
+	}
+	return ""
+}
+
+func (x *PersistAudioTranscriptRequest) GetFencingToken() int64 {
+	if x != nil {
+		return x.FencingToken
+	}
+	return 0
+}
+
+func (x *PersistAudioTranscriptRequest) GetChunks() []*AudioTranscriptChunk {
+	if x != nil {
+		return x.Chunks
+	}
+	return nil
+}
+
+type PersistAudioTranscriptResponse struct {
+	state         protoimpl.MessageState `protogen:"open.v1"`
+	Replayed      bool                   `protobuf:"varint,1,opt,name=replayed,proto3" json:"replayed,omitempty"`
+	ChunkCount    int32                  `protobuf:"varint,2,opt,name=chunk_count,json=chunkCount,proto3" json:"chunk_count,omitempty"`
+	unknownFields protoimpl.UnknownFields
+	sizeCache     protoimpl.SizeCache
+}
+
+func (x *PersistAudioTranscriptResponse) Reset() {
+	*x = PersistAudioTranscriptResponse{}
+	mi := &file_studymaterials_v1_internal_proto_msgTypes[8]
+	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+	ms.StoreMessageInfo(mi)
+}
+
+func (x *PersistAudioTranscriptResponse) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*PersistAudioTranscriptResponse) ProtoMessage() {}
+
+func (x *PersistAudioTranscriptResponse) ProtoReflect() protoreflect.Message {
+	mi := &file_studymaterials_v1_internal_proto_msgTypes[8]
+	if x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use PersistAudioTranscriptResponse.ProtoReflect.Descriptor instead.
+func (*PersistAudioTranscriptResponse) Descriptor() ([]byte, []int) {
+	return file_studymaterials_v1_internal_proto_rawDescGZIP(), []int{8}
+}
+
+func (x *PersistAudioTranscriptResponse) GetReplayed() bool {
+	if x != nil {
+		return x.Replayed
+	}
+	return false
+}
+
+func (x *PersistAudioTranscriptResponse) GetChunkCount() int32 {
+	if x != nil {
+		return x.ChunkCount
+	}
+	return 0
+}
+
+type ReportAudioTranscriptionFailureRequest struct {
+	state              protoimpl.MessageState `protogen:"open.v1"`
+	TranscriptionJobId string                 `protobuf:"bytes,1,opt,name=transcription_job_id,json=transcriptionJobId,proto3" json:"transcription_job_id,omitempty"`
+	SourceVersionId    string                 `protobuf:"bytes,2,opt,name=source_version_id,json=sourceVersionId,proto3" json:"source_version_id,omitempty"`
+	ProviderJobId      string                 `protobuf:"bytes,3,opt,name=provider_job_id,json=providerJobId,proto3" json:"provider_job_id,omitempty"`
+	ErrorCode          string                 `protobuf:"bytes,4,opt,name=error_code,json=errorCode,proto3" json:"error_code,omitempty"`
+	ErrorMessage       string                 `protobuf:"bytes,5,opt,name=error_message,json=errorMessage,proto3" json:"error_message,omitempty"`
+	Retryable          bool                   `protobuf:"varint,6,opt,name=retryable,proto3" json:"retryable,omitempty"`
+	NextPollAt         string                 `protobuf:"bytes,7,opt,name=next_poll_at,json=nextPollAt,proto3" json:"next_poll_at,omitempty"`
+	FencingToken       int64                  `protobuf:"varint,8,opt,name=fencing_token,json=fencingToken,proto3" json:"fencing_token,omitempty"`
+	unknownFields      protoimpl.UnknownFields
+	sizeCache          protoimpl.SizeCache
+}
+
+func (x *ReportAudioTranscriptionFailureRequest) Reset() {
+	*x = ReportAudioTranscriptionFailureRequest{}
+	mi := &file_studymaterials_v1_internal_proto_msgTypes[9]
+	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+	ms.StoreMessageInfo(mi)
+}
+
+func (x *ReportAudioTranscriptionFailureRequest) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*ReportAudioTranscriptionFailureRequest) ProtoMessage() {}
+
+func (x *ReportAudioTranscriptionFailureRequest) ProtoReflect() protoreflect.Message {
+	mi := &file_studymaterials_v1_internal_proto_msgTypes[9]
+	if x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use ReportAudioTranscriptionFailureRequest.ProtoReflect.Descriptor instead.
+func (*ReportAudioTranscriptionFailureRequest) Descriptor() ([]byte, []int) {
+	return file_studymaterials_v1_internal_proto_rawDescGZIP(), []int{9}
+}
+
+func (x *ReportAudioTranscriptionFailureRequest) GetTranscriptionJobId() string {
+	if x != nil {
+		return x.TranscriptionJobId
+	}
+	return ""
+}
+
+func (x *ReportAudioTranscriptionFailureRequest) GetSourceVersionId() string {
+	if x != nil {
+		return x.SourceVersionId
+	}
+	return ""
+}
+
+func (x *ReportAudioTranscriptionFailureRequest) GetProviderJobId() string {
+	if x != nil {
+		return x.ProviderJobId
+	}
+	return ""
+}
+
+func (x *ReportAudioTranscriptionFailureRequest) GetErrorCode() string {
+	if x != nil {
+		return x.ErrorCode
+	}
+	return ""
+}
+
+func (x *ReportAudioTranscriptionFailureRequest) GetErrorMessage() string {
+	if x != nil {
+		return x.ErrorMessage
+	}
+	return ""
+}
+
+func (x *ReportAudioTranscriptionFailureRequest) GetRetryable() bool {
+	if x != nil {
+		return x.Retryable
+	}
+	return false
+}
+
+func (x *ReportAudioTranscriptionFailureRequest) GetNextPollAt() string {
+	if x != nil {
+		return x.NextPollAt
+	}
+	return ""
+}
+
+func (x *ReportAudioTranscriptionFailureRequest) GetFencingToken() int64 {
+	if x != nil {
+		return x.FencingToken
+	}
+	return 0
+}
+
+type ReportAudioTranscriptionFailureResponse struct {
+	state         protoimpl.MessageState `protogen:"open.v1"`
+	Status        string                 `protobuf:"bytes,1,opt,name=status,proto3" json:"status,omitempty"`
+	unknownFields protoimpl.UnknownFields
+	sizeCache     protoimpl.SizeCache
+}
+
+func (x *ReportAudioTranscriptionFailureResponse) Reset() {
+	*x = ReportAudioTranscriptionFailureResponse{}
+	mi := &file_studymaterials_v1_internal_proto_msgTypes[10]
+	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+	ms.StoreMessageInfo(mi)
+}
+
+func (x *ReportAudioTranscriptionFailureResponse) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*ReportAudioTranscriptionFailureResponse) ProtoMessage() {}
+
+func (x *ReportAudioTranscriptionFailureResponse) ProtoReflect() protoreflect.Message {
+	mi := &file_studymaterials_v1_internal_proto_msgTypes[10]
+	if x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use ReportAudioTranscriptionFailureResponse.ProtoReflect.Descriptor instead.
+func (*ReportAudioTranscriptionFailureResponse) Descriptor() ([]byte, []int) {
+	return file_studymaterials_v1_internal_proto_rawDescGZIP(), []int{10}
+}
+
+func (x *ReportAudioTranscriptionFailureResponse) GetStatus() string {
+	if x != nil {
+		return x.Status
+	}
+	return ""
+}
+
+type GetStudyKitTitleContextRequest struct {
+	state            protoimpl.MessageState `protogen:"open.v1"`
+	StudyKitId       string                 `protobuf:"bytes,1,opt,name=study_kit_id,json=studyKitId,proto3" json:"study_kit_id,omitempty"`
+	ExpectedRevision int64                  `protobuf:"varint,2,opt,name=expected_revision,json=expectedRevision,proto3" json:"expected_revision,omitempty"`
+	unknownFields    protoimpl.UnknownFields
+	sizeCache        protoimpl.SizeCache
+}
+
+func (x *GetStudyKitTitleContextRequest) Reset() {
+	*x = GetStudyKitTitleContextRequest{}
+	mi := &file_studymaterials_v1_internal_proto_msgTypes[11]
+	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+	ms.StoreMessageInfo(mi)
+}
+
+func (x *GetStudyKitTitleContextRequest) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*GetStudyKitTitleContextRequest) ProtoMessage() {}
+
+func (x *GetStudyKitTitleContextRequest) ProtoReflect() protoreflect.Message {
+	mi := &file_studymaterials_v1_internal_proto_msgTypes[11]
+	if x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use GetStudyKitTitleContextRequest.ProtoReflect.Descriptor instead.
+func (*GetStudyKitTitleContextRequest) Descriptor() ([]byte, []int) {
+	return file_studymaterials_v1_internal_proto_rawDescGZIP(), []int{11}
+}
+
+func (x *GetStudyKitTitleContextRequest) GetStudyKitId() string {
+	if x != nil {
+		return x.StudyKitId
+	}
+	return ""
+}
+
+func (x *GetStudyKitTitleContextRequest) GetExpectedRevision() int64 {
+	if x != nil {
+		return x.ExpectedRevision
+	}
+	return 0
+}
+
+type GetStudyKitTitleContextResponse struct {
+	state         protoimpl.MessageState `protogen:"open.v1"`
+	Eligible      bool                   `protobuf:"varint,1,opt,name=eligible,proto3" json:"eligible,omitempty"`
+	CurrentTitle  string                 `protobuf:"bytes,2,opt,name=current_title,json=currentTitle,proto3" json:"current_title,omitempty"`
+	TitleRevision int64                  `protobuf:"varint,3,opt,name=title_revision,json=titleRevision,proto3" json:"title_revision,omitempty"`
+	Excerpts      []string               `protobuf:"bytes,4,rep,name=excerpts,proto3" json:"excerpts,omitempty"`
+	unknownFields protoimpl.UnknownFields
+	sizeCache     protoimpl.SizeCache
+}
+
+func (x *GetStudyKitTitleContextResponse) Reset() {
+	*x = GetStudyKitTitleContextResponse{}
+	mi := &file_studymaterials_v1_internal_proto_msgTypes[12]
+	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+	ms.StoreMessageInfo(mi)
+}
+
+func (x *GetStudyKitTitleContextResponse) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*GetStudyKitTitleContextResponse) ProtoMessage() {}
+
+func (x *GetStudyKitTitleContextResponse) ProtoReflect() protoreflect.Message {
+	mi := &file_studymaterials_v1_internal_proto_msgTypes[12]
+	if x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use GetStudyKitTitleContextResponse.ProtoReflect.Descriptor instead.
+func (*GetStudyKitTitleContextResponse) Descriptor() ([]byte, []int) {
+	return file_studymaterials_v1_internal_proto_rawDescGZIP(), []int{12}
+}
+
+func (x *GetStudyKitTitleContextResponse) GetEligible() bool {
+	if x != nil {
+		return x.Eligible
+	}
+	return false
+}
+
+func (x *GetStudyKitTitleContextResponse) GetCurrentTitle() string {
+	if x != nil {
+		return x.CurrentTitle
+	}
+	return ""
+}
+
+func (x *GetStudyKitTitleContextResponse) GetTitleRevision() int64 {
+	if x != nil {
+		return x.TitleRevision
+	}
+	return 0
+}
+
+func (x *GetStudyKitTitleContextResponse) GetExcerpts() []string {
+	if x != nil {
+		return x.Excerpts
+	}
+	return nil
+}
+
+type GetGenerationControlRequest struct {
+	state         protoimpl.MessageState `protogen:"open.v1"`
+	JobId         string                 `protobuf:"bytes,1,opt,name=job_id,json=jobId,proto3" json:"job_id,omitempty"`
+	unknownFields protoimpl.UnknownFields
+	sizeCache     protoimpl.SizeCache
+}
+
+func (x *GetGenerationControlRequest) Reset() {
+	*x = GetGenerationControlRequest{}
+	mi := &file_studymaterials_v1_internal_proto_msgTypes[13]
+	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+	ms.StoreMessageInfo(mi)
+}
+
+func (x *GetGenerationControlRequest) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*GetGenerationControlRequest) ProtoMessage() {}
+
+func (x *GetGenerationControlRequest) ProtoReflect() protoreflect.Message {
+	mi := &file_studymaterials_v1_internal_proto_msgTypes[13]
+	if x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use GetGenerationControlRequest.ProtoReflect.Descriptor instead.
+func (*GetGenerationControlRequest) Descriptor() ([]byte, []int) {
+	return file_studymaterials_v1_internal_proto_rawDescGZIP(), []int{13}
+}
+
+func (x *GetGenerationControlRequest) GetJobId() string {
+	if x != nil {
+		return x.JobId
+	}
+	return ""
+}
+
+type GetGenerationControlResponse struct {
+	state                   protoimpl.MessageState `protogen:"open.v1"`
+	Status                  string                 `protobuf:"bytes,1,opt,name=status,proto3" json:"status,omitempty"`
+	CancellationRequested   bool                   `protobuf:"varint,2,opt,name=cancellation_requested,json=cancellationRequested,proto3" json:"cancellation_requested,omitempty"`
+	CancellationRequestedAt string                 `protobuf:"bytes,3,opt,name=cancellation_requested_at,json=cancellationRequestedAt,proto3" json:"cancellation_requested_at,omitempty"`
+	unknownFields           protoimpl.UnknownFields
+	sizeCache               protoimpl.SizeCache
+}
+
+func (x *GetGenerationControlResponse) Reset() {
+	*x = GetGenerationControlResponse{}
+	mi := &file_studymaterials_v1_internal_proto_msgTypes[14]
+	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+	ms.StoreMessageInfo(mi)
+}
+
+func (x *GetGenerationControlResponse) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*GetGenerationControlResponse) ProtoMessage() {}
+
+func (x *GetGenerationControlResponse) ProtoReflect() protoreflect.Message {
+	mi := &file_studymaterials_v1_internal_proto_msgTypes[14]
+	if x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use GetGenerationControlResponse.ProtoReflect.Descriptor instead.
+func (*GetGenerationControlResponse) Descriptor() ([]byte, []int) {
+	return file_studymaterials_v1_internal_proto_rawDescGZIP(), []int{14}
+}
+
+func (x *GetGenerationControlResponse) GetStatus() string {
+	if x != nil {
+		return x.Status
+	}
+	return ""
+}
+
+func (x *GetGenerationControlResponse) GetCancellationRequested() bool {
+	if x != nil {
+		return x.CancellationRequested
+	}
+	return false
+}
+
+func (x *GetGenerationControlResponse) GetCancellationRequestedAt() string {
+	if x != nil {
+		return x.CancellationRequestedAt
+	}
+	return ""
+}
+
 type GetExtractionSourceRequest struct {
 	state         protoimpl.MessageState `protogen:"open.v1"`
 	JobId         string                 `protobuf:"bytes,1,opt,name=job_id,json=jobId,proto3" json:"job_id,omitempty"`
@@ -33,7 +1093,7 @@ type GetExtractionSourceRequest struct {
 
 func (x *GetExtractionSourceRequest) Reset() {
 	*x = GetExtractionSourceRequest{}
-	mi := &file_studymaterials_v1_internal_proto_msgTypes[0]
+	mi := &file_studymaterials_v1_internal_proto_msgTypes[15]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -45,7 +1105,7 @@ func (x *GetExtractionSourceRequest) String() string {
 func (*GetExtractionSourceRequest) ProtoMessage() {}
 
 func (x *GetExtractionSourceRequest) ProtoReflect() protoreflect.Message {
-	mi := &file_studymaterials_v1_internal_proto_msgTypes[0]
+	mi := &file_studymaterials_v1_internal_proto_msgTypes[15]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -58,7 +1118,7 @@ func (x *GetExtractionSourceRequest) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use GetExtractionSourceRequest.ProtoReflect.Descriptor instead.
 func (*GetExtractionSourceRequest) Descriptor() ([]byte, []int) {
-	return file_studymaterials_v1_internal_proto_rawDescGZIP(), []int{0}
+	return file_studymaterials_v1_internal_proto_rawDescGZIP(), []int{15}
 }
 
 func (x *GetExtractionSourceRequest) GetJobId() string {
@@ -102,7 +1162,7 @@ type GetExtractionSourceResponse struct {
 
 func (x *GetExtractionSourceResponse) Reset() {
 	*x = GetExtractionSourceResponse{}
-	mi := &file_studymaterials_v1_internal_proto_msgTypes[1]
+	mi := &file_studymaterials_v1_internal_proto_msgTypes[16]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -114,7 +1174,7 @@ func (x *GetExtractionSourceResponse) String() string {
 func (*GetExtractionSourceResponse) ProtoMessage() {}
 
 func (x *GetExtractionSourceResponse) ProtoReflect() protoreflect.Message {
-	mi := &file_studymaterials_v1_internal_proto_msgTypes[1]
+	mi := &file_studymaterials_v1_internal_proto_msgTypes[16]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -127,7 +1187,7 @@ func (x *GetExtractionSourceResponse) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use GetExtractionSourceResponse.ProtoReflect.Descriptor instead.
 func (*GetExtractionSourceResponse) Descriptor() ([]byte, []int) {
-	return file_studymaterials_v1_internal_proto_rawDescGZIP(), []int{1}
+	return file_studymaterials_v1_internal_proto_rawDescGZIP(), []int{16}
 }
 
 func (x *GetExtractionSourceResponse) GetUrl() string {
@@ -190,7 +1250,7 @@ type ExtractionHeader struct {
 
 func (x *ExtractionHeader) Reset() {
 	*x = ExtractionHeader{}
-	mi := &file_studymaterials_v1_internal_proto_msgTypes[2]
+	mi := &file_studymaterials_v1_internal_proto_msgTypes[17]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -202,7 +1262,7 @@ func (x *ExtractionHeader) String() string {
 func (*ExtractionHeader) ProtoMessage() {}
 
 func (x *ExtractionHeader) ProtoReflect() protoreflect.Message {
-	mi := &file_studymaterials_v1_internal_proto_msgTypes[2]
+	mi := &file_studymaterials_v1_internal_proto_msgTypes[17]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -215,7 +1275,7 @@ func (x *ExtractionHeader) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use ExtractionHeader.ProtoReflect.Descriptor instead.
 func (*ExtractionHeader) Descriptor() ([]byte, []int) {
-	return file_studymaterials_v1_internal_proto_rawDescGZIP(), []int{2}
+	return file_studymaterials_v1_internal_proto_rawDescGZIP(), []int{17}
 }
 
 func (x *ExtractionHeader) GetIdempotencyKey() string {
@@ -355,7 +1415,7 @@ type ExtractionChunk struct {
 
 func (x *ExtractionChunk) Reset() {
 	*x = ExtractionChunk{}
-	mi := &file_studymaterials_v1_internal_proto_msgTypes[3]
+	mi := &file_studymaterials_v1_internal_proto_msgTypes[18]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -367,7 +1427,7 @@ func (x *ExtractionChunk) String() string {
 func (*ExtractionChunk) ProtoMessage() {}
 
 func (x *ExtractionChunk) ProtoReflect() protoreflect.Message {
-	mi := &file_studymaterials_v1_internal_proto_msgTypes[3]
+	mi := &file_studymaterials_v1_internal_proto_msgTypes[18]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -380,7 +1440,7 @@ func (x *ExtractionChunk) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use ExtractionChunk.ProtoReflect.Descriptor instead.
 func (*ExtractionChunk) Descriptor() ([]byte, []int) {
-	return file_studymaterials_v1_internal_proto_rawDescGZIP(), []int{3}
+	return file_studymaterials_v1_internal_proto_rawDescGZIP(), []int{18}
 }
 
 func (x *ExtractionChunk) GetChunkIndex() int32 {
@@ -466,7 +1526,7 @@ type PersistExtractionRequest struct {
 
 func (x *PersistExtractionRequest) Reset() {
 	*x = PersistExtractionRequest{}
-	mi := &file_studymaterials_v1_internal_proto_msgTypes[4]
+	mi := &file_studymaterials_v1_internal_proto_msgTypes[19]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -478,7 +1538,7 @@ func (x *PersistExtractionRequest) String() string {
 func (*PersistExtractionRequest) ProtoMessage() {}
 
 func (x *PersistExtractionRequest) ProtoReflect() protoreflect.Message {
-	mi := &file_studymaterials_v1_internal_proto_msgTypes[4]
+	mi := &file_studymaterials_v1_internal_proto_msgTypes[19]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -491,7 +1551,7 @@ func (x *PersistExtractionRequest) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use PersistExtractionRequest.ProtoReflect.Descriptor instead.
 func (*PersistExtractionRequest) Descriptor() ([]byte, []int) {
-	return file_studymaterials_v1_internal_proto_rawDescGZIP(), []int{4}
+	return file_studymaterials_v1_internal_proto_rawDescGZIP(), []int{19}
 }
 
 func (x *PersistExtractionRequest) GetPayload() isPersistExtractionRequest_Payload {
@@ -545,7 +1605,7 @@ type PersistExtractionResponse struct {
 
 func (x *PersistExtractionResponse) Reset() {
 	*x = PersistExtractionResponse{}
-	mi := &file_studymaterials_v1_internal_proto_msgTypes[5]
+	mi := &file_studymaterials_v1_internal_proto_msgTypes[20]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -557,7 +1617,7 @@ func (x *PersistExtractionResponse) String() string {
 func (*PersistExtractionResponse) ProtoMessage() {}
 
 func (x *PersistExtractionResponse) ProtoReflect() protoreflect.Message {
-	mi := &file_studymaterials_v1_internal_proto_msgTypes[5]
+	mi := &file_studymaterials_v1_internal_proto_msgTypes[20]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -570,7 +1630,7 @@ func (x *PersistExtractionResponse) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use PersistExtractionResponse.ProtoReflect.Descriptor instead.
 func (*PersistExtractionResponse) Descriptor() ([]byte, []int) {
-	return file_studymaterials_v1_internal_proto_rawDescGZIP(), []int{5}
+	return file_studymaterials_v1_internal_proto_rawDescGZIP(), []int{20}
 }
 
 func (x *PersistExtractionResponse) GetExtractionId() string {
@@ -597,7 +1657,7 @@ type ReadExtractionRequest struct {
 
 func (x *ReadExtractionRequest) Reset() {
 	*x = ReadExtractionRequest{}
-	mi := &file_studymaterials_v1_internal_proto_msgTypes[6]
+	mi := &file_studymaterials_v1_internal_proto_msgTypes[21]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -609,7 +1669,7 @@ func (x *ReadExtractionRequest) String() string {
 func (*ReadExtractionRequest) ProtoMessage() {}
 
 func (x *ReadExtractionRequest) ProtoReflect() protoreflect.Message {
-	mi := &file_studymaterials_v1_internal_proto_msgTypes[6]
+	mi := &file_studymaterials_v1_internal_proto_msgTypes[21]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -622,7 +1682,7 @@ func (x *ReadExtractionRequest) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use ReadExtractionRequest.ProtoReflect.Descriptor instead.
 func (*ReadExtractionRequest) Descriptor() ([]byte, []int) {
-	return file_studymaterials_v1_internal_proto_rawDescGZIP(), []int{6}
+	return file_studymaterials_v1_internal_proto_rawDescGZIP(), []int{21}
 }
 
 func (x *ReadExtractionRequest) GetExtractionId() string {
@@ -652,7 +1712,7 @@ type ReadExtractionResponse struct {
 
 func (x *ReadExtractionResponse) Reset() {
 	*x = ReadExtractionResponse{}
-	mi := &file_studymaterials_v1_internal_proto_msgTypes[7]
+	mi := &file_studymaterials_v1_internal_proto_msgTypes[22]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -664,7 +1724,7 @@ func (x *ReadExtractionResponse) String() string {
 func (*ReadExtractionResponse) ProtoMessage() {}
 
 func (x *ReadExtractionResponse) ProtoReflect() protoreflect.Message {
-	mi := &file_studymaterials_v1_internal_proto_msgTypes[7]
+	mi := &file_studymaterials_v1_internal_proto_msgTypes[22]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -677,7 +1737,7 @@ func (x *ReadExtractionResponse) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use ReadExtractionResponse.ProtoReflect.Descriptor instead.
 func (*ReadExtractionResponse) Descriptor() ([]byte, []int) {
-	return file_studymaterials_v1_internal_proto_rawDescGZIP(), []int{7}
+	return file_studymaterials_v1_internal_proto_rawDescGZIP(), []int{22}
 }
 
 func (x *ReadExtractionResponse) GetPayload() isReadExtractionResponse_Payload {
@@ -725,7 +1785,103 @@ var File_studymaterials_v1_internal_proto protoreflect.FileDescriptor
 
 const file_studymaterials_v1_internal_proto_rawDesc = "" +
 	"\n" +
-	" studymaterials/v1/internal.proto\x12\x11studymaterials.v1\"\x95\x01\n" +
+	" studymaterials/v1/internal.proto\x12\x11studymaterials.v1\"\x9b\x01\n" +
+	"\x15GetSourceMediaRequest\x120\n" +
+	"\x14transcription_job_id\x18\x01 \x01(\tR\x12transcriptionJobId\x12*\n" +
+	"\x11source_version_id\x18\x02 \x01(\tR\x0fsourceVersionId\x12$\n" +
+	"\x0emedia_asset_id\x18\x03 \x01(\tR\fmediaAssetId\"\xb7\x01\n" +
+	"\x16GetSourceMediaResponse\x12\x10\n" +
+	"\x03url\x18\x01 \x01(\tR\x03url\x12\x1d\n" +
+	"\n" +
+	"expires_at\x18\x02 \x01(\tR\texpiresAt\x12$\n" +
+	"\x0emedia_asset_id\x18\x03 \x01(\tR\fmediaAssetId\x12%\n" +
+	"\x0esource_version\x18\x04 \x01(\tR\rsourceVersion\x12\x1f\n" +
+	"\vsource_size\x18\x05 \x01(\x03R\n" +
+	"sourceSize\"\x82\x01\n" +
+	"\"AuthorizeAudioTranscriptionRequest\x120\n" +
+	"\x14transcription_job_id\x18\x01 \x01(\tR\x12transcriptionJobId\x12*\n" +
+	"\x11source_version_id\x18\x02 \x01(\tR\x0fsourceVersionId\"\xeb\x02\n" +
+	"#AuthorizeAudioTranscriptionResponse\x12\x1e\n" +
+	"\n" +
+	"authorized\x18\x01 \x01(\bR\n" +
+	"authorized\x12\x16\n" +
+	"\x06status\x18\x02 \x01(\tR\x06status\x12\x1a\n" +
+	"\bprovider\x18\x03 \x01(\tR\bprovider\x12&\n" +
+	"\x0fprovider_job_id\x18\x04 \x01(\tR\rproviderJobId\x12\x1f\n" +
+	"\vcallback_id\x18\x05 \x01(\tR\n" +
+	"callbackId\x12$\n" +
+	"\x0emedia_asset_id\x18\x06 \x01(\tR\fmediaAssetId\x12\x14\n" +
+	"\x05model\x18\a \x01(\tR\x05model\x12%\n" +
+	"\x0espeaker_labels\x18\b \x01(\bR\rspeakerLabels\x12\x1f\n" +
+	"\vdeadline_at\x18\t \x01(\tR\n" +
+	"deadlineAt\x12#\n" +
+	"\rfencing_token\x18\n" +
+	" \x01(\x03R\ffencingToken\"\x93\x02\n" +
+	"!RegisterAudioTranscriptionRequest\x120\n" +
+	"\x14transcription_job_id\x18\x01 \x01(\tR\x12transcriptionJobId\x12*\n" +
+	"\x11source_version_id\x18\x02 \x01(\tR\x0fsourceVersionId\x12\x1a\n" +
+	"\bprovider\x18\x03 \x01(\tR\bprovider\x12&\n" +
+	"\x0fprovider_job_id\x18\x04 \x01(\tR\rproviderJobId\x12'\n" +
+	"\x0fprovider_status\x18\x05 \x01(\tR\x0eproviderStatus\x12#\n" +
+	"\rfencing_token\x18\x06 \x01(\x03R\ffencingToken\"X\n" +
+	"\"RegisterAudioTranscriptionResponse\x12\x1a\n" +
+	"\breplayed\x18\x01 \x01(\bR\breplayed\x12\x16\n" +
+	"\x06status\x18\x02 \x01(\tR\x06status\"\xc8\x01\n" +
+	"\x14AudioTranscriptChunk\x12\x1f\n" +
+	"\vchunk_index\x18\x01 \x01(\x05R\n" +
+	"chunkIndex\x12\x18\n" +
+	"\acontent\x18\x02 \x01(\tR\acontent\x12\x19\n" +
+	"\bstart_ms\x18\x03 \x01(\x03R\astartMs\x12\x15\n" +
+	"\x06end_ms\x18\x04 \x01(\x03R\x05endMs\x12#\n" +
+	"\rspeaker_label\x18\x05 \x01(\tR\fspeakerLabel\x12\x1e\n" +
+	"\n" +
+	"confidence\x18\x06 \x01(\x01R\n" +
+	"confidence\"\xb0\x03\n" +
+	"\x1dPersistAudioTranscriptRequest\x120\n" +
+	"\x14transcription_job_id\x18\x01 \x01(\tR\x12transcriptionJobId\x12*\n" +
+	"\x11source_version_id\x18\x02 \x01(\tR\x0fsourceVersionId\x12\x1a\n" +
+	"\bprovider\x18\x03 \x01(\tR\bprovider\x12&\n" +
+	"\x0fprovider_job_id\x18\x04 \x01(\tR\rproviderJobId\x12\x14\n" +
+	"\x05model\x18\x05 \x01(\tR\x05model\x12\x1f\n" +
+	"\vduration_ms\x18\x06 \x01(\x03R\n" +
+	"durationMs\x12#\n" +
+	"\rlanguage_code\x18\a \x01(\tR\flanguageCode\x12+\n" +
+	"\x11transcript_sha256\x18\b \x01(\tR\x10transcriptSha256\x12#\n" +
+	"\rfencing_token\x18\t \x01(\x03R\ffencingToken\x12?\n" +
+	"\x06chunks\x18\n" +
+	" \x03(\v2'.studymaterials.v1.AudioTranscriptChunkR\x06chunks\"]\n" +
+	"\x1ePersistAudioTranscriptResponse\x12\x1a\n" +
+	"\breplayed\x18\x01 \x01(\bR\breplayed\x12\x1f\n" +
+	"\vchunk_count\x18\x02 \x01(\x05R\n" +
+	"chunkCount\"\xd7\x02\n" +
+	"&ReportAudioTranscriptionFailureRequest\x120\n" +
+	"\x14transcription_job_id\x18\x01 \x01(\tR\x12transcriptionJobId\x12*\n" +
+	"\x11source_version_id\x18\x02 \x01(\tR\x0fsourceVersionId\x12&\n" +
+	"\x0fprovider_job_id\x18\x03 \x01(\tR\rproviderJobId\x12\x1d\n" +
+	"\n" +
+	"error_code\x18\x04 \x01(\tR\terrorCode\x12#\n" +
+	"\rerror_message\x18\x05 \x01(\tR\ferrorMessage\x12\x1c\n" +
+	"\tretryable\x18\x06 \x01(\bR\tretryable\x12 \n" +
+	"\fnext_poll_at\x18\a \x01(\tR\n" +
+	"nextPollAt\x12#\n" +
+	"\rfencing_token\x18\b \x01(\x03R\ffencingToken\"A\n" +
+	"'ReportAudioTranscriptionFailureResponse\x12\x16\n" +
+	"\x06status\x18\x01 \x01(\tR\x06status\"o\n" +
+	"\x1eGetStudyKitTitleContextRequest\x12 \n" +
+	"\fstudy_kit_id\x18\x01 \x01(\tR\n" +
+	"studyKitId\x12+\n" +
+	"\x11expected_revision\x18\x02 \x01(\x03R\x10expectedRevision\"\xa5\x01\n" +
+	"\x1fGetStudyKitTitleContextResponse\x12\x1a\n" +
+	"\beligible\x18\x01 \x01(\bR\beligible\x12#\n" +
+	"\rcurrent_title\x18\x02 \x01(\tR\fcurrentTitle\x12%\n" +
+	"\x0etitle_revision\x18\x03 \x01(\x03R\rtitleRevision\x12\x1a\n" +
+	"\bexcerpts\x18\x04 \x03(\tR\bexcerpts\"4\n" +
+	"\x1bGetGenerationControlRequest\x12\x15\n" +
+	"\x06job_id\x18\x01 \x01(\tR\x05jobId\"\xa9\x01\n" +
+	"\x1cGetGenerationControlResponse\x12\x16\n" +
+	"\x06status\x18\x01 \x01(\tR\x06status\x125\n" +
+	"\x16cancellation_requested\x18\x02 \x01(\bR\x15cancellationRequested\x12:\n" +
+	"\x19cancellation_requested_at\x18\x03 \x01(\tR\x17cancellationRequestedAt\"\x95\x01\n" +
 	"\x1aGetExtractionSourceRequest\x12\x15\n" +
 	"\x06job_id\x18\x01 \x01(\tR\x05jobId\x12\x1f\n" +
 	"\vdocument_id\x18\x02 \x01(\tR\n" +
@@ -796,11 +1952,19 @@ const file_studymaterials_v1_internal_proto_rawDesc = "" +
 	"\x16ReadExtractionResponse\x12=\n" +
 	"\x06header\x18\x01 \x01(\v2#.studymaterials.v1.ExtractionHeaderH\x00R\x06header\x12:\n" +
 	"\x05chunk\x18\x02 \x01(\v2\".studymaterials.v1.ExtractionChunkH\x00R\x05chunkB\t\n" +
-	"\apayload2\xf0\x02\n" +
+	"\apayload2\x88\n" +
+	"\n" +
 	"\x1dStudyMaterialsInternalService\x12t\n" +
 	"\x13GetExtractionSource\x12-.studymaterials.v1.GetExtractionSourceRequest\x1a..studymaterials.v1.GetExtractionSourceResponse\x12p\n" +
 	"\x11PersistExtraction\x12+.studymaterials.v1.PersistExtractionRequest\x1a,.studymaterials.v1.PersistExtractionResponse(\x01\x12g\n" +
-	"\x0eReadExtraction\x12(.studymaterials.v1.ReadExtractionRequest\x1a).studymaterials.v1.ReadExtractionResponse0\x01BKZIgithub.com/edadai/platform-go/contracts/studymaterialsv1;studymaterialsv1b\x06proto3"
+	"\x0eReadExtraction\x12(.studymaterials.v1.ReadExtractionRequest\x1a).studymaterials.v1.ReadExtractionResponse0\x01\x12e\n" +
+	"\x0eGetSourceMedia\x12(.studymaterials.v1.GetSourceMediaRequest\x1a).studymaterials.v1.GetSourceMediaResponse\x12\x8c\x01\n" +
+	"\x1bAuthorizeAudioTranscription\x125.studymaterials.v1.AuthorizeAudioTranscriptionRequest\x1a6.studymaterials.v1.AuthorizeAudioTranscriptionResponse\x12\x89\x01\n" +
+	"\x1aRegisterAudioTranscription\x124.studymaterials.v1.RegisterAudioTranscriptionRequest\x1a5.studymaterials.v1.RegisterAudioTranscriptionResponse\x12}\n" +
+	"\x16PersistAudioTranscript\x120.studymaterials.v1.PersistAudioTranscriptRequest\x1a1.studymaterials.v1.PersistAudioTranscriptResponse\x12\x98\x01\n" +
+	"\x1fReportAudioTranscriptionFailure\x129.studymaterials.v1.ReportAudioTranscriptionFailureRequest\x1a:.studymaterials.v1.ReportAudioTranscriptionFailureResponse\x12\x80\x01\n" +
+	"\x17GetStudyKitTitleContext\x121.studymaterials.v1.GetStudyKitTitleContextRequest\x1a2.studymaterials.v1.GetStudyKitTitleContextResponse\x12w\n" +
+	"\x14GetGenerationControl\x12..studymaterials.v1.GetGenerationControlRequest\x1a/.studymaterials.v1.GetGenerationControlResponseBKZIgithub.com/edadai/platform-go/contracts/studymaterialsv1;studymaterialsv1b\x06proto3"
 
 var (
 	file_studymaterials_v1_internal_proto_rawDescOnce sync.Once
@@ -814,33 +1978,63 @@ func file_studymaterials_v1_internal_proto_rawDescGZIP() []byte {
 	return file_studymaterials_v1_internal_proto_rawDescData
 }
 
-var file_studymaterials_v1_internal_proto_msgTypes = make([]protoimpl.MessageInfo, 8)
+var file_studymaterials_v1_internal_proto_msgTypes = make([]protoimpl.MessageInfo, 23)
 var file_studymaterials_v1_internal_proto_goTypes = []any{
-	(*GetExtractionSourceRequest)(nil),  // 0: studymaterials.v1.GetExtractionSourceRequest
-	(*GetExtractionSourceResponse)(nil), // 1: studymaterials.v1.GetExtractionSourceResponse
-	(*ExtractionHeader)(nil),            // 2: studymaterials.v1.ExtractionHeader
-	(*ExtractionChunk)(nil),             // 3: studymaterials.v1.ExtractionChunk
-	(*PersistExtractionRequest)(nil),    // 4: studymaterials.v1.PersistExtractionRequest
-	(*PersistExtractionResponse)(nil),   // 5: studymaterials.v1.PersistExtractionResponse
-	(*ReadExtractionRequest)(nil),       // 6: studymaterials.v1.ReadExtractionRequest
-	(*ReadExtractionResponse)(nil),      // 7: studymaterials.v1.ReadExtractionResponse
+	(*GetSourceMediaRequest)(nil),                   // 0: studymaterials.v1.GetSourceMediaRequest
+	(*GetSourceMediaResponse)(nil),                  // 1: studymaterials.v1.GetSourceMediaResponse
+	(*AuthorizeAudioTranscriptionRequest)(nil),      // 2: studymaterials.v1.AuthorizeAudioTranscriptionRequest
+	(*AuthorizeAudioTranscriptionResponse)(nil),     // 3: studymaterials.v1.AuthorizeAudioTranscriptionResponse
+	(*RegisterAudioTranscriptionRequest)(nil),       // 4: studymaterials.v1.RegisterAudioTranscriptionRequest
+	(*RegisterAudioTranscriptionResponse)(nil),      // 5: studymaterials.v1.RegisterAudioTranscriptionResponse
+	(*AudioTranscriptChunk)(nil),                    // 6: studymaterials.v1.AudioTranscriptChunk
+	(*PersistAudioTranscriptRequest)(nil),           // 7: studymaterials.v1.PersistAudioTranscriptRequest
+	(*PersistAudioTranscriptResponse)(nil),          // 8: studymaterials.v1.PersistAudioTranscriptResponse
+	(*ReportAudioTranscriptionFailureRequest)(nil),  // 9: studymaterials.v1.ReportAudioTranscriptionFailureRequest
+	(*ReportAudioTranscriptionFailureResponse)(nil), // 10: studymaterials.v1.ReportAudioTranscriptionFailureResponse
+	(*GetStudyKitTitleContextRequest)(nil),          // 11: studymaterials.v1.GetStudyKitTitleContextRequest
+	(*GetStudyKitTitleContextResponse)(nil),         // 12: studymaterials.v1.GetStudyKitTitleContextResponse
+	(*GetGenerationControlRequest)(nil),             // 13: studymaterials.v1.GetGenerationControlRequest
+	(*GetGenerationControlResponse)(nil),            // 14: studymaterials.v1.GetGenerationControlResponse
+	(*GetExtractionSourceRequest)(nil),              // 15: studymaterials.v1.GetExtractionSourceRequest
+	(*GetExtractionSourceResponse)(nil),             // 16: studymaterials.v1.GetExtractionSourceResponse
+	(*ExtractionHeader)(nil),                        // 17: studymaterials.v1.ExtractionHeader
+	(*ExtractionChunk)(nil),                         // 18: studymaterials.v1.ExtractionChunk
+	(*PersistExtractionRequest)(nil),                // 19: studymaterials.v1.PersistExtractionRequest
+	(*PersistExtractionResponse)(nil),               // 20: studymaterials.v1.PersistExtractionResponse
+	(*ReadExtractionRequest)(nil),                   // 21: studymaterials.v1.ReadExtractionRequest
+	(*ReadExtractionResponse)(nil),                  // 22: studymaterials.v1.ReadExtractionResponse
 }
 var file_studymaterials_v1_internal_proto_depIdxs = []int32{
-	2, // 0: studymaterials.v1.PersistExtractionRequest.header:type_name -> studymaterials.v1.ExtractionHeader
-	3, // 1: studymaterials.v1.PersistExtractionRequest.chunk:type_name -> studymaterials.v1.ExtractionChunk
-	2, // 2: studymaterials.v1.ReadExtractionResponse.header:type_name -> studymaterials.v1.ExtractionHeader
-	3, // 3: studymaterials.v1.ReadExtractionResponse.chunk:type_name -> studymaterials.v1.ExtractionChunk
-	0, // 4: studymaterials.v1.StudyMaterialsInternalService.GetExtractionSource:input_type -> studymaterials.v1.GetExtractionSourceRequest
-	4, // 5: studymaterials.v1.StudyMaterialsInternalService.PersistExtraction:input_type -> studymaterials.v1.PersistExtractionRequest
-	6, // 6: studymaterials.v1.StudyMaterialsInternalService.ReadExtraction:input_type -> studymaterials.v1.ReadExtractionRequest
-	1, // 7: studymaterials.v1.StudyMaterialsInternalService.GetExtractionSource:output_type -> studymaterials.v1.GetExtractionSourceResponse
-	5, // 8: studymaterials.v1.StudyMaterialsInternalService.PersistExtraction:output_type -> studymaterials.v1.PersistExtractionResponse
-	7, // 9: studymaterials.v1.StudyMaterialsInternalService.ReadExtraction:output_type -> studymaterials.v1.ReadExtractionResponse
-	7, // [7:10] is the sub-list for method output_type
-	4, // [4:7] is the sub-list for method input_type
-	4, // [4:4] is the sub-list for extension type_name
-	4, // [4:4] is the sub-list for extension extendee
-	0, // [0:4] is the sub-list for field type_name
+	6,  // 0: studymaterials.v1.PersistAudioTranscriptRequest.chunks:type_name -> studymaterials.v1.AudioTranscriptChunk
+	17, // 1: studymaterials.v1.PersistExtractionRequest.header:type_name -> studymaterials.v1.ExtractionHeader
+	18, // 2: studymaterials.v1.PersistExtractionRequest.chunk:type_name -> studymaterials.v1.ExtractionChunk
+	17, // 3: studymaterials.v1.ReadExtractionResponse.header:type_name -> studymaterials.v1.ExtractionHeader
+	18, // 4: studymaterials.v1.ReadExtractionResponse.chunk:type_name -> studymaterials.v1.ExtractionChunk
+	15, // 5: studymaterials.v1.StudyMaterialsInternalService.GetExtractionSource:input_type -> studymaterials.v1.GetExtractionSourceRequest
+	19, // 6: studymaterials.v1.StudyMaterialsInternalService.PersistExtraction:input_type -> studymaterials.v1.PersistExtractionRequest
+	21, // 7: studymaterials.v1.StudyMaterialsInternalService.ReadExtraction:input_type -> studymaterials.v1.ReadExtractionRequest
+	0,  // 8: studymaterials.v1.StudyMaterialsInternalService.GetSourceMedia:input_type -> studymaterials.v1.GetSourceMediaRequest
+	2,  // 9: studymaterials.v1.StudyMaterialsInternalService.AuthorizeAudioTranscription:input_type -> studymaterials.v1.AuthorizeAudioTranscriptionRequest
+	4,  // 10: studymaterials.v1.StudyMaterialsInternalService.RegisterAudioTranscription:input_type -> studymaterials.v1.RegisterAudioTranscriptionRequest
+	7,  // 11: studymaterials.v1.StudyMaterialsInternalService.PersistAudioTranscript:input_type -> studymaterials.v1.PersistAudioTranscriptRequest
+	9,  // 12: studymaterials.v1.StudyMaterialsInternalService.ReportAudioTranscriptionFailure:input_type -> studymaterials.v1.ReportAudioTranscriptionFailureRequest
+	11, // 13: studymaterials.v1.StudyMaterialsInternalService.GetStudyKitTitleContext:input_type -> studymaterials.v1.GetStudyKitTitleContextRequest
+	13, // 14: studymaterials.v1.StudyMaterialsInternalService.GetGenerationControl:input_type -> studymaterials.v1.GetGenerationControlRequest
+	16, // 15: studymaterials.v1.StudyMaterialsInternalService.GetExtractionSource:output_type -> studymaterials.v1.GetExtractionSourceResponse
+	20, // 16: studymaterials.v1.StudyMaterialsInternalService.PersistExtraction:output_type -> studymaterials.v1.PersistExtractionResponse
+	22, // 17: studymaterials.v1.StudyMaterialsInternalService.ReadExtraction:output_type -> studymaterials.v1.ReadExtractionResponse
+	1,  // 18: studymaterials.v1.StudyMaterialsInternalService.GetSourceMedia:output_type -> studymaterials.v1.GetSourceMediaResponse
+	3,  // 19: studymaterials.v1.StudyMaterialsInternalService.AuthorizeAudioTranscription:output_type -> studymaterials.v1.AuthorizeAudioTranscriptionResponse
+	5,  // 20: studymaterials.v1.StudyMaterialsInternalService.RegisterAudioTranscription:output_type -> studymaterials.v1.RegisterAudioTranscriptionResponse
+	8,  // 21: studymaterials.v1.StudyMaterialsInternalService.PersistAudioTranscript:output_type -> studymaterials.v1.PersistAudioTranscriptResponse
+	10, // 22: studymaterials.v1.StudyMaterialsInternalService.ReportAudioTranscriptionFailure:output_type -> studymaterials.v1.ReportAudioTranscriptionFailureResponse
+	12, // 23: studymaterials.v1.StudyMaterialsInternalService.GetStudyKitTitleContext:output_type -> studymaterials.v1.GetStudyKitTitleContextResponse
+	14, // 24: studymaterials.v1.StudyMaterialsInternalService.GetGenerationControl:output_type -> studymaterials.v1.GetGenerationControlResponse
+	15, // [15:25] is the sub-list for method output_type
+	5,  // [5:15] is the sub-list for method input_type
+	5,  // [5:5] is the sub-list for extension type_name
+	5,  // [5:5] is the sub-list for extension extendee
+	0,  // [0:5] is the sub-list for field type_name
 }
 
 func init() { file_studymaterials_v1_internal_proto_init() }
@@ -848,12 +2042,12 @@ func file_studymaterials_v1_internal_proto_init() {
 	if File_studymaterials_v1_internal_proto != nil {
 		return
 	}
-	file_studymaterials_v1_internal_proto_msgTypes[3].OneofWrappers = []any{}
-	file_studymaterials_v1_internal_proto_msgTypes[4].OneofWrappers = []any{
+	file_studymaterials_v1_internal_proto_msgTypes[18].OneofWrappers = []any{}
+	file_studymaterials_v1_internal_proto_msgTypes[19].OneofWrappers = []any{
 		(*PersistExtractionRequest_Header)(nil),
 		(*PersistExtractionRequest_Chunk)(nil),
 	}
-	file_studymaterials_v1_internal_proto_msgTypes[7].OneofWrappers = []any{
+	file_studymaterials_v1_internal_proto_msgTypes[22].OneofWrappers = []any{
 		(*ReadExtractionResponse_Header)(nil),
 		(*ReadExtractionResponse_Chunk)(nil),
 	}
@@ -863,7 +2057,7 @@ func file_studymaterials_v1_internal_proto_init() {
 			GoPackagePath: reflect.TypeOf(x{}).PkgPath(),
 			RawDescriptor: unsafe.Slice(unsafe.StringData(file_studymaterials_v1_internal_proto_rawDesc), len(file_studymaterials_v1_internal_proto_rawDesc)),
 			NumEnums:      0,
-			NumMessages:   8,
+			NumMessages:   23,
 			NumExtensions: 0,
 			NumServices:   1,
 		},

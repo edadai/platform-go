@@ -21,6 +21,13 @@ service InferenceService {
 
   rpc GradeCheck(GradeCheckRequest) returns (GradeCheckResponse);
   rpc CompleteLesson(GetLessonRequest) returns (Lesson);
+  rpc CreateLessonAssessment(CreateLessonAssessmentRequest) returns (LessonAssessment);
+  rpc GetLessonAssessment(GetLessonAssessmentRequest) returns (LessonAssessment);
+  rpc SubmitLessonAssessment(SubmitLessonAssessmentRequest) returns (LessonAssessment);
+  rpc ListLessonConversations(GetLessonRequest) returns (ConversationList);
+  rpc CreateLessonConversation(CreateLessonConversationRequest) returns (Conversation);
+  rpc GetLessonConversation(GetLessonConversationRequest) returns (Conversation);
+  rpc UpdateLessonConversation(UpdateLessonConversationRequest) returns (Conversation);
   rpc SubmitTurn(SubmitTurnRequest) returns (stream TurnEvent);
 
   rpc GetJob(GetJobRequest) returns (Job);
@@ -37,6 +44,8 @@ message CreateProgramRequest {
   string study_kit_id = 2;
   repeated DocumentRef documents = 3;
   string teaching_level = 4;
+  repeated string source_version_ids = 5;
+  string source_manifest_sha256 = 6;
 }
 
 message GetProgramRequest {
@@ -54,6 +63,10 @@ message Program {
   string status = 6;
   string created_at = 7;
   string updated_at = 8;
+  repeated string source_version_ids = 9;
+  string source_manifest_sha256 = 10;
+  int32 revision = 11;
+  bool stale = 12;
 }
 
 message ProgramView {
@@ -168,6 +181,7 @@ message PathTopic {
   bool locked = 5;
   int32 mastery = 6;
   string lesson_id = 7;
+  string lesson_status = 8;
 }
 
 message Path {
@@ -184,6 +198,7 @@ message LessonSection {
   string body = 3;
   repeated string key_points = 4;
   Question check = 5;
+  string helper_prompt = 6;
 }
 
 message Message {
@@ -194,6 +209,9 @@ message Message {
   string model = 5;
   string created_at = 6;
   string updated_at = 7;
+  repeated string citation_ids = 8;
+  bool partial = 9;
+  bool retrieval_unavailable = 10;
 }
 
 message Lesson {
@@ -208,6 +226,88 @@ message Lesson {
   repeated Message messages = 9;
   string created_at = 10;
   string updated_at = 11;
+  LessonAssessment latest_assessment = 12;
+}
+
+message AssessmentReviewItem {
+  string concept = 1;
+  string section_id = 2;
+  string section_title = 3;
+}
+
+message LessonAssessment {
+  string id = 1;
+  string lesson_id = 2;
+  int32 question_count = 3;
+  int32 attempt_number = 4;
+  string status = 5;
+  repeated Question questions = 6;
+  int32 score = 7;
+  bool passed = 8;
+  repeated AssessmentReviewItem review_plan = 9;
+  string error_message = 10;
+  string created_at = 11;
+  string updated_at = 12;
+}
+
+message CreateLessonAssessmentRequest {
+  string user_id = 1;
+  string lesson_id = 2;
+  int32 question_count = 3;
+}
+
+message GetLessonAssessmentRequest {
+  string user_id = 1;
+  string assessment_id = 2;
+}
+
+message LessonAssessmentAnswer {
+  string question_id = 1;
+  string selected = 2;
+}
+
+message SubmitLessonAssessmentRequest {
+  string user_id = 1;
+  string assessment_id = 2;
+  repeated LessonAssessmentAnswer answers = 3;
+}
+
+message Conversation {
+  string id = 1;
+  string user_id = 2;
+  string lesson_id = 3;
+  string section_id = 4;
+  string scope = 5;
+  string title = 6;
+  string title_source = 7;
+  bool archived = 8;
+  repeated Message messages = 9;
+  string created_at = 10;
+  string updated_at = 11;
+}
+
+message ConversationList {
+  repeated Conversation conversations = 1;
+}
+
+message CreateLessonConversationRequest {
+  string user_id = 1;
+  string lesson_id = 2;
+  string title = 3;
+}
+
+message GetLessonConversationRequest {
+  string user_id = 1;
+  string lesson_id = 2;
+  string conversation_id = 3;
+}
+
+message UpdateLessonConversationRequest {
+  string user_id = 1;
+  string lesson_id = 2;
+  string conversation_id = 3;
+  string title = 4;
+  optional bool archived = 5;
 }
 
 message GradeCheckRequest {
@@ -230,6 +330,9 @@ message SubmitTurnRequest {
   string user_id = 1;
   string lesson_id = 2;
   string content = 3;
+  string resume_message_id = 4;
+  string conversation_id = 5;
+  string section_id = 6;
 }
 
 message TurnEvent {

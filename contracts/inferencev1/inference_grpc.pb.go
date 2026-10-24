@@ -19,21 +19,28 @@ import (
 const _ = grpc.SupportPackageIsVersion9
 
 const (
-	InferenceService_CreateProgram_FullMethodName       = "/edad.inference.v1.InferenceService/CreateProgram"
-	InferenceService_GetProgram_FullMethodName          = "/edad.inference.v1.InferenceService/GetProgram"
-	InferenceService_StartKnowledgeCheck_FullMethodName = "/edad.inference.v1.InferenceService/StartKnowledgeCheck"
-	InferenceService_GetKnowledgeCheck_FullMethodName   = "/edad.inference.v1.InferenceService/GetKnowledgeCheck"
-	InferenceService_SubmitCheckAnswer_FullMethodName   = "/edad.inference.v1.InferenceService/SubmitCheckAnswer"
-	InferenceService_StartDiagnosis_FullMethodName      = "/edad.inference.v1.InferenceService/StartDiagnosis"
-	InferenceService_StartPath_FullMethodName           = "/edad.inference.v1.InferenceService/StartPath"
-	InferenceService_GetPath_FullMethodName             = "/edad.inference.v1.InferenceService/GetPath"
-	InferenceService_StartLesson_FullMethodName         = "/edad.inference.v1.InferenceService/StartLesson"
-	InferenceService_GetLesson_FullMethodName           = "/edad.inference.v1.InferenceService/GetLesson"
-	InferenceService_GradeCheck_FullMethodName          = "/edad.inference.v1.InferenceService/GradeCheck"
-	InferenceService_CompleteLesson_FullMethodName      = "/edad.inference.v1.InferenceService/CompleteLesson"
-	InferenceService_SubmitTurn_FullMethodName          = "/edad.inference.v1.InferenceService/SubmitTurn"
-	InferenceService_GetJob_FullMethodName              = "/edad.inference.v1.InferenceService/GetJob"
-	InferenceService_WatchJob_FullMethodName            = "/edad.inference.v1.InferenceService/WatchJob"
+	InferenceService_CreateProgram_FullMethodName            = "/edad.inference.v1.InferenceService/CreateProgram"
+	InferenceService_GetProgram_FullMethodName               = "/edad.inference.v1.InferenceService/GetProgram"
+	InferenceService_StartKnowledgeCheck_FullMethodName      = "/edad.inference.v1.InferenceService/StartKnowledgeCheck"
+	InferenceService_GetKnowledgeCheck_FullMethodName        = "/edad.inference.v1.InferenceService/GetKnowledgeCheck"
+	InferenceService_SubmitCheckAnswer_FullMethodName        = "/edad.inference.v1.InferenceService/SubmitCheckAnswer"
+	InferenceService_StartDiagnosis_FullMethodName           = "/edad.inference.v1.InferenceService/StartDiagnosis"
+	InferenceService_StartPath_FullMethodName                = "/edad.inference.v1.InferenceService/StartPath"
+	InferenceService_GetPath_FullMethodName                  = "/edad.inference.v1.InferenceService/GetPath"
+	InferenceService_StartLesson_FullMethodName              = "/edad.inference.v1.InferenceService/StartLesson"
+	InferenceService_GetLesson_FullMethodName                = "/edad.inference.v1.InferenceService/GetLesson"
+	InferenceService_GradeCheck_FullMethodName               = "/edad.inference.v1.InferenceService/GradeCheck"
+	InferenceService_CompleteLesson_FullMethodName           = "/edad.inference.v1.InferenceService/CompleteLesson"
+	InferenceService_CreateLessonAssessment_FullMethodName   = "/edad.inference.v1.InferenceService/CreateLessonAssessment"
+	InferenceService_GetLessonAssessment_FullMethodName      = "/edad.inference.v1.InferenceService/GetLessonAssessment"
+	InferenceService_SubmitLessonAssessment_FullMethodName   = "/edad.inference.v1.InferenceService/SubmitLessonAssessment"
+	InferenceService_ListLessonConversations_FullMethodName  = "/edad.inference.v1.InferenceService/ListLessonConversations"
+	InferenceService_CreateLessonConversation_FullMethodName = "/edad.inference.v1.InferenceService/CreateLessonConversation"
+	InferenceService_GetLessonConversation_FullMethodName    = "/edad.inference.v1.InferenceService/GetLessonConversation"
+	InferenceService_UpdateLessonConversation_FullMethodName = "/edad.inference.v1.InferenceService/UpdateLessonConversation"
+	InferenceService_SubmitTurn_FullMethodName               = "/edad.inference.v1.InferenceService/SubmitTurn"
+	InferenceService_GetJob_FullMethodName                   = "/edad.inference.v1.InferenceService/GetJob"
+	InferenceService_WatchJob_FullMethodName                 = "/edad.inference.v1.InferenceService/WatchJob"
 )
 
 // InferenceServiceClient is the client API for InferenceService service.
@@ -52,6 +59,13 @@ type InferenceServiceClient interface {
 	GetLesson(ctx context.Context, in *GetLessonRequest, opts ...grpc.CallOption) (*Lesson, error)
 	GradeCheck(ctx context.Context, in *GradeCheckRequest, opts ...grpc.CallOption) (*GradeCheckResponse, error)
 	CompleteLesson(ctx context.Context, in *GetLessonRequest, opts ...grpc.CallOption) (*Lesson, error)
+	CreateLessonAssessment(ctx context.Context, in *CreateLessonAssessmentRequest, opts ...grpc.CallOption) (*LessonAssessment, error)
+	GetLessonAssessment(ctx context.Context, in *GetLessonAssessmentRequest, opts ...grpc.CallOption) (*LessonAssessment, error)
+	SubmitLessonAssessment(ctx context.Context, in *SubmitLessonAssessmentRequest, opts ...grpc.CallOption) (*LessonAssessment, error)
+	ListLessonConversations(ctx context.Context, in *GetLessonRequest, opts ...grpc.CallOption) (*ConversationList, error)
+	CreateLessonConversation(ctx context.Context, in *CreateLessonConversationRequest, opts ...grpc.CallOption) (*Conversation, error)
+	GetLessonConversation(ctx context.Context, in *GetLessonConversationRequest, opts ...grpc.CallOption) (*Conversation, error)
+	UpdateLessonConversation(ctx context.Context, in *UpdateLessonConversationRequest, opts ...grpc.CallOption) (*Conversation, error)
 	SubmitTurn(ctx context.Context, in *SubmitTurnRequest, opts ...grpc.CallOption) (grpc.ServerStreamingClient[TurnEvent], error)
 	GetJob(ctx context.Context, in *GetJobRequest, opts ...grpc.CallOption) (*Job, error)
 	WatchJob(ctx context.Context, in *GetJobRequest, opts ...grpc.CallOption) (grpc.ServerStreamingClient[Job], error)
@@ -185,6 +199,76 @@ func (c *inferenceServiceClient) CompleteLesson(ctx context.Context, in *GetLess
 	return out, nil
 }
 
+func (c *inferenceServiceClient) CreateLessonAssessment(ctx context.Context, in *CreateLessonAssessmentRequest, opts ...grpc.CallOption) (*LessonAssessment, error) {
+	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
+	out := new(LessonAssessment)
+	err := c.cc.Invoke(ctx, InferenceService_CreateLessonAssessment_FullMethodName, in, out, cOpts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *inferenceServiceClient) GetLessonAssessment(ctx context.Context, in *GetLessonAssessmentRequest, opts ...grpc.CallOption) (*LessonAssessment, error) {
+	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
+	out := new(LessonAssessment)
+	err := c.cc.Invoke(ctx, InferenceService_GetLessonAssessment_FullMethodName, in, out, cOpts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *inferenceServiceClient) SubmitLessonAssessment(ctx context.Context, in *SubmitLessonAssessmentRequest, opts ...grpc.CallOption) (*LessonAssessment, error) {
+	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
+	out := new(LessonAssessment)
+	err := c.cc.Invoke(ctx, InferenceService_SubmitLessonAssessment_FullMethodName, in, out, cOpts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *inferenceServiceClient) ListLessonConversations(ctx context.Context, in *GetLessonRequest, opts ...grpc.CallOption) (*ConversationList, error) {
+	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
+	out := new(ConversationList)
+	err := c.cc.Invoke(ctx, InferenceService_ListLessonConversations_FullMethodName, in, out, cOpts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *inferenceServiceClient) CreateLessonConversation(ctx context.Context, in *CreateLessonConversationRequest, opts ...grpc.CallOption) (*Conversation, error) {
+	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
+	out := new(Conversation)
+	err := c.cc.Invoke(ctx, InferenceService_CreateLessonConversation_FullMethodName, in, out, cOpts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *inferenceServiceClient) GetLessonConversation(ctx context.Context, in *GetLessonConversationRequest, opts ...grpc.CallOption) (*Conversation, error) {
+	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
+	out := new(Conversation)
+	err := c.cc.Invoke(ctx, InferenceService_GetLessonConversation_FullMethodName, in, out, cOpts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *inferenceServiceClient) UpdateLessonConversation(ctx context.Context, in *UpdateLessonConversationRequest, opts ...grpc.CallOption) (*Conversation, error) {
+	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
+	out := new(Conversation)
+	err := c.cc.Invoke(ctx, InferenceService_UpdateLessonConversation_FullMethodName, in, out, cOpts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
 func (c *inferenceServiceClient) SubmitTurn(ctx context.Context, in *SubmitTurnRequest, opts ...grpc.CallOption) (grpc.ServerStreamingClient[TurnEvent], error) {
 	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
 	stream, err := c.cc.NewStream(ctx, &InferenceService_ServiceDesc.Streams[0], InferenceService_SubmitTurn_FullMethodName, cOpts...)
@@ -249,6 +333,13 @@ type InferenceServiceServer interface {
 	GetLesson(context.Context, *GetLessonRequest) (*Lesson, error)
 	GradeCheck(context.Context, *GradeCheckRequest) (*GradeCheckResponse, error)
 	CompleteLesson(context.Context, *GetLessonRequest) (*Lesson, error)
+	CreateLessonAssessment(context.Context, *CreateLessonAssessmentRequest) (*LessonAssessment, error)
+	GetLessonAssessment(context.Context, *GetLessonAssessmentRequest) (*LessonAssessment, error)
+	SubmitLessonAssessment(context.Context, *SubmitLessonAssessmentRequest) (*LessonAssessment, error)
+	ListLessonConversations(context.Context, *GetLessonRequest) (*ConversationList, error)
+	CreateLessonConversation(context.Context, *CreateLessonConversationRequest) (*Conversation, error)
+	GetLessonConversation(context.Context, *GetLessonConversationRequest) (*Conversation, error)
+	UpdateLessonConversation(context.Context, *UpdateLessonConversationRequest) (*Conversation, error)
 	SubmitTurn(*SubmitTurnRequest, grpc.ServerStreamingServer[TurnEvent]) error
 	GetJob(context.Context, *GetJobRequest) (*Job, error)
 	WatchJob(*GetJobRequest, grpc.ServerStreamingServer[Job]) error
@@ -297,6 +388,27 @@ func (UnimplementedInferenceServiceServer) GradeCheck(context.Context, *GradeChe
 }
 func (UnimplementedInferenceServiceServer) CompleteLesson(context.Context, *GetLessonRequest) (*Lesson, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method CompleteLesson not implemented")
+}
+func (UnimplementedInferenceServiceServer) CreateLessonAssessment(context.Context, *CreateLessonAssessmentRequest) (*LessonAssessment, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method CreateLessonAssessment not implemented")
+}
+func (UnimplementedInferenceServiceServer) GetLessonAssessment(context.Context, *GetLessonAssessmentRequest) (*LessonAssessment, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method GetLessonAssessment not implemented")
+}
+func (UnimplementedInferenceServiceServer) SubmitLessonAssessment(context.Context, *SubmitLessonAssessmentRequest) (*LessonAssessment, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method SubmitLessonAssessment not implemented")
+}
+func (UnimplementedInferenceServiceServer) ListLessonConversations(context.Context, *GetLessonRequest) (*ConversationList, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method ListLessonConversations not implemented")
+}
+func (UnimplementedInferenceServiceServer) CreateLessonConversation(context.Context, *CreateLessonConversationRequest) (*Conversation, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method CreateLessonConversation not implemented")
+}
+func (UnimplementedInferenceServiceServer) GetLessonConversation(context.Context, *GetLessonConversationRequest) (*Conversation, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method GetLessonConversation not implemented")
+}
+func (UnimplementedInferenceServiceServer) UpdateLessonConversation(context.Context, *UpdateLessonConversationRequest) (*Conversation, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method UpdateLessonConversation not implemented")
 }
 func (UnimplementedInferenceServiceServer) SubmitTurn(*SubmitTurnRequest, grpc.ServerStreamingServer[TurnEvent]) error {
 	return status.Errorf(codes.Unimplemented, "method SubmitTurn not implemented")
@@ -544,6 +656,132 @@ func _InferenceService_CompleteLesson_Handler(srv interface{}, ctx context.Conte
 	return interceptor(ctx, in, info, handler)
 }
 
+func _InferenceService_CreateLessonAssessment_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(CreateLessonAssessmentRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(InferenceServiceServer).CreateLessonAssessment(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: InferenceService_CreateLessonAssessment_FullMethodName,
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(InferenceServiceServer).CreateLessonAssessment(ctx, req.(*CreateLessonAssessmentRequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _InferenceService_GetLessonAssessment_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(GetLessonAssessmentRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(InferenceServiceServer).GetLessonAssessment(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: InferenceService_GetLessonAssessment_FullMethodName,
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(InferenceServiceServer).GetLessonAssessment(ctx, req.(*GetLessonAssessmentRequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _InferenceService_SubmitLessonAssessment_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(SubmitLessonAssessmentRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(InferenceServiceServer).SubmitLessonAssessment(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: InferenceService_SubmitLessonAssessment_FullMethodName,
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(InferenceServiceServer).SubmitLessonAssessment(ctx, req.(*SubmitLessonAssessmentRequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _InferenceService_ListLessonConversations_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(GetLessonRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(InferenceServiceServer).ListLessonConversations(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: InferenceService_ListLessonConversations_FullMethodName,
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(InferenceServiceServer).ListLessonConversations(ctx, req.(*GetLessonRequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _InferenceService_CreateLessonConversation_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(CreateLessonConversationRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(InferenceServiceServer).CreateLessonConversation(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: InferenceService_CreateLessonConversation_FullMethodName,
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(InferenceServiceServer).CreateLessonConversation(ctx, req.(*CreateLessonConversationRequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _InferenceService_GetLessonConversation_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(GetLessonConversationRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(InferenceServiceServer).GetLessonConversation(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: InferenceService_GetLessonConversation_FullMethodName,
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(InferenceServiceServer).GetLessonConversation(ctx, req.(*GetLessonConversationRequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _InferenceService_UpdateLessonConversation_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(UpdateLessonConversationRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(InferenceServiceServer).UpdateLessonConversation(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: InferenceService_UpdateLessonConversation_FullMethodName,
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(InferenceServiceServer).UpdateLessonConversation(ctx, req.(*UpdateLessonConversationRequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
 func _InferenceService_SubmitTurn_Handler(srv interface{}, stream grpc.ServerStream) error {
 	m := new(SubmitTurnRequest)
 	if err := stream.RecvMsg(m); err != nil {
@@ -638,6 +876,34 @@ var InferenceService_ServiceDesc = grpc.ServiceDesc{
 		{
 			MethodName: "CompleteLesson",
 			Handler:    _InferenceService_CompleteLesson_Handler,
+		},
+		{
+			MethodName: "CreateLessonAssessment",
+			Handler:    _InferenceService_CreateLessonAssessment_Handler,
+		},
+		{
+			MethodName: "GetLessonAssessment",
+			Handler:    _InferenceService_GetLessonAssessment_Handler,
+		},
+		{
+			MethodName: "SubmitLessonAssessment",
+			Handler:    _InferenceService_SubmitLessonAssessment_Handler,
+		},
+		{
+			MethodName: "ListLessonConversations",
+			Handler:    _InferenceService_ListLessonConversations_Handler,
+		},
+		{
+			MethodName: "CreateLessonConversation",
+			Handler:    _InferenceService_CreateLessonConversation_Handler,
+		},
+		{
+			MethodName: "GetLessonConversation",
+			Handler:    _InferenceService_GetLessonConversation_Handler,
+		},
+		{
+			MethodName: "UpdateLessonConversation",
+			Handler:    _InferenceService_UpdateLessonConversation_Handler,
 		},
 		{
 			MethodName: "GetJob",

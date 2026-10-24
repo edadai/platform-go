@@ -19,9 +19,16 @@ import (
 const _ = grpc.SupportPackageIsVersion9
 
 const (
-	StudyMaterialsInternalService_GetExtractionSource_FullMethodName = "/studymaterials.v1.StudyMaterialsInternalService/GetExtractionSource"
-	StudyMaterialsInternalService_PersistExtraction_FullMethodName   = "/studymaterials.v1.StudyMaterialsInternalService/PersistExtraction"
-	StudyMaterialsInternalService_ReadExtraction_FullMethodName      = "/studymaterials.v1.StudyMaterialsInternalService/ReadExtraction"
+	StudyMaterialsInternalService_GetExtractionSource_FullMethodName             = "/studymaterials.v1.StudyMaterialsInternalService/GetExtractionSource"
+	StudyMaterialsInternalService_PersistExtraction_FullMethodName               = "/studymaterials.v1.StudyMaterialsInternalService/PersistExtraction"
+	StudyMaterialsInternalService_ReadExtraction_FullMethodName                  = "/studymaterials.v1.StudyMaterialsInternalService/ReadExtraction"
+	StudyMaterialsInternalService_GetSourceMedia_FullMethodName                  = "/studymaterials.v1.StudyMaterialsInternalService/GetSourceMedia"
+	StudyMaterialsInternalService_AuthorizeAudioTranscription_FullMethodName     = "/studymaterials.v1.StudyMaterialsInternalService/AuthorizeAudioTranscription"
+	StudyMaterialsInternalService_RegisterAudioTranscription_FullMethodName      = "/studymaterials.v1.StudyMaterialsInternalService/RegisterAudioTranscription"
+	StudyMaterialsInternalService_PersistAudioTranscript_FullMethodName          = "/studymaterials.v1.StudyMaterialsInternalService/PersistAudioTranscript"
+	StudyMaterialsInternalService_ReportAudioTranscriptionFailure_FullMethodName = "/studymaterials.v1.StudyMaterialsInternalService/ReportAudioTranscriptionFailure"
+	StudyMaterialsInternalService_GetStudyKitTitleContext_FullMethodName         = "/studymaterials.v1.StudyMaterialsInternalService/GetStudyKitTitleContext"
+	StudyMaterialsInternalService_GetGenerationControl_FullMethodName            = "/studymaterials.v1.StudyMaterialsInternalService/GetGenerationControl"
 )
 
 // StudyMaterialsInternalServiceClient is the client API for StudyMaterialsInternalService service.
@@ -31,6 +38,13 @@ type StudyMaterialsInternalServiceClient interface {
 	GetExtractionSource(ctx context.Context, in *GetExtractionSourceRequest, opts ...grpc.CallOption) (*GetExtractionSourceResponse, error)
 	PersistExtraction(ctx context.Context, opts ...grpc.CallOption) (grpc.ClientStreamingClient[PersistExtractionRequest, PersistExtractionResponse], error)
 	ReadExtraction(ctx context.Context, in *ReadExtractionRequest, opts ...grpc.CallOption) (grpc.ServerStreamingClient[ReadExtractionResponse], error)
+	GetSourceMedia(ctx context.Context, in *GetSourceMediaRequest, opts ...grpc.CallOption) (*GetSourceMediaResponse, error)
+	AuthorizeAudioTranscription(ctx context.Context, in *AuthorizeAudioTranscriptionRequest, opts ...grpc.CallOption) (*AuthorizeAudioTranscriptionResponse, error)
+	RegisterAudioTranscription(ctx context.Context, in *RegisterAudioTranscriptionRequest, opts ...grpc.CallOption) (*RegisterAudioTranscriptionResponse, error)
+	PersistAudioTranscript(ctx context.Context, in *PersistAudioTranscriptRequest, opts ...grpc.CallOption) (*PersistAudioTranscriptResponse, error)
+	ReportAudioTranscriptionFailure(ctx context.Context, in *ReportAudioTranscriptionFailureRequest, opts ...grpc.CallOption) (*ReportAudioTranscriptionFailureResponse, error)
+	GetStudyKitTitleContext(ctx context.Context, in *GetStudyKitTitleContextRequest, opts ...grpc.CallOption) (*GetStudyKitTitleContextResponse, error)
+	GetGenerationControl(ctx context.Context, in *GetGenerationControlRequest, opts ...grpc.CallOption) (*GetGenerationControlResponse, error)
 }
 
 type studyMaterialsInternalServiceClient struct {
@@ -83,6 +97,76 @@ func (c *studyMaterialsInternalServiceClient) ReadExtraction(ctx context.Context
 // This type alias is provided for backwards compatibility with existing code that references the prior non-generic stream type by name.
 type StudyMaterialsInternalService_ReadExtractionClient = grpc.ServerStreamingClient[ReadExtractionResponse]
 
+func (c *studyMaterialsInternalServiceClient) GetSourceMedia(ctx context.Context, in *GetSourceMediaRequest, opts ...grpc.CallOption) (*GetSourceMediaResponse, error) {
+	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
+	out := new(GetSourceMediaResponse)
+	err := c.cc.Invoke(ctx, StudyMaterialsInternalService_GetSourceMedia_FullMethodName, in, out, cOpts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *studyMaterialsInternalServiceClient) AuthorizeAudioTranscription(ctx context.Context, in *AuthorizeAudioTranscriptionRequest, opts ...grpc.CallOption) (*AuthorizeAudioTranscriptionResponse, error) {
+	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
+	out := new(AuthorizeAudioTranscriptionResponse)
+	err := c.cc.Invoke(ctx, StudyMaterialsInternalService_AuthorizeAudioTranscription_FullMethodName, in, out, cOpts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *studyMaterialsInternalServiceClient) RegisterAudioTranscription(ctx context.Context, in *RegisterAudioTranscriptionRequest, opts ...grpc.CallOption) (*RegisterAudioTranscriptionResponse, error) {
+	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
+	out := new(RegisterAudioTranscriptionResponse)
+	err := c.cc.Invoke(ctx, StudyMaterialsInternalService_RegisterAudioTranscription_FullMethodName, in, out, cOpts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *studyMaterialsInternalServiceClient) PersistAudioTranscript(ctx context.Context, in *PersistAudioTranscriptRequest, opts ...grpc.CallOption) (*PersistAudioTranscriptResponse, error) {
+	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
+	out := new(PersistAudioTranscriptResponse)
+	err := c.cc.Invoke(ctx, StudyMaterialsInternalService_PersistAudioTranscript_FullMethodName, in, out, cOpts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *studyMaterialsInternalServiceClient) ReportAudioTranscriptionFailure(ctx context.Context, in *ReportAudioTranscriptionFailureRequest, opts ...grpc.CallOption) (*ReportAudioTranscriptionFailureResponse, error) {
+	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
+	out := new(ReportAudioTranscriptionFailureResponse)
+	err := c.cc.Invoke(ctx, StudyMaterialsInternalService_ReportAudioTranscriptionFailure_FullMethodName, in, out, cOpts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *studyMaterialsInternalServiceClient) GetStudyKitTitleContext(ctx context.Context, in *GetStudyKitTitleContextRequest, opts ...grpc.CallOption) (*GetStudyKitTitleContextResponse, error) {
+	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
+	out := new(GetStudyKitTitleContextResponse)
+	err := c.cc.Invoke(ctx, StudyMaterialsInternalService_GetStudyKitTitleContext_FullMethodName, in, out, cOpts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *studyMaterialsInternalServiceClient) GetGenerationControl(ctx context.Context, in *GetGenerationControlRequest, opts ...grpc.CallOption) (*GetGenerationControlResponse, error) {
+	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
+	out := new(GetGenerationControlResponse)
+	err := c.cc.Invoke(ctx, StudyMaterialsInternalService_GetGenerationControl_FullMethodName, in, out, cOpts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
 // StudyMaterialsInternalServiceServer is the server API for StudyMaterialsInternalService service.
 // All implementations must embed UnimplementedStudyMaterialsInternalServiceServer
 // for forward compatibility.
@@ -90,6 +174,13 @@ type StudyMaterialsInternalServiceServer interface {
 	GetExtractionSource(context.Context, *GetExtractionSourceRequest) (*GetExtractionSourceResponse, error)
 	PersistExtraction(grpc.ClientStreamingServer[PersistExtractionRequest, PersistExtractionResponse]) error
 	ReadExtraction(*ReadExtractionRequest, grpc.ServerStreamingServer[ReadExtractionResponse]) error
+	GetSourceMedia(context.Context, *GetSourceMediaRequest) (*GetSourceMediaResponse, error)
+	AuthorizeAudioTranscription(context.Context, *AuthorizeAudioTranscriptionRequest) (*AuthorizeAudioTranscriptionResponse, error)
+	RegisterAudioTranscription(context.Context, *RegisterAudioTranscriptionRequest) (*RegisterAudioTranscriptionResponse, error)
+	PersistAudioTranscript(context.Context, *PersistAudioTranscriptRequest) (*PersistAudioTranscriptResponse, error)
+	ReportAudioTranscriptionFailure(context.Context, *ReportAudioTranscriptionFailureRequest) (*ReportAudioTranscriptionFailureResponse, error)
+	GetStudyKitTitleContext(context.Context, *GetStudyKitTitleContextRequest) (*GetStudyKitTitleContextResponse, error)
+	GetGenerationControl(context.Context, *GetGenerationControlRequest) (*GetGenerationControlResponse, error)
 	mustEmbedUnimplementedStudyMaterialsInternalServiceServer()
 }
 
@@ -108,6 +199,27 @@ func (UnimplementedStudyMaterialsInternalServiceServer) PersistExtraction(grpc.C
 }
 func (UnimplementedStudyMaterialsInternalServiceServer) ReadExtraction(*ReadExtractionRequest, grpc.ServerStreamingServer[ReadExtractionResponse]) error {
 	return status.Errorf(codes.Unimplemented, "method ReadExtraction not implemented")
+}
+func (UnimplementedStudyMaterialsInternalServiceServer) GetSourceMedia(context.Context, *GetSourceMediaRequest) (*GetSourceMediaResponse, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method GetSourceMedia not implemented")
+}
+func (UnimplementedStudyMaterialsInternalServiceServer) AuthorizeAudioTranscription(context.Context, *AuthorizeAudioTranscriptionRequest) (*AuthorizeAudioTranscriptionResponse, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method AuthorizeAudioTranscription not implemented")
+}
+func (UnimplementedStudyMaterialsInternalServiceServer) RegisterAudioTranscription(context.Context, *RegisterAudioTranscriptionRequest) (*RegisterAudioTranscriptionResponse, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method RegisterAudioTranscription not implemented")
+}
+func (UnimplementedStudyMaterialsInternalServiceServer) PersistAudioTranscript(context.Context, *PersistAudioTranscriptRequest) (*PersistAudioTranscriptResponse, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method PersistAudioTranscript not implemented")
+}
+func (UnimplementedStudyMaterialsInternalServiceServer) ReportAudioTranscriptionFailure(context.Context, *ReportAudioTranscriptionFailureRequest) (*ReportAudioTranscriptionFailureResponse, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method ReportAudioTranscriptionFailure not implemented")
+}
+func (UnimplementedStudyMaterialsInternalServiceServer) GetStudyKitTitleContext(context.Context, *GetStudyKitTitleContextRequest) (*GetStudyKitTitleContextResponse, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method GetStudyKitTitleContext not implemented")
+}
+func (UnimplementedStudyMaterialsInternalServiceServer) GetGenerationControl(context.Context, *GetGenerationControlRequest) (*GetGenerationControlResponse, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method GetGenerationControl not implemented")
 }
 func (UnimplementedStudyMaterialsInternalServiceServer) mustEmbedUnimplementedStudyMaterialsInternalServiceServer() {
 }
@@ -167,6 +279,132 @@ func _StudyMaterialsInternalService_ReadExtraction_Handler(srv interface{}, stre
 // This type alias is provided for backwards compatibility with existing code that references the prior non-generic stream type by name.
 type StudyMaterialsInternalService_ReadExtractionServer = grpc.ServerStreamingServer[ReadExtractionResponse]
 
+func _StudyMaterialsInternalService_GetSourceMedia_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(GetSourceMediaRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(StudyMaterialsInternalServiceServer).GetSourceMedia(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: StudyMaterialsInternalService_GetSourceMedia_FullMethodName,
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(StudyMaterialsInternalServiceServer).GetSourceMedia(ctx, req.(*GetSourceMediaRequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _StudyMaterialsInternalService_AuthorizeAudioTranscription_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(AuthorizeAudioTranscriptionRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(StudyMaterialsInternalServiceServer).AuthorizeAudioTranscription(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: StudyMaterialsInternalService_AuthorizeAudioTranscription_FullMethodName,
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(StudyMaterialsInternalServiceServer).AuthorizeAudioTranscription(ctx, req.(*AuthorizeAudioTranscriptionRequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _StudyMaterialsInternalService_RegisterAudioTranscription_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(RegisterAudioTranscriptionRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(StudyMaterialsInternalServiceServer).RegisterAudioTranscription(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: StudyMaterialsInternalService_RegisterAudioTranscription_FullMethodName,
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(StudyMaterialsInternalServiceServer).RegisterAudioTranscription(ctx, req.(*RegisterAudioTranscriptionRequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _StudyMaterialsInternalService_PersistAudioTranscript_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(PersistAudioTranscriptRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(StudyMaterialsInternalServiceServer).PersistAudioTranscript(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: StudyMaterialsInternalService_PersistAudioTranscript_FullMethodName,
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(StudyMaterialsInternalServiceServer).PersistAudioTranscript(ctx, req.(*PersistAudioTranscriptRequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _StudyMaterialsInternalService_ReportAudioTranscriptionFailure_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(ReportAudioTranscriptionFailureRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(StudyMaterialsInternalServiceServer).ReportAudioTranscriptionFailure(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: StudyMaterialsInternalService_ReportAudioTranscriptionFailure_FullMethodName,
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(StudyMaterialsInternalServiceServer).ReportAudioTranscriptionFailure(ctx, req.(*ReportAudioTranscriptionFailureRequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _StudyMaterialsInternalService_GetStudyKitTitleContext_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(GetStudyKitTitleContextRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(StudyMaterialsInternalServiceServer).GetStudyKitTitleContext(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: StudyMaterialsInternalService_GetStudyKitTitleContext_FullMethodName,
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(StudyMaterialsInternalServiceServer).GetStudyKitTitleContext(ctx, req.(*GetStudyKitTitleContextRequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _StudyMaterialsInternalService_GetGenerationControl_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(GetGenerationControlRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(StudyMaterialsInternalServiceServer).GetGenerationControl(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: StudyMaterialsInternalService_GetGenerationControl_FullMethodName,
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(StudyMaterialsInternalServiceServer).GetGenerationControl(ctx, req.(*GetGenerationControlRequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
 // StudyMaterialsInternalService_ServiceDesc is the grpc.ServiceDesc for StudyMaterialsInternalService service.
 // It's only intended for direct use with grpc.RegisterService,
 // and not to be introspected or modified (even as a copy)
@@ -177,6 +415,34 @@ var StudyMaterialsInternalService_ServiceDesc = grpc.ServiceDesc{
 		{
 			MethodName: "GetExtractionSource",
 			Handler:    _StudyMaterialsInternalService_GetExtractionSource_Handler,
+		},
+		{
+			MethodName: "GetSourceMedia",
+			Handler:    _StudyMaterialsInternalService_GetSourceMedia_Handler,
+		},
+		{
+			MethodName: "AuthorizeAudioTranscription",
+			Handler:    _StudyMaterialsInternalService_AuthorizeAudioTranscription_Handler,
+		},
+		{
+			MethodName: "RegisterAudioTranscription",
+			Handler:    _StudyMaterialsInternalService_RegisterAudioTranscription_Handler,
+		},
+		{
+			MethodName: "PersistAudioTranscript",
+			Handler:    _StudyMaterialsInternalService_PersistAudioTranscript_Handler,
+		},
+		{
+			MethodName: "ReportAudioTranscriptionFailure",
+			Handler:    _StudyMaterialsInternalService_ReportAudioTranscriptionFailure_Handler,
+		},
+		{
+			MethodName: "GetStudyKitTitleContext",
+			Handler:    _StudyMaterialsInternalService_GetStudyKitTitleContext_Handler,
+		},
+		{
+			MethodName: "GetGenerationControl",
+			Handler:    _StudyMaterialsInternalService_GetGenerationControl_Handler,
 		},
 	},
 	Streams: []grpc.StreamDesc{

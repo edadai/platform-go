@@ -1,0 +1,77 @@
+syntax = "proto3";
+
+package edad.knowledge.v1;
+
+option go_package = "github.com/edadai/platform-go/contracts/knowledgev1;knowledgev1";
+
+service KnowledgeEmbeddingService {
+  rpc EmbedKnowledgeTexts(EmbedKnowledgeTextsRequest) returns (EmbedKnowledgeTextsResponse);
+}
+
+service StudyKnowledgeService {
+  rpc RetrieveStudyKnowledge(RetrieveStudyKnowledgeRequest) returns (RetrieveStudyKnowledgeResponse);
+  rpc GetKnowledgeCitation(GetKnowledgeCitationRequest) returns (KnowledgeCitation);
+}
+
+message EmbedKnowledgeTextsRequest {
+  string embedding_spec = 1;
+  repeated string texts = 2;
+  string purpose = 3;
+}
+
+message EmbeddingVector { repeated float values = 1; }
+
+message EmbedKnowledgeTextsResponse {
+  string embedding_spec = 1;
+  int32 dimensions = 2;
+  repeated EmbeddingVector vectors = 3;
+}
+
+message RetrieveStudyKnowledgeRequest {
+  string user_id = 1;
+  string study_kit_id = 2;
+  repeated string source_version_ids = 3;
+  string query = 4;
+  int32 limit = 5;
+  repeated KnowledgePageRange page_ranges = 6;
+}
+
+message KnowledgePageRange {
+  string source_version_id = 1;
+  int32 start_page = 2;
+  int32 end_page = 3;
+}
+
+message KnowledgePassage {
+  string source_id = 1;
+  string source_version_id = 2;
+  string chunk_id = 3;
+  string title = 4;
+  string source_type = 5;
+  string text = 6;
+  double score = 7;
+  string locator_json = 8;
+  string citation_id = 9;
+}
+
+message RetrieveStudyKnowledgeResponse {
+  repeated KnowledgePassage passages = 1;
+  string source_manifest_sha256 = 2;
+  bool retrieval_unavailable = 3;
+}
+
+message GetKnowledgeCitationRequest {
+  string user_id = 1;
+  string citation_id = 2;
+}
+
+message KnowledgeCitation {
+  string citation_id = 1;
+  string source_id = 2;
+  string source_version_id = 3;
+  string title = 4;
+  string source_type = 5;
+  string excerpt = 6;
+  string locator_json = 7;
+  string source_url = 8;
+}
