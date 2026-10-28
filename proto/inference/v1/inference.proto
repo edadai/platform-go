@@ -7,6 +7,7 @@ option go_package = "github.com/edadai/platform-go/contracts/inferencev1;inferen
 service InferenceService {
   rpc CreateProgram(CreateProgramRequest) returns (Program);
   rpc GetProgram(GetProgramRequest) returns (ProgramView);
+  rpc ListPrograms(ListProgramsRequest) returns (ListProgramsResponse);
 
   rpc StartKnowledgeCheck(StartJobRequest) returns (Job);
   rpc GetKnowledgeCheck(GetKnowledgeCheckRequest) returns (KnowledgeCheck);
@@ -46,6 +47,8 @@ message CreateProgramRequest {
   string teaching_level = 4;
   repeated string source_version_ids = 5;
   string source_manifest_sha256 = 6;
+  // Start a new Tutor session even when the selection matches the newest one.
+  bool force_new = 7;
 }
 
 message GetProgramRequest {
@@ -67,6 +70,16 @@ message Program {
   string source_manifest_sha256 = 10;
   int32 revision = 11;
   bool stale = 12;
+}
+
+// Every Tutor revision (session) for a study kit, newest first.
+message ListProgramsRequest {
+  string user_id = 1;
+  string study_kit_id = 2;
+}
+
+message ListProgramsResponse {
+  repeated Program programs = 1;
 }
 
 message ProgramView {

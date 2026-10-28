@@ -21,6 +21,7 @@ const _ = grpc.SupportPackageIsVersion9
 const (
 	InferenceService_CreateProgram_FullMethodName            = "/edad.inference.v1.InferenceService/CreateProgram"
 	InferenceService_GetProgram_FullMethodName               = "/edad.inference.v1.InferenceService/GetProgram"
+	InferenceService_ListPrograms_FullMethodName             = "/edad.inference.v1.InferenceService/ListPrograms"
 	InferenceService_StartKnowledgeCheck_FullMethodName      = "/edad.inference.v1.InferenceService/StartKnowledgeCheck"
 	InferenceService_GetKnowledgeCheck_FullMethodName        = "/edad.inference.v1.InferenceService/GetKnowledgeCheck"
 	InferenceService_SubmitCheckAnswer_FullMethodName        = "/edad.inference.v1.InferenceService/SubmitCheckAnswer"
@@ -49,6 +50,7 @@ const (
 type InferenceServiceClient interface {
 	CreateProgram(ctx context.Context, in *CreateProgramRequest, opts ...grpc.CallOption) (*Program, error)
 	GetProgram(ctx context.Context, in *GetProgramRequest, opts ...grpc.CallOption) (*ProgramView, error)
+	ListPrograms(ctx context.Context, in *ListProgramsRequest, opts ...grpc.CallOption) (*ListProgramsResponse, error)
 	StartKnowledgeCheck(ctx context.Context, in *StartJobRequest, opts ...grpc.CallOption) (*Job, error)
 	GetKnowledgeCheck(ctx context.Context, in *GetKnowledgeCheckRequest, opts ...grpc.CallOption) (*KnowledgeCheck, error)
 	SubmitCheckAnswer(ctx context.Context, in *SubmitCheckAnswerRequest, opts ...grpc.CallOption) (*CheckAnswerResult, error)
@@ -93,6 +95,16 @@ func (c *inferenceServiceClient) GetProgram(ctx context.Context, in *GetProgramR
 	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
 	out := new(ProgramView)
 	err := c.cc.Invoke(ctx, InferenceService_GetProgram_FullMethodName, in, out, cOpts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *inferenceServiceClient) ListPrograms(ctx context.Context, in *ListProgramsRequest, opts ...grpc.CallOption) (*ListProgramsResponse, error) {
+	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
+	out := new(ListProgramsResponse)
+	err := c.cc.Invoke(ctx, InferenceService_ListPrograms_FullMethodName, in, out, cOpts...)
 	if err != nil {
 		return nil, err
 	}
@@ -323,6 +335,7 @@ type InferenceService_WatchJobClient = grpc.ServerStreamingClient[Job]
 type InferenceServiceServer interface {
 	CreateProgram(context.Context, *CreateProgramRequest) (*Program, error)
 	GetProgram(context.Context, *GetProgramRequest) (*ProgramView, error)
+	ListPrograms(context.Context, *ListProgramsRequest) (*ListProgramsResponse, error)
 	StartKnowledgeCheck(context.Context, *StartJobRequest) (*Job, error)
 	GetKnowledgeCheck(context.Context, *GetKnowledgeCheckRequest) (*KnowledgeCheck, error)
 	SubmitCheckAnswer(context.Context, *SubmitCheckAnswerRequest) (*CheckAnswerResult, error)
@@ -358,6 +371,9 @@ func (UnimplementedInferenceServiceServer) CreateProgram(context.Context, *Creat
 }
 func (UnimplementedInferenceServiceServer) GetProgram(context.Context, *GetProgramRequest) (*ProgramView, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method GetProgram not implemented")
+}
+func (UnimplementedInferenceServiceServer) ListPrograms(context.Context, *ListProgramsRequest) (*ListProgramsResponse, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method ListPrograms not implemented")
 }
 func (UnimplementedInferenceServiceServer) StartKnowledgeCheck(context.Context, *StartJobRequest) (*Job, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method StartKnowledgeCheck not implemented")
@@ -472,6 +488,24 @@ func _InferenceService_GetProgram_Handler(srv interface{}, ctx context.Context, 
 	}
 	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
 		return srv.(InferenceServiceServer).GetProgram(ctx, req.(*GetProgramRequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _InferenceService_ListPrograms_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(ListProgramsRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(InferenceServiceServer).ListPrograms(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: InferenceService_ListPrograms_FullMethodName,
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(InferenceServiceServer).ListPrograms(ctx, req.(*ListProgramsRequest))
 	}
 	return interceptor(ctx, in, info, handler)
 }
@@ -836,6 +870,10 @@ var InferenceService_ServiceDesc = grpc.ServiceDesc{
 		{
 			MethodName: "GetProgram",
 			Handler:    _InferenceService_GetProgram_Handler,
+		},
+		{
+			MethodName: "ListPrograms",
+			Handler:    _InferenceService_ListPrograms_Handler,
 		},
 		{
 			MethodName: "StartKnowledgeCheck",

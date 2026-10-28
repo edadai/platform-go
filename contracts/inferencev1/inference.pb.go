@@ -81,8 +81,10 @@ type CreateProgramRequest struct {
 	TeachingLevel        string                 `protobuf:"bytes,4,opt,name=teaching_level,json=teachingLevel,proto3" json:"teaching_level,omitempty"`
 	SourceVersionIds     []string               `protobuf:"bytes,5,rep,name=source_version_ids,json=sourceVersionIds,proto3" json:"source_version_ids,omitempty"`
 	SourceManifestSha256 string                 `protobuf:"bytes,6,opt,name=source_manifest_sha256,json=sourceManifestSha256,proto3" json:"source_manifest_sha256,omitempty"`
-	unknownFields        protoimpl.UnknownFields
-	sizeCache            protoimpl.SizeCache
+	// Start a new Tutor session even when the selection matches the newest one.
+	ForceNew      bool `protobuf:"varint,7,opt,name=force_new,json=forceNew,proto3" json:"force_new,omitempty"`
+	unknownFields protoimpl.UnknownFields
+	sizeCache     protoimpl.SizeCache
 }
 
 func (x *CreateProgramRequest) Reset() {
@@ -155,6 +157,13 @@ func (x *CreateProgramRequest) GetSourceManifestSha256() string {
 		return x.SourceManifestSha256
 	}
 	return ""
+}
+
+func (x *CreateProgramRequest) GetForceNew() bool {
+	if x != nil {
+		return x.ForceNew
+	}
+	return false
 }
 
 type GetProgramRequest struct {
@@ -349,6 +358,103 @@ func (x *Program) GetStale() bool {
 	return false
 }
 
+// Every Tutor revision (session) for a study kit, newest first.
+type ListProgramsRequest struct {
+	state         protoimpl.MessageState `protogen:"open.v1"`
+	UserId        string                 `protobuf:"bytes,1,opt,name=user_id,json=userId,proto3" json:"user_id,omitempty"`
+	StudyKitId    string                 `protobuf:"bytes,2,opt,name=study_kit_id,json=studyKitId,proto3" json:"study_kit_id,omitempty"`
+	unknownFields protoimpl.UnknownFields
+	sizeCache     protoimpl.SizeCache
+}
+
+func (x *ListProgramsRequest) Reset() {
+	*x = ListProgramsRequest{}
+	mi := &file_inference_v1_inference_proto_msgTypes[4]
+	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+	ms.StoreMessageInfo(mi)
+}
+
+func (x *ListProgramsRequest) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*ListProgramsRequest) ProtoMessage() {}
+
+func (x *ListProgramsRequest) ProtoReflect() protoreflect.Message {
+	mi := &file_inference_v1_inference_proto_msgTypes[4]
+	if x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use ListProgramsRequest.ProtoReflect.Descriptor instead.
+func (*ListProgramsRequest) Descriptor() ([]byte, []int) {
+	return file_inference_v1_inference_proto_rawDescGZIP(), []int{4}
+}
+
+func (x *ListProgramsRequest) GetUserId() string {
+	if x != nil {
+		return x.UserId
+	}
+	return ""
+}
+
+func (x *ListProgramsRequest) GetStudyKitId() string {
+	if x != nil {
+		return x.StudyKitId
+	}
+	return ""
+}
+
+type ListProgramsResponse struct {
+	state         protoimpl.MessageState `protogen:"open.v1"`
+	Programs      []*Program             `protobuf:"bytes,1,rep,name=programs,proto3" json:"programs,omitempty"`
+	unknownFields protoimpl.UnknownFields
+	sizeCache     protoimpl.SizeCache
+}
+
+func (x *ListProgramsResponse) Reset() {
+	*x = ListProgramsResponse{}
+	mi := &file_inference_v1_inference_proto_msgTypes[5]
+	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+	ms.StoreMessageInfo(mi)
+}
+
+func (x *ListProgramsResponse) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*ListProgramsResponse) ProtoMessage() {}
+
+func (x *ListProgramsResponse) ProtoReflect() protoreflect.Message {
+	mi := &file_inference_v1_inference_proto_msgTypes[5]
+	if x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use ListProgramsResponse.ProtoReflect.Descriptor instead.
+func (*ListProgramsResponse) Descriptor() ([]byte, []int) {
+	return file_inference_v1_inference_proto_rawDescGZIP(), []int{5}
+}
+
+func (x *ListProgramsResponse) GetPrograms() []*Program {
+	if x != nil {
+		return x.Programs
+	}
+	return nil
+}
+
 type ProgramView struct {
 	state          protoimpl.MessageState `protogen:"open.v1"`
 	Program        *Program               `protobuf:"bytes,1,opt,name=program,proto3" json:"program,omitempty"`
@@ -362,7 +468,7 @@ type ProgramView struct {
 
 func (x *ProgramView) Reset() {
 	*x = ProgramView{}
-	mi := &file_inference_v1_inference_proto_msgTypes[4]
+	mi := &file_inference_v1_inference_proto_msgTypes[6]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -374,7 +480,7 @@ func (x *ProgramView) String() string {
 func (*ProgramView) ProtoMessage() {}
 
 func (x *ProgramView) ProtoReflect() protoreflect.Message {
-	mi := &file_inference_v1_inference_proto_msgTypes[4]
+	mi := &file_inference_v1_inference_proto_msgTypes[6]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -387,7 +493,7 @@ func (x *ProgramView) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use ProgramView.ProtoReflect.Descriptor instead.
 func (*ProgramView) Descriptor() ([]byte, []int) {
-	return file_inference_v1_inference_proto_rawDescGZIP(), []int{4}
+	return file_inference_v1_inference_proto_rawDescGZIP(), []int{6}
 }
 
 func (x *ProgramView) GetProgram() *Program {
@@ -435,7 +541,7 @@ type StartJobRequest struct {
 
 func (x *StartJobRequest) Reset() {
 	*x = StartJobRequest{}
-	mi := &file_inference_v1_inference_proto_msgTypes[5]
+	mi := &file_inference_v1_inference_proto_msgTypes[7]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -447,7 +553,7 @@ func (x *StartJobRequest) String() string {
 func (*StartJobRequest) ProtoMessage() {}
 
 func (x *StartJobRequest) ProtoReflect() protoreflect.Message {
-	mi := &file_inference_v1_inference_proto_msgTypes[5]
+	mi := &file_inference_v1_inference_proto_msgTypes[7]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -460,7 +566,7 @@ func (x *StartJobRequest) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use StartJobRequest.ProtoReflect.Descriptor instead.
 func (*StartJobRequest) Descriptor() ([]byte, []int) {
-	return file_inference_v1_inference_proto_rawDescGZIP(), []int{5}
+	return file_inference_v1_inference_proto_rawDescGZIP(), []int{7}
 }
 
 func (x *StartJobRequest) GetUserId() string {
@@ -489,7 +595,7 @@ type StartLessonRequest struct {
 
 func (x *StartLessonRequest) Reset() {
 	*x = StartLessonRequest{}
-	mi := &file_inference_v1_inference_proto_msgTypes[6]
+	mi := &file_inference_v1_inference_proto_msgTypes[8]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -501,7 +607,7 @@ func (x *StartLessonRequest) String() string {
 func (*StartLessonRequest) ProtoMessage() {}
 
 func (x *StartLessonRequest) ProtoReflect() protoreflect.Message {
-	mi := &file_inference_v1_inference_proto_msgTypes[6]
+	mi := &file_inference_v1_inference_proto_msgTypes[8]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -514,7 +620,7 @@ func (x *StartLessonRequest) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use StartLessonRequest.ProtoReflect.Descriptor instead.
 func (*StartLessonRequest) Descriptor() ([]byte, []int) {
-	return file_inference_v1_inference_proto_rawDescGZIP(), []int{6}
+	return file_inference_v1_inference_proto_rawDescGZIP(), []int{8}
 }
 
 func (x *StartLessonRequest) GetUserId() string {
@@ -556,7 +662,7 @@ type GetKnowledgeCheckRequest struct {
 
 func (x *GetKnowledgeCheckRequest) Reset() {
 	*x = GetKnowledgeCheckRequest{}
-	mi := &file_inference_v1_inference_proto_msgTypes[7]
+	mi := &file_inference_v1_inference_proto_msgTypes[9]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -568,7 +674,7 @@ func (x *GetKnowledgeCheckRequest) String() string {
 func (*GetKnowledgeCheckRequest) ProtoMessage() {}
 
 func (x *GetKnowledgeCheckRequest) ProtoReflect() protoreflect.Message {
-	mi := &file_inference_v1_inference_proto_msgTypes[7]
+	mi := &file_inference_v1_inference_proto_msgTypes[9]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -581,7 +687,7 @@ func (x *GetKnowledgeCheckRequest) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use GetKnowledgeCheckRequest.ProtoReflect.Descriptor instead.
 func (*GetKnowledgeCheckRequest) Descriptor() ([]byte, []int) {
-	return file_inference_v1_inference_proto_rawDescGZIP(), []int{7}
+	return file_inference_v1_inference_proto_rawDescGZIP(), []int{9}
 }
 
 func (x *GetKnowledgeCheckRequest) GetUserId() string {
@@ -615,7 +721,7 @@ type GetPathRequest struct {
 
 func (x *GetPathRequest) Reset() {
 	*x = GetPathRequest{}
-	mi := &file_inference_v1_inference_proto_msgTypes[8]
+	mi := &file_inference_v1_inference_proto_msgTypes[10]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -627,7 +733,7 @@ func (x *GetPathRequest) String() string {
 func (*GetPathRequest) ProtoMessage() {}
 
 func (x *GetPathRequest) ProtoReflect() protoreflect.Message {
-	mi := &file_inference_v1_inference_proto_msgTypes[8]
+	mi := &file_inference_v1_inference_proto_msgTypes[10]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -640,7 +746,7 @@ func (x *GetPathRequest) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use GetPathRequest.ProtoReflect.Descriptor instead.
 func (*GetPathRequest) Descriptor() ([]byte, []int) {
-	return file_inference_v1_inference_proto_rawDescGZIP(), []int{8}
+	return file_inference_v1_inference_proto_rawDescGZIP(), []int{10}
 }
 
 func (x *GetPathRequest) GetUserId() string {
@@ -667,7 +773,7 @@ type GetLessonRequest struct {
 
 func (x *GetLessonRequest) Reset() {
 	*x = GetLessonRequest{}
-	mi := &file_inference_v1_inference_proto_msgTypes[9]
+	mi := &file_inference_v1_inference_proto_msgTypes[11]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -679,7 +785,7 @@ func (x *GetLessonRequest) String() string {
 func (*GetLessonRequest) ProtoMessage() {}
 
 func (x *GetLessonRequest) ProtoReflect() protoreflect.Message {
-	mi := &file_inference_v1_inference_proto_msgTypes[9]
+	mi := &file_inference_v1_inference_proto_msgTypes[11]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -692,7 +798,7 @@ func (x *GetLessonRequest) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use GetLessonRequest.ProtoReflect.Descriptor instead.
 func (*GetLessonRequest) Descriptor() ([]byte, []int) {
-	return file_inference_v1_inference_proto_rawDescGZIP(), []int{9}
+	return file_inference_v1_inference_proto_rawDescGZIP(), []int{11}
 }
 
 func (x *GetLessonRequest) GetUserId() string {
@@ -719,7 +825,7 @@ type GetJobRequest struct {
 
 func (x *GetJobRequest) Reset() {
 	*x = GetJobRequest{}
-	mi := &file_inference_v1_inference_proto_msgTypes[10]
+	mi := &file_inference_v1_inference_proto_msgTypes[12]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -731,7 +837,7 @@ func (x *GetJobRequest) String() string {
 func (*GetJobRequest) ProtoMessage() {}
 
 func (x *GetJobRequest) ProtoReflect() protoreflect.Message {
-	mi := &file_inference_v1_inference_proto_msgTypes[10]
+	mi := &file_inference_v1_inference_proto_msgTypes[12]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -744,7 +850,7 @@ func (x *GetJobRequest) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use GetJobRequest.ProtoReflect.Descriptor instead.
 func (*GetJobRequest) Descriptor() ([]byte, []int) {
-	return file_inference_v1_inference_proto_rawDescGZIP(), []int{10}
+	return file_inference_v1_inference_proto_rawDescGZIP(), []int{12}
 }
 
 func (x *GetJobRequest) GetUserId() string {
@@ -778,7 +884,7 @@ type Job struct {
 
 func (x *Job) Reset() {
 	*x = Job{}
-	mi := &file_inference_v1_inference_proto_msgTypes[11]
+	mi := &file_inference_v1_inference_proto_msgTypes[13]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -790,7 +896,7 @@ func (x *Job) String() string {
 func (*Job) ProtoMessage() {}
 
 func (x *Job) ProtoReflect() protoreflect.Message {
-	mi := &file_inference_v1_inference_proto_msgTypes[11]
+	mi := &file_inference_v1_inference_proto_msgTypes[13]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -803,7 +909,7 @@ func (x *Job) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use Job.ProtoReflect.Descriptor instead.
 func (*Job) Descriptor() ([]byte, []int) {
-	return file_inference_v1_inference_proto_rawDescGZIP(), []int{11}
+	return file_inference_v1_inference_proto_rawDescGZIP(), []int{13}
 }
 
 func (x *Job) GetId() string {
@@ -879,7 +985,7 @@ type Choice struct {
 
 func (x *Choice) Reset() {
 	*x = Choice{}
-	mi := &file_inference_v1_inference_proto_msgTypes[12]
+	mi := &file_inference_v1_inference_proto_msgTypes[14]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -891,7 +997,7 @@ func (x *Choice) String() string {
 func (*Choice) ProtoMessage() {}
 
 func (x *Choice) ProtoReflect() protoreflect.Message {
-	mi := &file_inference_v1_inference_proto_msgTypes[12]
+	mi := &file_inference_v1_inference_proto_msgTypes[14]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -904,7 +1010,7 @@ func (x *Choice) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use Choice.ProtoReflect.Descriptor instead.
 func (*Choice) Descriptor() ([]byte, []int) {
-	return file_inference_v1_inference_proto_rawDescGZIP(), []int{12}
+	return file_inference_v1_inference_proto_rawDescGZIP(), []int{14}
 }
 
 func (x *Choice) GetId() string {
@@ -938,7 +1044,7 @@ type Question struct {
 
 func (x *Question) Reset() {
 	*x = Question{}
-	mi := &file_inference_v1_inference_proto_msgTypes[13]
+	mi := &file_inference_v1_inference_proto_msgTypes[15]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -950,7 +1056,7 @@ func (x *Question) String() string {
 func (*Question) ProtoMessage() {}
 
 func (x *Question) ProtoReflect() protoreflect.Message {
-	mi := &file_inference_v1_inference_proto_msgTypes[13]
+	mi := &file_inference_v1_inference_proto_msgTypes[15]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -963,7 +1069,7 @@ func (x *Question) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use Question.ProtoReflect.Descriptor instead.
 func (*Question) Descriptor() ([]byte, []int) {
-	return file_inference_v1_inference_proto_rawDescGZIP(), []int{13}
+	return file_inference_v1_inference_proto_rawDescGZIP(), []int{15}
 }
 
 func (x *Question) GetId() string {
@@ -1041,7 +1147,7 @@ type Diagnosis struct {
 
 func (x *Diagnosis) Reset() {
 	*x = Diagnosis{}
-	mi := &file_inference_v1_inference_proto_msgTypes[14]
+	mi := &file_inference_v1_inference_proto_msgTypes[16]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -1053,7 +1159,7 @@ func (x *Diagnosis) String() string {
 func (*Diagnosis) ProtoMessage() {}
 
 func (x *Diagnosis) ProtoReflect() protoreflect.Message {
-	mi := &file_inference_v1_inference_proto_msgTypes[14]
+	mi := &file_inference_v1_inference_proto_msgTypes[16]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -1066,7 +1172,7 @@ func (x *Diagnosis) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use Diagnosis.ProtoReflect.Descriptor instead.
 func (*Diagnosis) Descriptor() ([]byte, []int) {
-	return file_inference_v1_inference_proto_rawDescGZIP(), []int{14}
+	return file_inference_v1_inference_proto_rawDescGZIP(), []int{16}
 }
 
 func (x *Diagnosis) GetOverallPercent() int32 {
@@ -1112,7 +1218,7 @@ type KnowledgeCheck struct {
 
 func (x *KnowledgeCheck) Reset() {
 	*x = KnowledgeCheck{}
-	mi := &file_inference_v1_inference_proto_msgTypes[15]
+	mi := &file_inference_v1_inference_proto_msgTypes[17]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -1124,7 +1230,7 @@ func (x *KnowledgeCheck) String() string {
 func (*KnowledgeCheck) ProtoMessage() {}
 
 func (x *KnowledgeCheck) ProtoReflect() protoreflect.Message {
-	mi := &file_inference_v1_inference_proto_msgTypes[15]
+	mi := &file_inference_v1_inference_proto_msgTypes[17]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -1137,7 +1243,7 @@ func (x *KnowledgeCheck) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use KnowledgeCheck.ProtoReflect.Descriptor instead.
 func (*KnowledgeCheck) Descriptor() ([]byte, []int) {
-	return file_inference_v1_inference_proto_rawDescGZIP(), []int{15}
+	return file_inference_v1_inference_proto_rawDescGZIP(), []int{17}
 }
 
 func (x *KnowledgeCheck) GetId() string {
@@ -1202,7 +1308,7 @@ type SubmitCheckAnswerRequest struct {
 
 func (x *SubmitCheckAnswerRequest) Reset() {
 	*x = SubmitCheckAnswerRequest{}
-	mi := &file_inference_v1_inference_proto_msgTypes[16]
+	mi := &file_inference_v1_inference_proto_msgTypes[18]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -1214,7 +1320,7 @@ func (x *SubmitCheckAnswerRequest) String() string {
 func (*SubmitCheckAnswerRequest) ProtoMessage() {}
 
 func (x *SubmitCheckAnswerRequest) ProtoReflect() protoreflect.Message {
-	mi := &file_inference_v1_inference_proto_msgTypes[16]
+	mi := &file_inference_v1_inference_proto_msgTypes[18]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -1227,7 +1333,7 @@ func (x *SubmitCheckAnswerRequest) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use SubmitCheckAnswerRequest.ProtoReflect.Descriptor instead.
 func (*SubmitCheckAnswerRequest) Descriptor() ([]byte, []int) {
-	return file_inference_v1_inference_proto_rawDescGZIP(), []int{16}
+	return file_inference_v1_inference_proto_rawDescGZIP(), []int{18}
 }
 
 func (x *SubmitCheckAnswerRequest) GetUserId() string {
@@ -1279,7 +1385,7 @@ type CheckAnswerResult struct {
 
 func (x *CheckAnswerResult) Reset() {
 	*x = CheckAnswerResult{}
-	mi := &file_inference_v1_inference_proto_msgTypes[17]
+	mi := &file_inference_v1_inference_proto_msgTypes[19]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -1291,7 +1397,7 @@ func (x *CheckAnswerResult) String() string {
 func (*CheckAnswerResult) ProtoMessage() {}
 
 func (x *CheckAnswerResult) ProtoReflect() protoreflect.Message {
-	mi := &file_inference_v1_inference_proto_msgTypes[17]
+	mi := &file_inference_v1_inference_proto_msgTypes[19]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -1304,7 +1410,7 @@ func (x *CheckAnswerResult) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use CheckAnswerResult.ProtoReflect.Descriptor instead.
 func (*CheckAnswerResult) Descriptor() ([]byte, []int) {
-	return file_inference_v1_inference_proto_rawDescGZIP(), []int{17}
+	return file_inference_v1_inference_proto_rawDescGZIP(), []int{19}
 }
 
 func (x *CheckAnswerResult) GetQuestionId() string {
@@ -1365,7 +1471,7 @@ type PathTopic struct {
 
 func (x *PathTopic) Reset() {
 	*x = PathTopic{}
-	mi := &file_inference_v1_inference_proto_msgTypes[18]
+	mi := &file_inference_v1_inference_proto_msgTypes[20]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -1377,7 +1483,7 @@ func (x *PathTopic) String() string {
 func (*PathTopic) ProtoMessage() {}
 
 func (x *PathTopic) ProtoReflect() protoreflect.Message {
-	mi := &file_inference_v1_inference_proto_msgTypes[18]
+	mi := &file_inference_v1_inference_proto_msgTypes[20]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -1390,7 +1496,7 @@ func (x *PathTopic) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use PathTopic.ProtoReflect.Descriptor instead.
 func (*PathTopic) Descriptor() ([]byte, []int) {
-	return file_inference_v1_inference_proto_rawDescGZIP(), []int{18}
+	return file_inference_v1_inference_proto_rawDescGZIP(), []int{20}
 }
 
 func (x *PathTopic) GetId() string {
@@ -1462,7 +1568,7 @@ type Path struct {
 
 func (x *Path) Reset() {
 	*x = Path{}
-	mi := &file_inference_v1_inference_proto_msgTypes[19]
+	mi := &file_inference_v1_inference_proto_msgTypes[21]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -1474,7 +1580,7 @@ func (x *Path) String() string {
 func (*Path) ProtoMessage() {}
 
 func (x *Path) ProtoReflect() protoreflect.Message {
-	mi := &file_inference_v1_inference_proto_msgTypes[19]
+	mi := &file_inference_v1_inference_proto_msgTypes[21]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -1487,7 +1593,7 @@ func (x *Path) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use Path.ProtoReflect.Descriptor instead.
 func (*Path) Descriptor() ([]byte, []int) {
-	return file_inference_v1_inference_proto_rawDescGZIP(), []int{19}
+	return file_inference_v1_inference_proto_rawDescGZIP(), []int{21}
 }
 
 func (x *Path) GetId() string {
@@ -1539,7 +1645,7 @@ type LessonSection struct {
 
 func (x *LessonSection) Reset() {
 	*x = LessonSection{}
-	mi := &file_inference_v1_inference_proto_msgTypes[20]
+	mi := &file_inference_v1_inference_proto_msgTypes[22]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -1551,7 +1657,7 @@ func (x *LessonSection) String() string {
 func (*LessonSection) ProtoMessage() {}
 
 func (x *LessonSection) ProtoReflect() protoreflect.Message {
-	mi := &file_inference_v1_inference_proto_msgTypes[20]
+	mi := &file_inference_v1_inference_proto_msgTypes[22]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -1564,7 +1670,7 @@ func (x *LessonSection) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use LessonSection.ProtoReflect.Descriptor instead.
 func (*LessonSection) Descriptor() ([]byte, []int) {
-	return file_inference_v1_inference_proto_rawDescGZIP(), []int{20}
+	return file_inference_v1_inference_proto_rawDescGZIP(), []int{22}
 }
 
 func (x *LessonSection) GetId() string {
@@ -1627,7 +1733,7 @@ type Message struct {
 
 func (x *Message) Reset() {
 	*x = Message{}
-	mi := &file_inference_v1_inference_proto_msgTypes[21]
+	mi := &file_inference_v1_inference_proto_msgTypes[23]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -1639,7 +1745,7 @@ func (x *Message) String() string {
 func (*Message) ProtoMessage() {}
 
 func (x *Message) ProtoReflect() protoreflect.Message {
-	mi := &file_inference_v1_inference_proto_msgTypes[21]
+	mi := &file_inference_v1_inference_proto_msgTypes[23]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -1652,7 +1758,7 @@ func (x *Message) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use Message.ProtoReflect.Descriptor instead.
 func (*Message) Descriptor() ([]byte, []int) {
-	return file_inference_v1_inference_proto_rawDescGZIP(), []int{21}
+	return file_inference_v1_inference_proto_rawDescGZIP(), []int{23}
 }
 
 func (x *Message) GetId() string {
@@ -1745,7 +1851,7 @@ type Lesson struct {
 
 func (x *Lesson) Reset() {
 	*x = Lesson{}
-	mi := &file_inference_v1_inference_proto_msgTypes[22]
+	mi := &file_inference_v1_inference_proto_msgTypes[24]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -1757,7 +1863,7 @@ func (x *Lesson) String() string {
 func (*Lesson) ProtoMessage() {}
 
 func (x *Lesson) ProtoReflect() protoreflect.Message {
-	mi := &file_inference_v1_inference_proto_msgTypes[22]
+	mi := &file_inference_v1_inference_proto_msgTypes[24]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -1770,7 +1876,7 @@ func (x *Lesson) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use Lesson.ProtoReflect.Descriptor instead.
 func (*Lesson) Descriptor() ([]byte, []int) {
-	return file_inference_v1_inference_proto_rawDescGZIP(), []int{22}
+	return file_inference_v1_inference_proto_rawDescGZIP(), []int{24}
 }
 
 func (x *Lesson) GetId() string {
@@ -1868,7 +1974,7 @@ type AssessmentReviewItem struct {
 
 func (x *AssessmentReviewItem) Reset() {
 	*x = AssessmentReviewItem{}
-	mi := &file_inference_v1_inference_proto_msgTypes[23]
+	mi := &file_inference_v1_inference_proto_msgTypes[25]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -1880,7 +1986,7 @@ func (x *AssessmentReviewItem) String() string {
 func (*AssessmentReviewItem) ProtoMessage() {}
 
 func (x *AssessmentReviewItem) ProtoReflect() protoreflect.Message {
-	mi := &file_inference_v1_inference_proto_msgTypes[23]
+	mi := &file_inference_v1_inference_proto_msgTypes[25]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -1893,7 +1999,7 @@ func (x *AssessmentReviewItem) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use AssessmentReviewItem.ProtoReflect.Descriptor instead.
 func (*AssessmentReviewItem) Descriptor() ([]byte, []int) {
-	return file_inference_v1_inference_proto_rawDescGZIP(), []int{23}
+	return file_inference_v1_inference_proto_rawDescGZIP(), []int{25}
 }
 
 func (x *AssessmentReviewItem) GetConcept() string {
@@ -1937,7 +2043,7 @@ type LessonAssessment struct {
 
 func (x *LessonAssessment) Reset() {
 	*x = LessonAssessment{}
-	mi := &file_inference_v1_inference_proto_msgTypes[24]
+	mi := &file_inference_v1_inference_proto_msgTypes[26]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -1949,7 +2055,7 @@ func (x *LessonAssessment) String() string {
 func (*LessonAssessment) ProtoMessage() {}
 
 func (x *LessonAssessment) ProtoReflect() protoreflect.Message {
-	mi := &file_inference_v1_inference_proto_msgTypes[24]
+	mi := &file_inference_v1_inference_proto_msgTypes[26]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -1962,7 +2068,7 @@ func (x *LessonAssessment) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use LessonAssessment.ProtoReflect.Descriptor instead.
 func (*LessonAssessment) Descriptor() ([]byte, []int) {
-	return file_inference_v1_inference_proto_rawDescGZIP(), []int{24}
+	return file_inference_v1_inference_proto_rawDescGZIP(), []int{26}
 }
 
 func (x *LessonAssessment) GetId() string {
@@ -2060,7 +2166,7 @@ type CreateLessonAssessmentRequest struct {
 
 func (x *CreateLessonAssessmentRequest) Reset() {
 	*x = CreateLessonAssessmentRequest{}
-	mi := &file_inference_v1_inference_proto_msgTypes[25]
+	mi := &file_inference_v1_inference_proto_msgTypes[27]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -2072,7 +2178,7 @@ func (x *CreateLessonAssessmentRequest) String() string {
 func (*CreateLessonAssessmentRequest) ProtoMessage() {}
 
 func (x *CreateLessonAssessmentRequest) ProtoReflect() protoreflect.Message {
-	mi := &file_inference_v1_inference_proto_msgTypes[25]
+	mi := &file_inference_v1_inference_proto_msgTypes[27]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -2085,7 +2191,7 @@ func (x *CreateLessonAssessmentRequest) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use CreateLessonAssessmentRequest.ProtoReflect.Descriptor instead.
 func (*CreateLessonAssessmentRequest) Descriptor() ([]byte, []int) {
-	return file_inference_v1_inference_proto_rawDescGZIP(), []int{25}
+	return file_inference_v1_inference_proto_rawDescGZIP(), []int{27}
 }
 
 func (x *CreateLessonAssessmentRequest) GetUserId() string {
@@ -2119,7 +2225,7 @@ type GetLessonAssessmentRequest struct {
 
 func (x *GetLessonAssessmentRequest) Reset() {
 	*x = GetLessonAssessmentRequest{}
-	mi := &file_inference_v1_inference_proto_msgTypes[26]
+	mi := &file_inference_v1_inference_proto_msgTypes[28]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -2131,7 +2237,7 @@ func (x *GetLessonAssessmentRequest) String() string {
 func (*GetLessonAssessmentRequest) ProtoMessage() {}
 
 func (x *GetLessonAssessmentRequest) ProtoReflect() protoreflect.Message {
-	mi := &file_inference_v1_inference_proto_msgTypes[26]
+	mi := &file_inference_v1_inference_proto_msgTypes[28]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -2144,7 +2250,7 @@ func (x *GetLessonAssessmentRequest) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use GetLessonAssessmentRequest.ProtoReflect.Descriptor instead.
 func (*GetLessonAssessmentRequest) Descriptor() ([]byte, []int) {
-	return file_inference_v1_inference_proto_rawDescGZIP(), []int{26}
+	return file_inference_v1_inference_proto_rawDescGZIP(), []int{28}
 }
 
 func (x *GetLessonAssessmentRequest) GetUserId() string {
@@ -2171,7 +2277,7 @@ type LessonAssessmentAnswer struct {
 
 func (x *LessonAssessmentAnswer) Reset() {
 	*x = LessonAssessmentAnswer{}
-	mi := &file_inference_v1_inference_proto_msgTypes[27]
+	mi := &file_inference_v1_inference_proto_msgTypes[29]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -2183,7 +2289,7 @@ func (x *LessonAssessmentAnswer) String() string {
 func (*LessonAssessmentAnswer) ProtoMessage() {}
 
 func (x *LessonAssessmentAnswer) ProtoReflect() protoreflect.Message {
-	mi := &file_inference_v1_inference_proto_msgTypes[27]
+	mi := &file_inference_v1_inference_proto_msgTypes[29]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -2196,7 +2302,7 @@ func (x *LessonAssessmentAnswer) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use LessonAssessmentAnswer.ProtoReflect.Descriptor instead.
 func (*LessonAssessmentAnswer) Descriptor() ([]byte, []int) {
-	return file_inference_v1_inference_proto_rawDescGZIP(), []int{27}
+	return file_inference_v1_inference_proto_rawDescGZIP(), []int{29}
 }
 
 func (x *LessonAssessmentAnswer) GetQuestionId() string {
@@ -2224,7 +2330,7 @@ type SubmitLessonAssessmentRequest struct {
 
 func (x *SubmitLessonAssessmentRequest) Reset() {
 	*x = SubmitLessonAssessmentRequest{}
-	mi := &file_inference_v1_inference_proto_msgTypes[28]
+	mi := &file_inference_v1_inference_proto_msgTypes[30]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -2236,7 +2342,7 @@ func (x *SubmitLessonAssessmentRequest) String() string {
 func (*SubmitLessonAssessmentRequest) ProtoMessage() {}
 
 func (x *SubmitLessonAssessmentRequest) ProtoReflect() protoreflect.Message {
-	mi := &file_inference_v1_inference_proto_msgTypes[28]
+	mi := &file_inference_v1_inference_proto_msgTypes[30]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -2249,7 +2355,7 @@ func (x *SubmitLessonAssessmentRequest) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use SubmitLessonAssessmentRequest.ProtoReflect.Descriptor instead.
 func (*SubmitLessonAssessmentRequest) Descriptor() ([]byte, []int) {
-	return file_inference_v1_inference_proto_rawDescGZIP(), []int{28}
+	return file_inference_v1_inference_proto_rawDescGZIP(), []int{30}
 }
 
 func (x *SubmitLessonAssessmentRequest) GetUserId() string {
@@ -2292,7 +2398,7 @@ type Conversation struct {
 
 func (x *Conversation) Reset() {
 	*x = Conversation{}
-	mi := &file_inference_v1_inference_proto_msgTypes[29]
+	mi := &file_inference_v1_inference_proto_msgTypes[31]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -2304,7 +2410,7 @@ func (x *Conversation) String() string {
 func (*Conversation) ProtoMessage() {}
 
 func (x *Conversation) ProtoReflect() protoreflect.Message {
-	mi := &file_inference_v1_inference_proto_msgTypes[29]
+	mi := &file_inference_v1_inference_proto_msgTypes[31]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -2317,7 +2423,7 @@ func (x *Conversation) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use Conversation.ProtoReflect.Descriptor instead.
 func (*Conversation) Descriptor() ([]byte, []int) {
-	return file_inference_v1_inference_proto_rawDescGZIP(), []int{29}
+	return file_inference_v1_inference_proto_rawDescGZIP(), []int{31}
 }
 
 func (x *Conversation) GetId() string {
@@ -2406,7 +2512,7 @@ type ConversationList struct {
 
 func (x *ConversationList) Reset() {
 	*x = ConversationList{}
-	mi := &file_inference_v1_inference_proto_msgTypes[30]
+	mi := &file_inference_v1_inference_proto_msgTypes[32]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -2418,7 +2524,7 @@ func (x *ConversationList) String() string {
 func (*ConversationList) ProtoMessage() {}
 
 func (x *ConversationList) ProtoReflect() protoreflect.Message {
-	mi := &file_inference_v1_inference_proto_msgTypes[30]
+	mi := &file_inference_v1_inference_proto_msgTypes[32]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -2431,7 +2537,7 @@ func (x *ConversationList) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use ConversationList.ProtoReflect.Descriptor instead.
 func (*ConversationList) Descriptor() ([]byte, []int) {
-	return file_inference_v1_inference_proto_rawDescGZIP(), []int{30}
+	return file_inference_v1_inference_proto_rawDescGZIP(), []int{32}
 }
 
 func (x *ConversationList) GetConversations() []*Conversation {
@@ -2452,7 +2558,7 @@ type CreateLessonConversationRequest struct {
 
 func (x *CreateLessonConversationRequest) Reset() {
 	*x = CreateLessonConversationRequest{}
-	mi := &file_inference_v1_inference_proto_msgTypes[31]
+	mi := &file_inference_v1_inference_proto_msgTypes[33]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -2464,7 +2570,7 @@ func (x *CreateLessonConversationRequest) String() string {
 func (*CreateLessonConversationRequest) ProtoMessage() {}
 
 func (x *CreateLessonConversationRequest) ProtoReflect() protoreflect.Message {
-	mi := &file_inference_v1_inference_proto_msgTypes[31]
+	mi := &file_inference_v1_inference_proto_msgTypes[33]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -2477,7 +2583,7 @@ func (x *CreateLessonConversationRequest) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use CreateLessonConversationRequest.ProtoReflect.Descriptor instead.
 func (*CreateLessonConversationRequest) Descriptor() ([]byte, []int) {
-	return file_inference_v1_inference_proto_rawDescGZIP(), []int{31}
+	return file_inference_v1_inference_proto_rawDescGZIP(), []int{33}
 }
 
 func (x *CreateLessonConversationRequest) GetUserId() string {
@@ -2512,7 +2618,7 @@ type GetLessonConversationRequest struct {
 
 func (x *GetLessonConversationRequest) Reset() {
 	*x = GetLessonConversationRequest{}
-	mi := &file_inference_v1_inference_proto_msgTypes[32]
+	mi := &file_inference_v1_inference_proto_msgTypes[34]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -2524,7 +2630,7 @@ func (x *GetLessonConversationRequest) String() string {
 func (*GetLessonConversationRequest) ProtoMessage() {}
 
 func (x *GetLessonConversationRequest) ProtoReflect() protoreflect.Message {
-	mi := &file_inference_v1_inference_proto_msgTypes[32]
+	mi := &file_inference_v1_inference_proto_msgTypes[34]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -2537,7 +2643,7 @@ func (x *GetLessonConversationRequest) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use GetLessonConversationRequest.ProtoReflect.Descriptor instead.
 func (*GetLessonConversationRequest) Descriptor() ([]byte, []int) {
-	return file_inference_v1_inference_proto_rawDescGZIP(), []int{32}
+	return file_inference_v1_inference_proto_rawDescGZIP(), []int{34}
 }
 
 func (x *GetLessonConversationRequest) GetUserId() string {
@@ -2574,7 +2680,7 @@ type UpdateLessonConversationRequest struct {
 
 func (x *UpdateLessonConversationRequest) Reset() {
 	*x = UpdateLessonConversationRequest{}
-	mi := &file_inference_v1_inference_proto_msgTypes[33]
+	mi := &file_inference_v1_inference_proto_msgTypes[35]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -2586,7 +2692,7 @@ func (x *UpdateLessonConversationRequest) String() string {
 func (*UpdateLessonConversationRequest) ProtoMessage() {}
 
 func (x *UpdateLessonConversationRequest) ProtoReflect() protoreflect.Message {
-	mi := &file_inference_v1_inference_proto_msgTypes[33]
+	mi := &file_inference_v1_inference_proto_msgTypes[35]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -2599,7 +2705,7 @@ func (x *UpdateLessonConversationRequest) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use UpdateLessonConversationRequest.ProtoReflect.Descriptor instead.
 func (*UpdateLessonConversationRequest) Descriptor() ([]byte, []int) {
-	return file_inference_v1_inference_proto_rawDescGZIP(), []int{33}
+	return file_inference_v1_inference_proto_rawDescGZIP(), []int{35}
 }
 
 func (x *UpdateLessonConversationRequest) GetUserId() string {
@@ -2649,7 +2755,7 @@ type GradeCheckRequest struct {
 
 func (x *GradeCheckRequest) Reset() {
 	*x = GradeCheckRequest{}
-	mi := &file_inference_v1_inference_proto_msgTypes[34]
+	mi := &file_inference_v1_inference_proto_msgTypes[36]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -2661,7 +2767,7 @@ func (x *GradeCheckRequest) String() string {
 func (*GradeCheckRequest) ProtoMessage() {}
 
 func (x *GradeCheckRequest) ProtoReflect() protoreflect.Message {
-	mi := &file_inference_v1_inference_proto_msgTypes[34]
+	mi := &file_inference_v1_inference_proto_msgTypes[36]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -2674,7 +2780,7 @@ func (x *GradeCheckRequest) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use GradeCheckRequest.ProtoReflect.Descriptor instead.
 func (*GradeCheckRequest) Descriptor() ([]byte, []int) {
-	return file_inference_v1_inference_proto_rawDescGZIP(), []int{34}
+	return file_inference_v1_inference_proto_rawDescGZIP(), []int{36}
 }
 
 func (x *GradeCheckRequest) GetUserId() string {
@@ -2719,7 +2825,7 @@ type GradeCheckResponse struct {
 
 func (x *GradeCheckResponse) Reset() {
 	*x = GradeCheckResponse{}
-	mi := &file_inference_v1_inference_proto_msgTypes[35]
+	mi := &file_inference_v1_inference_proto_msgTypes[37]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -2731,7 +2837,7 @@ func (x *GradeCheckResponse) String() string {
 func (*GradeCheckResponse) ProtoMessage() {}
 
 func (x *GradeCheckResponse) ProtoReflect() protoreflect.Message {
-	mi := &file_inference_v1_inference_proto_msgTypes[35]
+	mi := &file_inference_v1_inference_proto_msgTypes[37]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -2744,7 +2850,7 @@ func (x *GradeCheckResponse) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use GradeCheckResponse.ProtoReflect.Descriptor instead.
 func (*GradeCheckResponse) Descriptor() ([]byte, []int) {
-	return file_inference_v1_inference_proto_rawDescGZIP(), []int{35}
+	return file_inference_v1_inference_proto_rawDescGZIP(), []int{37}
 }
 
 func (x *GradeCheckResponse) GetCorrect() bool {
@@ -2803,7 +2909,7 @@ type SubmitTurnRequest struct {
 
 func (x *SubmitTurnRequest) Reset() {
 	*x = SubmitTurnRequest{}
-	mi := &file_inference_v1_inference_proto_msgTypes[36]
+	mi := &file_inference_v1_inference_proto_msgTypes[38]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -2815,7 +2921,7 @@ func (x *SubmitTurnRequest) String() string {
 func (*SubmitTurnRequest) ProtoMessage() {}
 
 func (x *SubmitTurnRequest) ProtoReflect() protoreflect.Message {
-	mi := &file_inference_v1_inference_proto_msgTypes[36]
+	mi := &file_inference_v1_inference_proto_msgTypes[38]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -2828,7 +2934,7 @@ func (x *SubmitTurnRequest) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use SubmitTurnRequest.ProtoReflect.Descriptor instead.
 func (*SubmitTurnRequest) Descriptor() ([]byte, []int) {
-	return file_inference_v1_inference_proto_rawDescGZIP(), []int{36}
+	return file_inference_v1_inference_proto_rawDescGZIP(), []int{38}
 }
 
 func (x *SubmitTurnRequest) GetUserId() string {
@@ -2884,7 +2990,7 @@ type TurnEvent struct {
 
 func (x *TurnEvent) Reset() {
 	*x = TurnEvent{}
-	mi := &file_inference_v1_inference_proto_msgTypes[37]
+	mi := &file_inference_v1_inference_proto_msgTypes[39]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -2896,7 +3002,7 @@ func (x *TurnEvent) String() string {
 func (*TurnEvent) ProtoMessage() {}
 
 func (x *TurnEvent) ProtoReflect() protoreflect.Message {
-	mi := &file_inference_v1_inference_proto_msgTypes[37]
+	mi := &file_inference_v1_inference_proto_msgTypes[39]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -2909,7 +3015,7 @@ func (x *TurnEvent) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use TurnEvent.ProtoReflect.Descriptor instead.
 func (*TurnEvent) Descriptor() ([]byte, []int) {
-	return file_inference_v1_inference_proto_rawDescGZIP(), []int{37}
+	return file_inference_v1_inference_proto_rawDescGZIP(), []int{39}
 }
 
 func (x *TurnEvent) GetToken() string {
@@ -2941,7 +3047,7 @@ const file_inference_v1_inference_proto_rawDesc = "" +
 	"\vDocumentRef\x12\x1f\n" +
 	"\vdocument_id\x18\x01 \x01(\tR\n" +
 	"documentId\x12#\n" +
-	"\rextraction_id\x18\x02 \x01(\tR\fextractionId\"\x9a\x02\n" +
+	"\rextraction_id\x18\x02 \x01(\tR\fextractionId\"\xb7\x02\n" +
 	"\x14CreateProgramRequest\x12\x17\n" +
 	"\auser_id\x18\x01 \x01(\tR\x06userId\x12 \n" +
 	"\fstudy_kit_id\x18\x02 \x01(\tR\n" +
@@ -2949,7 +3055,8 @@ const file_inference_v1_inference_proto_rawDesc = "" +
 	"\tdocuments\x18\x03 \x03(\v2\x1e.edad.inference.v1.DocumentRefR\tdocuments\x12%\n" +
 	"\x0eteaching_level\x18\x04 \x01(\tR\rteachingLevel\x12,\n" +
 	"\x12source_version_ids\x18\x05 \x03(\tR\x10sourceVersionIds\x124\n" +
-	"\x16source_manifest_sha256\x18\x06 \x01(\tR\x14sourceManifestSha256\"m\n" +
+	"\x16source_manifest_sha256\x18\x06 \x01(\tR\x14sourceManifestSha256\x12\x1b\n" +
+	"\tforce_new\x18\a \x01(\bR\bforceNew\"m\n" +
 	"\x11GetProgramRequest\x12\x17\n" +
 	"\auser_id\x18\x01 \x01(\tR\x06userId\x12 \n" +
 	"\fstudy_kit_id\x18\x02 \x01(\tR\n" +
@@ -2972,7 +3079,13 @@ const file_inference_v1_inference_proto_rawDesc = "" +
 	"\x16source_manifest_sha256\x18\n" +
 	" \x01(\tR\x14sourceManifestSha256\x12\x1a\n" +
 	"\brevision\x18\v \x01(\x05R\brevision\x12\x14\n" +
-	"\x05stale\x18\f \x01(\bR\x05stale\"\x99\x02\n" +
+	"\x05stale\x18\f \x01(\bR\x05stale\"P\n" +
+	"\x13ListProgramsRequest\x12\x17\n" +
+	"\auser_id\x18\x01 \x01(\tR\x06userId\x12 \n" +
+	"\fstudy_kit_id\x18\x02 \x01(\tR\n" +
+	"studyKitId\"N\n" +
+	"\x14ListProgramsResponse\x126\n" +
+	"\bprograms\x18\x01 \x03(\v2\x1a.edad.inference.v1.ProgramR\bprograms\"\x99\x02\n" +
 	"\vProgramView\x124\n" +
 	"\aprogram\x18\x01 \x01(\v2\x1a.edad.inference.v1.ProgramR\aprogram\x12(\n" +
 	"\x03job\x18\x02 \x01(\v2\x16.edad.inference.v1.JobR\x03job\x12J\n" +
@@ -3215,11 +3328,12 @@ const file_inference_v1_inference_proto_rawDesc = "" +
 	"\tTurnEvent\x12\x14\n" +
 	"\x05token\x18\x01 \x01(\tR\x05token\x124\n" +
 	"\amessage\x18\x02 \x01(\v2\x1a.edad.inference.v1.MessageR\amessage\x121\n" +
-	"\x05check\x18\x03 \x01(\v2\x1b.edad.inference.v1.QuestionR\x05check2\xe1\x0f\n" +
+	"\x05check\x18\x03 \x01(\v2\x1b.edad.inference.v1.QuestionR\x05check2\xc2\x10\n" +
 	"\x10InferenceService\x12T\n" +
 	"\rCreateProgram\x12'.edad.inference.v1.CreateProgramRequest\x1a\x1a.edad.inference.v1.Program\x12R\n" +
 	"\n" +
-	"GetProgram\x12$.edad.inference.v1.GetProgramRequest\x1a\x1e.edad.inference.v1.ProgramView\x12Q\n" +
+	"GetProgram\x12$.edad.inference.v1.GetProgramRequest\x1a\x1e.edad.inference.v1.ProgramView\x12_\n" +
+	"\fListPrograms\x12&.edad.inference.v1.ListProgramsRequest\x1a'.edad.inference.v1.ListProgramsResponse\x12Q\n" +
 	"\x13StartKnowledgeCheck\x12\".edad.inference.v1.StartJobRequest\x1a\x16.edad.inference.v1.Job\x12c\n" +
 	"\x11GetKnowledgeCheck\x12+.edad.inference.v1.GetKnowledgeCheckRequest\x1a!.edad.inference.v1.KnowledgeCheck\x12f\n" +
 	"\x11SubmitCheckAnswer\x12+.edad.inference.v1.SubmitCheckAnswerRequest\x1a$.edad.inference.v1.CheckAnswerResult\x12L\n" +
@@ -3255,118 +3369,123 @@ func file_inference_v1_inference_proto_rawDescGZIP() []byte {
 	return file_inference_v1_inference_proto_rawDescData
 }
 
-var file_inference_v1_inference_proto_msgTypes = make([]protoimpl.MessageInfo, 38)
+var file_inference_v1_inference_proto_msgTypes = make([]protoimpl.MessageInfo, 40)
 var file_inference_v1_inference_proto_goTypes = []any{
 	(*DocumentRef)(nil),                     // 0: edad.inference.v1.DocumentRef
 	(*CreateProgramRequest)(nil),            // 1: edad.inference.v1.CreateProgramRequest
 	(*GetProgramRequest)(nil),               // 2: edad.inference.v1.GetProgramRequest
 	(*Program)(nil),                         // 3: edad.inference.v1.Program
-	(*ProgramView)(nil),                     // 4: edad.inference.v1.ProgramView
-	(*StartJobRequest)(nil),                 // 5: edad.inference.v1.StartJobRequest
-	(*StartLessonRequest)(nil),              // 6: edad.inference.v1.StartLessonRequest
-	(*GetKnowledgeCheckRequest)(nil),        // 7: edad.inference.v1.GetKnowledgeCheckRequest
-	(*GetPathRequest)(nil),                  // 8: edad.inference.v1.GetPathRequest
-	(*GetLessonRequest)(nil),                // 9: edad.inference.v1.GetLessonRequest
-	(*GetJobRequest)(nil),                   // 10: edad.inference.v1.GetJobRequest
-	(*Job)(nil),                             // 11: edad.inference.v1.Job
-	(*Choice)(nil),                          // 12: edad.inference.v1.Choice
-	(*Question)(nil),                        // 13: edad.inference.v1.Question
-	(*Diagnosis)(nil),                       // 14: edad.inference.v1.Diagnosis
-	(*KnowledgeCheck)(nil),                  // 15: edad.inference.v1.KnowledgeCheck
-	(*SubmitCheckAnswerRequest)(nil),        // 16: edad.inference.v1.SubmitCheckAnswerRequest
-	(*CheckAnswerResult)(nil),               // 17: edad.inference.v1.CheckAnswerResult
-	(*PathTopic)(nil),                       // 18: edad.inference.v1.PathTopic
-	(*Path)(nil),                            // 19: edad.inference.v1.Path
-	(*LessonSection)(nil),                   // 20: edad.inference.v1.LessonSection
-	(*Message)(nil),                         // 21: edad.inference.v1.Message
-	(*Lesson)(nil),                          // 22: edad.inference.v1.Lesson
-	(*AssessmentReviewItem)(nil),            // 23: edad.inference.v1.AssessmentReviewItem
-	(*LessonAssessment)(nil),                // 24: edad.inference.v1.LessonAssessment
-	(*CreateLessonAssessmentRequest)(nil),   // 25: edad.inference.v1.CreateLessonAssessmentRequest
-	(*GetLessonAssessmentRequest)(nil),      // 26: edad.inference.v1.GetLessonAssessmentRequest
-	(*LessonAssessmentAnswer)(nil),          // 27: edad.inference.v1.LessonAssessmentAnswer
-	(*SubmitLessonAssessmentRequest)(nil),   // 28: edad.inference.v1.SubmitLessonAssessmentRequest
-	(*Conversation)(nil),                    // 29: edad.inference.v1.Conversation
-	(*ConversationList)(nil),                // 30: edad.inference.v1.ConversationList
-	(*CreateLessonConversationRequest)(nil), // 31: edad.inference.v1.CreateLessonConversationRequest
-	(*GetLessonConversationRequest)(nil),    // 32: edad.inference.v1.GetLessonConversationRequest
-	(*UpdateLessonConversationRequest)(nil), // 33: edad.inference.v1.UpdateLessonConversationRequest
-	(*GradeCheckRequest)(nil),               // 34: edad.inference.v1.GradeCheckRequest
-	(*GradeCheckResponse)(nil),              // 35: edad.inference.v1.GradeCheckResponse
-	(*SubmitTurnRequest)(nil),               // 36: edad.inference.v1.SubmitTurnRequest
-	(*TurnEvent)(nil),                       // 37: edad.inference.v1.TurnEvent
+	(*ListProgramsRequest)(nil),             // 4: edad.inference.v1.ListProgramsRequest
+	(*ListProgramsResponse)(nil),            // 5: edad.inference.v1.ListProgramsResponse
+	(*ProgramView)(nil),                     // 6: edad.inference.v1.ProgramView
+	(*StartJobRequest)(nil),                 // 7: edad.inference.v1.StartJobRequest
+	(*StartLessonRequest)(nil),              // 8: edad.inference.v1.StartLessonRequest
+	(*GetKnowledgeCheckRequest)(nil),        // 9: edad.inference.v1.GetKnowledgeCheckRequest
+	(*GetPathRequest)(nil),                  // 10: edad.inference.v1.GetPathRequest
+	(*GetLessonRequest)(nil),                // 11: edad.inference.v1.GetLessonRequest
+	(*GetJobRequest)(nil),                   // 12: edad.inference.v1.GetJobRequest
+	(*Job)(nil),                             // 13: edad.inference.v1.Job
+	(*Choice)(nil),                          // 14: edad.inference.v1.Choice
+	(*Question)(nil),                        // 15: edad.inference.v1.Question
+	(*Diagnosis)(nil),                       // 16: edad.inference.v1.Diagnosis
+	(*KnowledgeCheck)(nil),                  // 17: edad.inference.v1.KnowledgeCheck
+	(*SubmitCheckAnswerRequest)(nil),        // 18: edad.inference.v1.SubmitCheckAnswerRequest
+	(*CheckAnswerResult)(nil),               // 19: edad.inference.v1.CheckAnswerResult
+	(*PathTopic)(nil),                       // 20: edad.inference.v1.PathTopic
+	(*Path)(nil),                            // 21: edad.inference.v1.Path
+	(*LessonSection)(nil),                   // 22: edad.inference.v1.LessonSection
+	(*Message)(nil),                         // 23: edad.inference.v1.Message
+	(*Lesson)(nil),                          // 24: edad.inference.v1.Lesson
+	(*AssessmentReviewItem)(nil),            // 25: edad.inference.v1.AssessmentReviewItem
+	(*LessonAssessment)(nil),                // 26: edad.inference.v1.LessonAssessment
+	(*CreateLessonAssessmentRequest)(nil),   // 27: edad.inference.v1.CreateLessonAssessmentRequest
+	(*GetLessonAssessmentRequest)(nil),      // 28: edad.inference.v1.GetLessonAssessmentRequest
+	(*LessonAssessmentAnswer)(nil),          // 29: edad.inference.v1.LessonAssessmentAnswer
+	(*SubmitLessonAssessmentRequest)(nil),   // 30: edad.inference.v1.SubmitLessonAssessmentRequest
+	(*Conversation)(nil),                    // 31: edad.inference.v1.Conversation
+	(*ConversationList)(nil),                // 32: edad.inference.v1.ConversationList
+	(*CreateLessonConversationRequest)(nil), // 33: edad.inference.v1.CreateLessonConversationRequest
+	(*GetLessonConversationRequest)(nil),    // 34: edad.inference.v1.GetLessonConversationRequest
+	(*UpdateLessonConversationRequest)(nil), // 35: edad.inference.v1.UpdateLessonConversationRequest
+	(*GradeCheckRequest)(nil),               // 36: edad.inference.v1.GradeCheckRequest
+	(*GradeCheckResponse)(nil),              // 37: edad.inference.v1.GradeCheckResponse
+	(*SubmitTurnRequest)(nil),               // 38: edad.inference.v1.SubmitTurnRequest
+	(*TurnEvent)(nil),                       // 39: edad.inference.v1.TurnEvent
 }
 var file_inference_v1_inference_proto_depIdxs = []int32{
 	0,  // 0: edad.inference.v1.CreateProgramRequest.documents:type_name -> edad.inference.v1.DocumentRef
-	3,  // 1: edad.inference.v1.ProgramView.program:type_name -> edad.inference.v1.Program
-	11, // 2: edad.inference.v1.ProgramView.job:type_name -> edad.inference.v1.Job
-	15, // 3: edad.inference.v1.ProgramView.knowledge_check:type_name -> edad.inference.v1.KnowledgeCheck
-	19, // 4: edad.inference.v1.ProgramView.path:type_name -> edad.inference.v1.Path
-	22, // 5: edad.inference.v1.ProgramView.lesson:type_name -> edad.inference.v1.Lesson
-	12, // 6: edad.inference.v1.Question.options:type_name -> edad.inference.v1.Choice
-	13, // 7: edad.inference.v1.KnowledgeCheck.questions:type_name -> edad.inference.v1.Question
-	14, // 8: edad.inference.v1.KnowledgeCheck.diagnosis:type_name -> edad.inference.v1.Diagnosis
-	18, // 9: edad.inference.v1.Path.topics:type_name -> edad.inference.v1.PathTopic
-	13, // 10: edad.inference.v1.LessonSection.check:type_name -> edad.inference.v1.Question
-	20, // 11: edad.inference.v1.Lesson.sections:type_name -> edad.inference.v1.LessonSection
-	21, // 12: edad.inference.v1.Lesson.messages:type_name -> edad.inference.v1.Message
-	24, // 13: edad.inference.v1.Lesson.latest_assessment:type_name -> edad.inference.v1.LessonAssessment
-	13, // 14: edad.inference.v1.LessonAssessment.questions:type_name -> edad.inference.v1.Question
-	23, // 15: edad.inference.v1.LessonAssessment.review_plan:type_name -> edad.inference.v1.AssessmentReviewItem
-	27, // 16: edad.inference.v1.SubmitLessonAssessmentRequest.answers:type_name -> edad.inference.v1.LessonAssessmentAnswer
-	21, // 17: edad.inference.v1.Conversation.messages:type_name -> edad.inference.v1.Message
-	29, // 18: edad.inference.v1.ConversationList.conversations:type_name -> edad.inference.v1.Conversation
-	21, // 19: edad.inference.v1.TurnEvent.message:type_name -> edad.inference.v1.Message
-	13, // 20: edad.inference.v1.TurnEvent.check:type_name -> edad.inference.v1.Question
-	1,  // 21: edad.inference.v1.InferenceService.CreateProgram:input_type -> edad.inference.v1.CreateProgramRequest
-	2,  // 22: edad.inference.v1.InferenceService.GetProgram:input_type -> edad.inference.v1.GetProgramRequest
-	5,  // 23: edad.inference.v1.InferenceService.StartKnowledgeCheck:input_type -> edad.inference.v1.StartJobRequest
-	7,  // 24: edad.inference.v1.InferenceService.GetKnowledgeCheck:input_type -> edad.inference.v1.GetKnowledgeCheckRequest
-	16, // 25: edad.inference.v1.InferenceService.SubmitCheckAnswer:input_type -> edad.inference.v1.SubmitCheckAnswerRequest
-	5,  // 26: edad.inference.v1.InferenceService.StartDiagnosis:input_type -> edad.inference.v1.StartJobRequest
-	5,  // 27: edad.inference.v1.InferenceService.StartPath:input_type -> edad.inference.v1.StartJobRequest
-	8,  // 28: edad.inference.v1.InferenceService.GetPath:input_type -> edad.inference.v1.GetPathRequest
-	6,  // 29: edad.inference.v1.InferenceService.StartLesson:input_type -> edad.inference.v1.StartLessonRequest
-	9,  // 30: edad.inference.v1.InferenceService.GetLesson:input_type -> edad.inference.v1.GetLessonRequest
-	34, // 31: edad.inference.v1.InferenceService.GradeCheck:input_type -> edad.inference.v1.GradeCheckRequest
-	9,  // 32: edad.inference.v1.InferenceService.CompleteLesson:input_type -> edad.inference.v1.GetLessonRequest
-	25, // 33: edad.inference.v1.InferenceService.CreateLessonAssessment:input_type -> edad.inference.v1.CreateLessonAssessmentRequest
-	26, // 34: edad.inference.v1.InferenceService.GetLessonAssessment:input_type -> edad.inference.v1.GetLessonAssessmentRequest
-	28, // 35: edad.inference.v1.InferenceService.SubmitLessonAssessment:input_type -> edad.inference.v1.SubmitLessonAssessmentRequest
-	9,  // 36: edad.inference.v1.InferenceService.ListLessonConversations:input_type -> edad.inference.v1.GetLessonRequest
-	31, // 37: edad.inference.v1.InferenceService.CreateLessonConversation:input_type -> edad.inference.v1.CreateLessonConversationRequest
-	32, // 38: edad.inference.v1.InferenceService.GetLessonConversation:input_type -> edad.inference.v1.GetLessonConversationRequest
-	33, // 39: edad.inference.v1.InferenceService.UpdateLessonConversation:input_type -> edad.inference.v1.UpdateLessonConversationRequest
-	36, // 40: edad.inference.v1.InferenceService.SubmitTurn:input_type -> edad.inference.v1.SubmitTurnRequest
-	10, // 41: edad.inference.v1.InferenceService.GetJob:input_type -> edad.inference.v1.GetJobRequest
-	10, // 42: edad.inference.v1.InferenceService.WatchJob:input_type -> edad.inference.v1.GetJobRequest
-	3,  // 43: edad.inference.v1.InferenceService.CreateProgram:output_type -> edad.inference.v1.Program
-	4,  // 44: edad.inference.v1.InferenceService.GetProgram:output_type -> edad.inference.v1.ProgramView
-	11, // 45: edad.inference.v1.InferenceService.StartKnowledgeCheck:output_type -> edad.inference.v1.Job
-	15, // 46: edad.inference.v1.InferenceService.GetKnowledgeCheck:output_type -> edad.inference.v1.KnowledgeCheck
-	17, // 47: edad.inference.v1.InferenceService.SubmitCheckAnswer:output_type -> edad.inference.v1.CheckAnswerResult
-	11, // 48: edad.inference.v1.InferenceService.StartDiagnosis:output_type -> edad.inference.v1.Job
-	11, // 49: edad.inference.v1.InferenceService.StartPath:output_type -> edad.inference.v1.Job
-	19, // 50: edad.inference.v1.InferenceService.GetPath:output_type -> edad.inference.v1.Path
-	11, // 51: edad.inference.v1.InferenceService.StartLesson:output_type -> edad.inference.v1.Job
-	22, // 52: edad.inference.v1.InferenceService.GetLesson:output_type -> edad.inference.v1.Lesson
-	35, // 53: edad.inference.v1.InferenceService.GradeCheck:output_type -> edad.inference.v1.GradeCheckResponse
-	22, // 54: edad.inference.v1.InferenceService.CompleteLesson:output_type -> edad.inference.v1.Lesson
-	24, // 55: edad.inference.v1.InferenceService.CreateLessonAssessment:output_type -> edad.inference.v1.LessonAssessment
-	24, // 56: edad.inference.v1.InferenceService.GetLessonAssessment:output_type -> edad.inference.v1.LessonAssessment
-	24, // 57: edad.inference.v1.InferenceService.SubmitLessonAssessment:output_type -> edad.inference.v1.LessonAssessment
-	30, // 58: edad.inference.v1.InferenceService.ListLessonConversations:output_type -> edad.inference.v1.ConversationList
-	29, // 59: edad.inference.v1.InferenceService.CreateLessonConversation:output_type -> edad.inference.v1.Conversation
-	29, // 60: edad.inference.v1.InferenceService.GetLessonConversation:output_type -> edad.inference.v1.Conversation
-	29, // 61: edad.inference.v1.InferenceService.UpdateLessonConversation:output_type -> edad.inference.v1.Conversation
-	37, // 62: edad.inference.v1.InferenceService.SubmitTurn:output_type -> edad.inference.v1.TurnEvent
-	11, // 63: edad.inference.v1.InferenceService.GetJob:output_type -> edad.inference.v1.Job
-	11, // 64: edad.inference.v1.InferenceService.WatchJob:output_type -> edad.inference.v1.Job
-	43, // [43:65] is the sub-list for method output_type
-	21, // [21:43] is the sub-list for method input_type
-	21, // [21:21] is the sub-list for extension type_name
-	21, // [21:21] is the sub-list for extension extendee
-	0,  // [0:21] is the sub-list for field type_name
+	3,  // 1: edad.inference.v1.ListProgramsResponse.programs:type_name -> edad.inference.v1.Program
+	3,  // 2: edad.inference.v1.ProgramView.program:type_name -> edad.inference.v1.Program
+	13, // 3: edad.inference.v1.ProgramView.job:type_name -> edad.inference.v1.Job
+	17, // 4: edad.inference.v1.ProgramView.knowledge_check:type_name -> edad.inference.v1.KnowledgeCheck
+	21, // 5: edad.inference.v1.ProgramView.path:type_name -> edad.inference.v1.Path
+	24, // 6: edad.inference.v1.ProgramView.lesson:type_name -> edad.inference.v1.Lesson
+	14, // 7: edad.inference.v1.Question.options:type_name -> edad.inference.v1.Choice
+	15, // 8: edad.inference.v1.KnowledgeCheck.questions:type_name -> edad.inference.v1.Question
+	16, // 9: edad.inference.v1.KnowledgeCheck.diagnosis:type_name -> edad.inference.v1.Diagnosis
+	20, // 10: edad.inference.v1.Path.topics:type_name -> edad.inference.v1.PathTopic
+	15, // 11: edad.inference.v1.LessonSection.check:type_name -> edad.inference.v1.Question
+	22, // 12: edad.inference.v1.Lesson.sections:type_name -> edad.inference.v1.LessonSection
+	23, // 13: edad.inference.v1.Lesson.messages:type_name -> edad.inference.v1.Message
+	26, // 14: edad.inference.v1.Lesson.latest_assessment:type_name -> edad.inference.v1.LessonAssessment
+	15, // 15: edad.inference.v1.LessonAssessment.questions:type_name -> edad.inference.v1.Question
+	25, // 16: edad.inference.v1.LessonAssessment.review_plan:type_name -> edad.inference.v1.AssessmentReviewItem
+	29, // 17: edad.inference.v1.SubmitLessonAssessmentRequest.answers:type_name -> edad.inference.v1.LessonAssessmentAnswer
+	23, // 18: edad.inference.v1.Conversation.messages:type_name -> edad.inference.v1.Message
+	31, // 19: edad.inference.v1.ConversationList.conversations:type_name -> edad.inference.v1.Conversation
+	23, // 20: edad.inference.v1.TurnEvent.message:type_name -> edad.inference.v1.Message
+	15, // 21: edad.inference.v1.TurnEvent.check:type_name -> edad.inference.v1.Question
+	1,  // 22: edad.inference.v1.InferenceService.CreateProgram:input_type -> edad.inference.v1.CreateProgramRequest
+	2,  // 23: edad.inference.v1.InferenceService.GetProgram:input_type -> edad.inference.v1.GetProgramRequest
+	4,  // 24: edad.inference.v1.InferenceService.ListPrograms:input_type -> edad.inference.v1.ListProgramsRequest
+	7,  // 25: edad.inference.v1.InferenceService.StartKnowledgeCheck:input_type -> edad.inference.v1.StartJobRequest
+	9,  // 26: edad.inference.v1.InferenceService.GetKnowledgeCheck:input_type -> edad.inference.v1.GetKnowledgeCheckRequest
+	18, // 27: edad.inference.v1.InferenceService.SubmitCheckAnswer:input_type -> edad.inference.v1.SubmitCheckAnswerRequest
+	7,  // 28: edad.inference.v1.InferenceService.StartDiagnosis:input_type -> edad.inference.v1.StartJobRequest
+	7,  // 29: edad.inference.v1.InferenceService.StartPath:input_type -> edad.inference.v1.StartJobRequest
+	10, // 30: edad.inference.v1.InferenceService.GetPath:input_type -> edad.inference.v1.GetPathRequest
+	8,  // 31: edad.inference.v1.InferenceService.StartLesson:input_type -> edad.inference.v1.StartLessonRequest
+	11, // 32: edad.inference.v1.InferenceService.GetLesson:input_type -> edad.inference.v1.GetLessonRequest
+	36, // 33: edad.inference.v1.InferenceService.GradeCheck:input_type -> edad.inference.v1.GradeCheckRequest
+	11, // 34: edad.inference.v1.InferenceService.CompleteLesson:input_type -> edad.inference.v1.GetLessonRequest
+	27, // 35: edad.inference.v1.InferenceService.CreateLessonAssessment:input_type -> edad.inference.v1.CreateLessonAssessmentRequest
+	28, // 36: edad.inference.v1.InferenceService.GetLessonAssessment:input_type -> edad.inference.v1.GetLessonAssessmentRequest
+	30, // 37: edad.inference.v1.InferenceService.SubmitLessonAssessment:input_type -> edad.inference.v1.SubmitLessonAssessmentRequest
+	11, // 38: edad.inference.v1.InferenceService.ListLessonConversations:input_type -> edad.inference.v1.GetLessonRequest
+	33, // 39: edad.inference.v1.InferenceService.CreateLessonConversation:input_type -> edad.inference.v1.CreateLessonConversationRequest
+	34, // 40: edad.inference.v1.InferenceService.GetLessonConversation:input_type -> edad.inference.v1.GetLessonConversationRequest
+	35, // 41: edad.inference.v1.InferenceService.UpdateLessonConversation:input_type -> edad.inference.v1.UpdateLessonConversationRequest
+	38, // 42: edad.inference.v1.InferenceService.SubmitTurn:input_type -> edad.inference.v1.SubmitTurnRequest
+	12, // 43: edad.inference.v1.InferenceService.GetJob:input_type -> edad.inference.v1.GetJobRequest
+	12, // 44: edad.inference.v1.InferenceService.WatchJob:input_type -> edad.inference.v1.GetJobRequest
+	3,  // 45: edad.inference.v1.InferenceService.CreateProgram:output_type -> edad.inference.v1.Program
+	6,  // 46: edad.inference.v1.InferenceService.GetProgram:output_type -> edad.inference.v1.ProgramView
+	5,  // 47: edad.inference.v1.InferenceService.ListPrograms:output_type -> edad.inference.v1.ListProgramsResponse
+	13, // 48: edad.inference.v1.InferenceService.StartKnowledgeCheck:output_type -> edad.inference.v1.Job
+	17, // 49: edad.inference.v1.InferenceService.GetKnowledgeCheck:output_type -> edad.inference.v1.KnowledgeCheck
+	19, // 50: edad.inference.v1.InferenceService.SubmitCheckAnswer:output_type -> edad.inference.v1.CheckAnswerResult
+	13, // 51: edad.inference.v1.InferenceService.StartDiagnosis:output_type -> edad.inference.v1.Job
+	13, // 52: edad.inference.v1.InferenceService.StartPath:output_type -> edad.inference.v1.Job
+	21, // 53: edad.inference.v1.InferenceService.GetPath:output_type -> edad.inference.v1.Path
+	13, // 54: edad.inference.v1.InferenceService.StartLesson:output_type -> edad.inference.v1.Job
+	24, // 55: edad.inference.v1.InferenceService.GetLesson:output_type -> edad.inference.v1.Lesson
+	37, // 56: edad.inference.v1.InferenceService.GradeCheck:output_type -> edad.inference.v1.GradeCheckResponse
+	24, // 57: edad.inference.v1.InferenceService.CompleteLesson:output_type -> edad.inference.v1.Lesson
+	26, // 58: edad.inference.v1.InferenceService.CreateLessonAssessment:output_type -> edad.inference.v1.LessonAssessment
+	26, // 59: edad.inference.v1.InferenceService.GetLessonAssessment:output_type -> edad.inference.v1.LessonAssessment
+	26, // 60: edad.inference.v1.InferenceService.SubmitLessonAssessment:output_type -> edad.inference.v1.LessonAssessment
+	32, // 61: edad.inference.v1.InferenceService.ListLessonConversations:output_type -> edad.inference.v1.ConversationList
+	31, // 62: edad.inference.v1.InferenceService.CreateLessonConversation:output_type -> edad.inference.v1.Conversation
+	31, // 63: edad.inference.v1.InferenceService.GetLessonConversation:output_type -> edad.inference.v1.Conversation
+	31, // 64: edad.inference.v1.InferenceService.UpdateLessonConversation:output_type -> edad.inference.v1.Conversation
+	39, // 65: edad.inference.v1.InferenceService.SubmitTurn:output_type -> edad.inference.v1.TurnEvent
+	13, // 66: edad.inference.v1.InferenceService.GetJob:output_type -> edad.inference.v1.Job
+	13, // 67: edad.inference.v1.InferenceService.WatchJob:output_type -> edad.inference.v1.Job
+	45, // [45:68] is the sub-list for method output_type
+	22, // [22:45] is the sub-list for method input_type
+	22, // [22:22] is the sub-list for extension type_name
+	22, // [22:22] is the sub-list for extension extendee
+	0,  // [0:22] is the sub-list for field type_name
 }
 
 func init() { file_inference_v1_inference_proto_init() }
@@ -3374,14 +3493,14 @@ func file_inference_v1_inference_proto_init() {
 	if File_inference_v1_inference_proto != nil {
 		return
 	}
-	file_inference_v1_inference_proto_msgTypes[33].OneofWrappers = []any{}
+	file_inference_v1_inference_proto_msgTypes[35].OneofWrappers = []any{}
 	type x struct{}
 	out := protoimpl.TypeBuilder{
 		File: protoimpl.DescBuilder{
 			GoPackagePath: reflect.TypeOf(x{}).PkgPath(),
 			RawDescriptor: unsafe.Slice(unsafe.StringData(file_inference_v1_inference_proto_rawDesc), len(file_inference_v1_inference_proto_rawDesc)),
 			NumEnums:      0,
-			NumMessages:   38,
+			NumMessages:   40,
 			NumExtensions: 0,
 			NumServices:   1,
 		},
