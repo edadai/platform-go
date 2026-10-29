@@ -9262,6 +9262,74 @@ func (x *ListLedgerTransactionsResponse) GetTransactions() []*LedgerTransactionR
 	return nil
 }
 
+type UpdateProductRequest struct {
+	state         protoimpl.MessageState `protogen:"open.v1"`
+	Id            string                 `protobuf:"bytes,1,opt,name=id,proto3" json:"id,omitempty"`
+	Name          string                 `protobuf:"bytes,2,opt,name=name,proto3" json:"name,omitempty"`
+	Description   string                 `protobuf:"bytes,3,opt,name=description,proto3" json:"description,omitempty"`
+	Context       *RequestContext        `protobuf:"bytes,4,opt,name=context,proto3" json:"context,omitempty"`
+	unknownFields protoimpl.UnknownFields
+	sizeCache     protoimpl.SizeCache
+}
+
+func (x *UpdateProductRequest) Reset() {
+	*x = UpdateProductRequest{}
+	mi := &file_subscriptionbilling_billing_proto_msgTypes[114]
+	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+	ms.StoreMessageInfo(mi)
+}
+
+func (x *UpdateProductRequest) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*UpdateProductRequest) ProtoMessage() {}
+
+func (x *UpdateProductRequest) ProtoReflect() protoreflect.Message {
+	mi := &file_subscriptionbilling_billing_proto_msgTypes[114]
+	if x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use UpdateProductRequest.ProtoReflect.Descriptor instead.
+func (*UpdateProductRequest) Descriptor() ([]byte, []int) {
+	return file_subscriptionbilling_billing_proto_rawDescGZIP(), []int{114}
+}
+
+func (x *UpdateProductRequest) GetId() string {
+	if x != nil {
+		return x.Id
+	}
+	return ""
+}
+
+func (x *UpdateProductRequest) GetName() string {
+	if x != nil {
+		return x.Name
+	}
+	return ""
+}
+
+func (x *UpdateProductRequest) GetDescription() string {
+	if x != nil {
+		return x.Description
+	}
+	return ""
+}
+
+func (x *UpdateProductRequest) GetContext() *RequestContext {
+	if x != nil {
+		return x.Context
+	}
+	return nil
+}
+
 var File_subscriptionbilling_billing_proto protoreflect.FileDescriptor
 
 const file_subscriptionbilling_billing_proto_rawDesc = "" +
@@ -10142,9 +10210,17 @@ const file_subscriptionbilling_billing_proto_rawDesc = "" +
 	"\rposted_at_utc\x18\x04 \x01(\tR\vpostedAtUtc\x12B\n" +
 	"\aentries\x18\x05 \x03(\v2(.subscriptionbilling.LedgerEntryResponseR\aentries\"t\n" +
 	"\x1eListLedgerTransactionsResponse\x12R\n" +
-	"\ftransactions\x18\x01 \x03(\v2..subscriptionbilling.LedgerTransactionResponseR\ftransactions2\xf4@\n" +
+	"\ftransactions\x18\x01 \x03(\v2..subscriptionbilling.LedgerTransactionResponseR\ftransactions\"\x9b\x01\n" +
+	"\x14UpdateProductRequest\x12\x0e\n" +
+	"\x02id\x18\x01 \x01(\tR\x02id\x12\x12\n" +
+	"\x04name\x18\x02 \x01(\tR\x04name\x12 \n" +
+	"\vdescription\x18\x03 \x01(\tR\vdescription\x12=\n" +
+	"\acontext\x18\x04 \x01(\v2#.subscriptionbilling.RequestContextR\acontext2\x96C\n" +
 	"\x16SubscriptionBillingApi\x12_\n" +
-	"\rCreateProduct\x12).subscriptionbilling.CreateProductRequest\x1a#.subscriptionbilling.EntityResponse\x12Y\n" +
+	"\rCreateProduct\x12).subscriptionbilling.CreateProductRequest\x1a#.subscriptionbilling.EntityResponse\x12`\n" +
+	"\rUpdateProduct\x12).subscriptionbilling.UpdateProductRequest\x1a$.subscriptionbilling.ProductResponse\x12]\n" +
+	"\x0fActivateProduct\x12$.subscriptionbilling.EntityIdRequest\x1a$.subscriptionbilling.ProductResponse\x12_\n" +
+	"\x11DeactivateProduct\x12$.subscriptionbilling.EntityIdRequest\x1a$.subscriptionbilling.ProductResponse\x12Y\n" +
 	"\n" +
 	"CreatePlan\x12&.subscriptionbilling.CreatePlanRequest\x1a#.subscriptionbilling.EntityResponse\x12[\n" +
 	"\vCreatePrice\x12'.subscriptionbilling.CreatePriceRequest\x1a#.subscriptionbilling.EntityResponse\x12[\n" +
@@ -10237,7 +10313,7 @@ func file_subscriptionbilling_billing_proto_rawDescGZIP() []byte {
 	return file_subscriptionbilling_billing_proto_rawDescData
 }
 
-var file_subscriptionbilling_billing_proto_msgTypes = make([]protoimpl.MessageInfo, 114)
+var file_subscriptionbilling_billing_proto_msgTypes = make([]protoimpl.MessageInfo, 115)
 var file_subscriptionbilling_billing_proto_goTypes = []any{
 	(*ListPlansRequest)(nil),                           // 0: subscriptionbilling.ListPlansRequest
 	(*BillingSummaryRequest)(nil),                      // 1: subscriptionbilling.BillingSummaryRequest
@@ -10353,6 +10429,7 @@ var file_subscriptionbilling_billing_proto_goTypes = []any{
 	(*LedgerEntryResponse)(nil),                        // 111: subscriptionbilling.LedgerEntryResponse
 	(*LedgerTransactionResponse)(nil),                  // 112: subscriptionbilling.LedgerTransactionResponse
 	(*ListLedgerTransactionsResponse)(nil),             // 113: subscriptionbilling.ListLedgerTransactionsResponse
+	(*UpdateProductRequest)(nil),                       // 114: subscriptionbilling.UpdateProductRequest
 }
 var file_subscriptionbilling_billing_proto_depIdxs = []int32{
 	8,   // 0: subscriptionbilling.SubscriptionStatsResponse.plan_breakdown:type_name -> subscriptionbilling.SubscriptionPlanBreakdownRow
@@ -10439,159 +10516,166 @@ var file_subscriptionbilling_billing_proto_depIdxs = []int32{
 	108, // 81: subscriptionbilling.ListLedgerAccountsResponse.accounts:type_name -> subscriptionbilling.LedgerAccountResponse
 	111, // 82: subscriptionbilling.LedgerTransactionResponse.entries:type_name -> subscriptionbilling.LedgerEntryResponse
 	112, // 83: subscriptionbilling.ListLedgerTransactionsResponse.transactions:type_name -> subscriptionbilling.LedgerTransactionResponse
-	39,  // 84: subscriptionbilling.SubscriptionBillingApi.CreateProduct:input_type -> subscriptionbilling.CreateProductRequest
-	40,  // 85: subscriptionbilling.SubscriptionBillingApi.CreatePlan:input_type -> subscriptionbilling.CreatePlanRequest
-	41,  // 86: subscriptionbilling.SubscriptionBillingApi.CreatePrice:input_type -> subscriptionbilling.CreatePriceRequest
-	36,  // 87: subscriptionbilling.SubscriptionBillingApi.SetDefaultPrice:input_type -> subscriptionbilling.EntityIdRequest
-	36,  // 88: subscriptionbilling.SubscriptionBillingApi.DeactivatePrice:input_type -> subscriptionbilling.EntityIdRequest
-	42,  // 89: subscriptionbilling.SubscriptionBillingApi.CreateOffer:input_type -> subscriptionbilling.CreateOfferRequest
-	44,  // 90: subscriptionbilling.SubscriptionBillingApi.UpdateOffer:input_type -> subscriptionbilling.UpdateOfferRequest
-	45,  // 91: subscriptionbilling.SubscriptionBillingApi.ConfigureOfferPhase:input_type -> subscriptionbilling.ConfigureOfferPhaseRequest
-	46,  // 92: subscriptionbilling.SubscriptionBillingApi.ConfigureCatalogPresentation:input_type -> subscriptionbilling.ConfigureCatalogPresentationRequest
-	36,  // 93: subscriptionbilling.SubscriptionBillingApi.EnableOffer:input_type -> subscriptionbilling.EntityIdRequest
-	36,  // 94: subscriptionbilling.SubscriptionBillingApi.DisableOffer:input_type -> subscriptionbilling.EntityIdRequest
-	47,  // 95: subscriptionbilling.SubscriptionBillingApi.AttachEntitlementToPlan:input_type -> subscriptionbilling.AttachEntitlementToPlanRequest
-	48,  // 96: subscriptionbilling.SubscriptionBillingApi.UpsertPlanEntitlement:input_type -> subscriptionbilling.UpsertPlanEntitlementRequest
-	49,  // 97: subscriptionbilling.SubscriptionBillingApi.ConfigureOfferPolicy:input_type -> subscriptionbilling.ConfigureOfferPolicyRequest
-	50,  // 98: subscriptionbilling.SubscriptionBillingApi.ConfigureBillingPolicy:input_type -> subscriptionbilling.ConfigureBillingPolicyRequest
-	1,   // 99: subscriptionbilling.SubscriptionBillingApi.GetBillingSummary:input_type -> subscriptionbilling.BillingSummaryRequest
-	3,   // 100: subscriptionbilling.SubscriptionBillingApi.GetSubscriptionStats:input_type -> subscriptionbilling.SubscriptionStatsRequest
-	10,  // 101: subscriptionbilling.SubscriptionBillingApi.GetChurnStats:input_type -> subscriptionbilling.ChurnStatsRequest
-	14,  // 102: subscriptionbilling.SubscriptionBillingApi.GetPaymentStats:input_type -> subscriptionbilling.PaymentStatsRequest
-	16,  // 103: subscriptionbilling.SubscriptionBillingApi.ListProducts:input_type -> subscriptionbilling.ListProductsRequest
-	0,   // 104: subscriptionbilling.SubscriptionBillingApi.ListPlans:input_type -> subscriptionbilling.ListPlansRequest
-	36,  // 105: subscriptionbilling.SubscriptionBillingApi.GetPlan:input_type -> subscriptionbilling.EntityIdRequest
-	36,  // 106: subscriptionbilling.SubscriptionBillingApi.ListPlanPrices:input_type -> subscriptionbilling.EntityIdRequest
-	27,  // 107: subscriptionbilling.SubscriptionBillingApi.ListOffers:input_type -> subscriptionbilling.ListOffersRequest
-	32,  // 108: subscriptionbilling.SubscriptionBillingApi.ListBillingPolicies:input_type -> subscriptionbilling.ListPoliciesRequest
-	19,  // 109: subscriptionbilling.SubscriptionBillingApi.UpdatePlan:input_type -> subscriptionbilling.UpdatePlanRequest
-	36,  // 110: subscriptionbilling.SubscriptionBillingApi.PublishPlan:input_type -> subscriptionbilling.EntityIdRequest
-	36,  // 111: subscriptionbilling.SubscriptionBillingApi.ArchivePlan:input_type -> subscriptionbilling.EntityIdRequest
-	38,  // 112: subscriptionbilling.SubscriptionBillingApi.ListSubscriptions:input_type -> subscriptionbilling.ListSubscriptionsRequest
-	51,  // 113: subscriptionbilling.SubscriptionBillingApi.StartSubscription:input_type -> subscriptionbilling.StartSubscriptionRequest
-	36,  // 114: subscriptionbilling.SubscriptionBillingApi.CancelSubscription:input_type -> subscriptionbilling.EntityIdRequest
-	36,  // 115: subscriptionbilling.SubscriptionBillingApi.ScheduleSubscriptionCancellation:input_type -> subscriptionbilling.EntityIdRequest
-	36,  // 116: subscriptionbilling.SubscriptionBillingApi.ResumeSubscription:input_type -> subscriptionbilling.EntityIdRequest
-	56,  // 117: subscriptionbilling.SubscriptionBillingApi.ChangePlan:input_type -> subscriptionbilling.ChangePlanRequest
-	36,  // 118: subscriptionbilling.SubscriptionBillingApi.GetSubscriptionStatus:input_type -> subscriptionbilling.EntityIdRequest
-	37,  // 119: subscriptionbilling.SubscriptionBillingApi.GetCurrentSubscription:input_type -> subscriptionbilling.CustomerRequest
-	52,  // 120: subscriptionbilling.SubscriptionBillingApi.CreateComplimentaryAccess:input_type -> subscriptionbilling.CreateComplimentaryAccessRequest
-	53,  // 121: subscriptionbilling.SubscriptionBillingApi.ListComplimentaryAccess:input_type -> subscriptionbilling.ListComplimentaryAccessRequest
-	37,  // 122: subscriptionbilling.SubscriptionBillingApi.GetCurrentComplimentaryAccess:input_type -> subscriptionbilling.CustomerRequest
-	54,  // 123: subscriptionbilling.SubscriptionBillingApi.ExtendComplimentaryAccess:input_type -> subscriptionbilling.ExtendComplimentaryAccessRequest
-	55,  // 124: subscriptionbilling.SubscriptionBillingApi.RevokeComplimentaryAccess:input_type -> subscriptionbilling.RevokeComplimentaryAccessRequest
-	57,  // 125: subscriptionbilling.SubscriptionBillingApi.CheckEntitlement:input_type -> subscriptionbilling.CheckEntitlementRequest
-	36,  // 126: subscriptionbilling.SubscriptionBillingApi.GetEntitlementSnapshot:input_type -> subscriptionbilling.EntityIdRequest
-	36,  // 127: subscriptionbilling.SubscriptionBillingApi.RefreshEntitlementSnapshot:input_type -> subscriptionbilling.EntityIdRequest
-	58,  // 128: subscriptionbilling.SubscriptionBillingApi.RecordUsage:input_type -> subscriptionbilling.RecordUsageRequest
-	59,  // 129: subscriptionbilling.SubscriptionBillingApi.CreateInvoice:input_type -> subscriptionbilling.CreateInvoiceRequest
-	36,  // 130: subscriptionbilling.SubscriptionBillingApi.GetInvoice:input_type -> subscriptionbilling.EntityIdRequest
-	102, // 131: subscriptionbilling.SubscriptionBillingApi.ListAllInvoices:input_type -> subscriptionbilling.ListBillingDocumentsRequest
-	37,  // 132: subscriptionbilling.SubscriptionBillingApi.ListInvoices:input_type -> subscriptionbilling.CustomerRequest
-	36,  // 133: subscriptionbilling.SubscriptionBillingApi.MarkManualInvoicePaid:input_type -> subscriptionbilling.EntityIdRequest
-	60,  // 134: subscriptionbilling.SubscriptionBillingApi.VoidAbandonedCheckout:input_type -> subscriptionbilling.VoidAbandonedCheckoutRequest
-	63,  // 135: subscriptionbilling.SubscriptionBillingApi.PayInvoice:input_type -> subscriptionbilling.PayInvoiceRequest
-	64,  // 136: subscriptionbilling.SubscriptionBillingApi.CreateInvoiceCheckout:input_type -> subscriptionbilling.CreateInvoiceCheckoutRequest
-	66,  // 137: subscriptionbilling.SubscriptionBillingApi.CreateCardVerificationCheckout:input_type -> subscriptionbilling.CreateCardVerificationCheckoutRequest
-	65,  // 138: subscriptionbilling.SubscriptionBillingApi.CreateUpcomingCheckout:input_type -> subscriptionbilling.CreateUpcomingCheckoutRequest
-	102, // 139: subscriptionbilling.SubscriptionBillingApi.ListPayments:input_type -> subscriptionbilling.ListBillingDocumentsRequest
-	61,  // 140: subscriptionbilling.SubscriptionBillingApi.RefundPayment:input_type -> subscriptionbilling.RefundPaymentRequest
-	62,  // 141: subscriptionbilling.SubscriptionBillingApi.RetryPayment:input_type -> subscriptionbilling.RetryPaymentRequest
-	67,  // 142: subscriptionbilling.SubscriptionBillingApi.ListPaymentRetryQueue:input_type -> subscriptionbilling.ListPaymentRetryQueueRequest
-	71,  // 143: subscriptionbilling.SubscriptionBillingApi.ProcessPaymentRetryQueue:input_type -> subscriptionbilling.ProcessPaymentRetryQueueRequest
-	73,  // 144: subscriptionbilling.SubscriptionBillingApi.CancelPaymentRetry:input_type -> subscriptionbilling.CancelPaymentRetryRequest
-	74,  // 145: subscriptionbilling.SubscriptionBillingApi.ListPaymentReviewCases:input_type -> subscriptionbilling.ListPaymentReviewCasesRequest
-	75,  // 146: subscriptionbilling.SubscriptionBillingApi.ResolvePaymentReviewCase:input_type -> subscriptionbilling.ResolvePaymentReviewCaseRequest
-	76,  // 147: subscriptionbilling.SubscriptionBillingApi.RecordPaymentReviewRefund:input_type -> subscriptionbilling.RecordPaymentReviewRefundRequest
-	79,  // 148: subscriptionbilling.SubscriptionBillingApi.PreviewSubscriptionReconciliation:input_type -> subscriptionbilling.SubscriptionReconciliationPreviewRequest
-	80,  // 149: subscriptionbilling.SubscriptionBillingApi.ApplySubscriptionReconciliation:input_type -> subscriptionbilling.ApplySubscriptionReconciliationRequest
-	83,  // 150: subscriptionbilling.SubscriptionBillingApi.PreviewRenewalPaymentReconciliation:input_type -> subscriptionbilling.RenewalPaymentReconciliationPreviewRequest
-	84,  // 151: subscriptionbilling.SubscriptionBillingApi.ApplyRenewalPaymentReconciliation:input_type -> subscriptionbilling.ApplyRenewalPaymentReconciliationRequest
-	107, // 152: subscriptionbilling.SubscriptionBillingApi.ListLedgerAccounts:input_type -> subscriptionbilling.ListLedgerAccountsRequest
-	110, // 153: subscriptionbilling.SubscriptionBillingApi.ListLedgerTransactions:input_type -> subscriptionbilling.ListLedgerTransactionsRequest
-	87,  // 154: subscriptionbilling.SubscriptionBillingApi.CreateCheckout:input_type -> subscriptionbilling.CreateCheckoutRequest
-	88,  // 155: subscriptionbilling.SubscriptionBillingApi.GetPaymentStatusByReference:input_type -> subscriptionbilling.PaymentReferenceRequest
-	88,  // 156: subscriptionbilling.SubscriptionBillingApi.VerifyPaymentReference:input_type -> subscriptionbilling.PaymentReferenceRequest
-	89,  // 157: subscriptionbilling.SubscriptionBillingApi.ReceivePaystackWebhook:input_type -> subscriptionbilling.ReceivePaystackWebhookRequest
-	90,  // 158: subscriptionbilling.SubscriptionBillingApi.CreateProduct:output_type -> subscriptionbilling.EntityResponse
-	90,  // 159: subscriptionbilling.SubscriptionBillingApi.CreatePlan:output_type -> subscriptionbilling.EntityResponse
-	90,  // 160: subscriptionbilling.SubscriptionBillingApi.CreatePrice:output_type -> subscriptionbilling.EntityResponse
-	22,  // 161: subscriptionbilling.SubscriptionBillingApi.SetDefaultPrice:output_type -> subscriptionbilling.PriceResponse
-	22,  // 162: subscriptionbilling.SubscriptionBillingApi.DeactivatePrice:output_type -> subscriptionbilling.PriceResponse
-	90,  // 163: subscriptionbilling.SubscriptionBillingApi.CreateOffer:output_type -> subscriptionbilling.EntityResponse
-	30,  // 164: subscriptionbilling.SubscriptionBillingApi.UpdateOffer:output_type -> subscriptionbilling.OfferResponse
-	90,  // 165: subscriptionbilling.SubscriptionBillingApi.ConfigureOfferPhase:output_type -> subscriptionbilling.EntityResponse
-	90,  // 166: subscriptionbilling.SubscriptionBillingApi.ConfigureCatalogPresentation:output_type -> subscriptionbilling.EntityResponse
-	90,  // 167: subscriptionbilling.SubscriptionBillingApi.EnableOffer:output_type -> subscriptionbilling.EntityResponse
-	90,  // 168: subscriptionbilling.SubscriptionBillingApi.DisableOffer:output_type -> subscriptionbilling.EntityResponse
-	90,  // 169: subscriptionbilling.SubscriptionBillingApi.AttachEntitlementToPlan:output_type -> subscriptionbilling.EntityResponse
-	24,  // 170: subscriptionbilling.SubscriptionBillingApi.UpsertPlanEntitlement:output_type -> subscriptionbilling.PlanEntitlementResponse
-	90,  // 171: subscriptionbilling.SubscriptionBillingApi.ConfigureOfferPolicy:output_type -> subscriptionbilling.EntityResponse
-	90,  // 172: subscriptionbilling.SubscriptionBillingApi.ConfigureBillingPolicy:output_type -> subscriptionbilling.EntityResponse
-	2,   // 173: subscriptionbilling.SubscriptionBillingApi.GetBillingSummary:output_type -> subscriptionbilling.BillingSummaryResponse
-	4,   // 174: subscriptionbilling.SubscriptionBillingApi.GetSubscriptionStats:output_type -> subscriptionbilling.SubscriptionStatsResponse
-	11,  // 175: subscriptionbilling.SubscriptionBillingApi.GetChurnStats:output_type -> subscriptionbilling.ChurnStatsResponse
-	15,  // 176: subscriptionbilling.SubscriptionBillingApi.GetPaymentStats:output_type -> subscriptionbilling.PaymentStatsResponse
-	18,  // 177: subscriptionbilling.SubscriptionBillingApi.ListProducts:output_type -> subscriptionbilling.ListProductsResponse
-	21,  // 178: subscriptionbilling.SubscriptionBillingApi.ListPlans:output_type -> subscriptionbilling.ListPlansResponse
-	26,  // 179: subscriptionbilling.SubscriptionBillingApi.GetPlan:output_type -> subscriptionbilling.PlanDetailResponse
-	23,  // 180: subscriptionbilling.SubscriptionBillingApi.ListPlanPrices:output_type -> subscriptionbilling.ListPricesResponse
-	31,  // 181: subscriptionbilling.SubscriptionBillingApi.ListOffers:output_type -> subscriptionbilling.ListOffersResponse
-	34,  // 182: subscriptionbilling.SubscriptionBillingApi.ListBillingPolicies:output_type -> subscriptionbilling.ListBillingPoliciesResponse
-	20,  // 183: subscriptionbilling.SubscriptionBillingApi.UpdatePlan:output_type -> subscriptionbilling.PlanResponse
-	20,  // 184: subscriptionbilling.SubscriptionBillingApi.PublishPlan:output_type -> subscriptionbilling.PlanResponse
-	20,  // 185: subscriptionbilling.SubscriptionBillingApi.ArchivePlan:output_type -> subscriptionbilling.PlanResponse
-	97,  // 186: subscriptionbilling.SubscriptionBillingApi.ListSubscriptions:output_type -> subscriptionbilling.ListSubscriptionsResponse
-	93,  // 187: subscriptionbilling.SubscriptionBillingApi.StartSubscription:output_type -> subscriptionbilling.SubscriptionResponse
-	93,  // 188: subscriptionbilling.SubscriptionBillingApi.CancelSubscription:output_type -> subscriptionbilling.SubscriptionResponse
-	93,  // 189: subscriptionbilling.SubscriptionBillingApi.ScheduleSubscriptionCancellation:output_type -> subscriptionbilling.SubscriptionResponse
-	93,  // 190: subscriptionbilling.SubscriptionBillingApi.ResumeSubscription:output_type -> subscriptionbilling.SubscriptionResponse
-	96,  // 191: subscriptionbilling.SubscriptionBillingApi.ChangePlan:output_type -> subscriptionbilling.PlanChangeResponse
-	92,  // 192: subscriptionbilling.SubscriptionBillingApi.GetSubscriptionStatus:output_type -> subscriptionbilling.SubscriptionStatusResponse
-	93,  // 193: subscriptionbilling.SubscriptionBillingApi.GetCurrentSubscription:output_type -> subscriptionbilling.SubscriptionResponse
-	94,  // 194: subscriptionbilling.SubscriptionBillingApi.CreateComplimentaryAccess:output_type -> subscriptionbilling.ComplimentaryAccessResponse
-	95,  // 195: subscriptionbilling.SubscriptionBillingApi.ListComplimentaryAccess:output_type -> subscriptionbilling.ListComplimentaryAccessResponse
-	94,  // 196: subscriptionbilling.SubscriptionBillingApi.GetCurrentComplimentaryAccess:output_type -> subscriptionbilling.ComplimentaryAccessResponse
-	94,  // 197: subscriptionbilling.SubscriptionBillingApi.ExtendComplimentaryAccess:output_type -> subscriptionbilling.ComplimentaryAccessResponse
-	94,  // 198: subscriptionbilling.SubscriptionBillingApi.RevokeComplimentaryAccess:output_type -> subscriptionbilling.ComplimentaryAccessResponse
-	98,  // 199: subscriptionbilling.SubscriptionBillingApi.CheckEntitlement:output_type -> subscriptionbilling.CheckEntitlementResponse
-	99,  // 200: subscriptionbilling.SubscriptionBillingApi.GetEntitlementSnapshot:output_type -> subscriptionbilling.EntitlementSnapshotResponse
-	99,  // 201: subscriptionbilling.SubscriptionBillingApi.RefreshEntitlementSnapshot:output_type -> subscriptionbilling.EntitlementSnapshotResponse
-	90,  // 202: subscriptionbilling.SubscriptionBillingApi.RecordUsage:output_type -> subscriptionbilling.EntityResponse
-	100, // 203: subscriptionbilling.SubscriptionBillingApi.CreateInvoice:output_type -> subscriptionbilling.InvoiceResponse
-	100, // 204: subscriptionbilling.SubscriptionBillingApi.GetInvoice:output_type -> subscriptionbilling.InvoiceResponse
-	101, // 205: subscriptionbilling.SubscriptionBillingApi.ListAllInvoices:output_type -> subscriptionbilling.ListInvoicesResponse
-	101, // 206: subscriptionbilling.SubscriptionBillingApi.ListInvoices:output_type -> subscriptionbilling.ListInvoicesResponse
-	100, // 207: subscriptionbilling.SubscriptionBillingApi.MarkManualInvoicePaid:output_type -> subscriptionbilling.InvoiceResponse
-	100, // 208: subscriptionbilling.SubscriptionBillingApi.VoidAbandonedCheckout:output_type -> subscriptionbilling.InvoiceResponse
-	105, // 209: subscriptionbilling.SubscriptionBillingApi.PayInvoice:output_type -> subscriptionbilling.PaymentResponse
-	103, // 210: subscriptionbilling.SubscriptionBillingApi.CreateInvoiceCheckout:output_type -> subscriptionbilling.PaymentIntentResponse
-	103, // 211: subscriptionbilling.SubscriptionBillingApi.CreateCardVerificationCheckout:output_type -> subscriptionbilling.PaymentIntentResponse
-	103, // 212: subscriptionbilling.SubscriptionBillingApi.CreateUpcomingCheckout:output_type -> subscriptionbilling.PaymentIntentResponse
-	106, // 213: subscriptionbilling.SubscriptionBillingApi.ListPayments:output_type -> subscriptionbilling.ListPaymentsResponse
-	90,  // 214: subscriptionbilling.SubscriptionBillingApi.RefundPayment:output_type -> subscriptionbilling.EntityResponse
-	105, // 215: subscriptionbilling.SubscriptionBillingApi.RetryPayment:output_type -> subscriptionbilling.PaymentResponse
-	69,  // 216: subscriptionbilling.SubscriptionBillingApi.ListPaymentRetryQueue:output_type -> subscriptionbilling.ListPaymentRetryQueueResponse
-	72,  // 217: subscriptionbilling.SubscriptionBillingApi.ProcessPaymentRetryQueue:output_type -> subscriptionbilling.PaymentRetryBatchResponse
-	90,  // 218: subscriptionbilling.SubscriptionBillingApi.CancelPaymentRetry:output_type -> subscriptionbilling.EntityResponse
-	78,  // 219: subscriptionbilling.SubscriptionBillingApi.ListPaymentReviewCases:output_type -> subscriptionbilling.ListPaymentReviewCasesResponse
-	77,  // 220: subscriptionbilling.SubscriptionBillingApi.ResolvePaymentReviewCase:output_type -> subscriptionbilling.PaymentReviewCaseResponse
-	77,  // 221: subscriptionbilling.SubscriptionBillingApi.RecordPaymentReviewRefund:output_type -> subscriptionbilling.PaymentReviewCaseResponse
-	82,  // 222: subscriptionbilling.SubscriptionBillingApi.PreviewSubscriptionReconciliation:output_type -> subscriptionbilling.SubscriptionReconciliationReportResponse
-	82,  // 223: subscriptionbilling.SubscriptionBillingApi.ApplySubscriptionReconciliation:output_type -> subscriptionbilling.SubscriptionReconciliationReportResponse
-	86,  // 224: subscriptionbilling.SubscriptionBillingApi.PreviewRenewalPaymentReconciliation:output_type -> subscriptionbilling.RenewalPaymentReconciliationReportResponse
-	86,  // 225: subscriptionbilling.SubscriptionBillingApi.ApplyRenewalPaymentReconciliation:output_type -> subscriptionbilling.RenewalPaymentReconciliationReportResponse
-	109, // 226: subscriptionbilling.SubscriptionBillingApi.ListLedgerAccounts:output_type -> subscriptionbilling.ListLedgerAccountsResponse
-	113, // 227: subscriptionbilling.SubscriptionBillingApi.ListLedgerTransactions:output_type -> subscriptionbilling.ListLedgerTransactionsResponse
-	104, // 228: subscriptionbilling.SubscriptionBillingApi.CreateCheckout:output_type -> subscriptionbilling.CheckoutResponse
-	105, // 229: subscriptionbilling.SubscriptionBillingApi.GetPaymentStatusByReference:output_type -> subscriptionbilling.PaymentResponse
-	105, // 230: subscriptionbilling.SubscriptionBillingApi.VerifyPaymentReference:output_type -> subscriptionbilling.PaymentResponse
-	91,  // 231: subscriptionbilling.SubscriptionBillingApi.ReceivePaystackWebhook:output_type -> subscriptionbilling.StatusResponse
-	158, // [158:232] is the sub-list for method output_type
-	84,  // [84:158] is the sub-list for method input_type
-	84,  // [84:84] is the sub-list for extension type_name
-	84,  // [84:84] is the sub-list for extension extendee
-	0,   // [0:84] is the sub-list for field type_name
+	35,  // 84: subscriptionbilling.UpdateProductRequest.context:type_name -> subscriptionbilling.RequestContext
+	39,  // 85: subscriptionbilling.SubscriptionBillingApi.CreateProduct:input_type -> subscriptionbilling.CreateProductRequest
+	114, // 86: subscriptionbilling.SubscriptionBillingApi.UpdateProduct:input_type -> subscriptionbilling.UpdateProductRequest
+	36,  // 87: subscriptionbilling.SubscriptionBillingApi.ActivateProduct:input_type -> subscriptionbilling.EntityIdRequest
+	36,  // 88: subscriptionbilling.SubscriptionBillingApi.DeactivateProduct:input_type -> subscriptionbilling.EntityIdRequest
+	40,  // 89: subscriptionbilling.SubscriptionBillingApi.CreatePlan:input_type -> subscriptionbilling.CreatePlanRequest
+	41,  // 90: subscriptionbilling.SubscriptionBillingApi.CreatePrice:input_type -> subscriptionbilling.CreatePriceRequest
+	36,  // 91: subscriptionbilling.SubscriptionBillingApi.SetDefaultPrice:input_type -> subscriptionbilling.EntityIdRequest
+	36,  // 92: subscriptionbilling.SubscriptionBillingApi.DeactivatePrice:input_type -> subscriptionbilling.EntityIdRequest
+	42,  // 93: subscriptionbilling.SubscriptionBillingApi.CreateOffer:input_type -> subscriptionbilling.CreateOfferRequest
+	44,  // 94: subscriptionbilling.SubscriptionBillingApi.UpdateOffer:input_type -> subscriptionbilling.UpdateOfferRequest
+	45,  // 95: subscriptionbilling.SubscriptionBillingApi.ConfigureOfferPhase:input_type -> subscriptionbilling.ConfigureOfferPhaseRequest
+	46,  // 96: subscriptionbilling.SubscriptionBillingApi.ConfigureCatalogPresentation:input_type -> subscriptionbilling.ConfigureCatalogPresentationRequest
+	36,  // 97: subscriptionbilling.SubscriptionBillingApi.EnableOffer:input_type -> subscriptionbilling.EntityIdRequest
+	36,  // 98: subscriptionbilling.SubscriptionBillingApi.DisableOffer:input_type -> subscriptionbilling.EntityIdRequest
+	47,  // 99: subscriptionbilling.SubscriptionBillingApi.AttachEntitlementToPlan:input_type -> subscriptionbilling.AttachEntitlementToPlanRequest
+	48,  // 100: subscriptionbilling.SubscriptionBillingApi.UpsertPlanEntitlement:input_type -> subscriptionbilling.UpsertPlanEntitlementRequest
+	49,  // 101: subscriptionbilling.SubscriptionBillingApi.ConfigureOfferPolicy:input_type -> subscriptionbilling.ConfigureOfferPolicyRequest
+	50,  // 102: subscriptionbilling.SubscriptionBillingApi.ConfigureBillingPolicy:input_type -> subscriptionbilling.ConfigureBillingPolicyRequest
+	1,   // 103: subscriptionbilling.SubscriptionBillingApi.GetBillingSummary:input_type -> subscriptionbilling.BillingSummaryRequest
+	3,   // 104: subscriptionbilling.SubscriptionBillingApi.GetSubscriptionStats:input_type -> subscriptionbilling.SubscriptionStatsRequest
+	10,  // 105: subscriptionbilling.SubscriptionBillingApi.GetChurnStats:input_type -> subscriptionbilling.ChurnStatsRequest
+	14,  // 106: subscriptionbilling.SubscriptionBillingApi.GetPaymentStats:input_type -> subscriptionbilling.PaymentStatsRequest
+	16,  // 107: subscriptionbilling.SubscriptionBillingApi.ListProducts:input_type -> subscriptionbilling.ListProductsRequest
+	0,   // 108: subscriptionbilling.SubscriptionBillingApi.ListPlans:input_type -> subscriptionbilling.ListPlansRequest
+	36,  // 109: subscriptionbilling.SubscriptionBillingApi.GetPlan:input_type -> subscriptionbilling.EntityIdRequest
+	36,  // 110: subscriptionbilling.SubscriptionBillingApi.ListPlanPrices:input_type -> subscriptionbilling.EntityIdRequest
+	27,  // 111: subscriptionbilling.SubscriptionBillingApi.ListOffers:input_type -> subscriptionbilling.ListOffersRequest
+	32,  // 112: subscriptionbilling.SubscriptionBillingApi.ListBillingPolicies:input_type -> subscriptionbilling.ListPoliciesRequest
+	19,  // 113: subscriptionbilling.SubscriptionBillingApi.UpdatePlan:input_type -> subscriptionbilling.UpdatePlanRequest
+	36,  // 114: subscriptionbilling.SubscriptionBillingApi.PublishPlan:input_type -> subscriptionbilling.EntityIdRequest
+	36,  // 115: subscriptionbilling.SubscriptionBillingApi.ArchivePlan:input_type -> subscriptionbilling.EntityIdRequest
+	38,  // 116: subscriptionbilling.SubscriptionBillingApi.ListSubscriptions:input_type -> subscriptionbilling.ListSubscriptionsRequest
+	51,  // 117: subscriptionbilling.SubscriptionBillingApi.StartSubscription:input_type -> subscriptionbilling.StartSubscriptionRequest
+	36,  // 118: subscriptionbilling.SubscriptionBillingApi.CancelSubscription:input_type -> subscriptionbilling.EntityIdRequest
+	36,  // 119: subscriptionbilling.SubscriptionBillingApi.ScheduleSubscriptionCancellation:input_type -> subscriptionbilling.EntityIdRequest
+	36,  // 120: subscriptionbilling.SubscriptionBillingApi.ResumeSubscription:input_type -> subscriptionbilling.EntityIdRequest
+	56,  // 121: subscriptionbilling.SubscriptionBillingApi.ChangePlan:input_type -> subscriptionbilling.ChangePlanRequest
+	36,  // 122: subscriptionbilling.SubscriptionBillingApi.GetSubscriptionStatus:input_type -> subscriptionbilling.EntityIdRequest
+	37,  // 123: subscriptionbilling.SubscriptionBillingApi.GetCurrentSubscription:input_type -> subscriptionbilling.CustomerRequest
+	52,  // 124: subscriptionbilling.SubscriptionBillingApi.CreateComplimentaryAccess:input_type -> subscriptionbilling.CreateComplimentaryAccessRequest
+	53,  // 125: subscriptionbilling.SubscriptionBillingApi.ListComplimentaryAccess:input_type -> subscriptionbilling.ListComplimentaryAccessRequest
+	37,  // 126: subscriptionbilling.SubscriptionBillingApi.GetCurrentComplimentaryAccess:input_type -> subscriptionbilling.CustomerRequest
+	54,  // 127: subscriptionbilling.SubscriptionBillingApi.ExtendComplimentaryAccess:input_type -> subscriptionbilling.ExtendComplimentaryAccessRequest
+	55,  // 128: subscriptionbilling.SubscriptionBillingApi.RevokeComplimentaryAccess:input_type -> subscriptionbilling.RevokeComplimentaryAccessRequest
+	57,  // 129: subscriptionbilling.SubscriptionBillingApi.CheckEntitlement:input_type -> subscriptionbilling.CheckEntitlementRequest
+	36,  // 130: subscriptionbilling.SubscriptionBillingApi.GetEntitlementSnapshot:input_type -> subscriptionbilling.EntityIdRequest
+	36,  // 131: subscriptionbilling.SubscriptionBillingApi.RefreshEntitlementSnapshot:input_type -> subscriptionbilling.EntityIdRequest
+	58,  // 132: subscriptionbilling.SubscriptionBillingApi.RecordUsage:input_type -> subscriptionbilling.RecordUsageRequest
+	59,  // 133: subscriptionbilling.SubscriptionBillingApi.CreateInvoice:input_type -> subscriptionbilling.CreateInvoiceRequest
+	36,  // 134: subscriptionbilling.SubscriptionBillingApi.GetInvoice:input_type -> subscriptionbilling.EntityIdRequest
+	102, // 135: subscriptionbilling.SubscriptionBillingApi.ListAllInvoices:input_type -> subscriptionbilling.ListBillingDocumentsRequest
+	37,  // 136: subscriptionbilling.SubscriptionBillingApi.ListInvoices:input_type -> subscriptionbilling.CustomerRequest
+	36,  // 137: subscriptionbilling.SubscriptionBillingApi.MarkManualInvoicePaid:input_type -> subscriptionbilling.EntityIdRequest
+	60,  // 138: subscriptionbilling.SubscriptionBillingApi.VoidAbandonedCheckout:input_type -> subscriptionbilling.VoidAbandonedCheckoutRequest
+	63,  // 139: subscriptionbilling.SubscriptionBillingApi.PayInvoice:input_type -> subscriptionbilling.PayInvoiceRequest
+	64,  // 140: subscriptionbilling.SubscriptionBillingApi.CreateInvoiceCheckout:input_type -> subscriptionbilling.CreateInvoiceCheckoutRequest
+	66,  // 141: subscriptionbilling.SubscriptionBillingApi.CreateCardVerificationCheckout:input_type -> subscriptionbilling.CreateCardVerificationCheckoutRequest
+	65,  // 142: subscriptionbilling.SubscriptionBillingApi.CreateUpcomingCheckout:input_type -> subscriptionbilling.CreateUpcomingCheckoutRequest
+	102, // 143: subscriptionbilling.SubscriptionBillingApi.ListPayments:input_type -> subscriptionbilling.ListBillingDocumentsRequest
+	61,  // 144: subscriptionbilling.SubscriptionBillingApi.RefundPayment:input_type -> subscriptionbilling.RefundPaymentRequest
+	62,  // 145: subscriptionbilling.SubscriptionBillingApi.RetryPayment:input_type -> subscriptionbilling.RetryPaymentRequest
+	67,  // 146: subscriptionbilling.SubscriptionBillingApi.ListPaymentRetryQueue:input_type -> subscriptionbilling.ListPaymentRetryQueueRequest
+	71,  // 147: subscriptionbilling.SubscriptionBillingApi.ProcessPaymentRetryQueue:input_type -> subscriptionbilling.ProcessPaymentRetryQueueRequest
+	73,  // 148: subscriptionbilling.SubscriptionBillingApi.CancelPaymentRetry:input_type -> subscriptionbilling.CancelPaymentRetryRequest
+	74,  // 149: subscriptionbilling.SubscriptionBillingApi.ListPaymentReviewCases:input_type -> subscriptionbilling.ListPaymentReviewCasesRequest
+	75,  // 150: subscriptionbilling.SubscriptionBillingApi.ResolvePaymentReviewCase:input_type -> subscriptionbilling.ResolvePaymentReviewCaseRequest
+	76,  // 151: subscriptionbilling.SubscriptionBillingApi.RecordPaymentReviewRefund:input_type -> subscriptionbilling.RecordPaymentReviewRefundRequest
+	79,  // 152: subscriptionbilling.SubscriptionBillingApi.PreviewSubscriptionReconciliation:input_type -> subscriptionbilling.SubscriptionReconciliationPreviewRequest
+	80,  // 153: subscriptionbilling.SubscriptionBillingApi.ApplySubscriptionReconciliation:input_type -> subscriptionbilling.ApplySubscriptionReconciliationRequest
+	83,  // 154: subscriptionbilling.SubscriptionBillingApi.PreviewRenewalPaymentReconciliation:input_type -> subscriptionbilling.RenewalPaymentReconciliationPreviewRequest
+	84,  // 155: subscriptionbilling.SubscriptionBillingApi.ApplyRenewalPaymentReconciliation:input_type -> subscriptionbilling.ApplyRenewalPaymentReconciliationRequest
+	107, // 156: subscriptionbilling.SubscriptionBillingApi.ListLedgerAccounts:input_type -> subscriptionbilling.ListLedgerAccountsRequest
+	110, // 157: subscriptionbilling.SubscriptionBillingApi.ListLedgerTransactions:input_type -> subscriptionbilling.ListLedgerTransactionsRequest
+	87,  // 158: subscriptionbilling.SubscriptionBillingApi.CreateCheckout:input_type -> subscriptionbilling.CreateCheckoutRequest
+	88,  // 159: subscriptionbilling.SubscriptionBillingApi.GetPaymentStatusByReference:input_type -> subscriptionbilling.PaymentReferenceRequest
+	88,  // 160: subscriptionbilling.SubscriptionBillingApi.VerifyPaymentReference:input_type -> subscriptionbilling.PaymentReferenceRequest
+	89,  // 161: subscriptionbilling.SubscriptionBillingApi.ReceivePaystackWebhook:input_type -> subscriptionbilling.ReceivePaystackWebhookRequest
+	90,  // 162: subscriptionbilling.SubscriptionBillingApi.CreateProduct:output_type -> subscriptionbilling.EntityResponse
+	17,  // 163: subscriptionbilling.SubscriptionBillingApi.UpdateProduct:output_type -> subscriptionbilling.ProductResponse
+	17,  // 164: subscriptionbilling.SubscriptionBillingApi.ActivateProduct:output_type -> subscriptionbilling.ProductResponse
+	17,  // 165: subscriptionbilling.SubscriptionBillingApi.DeactivateProduct:output_type -> subscriptionbilling.ProductResponse
+	90,  // 166: subscriptionbilling.SubscriptionBillingApi.CreatePlan:output_type -> subscriptionbilling.EntityResponse
+	90,  // 167: subscriptionbilling.SubscriptionBillingApi.CreatePrice:output_type -> subscriptionbilling.EntityResponse
+	22,  // 168: subscriptionbilling.SubscriptionBillingApi.SetDefaultPrice:output_type -> subscriptionbilling.PriceResponse
+	22,  // 169: subscriptionbilling.SubscriptionBillingApi.DeactivatePrice:output_type -> subscriptionbilling.PriceResponse
+	90,  // 170: subscriptionbilling.SubscriptionBillingApi.CreateOffer:output_type -> subscriptionbilling.EntityResponse
+	30,  // 171: subscriptionbilling.SubscriptionBillingApi.UpdateOffer:output_type -> subscriptionbilling.OfferResponse
+	90,  // 172: subscriptionbilling.SubscriptionBillingApi.ConfigureOfferPhase:output_type -> subscriptionbilling.EntityResponse
+	90,  // 173: subscriptionbilling.SubscriptionBillingApi.ConfigureCatalogPresentation:output_type -> subscriptionbilling.EntityResponse
+	90,  // 174: subscriptionbilling.SubscriptionBillingApi.EnableOffer:output_type -> subscriptionbilling.EntityResponse
+	90,  // 175: subscriptionbilling.SubscriptionBillingApi.DisableOffer:output_type -> subscriptionbilling.EntityResponse
+	90,  // 176: subscriptionbilling.SubscriptionBillingApi.AttachEntitlementToPlan:output_type -> subscriptionbilling.EntityResponse
+	24,  // 177: subscriptionbilling.SubscriptionBillingApi.UpsertPlanEntitlement:output_type -> subscriptionbilling.PlanEntitlementResponse
+	90,  // 178: subscriptionbilling.SubscriptionBillingApi.ConfigureOfferPolicy:output_type -> subscriptionbilling.EntityResponse
+	90,  // 179: subscriptionbilling.SubscriptionBillingApi.ConfigureBillingPolicy:output_type -> subscriptionbilling.EntityResponse
+	2,   // 180: subscriptionbilling.SubscriptionBillingApi.GetBillingSummary:output_type -> subscriptionbilling.BillingSummaryResponse
+	4,   // 181: subscriptionbilling.SubscriptionBillingApi.GetSubscriptionStats:output_type -> subscriptionbilling.SubscriptionStatsResponse
+	11,  // 182: subscriptionbilling.SubscriptionBillingApi.GetChurnStats:output_type -> subscriptionbilling.ChurnStatsResponse
+	15,  // 183: subscriptionbilling.SubscriptionBillingApi.GetPaymentStats:output_type -> subscriptionbilling.PaymentStatsResponse
+	18,  // 184: subscriptionbilling.SubscriptionBillingApi.ListProducts:output_type -> subscriptionbilling.ListProductsResponse
+	21,  // 185: subscriptionbilling.SubscriptionBillingApi.ListPlans:output_type -> subscriptionbilling.ListPlansResponse
+	26,  // 186: subscriptionbilling.SubscriptionBillingApi.GetPlan:output_type -> subscriptionbilling.PlanDetailResponse
+	23,  // 187: subscriptionbilling.SubscriptionBillingApi.ListPlanPrices:output_type -> subscriptionbilling.ListPricesResponse
+	31,  // 188: subscriptionbilling.SubscriptionBillingApi.ListOffers:output_type -> subscriptionbilling.ListOffersResponse
+	34,  // 189: subscriptionbilling.SubscriptionBillingApi.ListBillingPolicies:output_type -> subscriptionbilling.ListBillingPoliciesResponse
+	20,  // 190: subscriptionbilling.SubscriptionBillingApi.UpdatePlan:output_type -> subscriptionbilling.PlanResponse
+	20,  // 191: subscriptionbilling.SubscriptionBillingApi.PublishPlan:output_type -> subscriptionbilling.PlanResponse
+	20,  // 192: subscriptionbilling.SubscriptionBillingApi.ArchivePlan:output_type -> subscriptionbilling.PlanResponse
+	97,  // 193: subscriptionbilling.SubscriptionBillingApi.ListSubscriptions:output_type -> subscriptionbilling.ListSubscriptionsResponse
+	93,  // 194: subscriptionbilling.SubscriptionBillingApi.StartSubscription:output_type -> subscriptionbilling.SubscriptionResponse
+	93,  // 195: subscriptionbilling.SubscriptionBillingApi.CancelSubscription:output_type -> subscriptionbilling.SubscriptionResponse
+	93,  // 196: subscriptionbilling.SubscriptionBillingApi.ScheduleSubscriptionCancellation:output_type -> subscriptionbilling.SubscriptionResponse
+	93,  // 197: subscriptionbilling.SubscriptionBillingApi.ResumeSubscription:output_type -> subscriptionbilling.SubscriptionResponse
+	96,  // 198: subscriptionbilling.SubscriptionBillingApi.ChangePlan:output_type -> subscriptionbilling.PlanChangeResponse
+	92,  // 199: subscriptionbilling.SubscriptionBillingApi.GetSubscriptionStatus:output_type -> subscriptionbilling.SubscriptionStatusResponse
+	93,  // 200: subscriptionbilling.SubscriptionBillingApi.GetCurrentSubscription:output_type -> subscriptionbilling.SubscriptionResponse
+	94,  // 201: subscriptionbilling.SubscriptionBillingApi.CreateComplimentaryAccess:output_type -> subscriptionbilling.ComplimentaryAccessResponse
+	95,  // 202: subscriptionbilling.SubscriptionBillingApi.ListComplimentaryAccess:output_type -> subscriptionbilling.ListComplimentaryAccessResponse
+	94,  // 203: subscriptionbilling.SubscriptionBillingApi.GetCurrentComplimentaryAccess:output_type -> subscriptionbilling.ComplimentaryAccessResponse
+	94,  // 204: subscriptionbilling.SubscriptionBillingApi.ExtendComplimentaryAccess:output_type -> subscriptionbilling.ComplimentaryAccessResponse
+	94,  // 205: subscriptionbilling.SubscriptionBillingApi.RevokeComplimentaryAccess:output_type -> subscriptionbilling.ComplimentaryAccessResponse
+	98,  // 206: subscriptionbilling.SubscriptionBillingApi.CheckEntitlement:output_type -> subscriptionbilling.CheckEntitlementResponse
+	99,  // 207: subscriptionbilling.SubscriptionBillingApi.GetEntitlementSnapshot:output_type -> subscriptionbilling.EntitlementSnapshotResponse
+	99,  // 208: subscriptionbilling.SubscriptionBillingApi.RefreshEntitlementSnapshot:output_type -> subscriptionbilling.EntitlementSnapshotResponse
+	90,  // 209: subscriptionbilling.SubscriptionBillingApi.RecordUsage:output_type -> subscriptionbilling.EntityResponse
+	100, // 210: subscriptionbilling.SubscriptionBillingApi.CreateInvoice:output_type -> subscriptionbilling.InvoiceResponse
+	100, // 211: subscriptionbilling.SubscriptionBillingApi.GetInvoice:output_type -> subscriptionbilling.InvoiceResponse
+	101, // 212: subscriptionbilling.SubscriptionBillingApi.ListAllInvoices:output_type -> subscriptionbilling.ListInvoicesResponse
+	101, // 213: subscriptionbilling.SubscriptionBillingApi.ListInvoices:output_type -> subscriptionbilling.ListInvoicesResponse
+	100, // 214: subscriptionbilling.SubscriptionBillingApi.MarkManualInvoicePaid:output_type -> subscriptionbilling.InvoiceResponse
+	100, // 215: subscriptionbilling.SubscriptionBillingApi.VoidAbandonedCheckout:output_type -> subscriptionbilling.InvoiceResponse
+	105, // 216: subscriptionbilling.SubscriptionBillingApi.PayInvoice:output_type -> subscriptionbilling.PaymentResponse
+	103, // 217: subscriptionbilling.SubscriptionBillingApi.CreateInvoiceCheckout:output_type -> subscriptionbilling.PaymentIntentResponse
+	103, // 218: subscriptionbilling.SubscriptionBillingApi.CreateCardVerificationCheckout:output_type -> subscriptionbilling.PaymentIntentResponse
+	103, // 219: subscriptionbilling.SubscriptionBillingApi.CreateUpcomingCheckout:output_type -> subscriptionbilling.PaymentIntentResponse
+	106, // 220: subscriptionbilling.SubscriptionBillingApi.ListPayments:output_type -> subscriptionbilling.ListPaymentsResponse
+	90,  // 221: subscriptionbilling.SubscriptionBillingApi.RefundPayment:output_type -> subscriptionbilling.EntityResponse
+	105, // 222: subscriptionbilling.SubscriptionBillingApi.RetryPayment:output_type -> subscriptionbilling.PaymentResponse
+	69,  // 223: subscriptionbilling.SubscriptionBillingApi.ListPaymentRetryQueue:output_type -> subscriptionbilling.ListPaymentRetryQueueResponse
+	72,  // 224: subscriptionbilling.SubscriptionBillingApi.ProcessPaymentRetryQueue:output_type -> subscriptionbilling.PaymentRetryBatchResponse
+	90,  // 225: subscriptionbilling.SubscriptionBillingApi.CancelPaymentRetry:output_type -> subscriptionbilling.EntityResponse
+	78,  // 226: subscriptionbilling.SubscriptionBillingApi.ListPaymentReviewCases:output_type -> subscriptionbilling.ListPaymentReviewCasesResponse
+	77,  // 227: subscriptionbilling.SubscriptionBillingApi.ResolvePaymentReviewCase:output_type -> subscriptionbilling.PaymentReviewCaseResponse
+	77,  // 228: subscriptionbilling.SubscriptionBillingApi.RecordPaymentReviewRefund:output_type -> subscriptionbilling.PaymentReviewCaseResponse
+	82,  // 229: subscriptionbilling.SubscriptionBillingApi.PreviewSubscriptionReconciliation:output_type -> subscriptionbilling.SubscriptionReconciliationReportResponse
+	82,  // 230: subscriptionbilling.SubscriptionBillingApi.ApplySubscriptionReconciliation:output_type -> subscriptionbilling.SubscriptionReconciliationReportResponse
+	86,  // 231: subscriptionbilling.SubscriptionBillingApi.PreviewRenewalPaymentReconciliation:output_type -> subscriptionbilling.RenewalPaymentReconciliationReportResponse
+	86,  // 232: subscriptionbilling.SubscriptionBillingApi.ApplyRenewalPaymentReconciliation:output_type -> subscriptionbilling.RenewalPaymentReconciliationReportResponse
+	109, // 233: subscriptionbilling.SubscriptionBillingApi.ListLedgerAccounts:output_type -> subscriptionbilling.ListLedgerAccountsResponse
+	113, // 234: subscriptionbilling.SubscriptionBillingApi.ListLedgerTransactions:output_type -> subscriptionbilling.ListLedgerTransactionsResponse
+	104, // 235: subscriptionbilling.SubscriptionBillingApi.CreateCheckout:output_type -> subscriptionbilling.CheckoutResponse
+	105, // 236: subscriptionbilling.SubscriptionBillingApi.GetPaymentStatusByReference:output_type -> subscriptionbilling.PaymentResponse
+	105, // 237: subscriptionbilling.SubscriptionBillingApi.VerifyPaymentReference:output_type -> subscriptionbilling.PaymentResponse
+	91,  // 238: subscriptionbilling.SubscriptionBillingApi.ReceivePaystackWebhook:output_type -> subscriptionbilling.StatusResponse
+	162, // [162:239] is the sub-list for method output_type
+	85,  // [85:162] is the sub-list for method input_type
+	85,  // [85:85] is the sub-list for extension type_name
+	85,  // [85:85] is the sub-list for extension extendee
+	0,   // [0:85] is the sub-list for field type_name
 }
 
 func init() { file_subscriptionbilling_billing_proto_init() }
@@ -10605,7 +10689,7 @@ func file_subscriptionbilling_billing_proto_init() {
 			GoPackagePath: reflect.TypeOf(x{}).PkgPath(),
 			RawDescriptor: unsafe.Slice(unsafe.StringData(file_subscriptionbilling_billing_proto_rawDesc), len(file_subscriptionbilling_billing_proto_rawDesc)),
 			NumEnums:      0,
-			NumMessages:   114,
+			NumMessages:   115,
 			NumExtensions: 0,
 			NumServices:   1,
 		},

@@ -20,6 +20,9 @@ const _ = grpc.SupportPackageIsVersion9
 
 const (
 	SubscriptionBillingApi_CreateProduct_FullMethodName                       = "/subscriptionbilling.SubscriptionBillingApi/CreateProduct"
+	SubscriptionBillingApi_UpdateProduct_FullMethodName                       = "/subscriptionbilling.SubscriptionBillingApi/UpdateProduct"
+	SubscriptionBillingApi_ActivateProduct_FullMethodName                     = "/subscriptionbilling.SubscriptionBillingApi/ActivateProduct"
+	SubscriptionBillingApi_DeactivateProduct_FullMethodName                   = "/subscriptionbilling.SubscriptionBillingApi/DeactivateProduct"
 	SubscriptionBillingApi_CreatePlan_FullMethodName                          = "/subscriptionbilling.SubscriptionBillingApi/CreatePlan"
 	SubscriptionBillingApi_CreatePrice_FullMethodName                         = "/subscriptionbilling.SubscriptionBillingApi/CreatePrice"
 	SubscriptionBillingApi_SetDefaultPrice_FullMethodName                     = "/subscriptionbilling.SubscriptionBillingApi/SetDefaultPrice"
@@ -100,6 +103,9 @@ const (
 // For semantics around ctx use and closing/ending streaming RPCs, please refer to https://pkg.go.dev/google.golang.org/grpc/?tab=doc#ClientConn.NewStream.
 type SubscriptionBillingApiClient interface {
 	CreateProduct(ctx context.Context, in *CreateProductRequest, opts ...grpc.CallOption) (*EntityResponse, error)
+	UpdateProduct(ctx context.Context, in *UpdateProductRequest, opts ...grpc.CallOption) (*ProductResponse, error)
+	ActivateProduct(ctx context.Context, in *EntityIdRequest, opts ...grpc.CallOption) (*ProductResponse, error)
+	DeactivateProduct(ctx context.Context, in *EntityIdRequest, opts ...grpc.CallOption) (*ProductResponse, error)
 	CreatePlan(ctx context.Context, in *CreatePlanRequest, opts ...grpc.CallOption) (*EntityResponse, error)
 	CreatePrice(ctx context.Context, in *CreatePriceRequest, opts ...grpc.CallOption) (*EntityResponse, error)
 	SetDefaultPrice(ctx context.Context, in *EntityIdRequest, opts ...grpc.CallOption) (*PriceResponse, error)
@@ -193,6 +199,36 @@ func (c *subscriptionBillingApiClient) CreateProduct(ctx context.Context, in *Cr
 	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
 	out := new(EntityResponse)
 	err := c.cc.Invoke(ctx, SubscriptionBillingApi_CreateProduct_FullMethodName, in, out, cOpts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *subscriptionBillingApiClient) UpdateProduct(ctx context.Context, in *UpdateProductRequest, opts ...grpc.CallOption) (*ProductResponse, error) {
+	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
+	out := new(ProductResponse)
+	err := c.cc.Invoke(ctx, SubscriptionBillingApi_UpdateProduct_FullMethodName, in, out, cOpts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *subscriptionBillingApiClient) ActivateProduct(ctx context.Context, in *EntityIdRequest, opts ...grpc.CallOption) (*ProductResponse, error) {
+	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
+	out := new(ProductResponse)
+	err := c.cc.Invoke(ctx, SubscriptionBillingApi_ActivateProduct_FullMethodName, in, out, cOpts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *subscriptionBillingApiClient) DeactivateProduct(ctx context.Context, in *EntityIdRequest, opts ...grpc.CallOption) (*ProductResponse, error) {
+	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
+	out := new(ProductResponse)
+	err := c.cc.Invoke(ctx, SubscriptionBillingApi_DeactivateProduct_FullMethodName, in, out, cOpts...)
 	if err != nil {
 		return nil, err
 	}
@@ -934,6 +970,9 @@ func (c *subscriptionBillingApiClient) ReceivePaystackWebhook(ctx context.Contex
 // for forward compatibility.
 type SubscriptionBillingApiServer interface {
 	CreateProduct(context.Context, *CreateProductRequest) (*EntityResponse, error)
+	UpdateProduct(context.Context, *UpdateProductRequest) (*ProductResponse, error)
+	ActivateProduct(context.Context, *EntityIdRequest) (*ProductResponse, error)
+	DeactivateProduct(context.Context, *EntityIdRequest) (*ProductResponse, error)
 	CreatePlan(context.Context, *CreatePlanRequest) (*EntityResponse, error)
 	CreatePrice(context.Context, *CreatePriceRequest) (*EntityResponse, error)
 	SetDefaultPrice(context.Context, *EntityIdRequest) (*PriceResponse, error)
@@ -1025,6 +1064,15 @@ type UnimplementedSubscriptionBillingApiServer struct{}
 
 func (UnimplementedSubscriptionBillingApiServer) CreateProduct(context.Context, *CreateProductRequest) (*EntityResponse, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method CreateProduct not implemented")
+}
+func (UnimplementedSubscriptionBillingApiServer) UpdateProduct(context.Context, *UpdateProductRequest) (*ProductResponse, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method UpdateProduct not implemented")
+}
+func (UnimplementedSubscriptionBillingApiServer) ActivateProduct(context.Context, *EntityIdRequest) (*ProductResponse, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method ActivateProduct not implemented")
+}
+func (UnimplementedSubscriptionBillingApiServer) DeactivateProduct(context.Context, *EntityIdRequest) (*ProductResponse, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method DeactivateProduct not implemented")
 }
 func (UnimplementedSubscriptionBillingApiServer) CreatePlan(context.Context, *CreatePlanRequest) (*EntityResponse, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method CreatePlan not implemented")
@@ -1281,6 +1329,60 @@ func _SubscriptionBillingApi_CreateProduct_Handler(srv interface{}, ctx context.
 	}
 	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
 		return srv.(SubscriptionBillingApiServer).CreateProduct(ctx, req.(*CreateProductRequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _SubscriptionBillingApi_UpdateProduct_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(UpdateProductRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(SubscriptionBillingApiServer).UpdateProduct(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: SubscriptionBillingApi_UpdateProduct_FullMethodName,
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(SubscriptionBillingApiServer).UpdateProduct(ctx, req.(*UpdateProductRequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _SubscriptionBillingApi_ActivateProduct_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(EntityIdRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(SubscriptionBillingApiServer).ActivateProduct(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: SubscriptionBillingApi_ActivateProduct_FullMethodName,
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(SubscriptionBillingApiServer).ActivateProduct(ctx, req.(*EntityIdRequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _SubscriptionBillingApi_DeactivateProduct_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(EntityIdRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(SubscriptionBillingApiServer).DeactivateProduct(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: SubscriptionBillingApi_DeactivateProduct_FullMethodName,
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(SubscriptionBillingApiServer).DeactivateProduct(ctx, req.(*EntityIdRequest))
 	}
 	return interceptor(ctx, in, info, handler)
 }
@@ -2609,6 +2711,18 @@ var SubscriptionBillingApi_ServiceDesc = grpc.ServiceDesc{
 		{
 			MethodName: "CreateProduct",
 			Handler:    _SubscriptionBillingApi_CreateProduct_Handler,
+		},
+		{
+			MethodName: "UpdateProduct",
+			Handler:    _SubscriptionBillingApi_UpdateProduct_Handler,
+		},
+		{
+			MethodName: "ActivateProduct",
+			Handler:    _SubscriptionBillingApi_ActivateProduct_Handler,
+		},
+		{
+			MethodName: "DeactivateProduct",
+			Handler:    _SubscriptionBillingApi_DeactivateProduct_Handler,
 		},
 		{
 			MethodName: "CreatePlan",

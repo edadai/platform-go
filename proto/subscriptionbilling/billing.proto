@@ -7,6 +7,9 @@ package subscriptionbilling;
 
 service SubscriptionBillingApi {
   rpc CreateProduct (CreateProductRequest) returns (EntityResponse);
+  rpc UpdateProduct (UpdateProductRequest) returns (ProductResponse);
+  rpc ActivateProduct (EntityIdRequest) returns (ProductResponse);
+  rpc DeactivateProduct (EntityIdRequest) returns (ProductResponse);
   rpc CreatePlan (CreatePlanRequest) returns (EntityResponse);
   rpc CreatePrice (CreatePriceRequest) returns (EntityResponse);
   rpc SetDefaultPrice (EntityIdRequest) returns (PriceResponse);
@@ -1033,3 +1036,10 @@ message LedgerTransactionResponse {
   repeated LedgerEntryResponse entries = 5;
 }
 message ListLedgerTransactionsResponse { repeated LedgerTransactionResponse transactions = 1; }
+
+message UpdateProductRequest {
+  string id = 1;
+  string name = 2;
+  string description = 3;
+  RequestContext context = 4;
+}
