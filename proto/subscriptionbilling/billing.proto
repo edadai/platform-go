@@ -99,6 +99,8 @@ service SubscriptionBillingApi {
 message ListPlansRequest {
   bool public_only = 1;
   string customer_id = 2;
+  string billing_cycle = 3;
+  repeated string product_ids = 4;
 }
 message BillingSummaryRequest {}
 message BillingSummaryResponse {

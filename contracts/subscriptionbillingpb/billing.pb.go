@@ -25,6 +25,8 @@ type ListPlansRequest struct {
 	state         protoimpl.MessageState `protogen:"open.v1"`
 	PublicOnly    bool                   `protobuf:"varint,1,opt,name=public_only,json=publicOnly,proto3" json:"public_only,omitempty"`
 	CustomerId    string                 `protobuf:"bytes,2,opt,name=customer_id,json=customerId,proto3" json:"customer_id,omitempty"`
+	BillingCycle  string                 `protobuf:"bytes,3,opt,name=billing_cycle,json=billingCycle,proto3" json:"billing_cycle,omitempty"`
+	ProductIds    []string               `protobuf:"bytes,4,rep,name=product_ids,json=productIds,proto3" json:"product_ids,omitempty"`
 	unknownFields protoimpl.UnknownFields
 	sizeCache     protoimpl.SizeCache
 }
@@ -71,6 +73,20 @@ func (x *ListPlansRequest) GetCustomerId() string {
 		return x.CustomerId
 	}
 	return ""
+}
+
+func (x *ListPlansRequest) GetBillingCycle() string {
+	if x != nil {
+		return x.BillingCycle
+	}
+	return ""
+}
+
+func (x *ListPlansRequest) GetProductIds() []string {
+	if x != nil {
+		return x.ProductIds
+	}
+	return nil
 }
 
 type BillingSummaryRequest struct {
@@ -9334,12 +9350,15 @@ var File_subscriptionbilling_billing_proto protoreflect.FileDescriptor
 
 const file_subscriptionbilling_billing_proto_rawDesc = "" +
 	"\n" +
-	"!subscriptionbilling/billing.proto\x12\x13subscriptionbilling\"T\n" +
+	"!subscriptionbilling/billing.proto\x12\x13subscriptionbilling\"\x9a\x01\n" +
 	"\x10ListPlansRequest\x12\x1f\n" +
 	"\vpublic_only\x18\x01 \x01(\bR\n" +
 	"publicOnly\x12\x1f\n" +
 	"\vcustomer_id\x18\x02 \x01(\tR\n" +
-	"customerId\"\x17\n" +
+	"customerId\x12#\n" +
+	"\rbilling_cycle\x18\x03 \x01(\tR\fbillingCycle\x12\x1f\n" +
+	"\vproduct_ids\x18\x04 \x03(\tR\n" +
+	"productIds\"\x17\n" +
 	"\x15BillingSummaryRequest\"\xd7\x03\n" +
 	"\x16BillingSummaryResponse\x12#\n" +
 	"\rproduct_count\x18\x01 \x01(\x05R\fproductCount\x120\n" +
