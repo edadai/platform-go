@@ -17,6 +17,22 @@ service StudyMaterialsInternalService {
   rpc GetGenerationControl(GetGenerationControlRequest) returns (GetGenerationControlResponse);
 }
 
+// StudyKitInternalService is the canonical internal API. The legacy
+// StudyMaterialsInternalService remains during the rolling compatibility
+// window so independently deployed consumers can migrate safely.
+service StudyKitInternalService {
+  rpc GetExtractionSource(GetExtractionSourceRequest) returns (GetExtractionSourceResponse);
+  rpc PersistExtraction(stream PersistExtractionRequest) returns (PersistExtractionResponse);
+  rpc ReadExtraction(ReadExtractionRequest) returns (stream ReadExtractionResponse);
+  rpc GetSourceMedia(GetSourceMediaRequest) returns (GetSourceMediaResponse);
+  rpc AuthorizeAudioTranscription(AuthorizeAudioTranscriptionRequest) returns (AuthorizeAudioTranscriptionResponse);
+  rpc RegisterAudioTranscription(RegisterAudioTranscriptionRequest) returns (RegisterAudioTranscriptionResponse);
+  rpc PersistAudioTranscript(PersistAudioTranscriptRequest) returns (PersistAudioTranscriptResponse);
+  rpc ReportAudioTranscriptionFailure(ReportAudioTranscriptionFailureRequest) returns (ReportAudioTranscriptionFailureResponse);
+  rpc GetStudyKitTitleContext(GetStudyKitTitleContextRequest) returns (GetStudyKitTitleContextResponse);
+  rpc GetGenerationControl(GetGenerationControlRequest) returns (GetGenerationControlResponse);
+}
+
 message GetSourceMediaRequest {
   string transcription_job_id = 1;
   string source_version_id = 2;
