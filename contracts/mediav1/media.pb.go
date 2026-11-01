@@ -1637,6 +1637,7 @@ type CreateOriginalDownloadRequest struct {
 	state         protoimpl.MessageState `protogen:"open.v1"`
 	Id            string                 `protobuf:"bytes,1,opt,name=id,proto3" json:"id,omitempty"`
 	ActorId       string                 `protobuf:"bytes,2,opt,name=actor_id,json=actorId,proto3" json:"actor_id,omitempty"`
+	Inline        bool                   `protobuf:"varint,3,opt,name=inline,proto3" json:"inline,omitempty"`
 	unknownFields protoimpl.UnknownFields
 	sizeCache     protoimpl.SizeCache
 }
@@ -1683,6 +1684,13 @@ func (x *CreateOriginalDownloadRequest) GetActorId() string {
 		return x.ActorId
 	}
 	return ""
+}
+
+func (x *CreateOriginalDownloadRequest) GetInline() bool {
+	if x != nil {
+		return x.Inline
+	}
+	return false
 }
 
 type CreateOriginalDownloadResponse struct {
@@ -1885,10 +1893,11 @@ const file_media_v1_media_proto_rawDesc = "" +
 	"resourceId\x12\x16\n" +
 	"\x06exists\x18\x03 \x01(\bR\x06exists\",\n" +
 	"\x1aReconcileReferenceResponse\x12\x0e\n" +
-	"\x02ok\x18\x01 \x01(\bR\x02ok\"J\n" +
+	"\x02ok\x18\x01 \x01(\bR\x02ok\"b\n" +
 	"\x1dCreateOriginalDownloadRequest\x12\x0e\n" +
 	"\x02id\x18\x01 \x01(\tR\x02id\x12\x19\n" +
-	"\bactor_id\x18\x02 \x01(\tR\aactorId\"\x99\x01\n" +
+	"\bactor_id\x18\x02 \x01(\tR\aactorId\x12\x16\n" +
+	"\x06inline\x18\x03 \x01(\bR\x06inline\"\x99\x01\n" +
 	"\x1eCreateOriginalDownloadResponse\x12\x10\n" +
 	"\x03url\x18\x01 \x01(\tR\x03url\x12\x1d\n" +
 	"\n" +

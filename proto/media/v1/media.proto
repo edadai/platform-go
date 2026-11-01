@@ -144,6 +144,7 @@ message ReconcileReferenceResponse { bool ok = 1; }
 message CreateOriginalDownloadRequest {
   string id = 1;
   string actor_id = 2;
+  bool inline = 3;
 }
 message CreateOriginalDownloadResponse {
   string url = 1;
