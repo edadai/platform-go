@@ -49,6 +49,19 @@ message CreateProgramRequest {
   string source_manifest_sha256 = 6;
   // Start a new Tutor session even when the selection matches the newest one.
   bool force_new = 7;
+  repeated SourceScope source_scopes = 8;
+}
+
+message SourcePageRange {
+  int32 start_page = 1;
+  int32 end_page = 2;
+}
+
+message SourceScope {
+  string source_version_id = 1;
+  string mode = 2;
+  repeated string segment_ids = 3;
+  repeated SourcePageRange page_ranges = 4;
 }
 
 message GetProgramRequest {
@@ -70,6 +83,7 @@ message Program {
   string source_manifest_sha256 = 10;
   int32 revision = 11;
   bool stale = 12;
+  repeated SourceScope source_scopes = 13;
 }
 
 // Every Tutor revision (session) for a study kit, newest first.

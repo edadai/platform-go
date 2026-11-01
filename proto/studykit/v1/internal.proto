@@ -6,6 +6,9 @@ option go_package = "github.com/edadai/platform-go/contracts/studykitv1;studykit
 
 service StudyMaterialsInternalService {
   rpc GetExtractionSource(GetExtractionSourceRequest) returns (GetExtractionSourceResponse);
+  rpc BeginExtraction(BeginExtractionRequest) returns (BeginExtractionResponse);
+  rpc PersistExtractionBatch(PersistExtractionBatchRequest) returns (PersistExtractionBatchResponse);
+  rpc FinalizeExtraction(FinalizeExtractionRequest) returns (FinalizeExtractionResponse);
   rpc PersistExtraction(stream PersistExtractionRequest) returns (PersistExtractionResponse);
   rpc ReadExtraction(ReadExtractionRequest) returns (stream ReadExtractionResponse);
   rpc GetSourceMedia(GetSourceMediaRequest) returns (GetSourceMediaResponse);
@@ -22,6 +25,9 @@ service StudyMaterialsInternalService {
 // window so independently deployed consumers can migrate safely.
 service StudyKitInternalService {
   rpc GetExtractionSource(GetExtractionSourceRequest) returns (GetExtractionSourceResponse);
+  rpc BeginExtraction(BeginExtractionRequest) returns (BeginExtractionResponse);
+  rpc PersistExtractionBatch(PersistExtractionBatchRequest) returns (PersistExtractionBatchResponse);
+  rpc FinalizeExtraction(FinalizeExtractionRequest) returns (FinalizeExtractionResponse);
   rpc PersistExtraction(stream PersistExtractionRequest) returns (PersistExtractionResponse);
   rpc ReadExtraction(ReadExtractionRequest) returns (stream ReadExtractionResponse);
   rpc GetSourceMedia(GetSourceMediaRequest) returns (GetSourceMediaResponse);
@@ -154,6 +160,68 @@ message GetExtractionSourceResponse {
   string media_asset_id = 3;
   string source_version = 4;
   int64 source_size = 5;
+}
+
+message BeginExtractionRequest {
+  string idempotency_key = 1;
+  string job_id = 2;
+  string document_id = 3;
+  string media_asset_id = 4;
+  string source_version = 5;
+  string source_sha256 = 6;
+  int64 source_size = 7;
+  string extractor_version = 8;
+  string filename = 9;
+  string media_type = 10;
+  string title = 11;
+  int32 page_count = 12;
+}
+
+message BeginExtractionResponse {
+  string extraction_id = 1;
+  string status = 2;
+  bool replayed = 3;
+  repeated int32 completed_chunk_indexes = 4;
+}
+
+message PersistExtractionBatchRequest {
+  string extraction_id = 1;
+  string job_id = 2;
+  string document_id = 3;
+  repeated ExtractionChunk chunks = 4;
+  int32 processed_pages = 5;
+  string metadata_json = 6;
+}
+
+message PersistExtractionBatchResponse {
+  int32 persisted_chunks = 1;
+  int32 completed_chunks = 2;
+  bool replayed = 3;
+}
+
+message FinalizeExtractionRequest {
+  string extraction_id = 1;
+  string job_id = 2;
+  string document_id = 3;
+  repeated string warnings = 4;
+  string metadata_json = 5;
+  repeated ExtractionStructureHint structure_hints = 6;
+}
+
+message ExtractionStructureHint {
+  string title = 1;
+  int32 page_number = 2;
+  int32 level = 3;
+}
+
+message FinalizeExtractionResponse {
+  string extraction_id = 1;
+  bool replayed = 2;
+  int32 page_count = 3;
+  int32 ocr_page_count = 4;
+  int64 result_bytes = 5;
+  repeated string warnings = 6;
+  string content_sha256 = 7;
 }
 
 message ExtractionHeader {
