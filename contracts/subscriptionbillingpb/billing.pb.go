@@ -9346,6 +9346,1390 @@ func (x *UpdateProductRequest) GetContext() *RequestContext {
 	return nil
 }
 
+type ConfigureAppleProductMappingRequest struct {
+	state               protoimpl.MessageState `protogen:"open.v1"`
+	PriceId             string                 `protobuf:"bytes,1,opt,name=price_id,json=priceId,proto3" json:"price_id,omitempty"`
+	BundleId            string                 `protobuf:"bytes,2,opt,name=bundle_id,json=bundleId,proto3" json:"bundle_id,omitempty"`
+	ProductId           string                 `protobuf:"bytes,3,opt,name=product_id,json=productId,proto3" json:"product_id,omitempty"`
+	SubscriptionGroupId string                 `protobuf:"bytes,4,opt,name=subscription_group_id,json=subscriptionGroupId,proto3" json:"subscription_group_id,omitempty"`
+	SubscriptionLevel   int32                  `protobuf:"varint,5,opt,name=subscription_level,json=subscriptionLevel,proto3" json:"subscription_level,omitempty"`
+	IsEnabled           bool                   `protobuf:"varint,6,opt,name=is_enabled,json=isEnabled,proto3" json:"is_enabled,omitempty"`
+	Context             *RequestContext        `protobuf:"bytes,7,opt,name=context,proto3" json:"context,omitempty"`
+	unknownFields       protoimpl.UnknownFields
+	sizeCache           protoimpl.SizeCache
+}
+
+func (x *ConfigureAppleProductMappingRequest) Reset() {
+	*x = ConfigureAppleProductMappingRequest{}
+	mi := &file_subscriptionbilling_billing_proto_msgTypes[115]
+	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+	ms.StoreMessageInfo(mi)
+}
+
+func (x *ConfigureAppleProductMappingRequest) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*ConfigureAppleProductMappingRequest) ProtoMessage() {}
+
+func (x *ConfigureAppleProductMappingRequest) ProtoReflect() protoreflect.Message {
+	mi := &file_subscriptionbilling_billing_proto_msgTypes[115]
+	if x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use ConfigureAppleProductMappingRequest.ProtoReflect.Descriptor instead.
+func (*ConfigureAppleProductMappingRequest) Descriptor() ([]byte, []int) {
+	return file_subscriptionbilling_billing_proto_rawDescGZIP(), []int{115}
+}
+
+func (x *ConfigureAppleProductMappingRequest) GetPriceId() string {
+	if x != nil {
+		return x.PriceId
+	}
+	return ""
+}
+
+func (x *ConfigureAppleProductMappingRequest) GetBundleId() string {
+	if x != nil {
+		return x.BundleId
+	}
+	return ""
+}
+
+func (x *ConfigureAppleProductMappingRequest) GetProductId() string {
+	if x != nil {
+		return x.ProductId
+	}
+	return ""
+}
+
+func (x *ConfigureAppleProductMappingRequest) GetSubscriptionGroupId() string {
+	if x != nil {
+		return x.SubscriptionGroupId
+	}
+	return ""
+}
+
+func (x *ConfigureAppleProductMappingRequest) GetSubscriptionLevel() int32 {
+	if x != nil {
+		return x.SubscriptionLevel
+	}
+	return 0
+}
+
+func (x *ConfigureAppleProductMappingRequest) GetIsEnabled() bool {
+	if x != nil {
+		return x.IsEnabled
+	}
+	return false
+}
+
+func (x *ConfigureAppleProductMappingRequest) GetContext() *RequestContext {
+	if x != nil {
+		return x.Context
+	}
+	return nil
+}
+
+type AppleProductMappingResponse struct {
+	state               protoimpl.MessageState `protogen:"open.v1"`
+	Id                  string                 `protobuf:"bytes,1,opt,name=id,proto3" json:"id,omitempty"`
+	PlanId              string                 `protobuf:"bytes,2,opt,name=plan_id,json=planId,proto3" json:"plan_id,omitempty"`
+	PriceId             string                 `protobuf:"bytes,3,opt,name=price_id,json=priceId,proto3" json:"price_id,omitempty"`
+	BundleId            string                 `protobuf:"bytes,4,opt,name=bundle_id,json=bundleId,proto3" json:"bundle_id,omitempty"`
+	ProductId           string                 `protobuf:"bytes,5,opt,name=product_id,json=productId,proto3" json:"product_id,omitempty"`
+	SubscriptionGroupId string                 `protobuf:"bytes,6,opt,name=subscription_group_id,json=subscriptionGroupId,proto3" json:"subscription_group_id,omitempty"`
+	SubscriptionLevel   int32                  `protobuf:"varint,7,opt,name=subscription_level,json=subscriptionLevel,proto3" json:"subscription_level,omitempty"`
+	IsEnabled           bool                   `protobuf:"varint,8,opt,name=is_enabled,json=isEnabled,proto3" json:"is_enabled,omitempty"`
+	PlanCode            string                 `protobuf:"bytes,9,opt,name=plan_code,json=planCode,proto3" json:"plan_code,omitempty"`
+	PlanName            string                 `protobuf:"bytes,10,opt,name=plan_name,json=planName,proto3" json:"plan_name,omitempty"`
+	PriceCode           string                 `protobuf:"bytes,11,opt,name=price_code,json=priceCode,proto3" json:"price_code,omitempty"`
+	PriceAmount         float64                `protobuf:"fixed64,12,opt,name=price_amount,json=priceAmount,proto3" json:"price_amount,omitempty"`
+	PriceCurrency       string                 `protobuf:"bytes,13,opt,name=price_currency,json=priceCurrency,proto3" json:"price_currency,omitempty"`
+	PriceIntervalUnit   string                 `protobuf:"bytes,14,opt,name=price_interval_unit,json=priceIntervalUnit,proto3" json:"price_interval_unit,omitempty"`
+	PriceIntervalCount  int32                  `protobuf:"varint,15,opt,name=price_interval_count,json=priceIntervalCount,proto3" json:"price_interval_count,omitempty"`
+	PriceIsActive       bool                   `protobuf:"varint,16,opt,name=price_is_active,json=priceIsActive,proto3" json:"price_is_active,omitempty"`
+	unknownFields       protoimpl.UnknownFields
+	sizeCache           protoimpl.SizeCache
+}
+
+func (x *AppleProductMappingResponse) Reset() {
+	*x = AppleProductMappingResponse{}
+	mi := &file_subscriptionbilling_billing_proto_msgTypes[116]
+	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+	ms.StoreMessageInfo(mi)
+}
+
+func (x *AppleProductMappingResponse) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*AppleProductMappingResponse) ProtoMessage() {}
+
+func (x *AppleProductMappingResponse) ProtoReflect() protoreflect.Message {
+	mi := &file_subscriptionbilling_billing_proto_msgTypes[116]
+	if x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use AppleProductMappingResponse.ProtoReflect.Descriptor instead.
+func (*AppleProductMappingResponse) Descriptor() ([]byte, []int) {
+	return file_subscriptionbilling_billing_proto_rawDescGZIP(), []int{116}
+}
+
+func (x *AppleProductMappingResponse) GetId() string {
+	if x != nil {
+		return x.Id
+	}
+	return ""
+}
+
+func (x *AppleProductMappingResponse) GetPlanId() string {
+	if x != nil {
+		return x.PlanId
+	}
+	return ""
+}
+
+func (x *AppleProductMappingResponse) GetPriceId() string {
+	if x != nil {
+		return x.PriceId
+	}
+	return ""
+}
+
+func (x *AppleProductMappingResponse) GetBundleId() string {
+	if x != nil {
+		return x.BundleId
+	}
+	return ""
+}
+
+func (x *AppleProductMappingResponse) GetProductId() string {
+	if x != nil {
+		return x.ProductId
+	}
+	return ""
+}
+
+func (x *AppleProductMappingResponse) GetSubscriptionGroupId() string {
+	if x != nil {
+		return x.SubscriptionGroupId
+	}
+	return ""
+}
+
+func (x *AppleProductMappingResponse) GetSubscriptionLevel() int32 {
+	if x != nil {
+		return x.SubscriptionLevel
+	}
+	return 0
+}
+
+func (x *AppleProductMappingResponse) GetIsEnabled() bool {
+	if x != nil {
+		return x.IsEnabled
+	}
+	return false
+}
+
+func (x *AppleProductMappingResponse) GetPlanCode() string {
+	if x != nil {
+		return x.PlanCode
+	}
+	return ""
+}
+
+func (x *AppleProductMappingResponse) GetPlanName() string {
+	if x != nil {
+		return x.PlanName
+	}
+	return ""
+}
+
+func (x *AppleProductMappingResponse) GetPriceCode() string {
+	if x != nil {
+		return x.PriceCode
+	}
+	return ""
+}
+
+func (x *AppleProductMappingResponse) GetPriceAmount() float64 {
+	if x != nil {
+		return x.PriceAmount
+	}
+	return 0
+}
+
+func (x *AppleProductMappingResponse) GetPriceCurrency() string {
+	if x != nil {
+		return x.PriceCurrency
+	}
+	return ""
+}
+
+func (x *AppleProductMappingResponse) GetPriceIntervalUnit() string {
+	if x != nil {
+		return x.PriceIntervalUnit
+	}
+	return ""
+}
+
+func (x *AppleProductMappingResponse) GetPriceIntervalCount() int32 {
+	if x != nil {
+		return x.PriceIntervalCount
+	}
+	return 0
+}
+
+func (x *AppleProductMappingResponse) GetPriceIsActive() bool {
+	if x != nil {
+		return x.PriceIsActive
+	}
+	return false
+}
+
+type ListAppleProductMappingsRequest struct {
+	state         protoimpl.MessageState `protogen:"open.v1"`
+	EnabledOnly   bool                   `protobuf:"varint,1,opt,name=enabled_only,json=enabledOnly,proto3" json:"enabled_only,omitempty"`
+	unknownFields protoimpl.UnknownFields
+	sizeCache     protoimpl.SizeCache
+}
+
+func (x *ListAppleProductMappingsRequest) Reset() {
+	*x = ListAppleProductMappingsRequest{}
+	mi := &file_subscriptionbilling_billing_proto_msgTypes[117]
+	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+	ms.StoreMessageInfo(mi)
+}
+
+func (x *ListAppleProductMappingsRequest) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*ListAppleProductMappingsRequest) ProtoMessage() {}
+
+func (x *ListAppleProductMappingsRequest) ProtoReflect() protoreflect.Message {
+	mi := &file_subscriptionbilling_billing_proto_msgTypes[117]
+	if x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use ListAppleProductMappingsRequest.ProtoReflect.Descriptor instead.
+func (*ListAppleProductMappingsRequest) Descriptor() ([]byte, []int) {
+	return file_subscriptionbilling_billing_proto_rawDescGZIP(), []int{117}
+}
+
+func (x *ListAppleProductMappingsRequest) GetEnabledOnly() bool {
+	if x != nil {
+		return x.EnabledOnly
+	}
+	return false
+}
+
+type ListAppleProductMappingsResponse struct {
+	state         protoimpl.MessageState         `protogen:"open.v1"`
+	Products      []*AppleProductMappingResponse `protobuf:"bytes,1,rep,name=products,proto3" json:"products,omitempty"`
+	unknownFields protoimpl.UnknownFields
+	sizeCache     protoimpl.SizeCache
+}
+
+func (x *ListAppleProductMappingsResponse) Reset() {
+	*x = ListAppleProductMappingsResponse{}
+	mi := &file_subscriptionbilling_billing_proto_msgTypes[118]
+	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+	ms.StoreMessageInfo(mi)
+}
+
+func (x *ListAppleProductMappingsResponse) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*ListAppleProductMappingsResponse) ProtoMessage() {}
+
+func (x *ListAppleProductMappingsResponse) ProtoReflect() protoreflect.Message {
+	mi := &file_subscriptionbilling_billing_proto_msgTypes[118]
+	if x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use ListAppleProductMappingsResponse.ProtoReflect.Descriptor instead.
+func (*ListAppleProductMappingsResponse) Descriptor() ([]byte, []int) {
+	return file_subscriptionbilling_billing_proto_rawDescGZIP(), []int{118}
+}
+
+func (x *ListAppleProductMappingsResponse) GetProducts() []*AppleProductMappingResponse {
+	if x != nil {
+		return x.Products
+	}
+	return nil
+}
+
+type ApplePurchaseContextRequest struct {
+	state         protoimpl.MessageState `protogen:"open.v1"`
+	CustomerId    string                 `protobuf:"bytes,1,opt,name=customer_id,json=customerId,proto3" json:"customer_id,omitempty"`
+	BundleId      string                 `protobuf:"bytes,2,opt,name=bundle_id,json=bundleId,proto3" json:"bundle_id,omitempty"`
+	Context       *RequestContext        `protobuf:"bytes,3,opt,name=context,proto3" json:"context,omitempty"`
+	unknownFields protoimpl.UnknownFields
+	sizeCache     protoimpl.SizeCache
+}
+
+func (x *ApplePurchaseContextRequest) Reset() {
+	*x = ApplePurchaseContextRequest{}
+	mi := &file_subscriptionbilling_billing_proto_msgTypes[119]
+	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+	ms.StoreMessageInfo(mi)
+}
+
+func (x *ApplePurchaseContextRequest) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*ApplePurchaseContextRequest) ProtoMessage() {}
+
+func (x *ApplePurchaseContextRequest) ProtoReflect() protoreflect.Message {
+	mi := &file_subscriptionbilling_billing_proto_msgTypes[119]
+	if x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use ApplePurchaseContextRequest.ProtoReflect.Descriptor instead.
+func (*ApplePurchaseContextRequest) Descriptor() ([]byte, []int) {
+	return file_subscriptionbilling_billing_proto_rawDescGZIP(), []int{119}
+}
+
+func (x *ApplePurchaseContextRequest) GetCustomerId() string {
+	if x != nil {
+		return x.CustomerId
+	}
+	return ""
+}
+
+func (x *ApplePurchaseContextRequest) GetBundleId() string {
+	if x != nil {
+		return x.BundleId
+	}
+	return ""
+}
+
+func (x *ApplePurchaseContextRequest) GetContext() *RequestContext {
+	if x != nil {
+		return x.Context
+	}
+	return nil
+}
+
+type ApplePurchaseContextResponse struct {
+	state               protoimpl.MessageState         `protogen:"open.v1"`
+	AppAccountToken     string                         `protobuf:"bytes,1,opt,name=app_account_token,json=appAccountToken,proto3" json:"app_account_token,omitempty"`
+	Eligible            bool                           `protobuf:"varint,2,opt,name=eligible,proto3" json:"eligible,omitempty"`
+	IneligibilityReason string                         `protobuf:"bytes,3,opt,name=ineligibility_reason,json=ineligibilityReason,proto3" json:"ineligibility_reason,omitempty"`
+	Products            []*AppleProductMappingResponse `protobuf:"bytes,4,rep,name=products,proto3" json:"products,omitempty"`
+	unknownFields       protoimpl.UnknownFields
+	sizeCache           protoimpl.SizeCache
+}
+
+func (x *ApplePurchaseContextResponse) Reset() {
+	*x = ApplePurchaseContextResponse{}
+	mi := &file_subscriptionbilling_billing_proto_msgTypes[120]
+	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+	ms.StoreMessageInfo(mi)
+}
+
+func (x *ApplePurchaseContextResponse) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*ApplePurchaseContextResponse) ProtoMessage() {}
+
+func (x *ApplePurchaseContextResponse) ProtoReflect() protoreflect.Message {
+	mi := &file_subscriptionbilling_billing_proto_msgTypes[120]
+	if x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use ApplePurchaseContextResponse.ProtoReflect.Descriptor instead.
+func (*ApplePurchaseContextResponse) Descriptor() ([]byte, []int) {
+	return file_subscriptionbilling_billing_proto_rawDescGZIP(), []int{120}
+}
+
+func (x *ApplePurchaseContextResponse) GetAppAccountToken() string {
+	if x != nil {
+		return x.AppAccountToken
+	}
+	return ""
+}
+
+func (x *ApplePurchaseContextResponse) GetEligible() bool {
+	if x != nil {
+		return x.Eligible
+	}
+	return false
+}
+
+func (x *ApplePurchaseContextResponse) GetIneligibilityReason() string {
+	if x != nil {
+		return x.IneligibilityReason
+	}
+	return ""
+}
+
+func (x *ApplePurchaseContextResponse) GetProducts() []*AppleProductMappingResponse {
+	if x != nil {
+		return x.Products
+	}
+	return nil
+}
+
+type CreateApplePurchaseReservationRequest struct {
+	state                 protoimpl.MessageState `protogen:"open.v1"`
+	CustomerId            string                 `protobuf:"bytes,1,opt,name=customer_id,json=customerId,proto3" json:"customer_id,omitempty"`
+	AppleProductMappingId string                 `protobuf:"bytes,2,opt,name=apple_product_mapping_id,json=appleProductMappingId,proto3" json:"apple_product_mapping_id,omitempty"`
+	Context               *RequestContext        `protobuf:"bytes,3,opt,name=context,proto3" json:"context,omitempty"`
+	unknownFields         protoimpl.UnknownFields
+	sizeCache             protoimpl.SizeCache
+}
+
+func (x *CreateApplePurchaseReservationRequest) Reset() {
+	*x = CreateApplePurchaseReservationRequest{}
+	mi := &file_subscriptionbilling_billing_proto_msgTypes[121]
+	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+	ms.StoreMessageInfo(mi)
+}
+
+func (x *CreateApplePurchaseReservationRequest) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*CreateApplePurchaseReservationRequest) ProtoMessage() {}
+
+func (x *CreateApplePurchaseReservationRequest) ProtoReflect() protoreflect.Message {
+	mi := &file_subscriptionbilling_billing_proto_msgTypes[121]
+	if x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use CreateApplePurchaseReservationRequest.ProtoReflect.Descriptor instead.
+func (*CreateApplePurchaseReservationRequest) Descriptor() ([]byte, []int) {
+	return file_subscriptionbilling_billing_proto_rawDescGZIP(), []int{121}
+}
+
+func (x *CreateApplePurchaseReservationRequest) GetCustomerId() string {
+	if x != nil {
+		return x.CustomerId
+	}
+	return ""
+}
+
+func (x *CreateApplePurchaseReservationRequest) GetAppleProductMappingId() string {
+	if x != nil {
+		return x.AppleProductMappingId
+	}
+	return ""
+}
+
+func (x *CreateApplePurchaseReservationRequest) GetContext() *RequestContext {
+	if x != nil {
+		return x.Context
+	}
+	return nil
+}
+
+type ApplePurchaseReservationResponse struct {
+	state                 protoimpl.MessageState `protogen:"open.v1"`
+	Id                    string                 `protobuf:"bytes,1,opt,name=id,proto3" json:"id,omitempty"`
+	AppleProductMappingId string                 `protobuf:"bytes,2,opt,name=apple_product_mapping_id,json=appleProductMappingId,proto3" json:"apple_product_mapping_id,omitempty"`
+	AppAccountToken       string                 `protobuf:"bytes,3,opt,name=app_account_token,json=appAccountToken,proto3" json:"app_account_token,omitempty"`
+	Status                string                 `protobuf:"bytes,4,opt,name=status,proto3" json:"status,omitempty"`
+	ExpiresAtUtc          string                 `protobuf:"bytes,5,opt,name=expires_at_utc,json=expiresAtUtc,proto3" json:"expires_at_utc,omitempty"`
+	unknownFields         protoimpl.UnknownFields
+	sizeCache             protoimpl.SizeCache
+}
+
+func (x *ApplePurchaseReservationResponse) Reset() {
+	*x = ApplePurchaseReservationResponse{}
+	mi := &file_subscriptionbilling_billing_proto_msgTypes[122]
+	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+	ms.StoreMessageInfo(mi)
+}
+
+func (x *ApplePurchaseReservationResponse) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*ApplePurchaseReservationResponse) ProtoMessage() {}
+
+func (x *ApplePurchaseReservationResponse) ProtoReflect() protoreflect.Message {
+	mi := &file_subscriptionbilling_billing_proto_msgTypes[122]
+	if x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use ApplePurchaseReservationResponse.ProtoReflect.Descriptor instead.
+func (*ApplePurchaseReservationResponse) Descriptor() ([]byte, []int) {
+	return file_subscriptionbilling_billing_proto_rawDescGZIP(), []int{122}
+}
+
+func (x *ApplePurchaseReservationResponse) GetId() string {
+	if x != nil {
+		return x.Id
+	}
+	return ""
+}
+
+func (x *ApplePurchaseReservationResponse) GetAppleProductMappingId() string {
+	if x != nil {
+		return x.AppleProductMappingId
+	}
+	return ""
+}
+
+func (x *ApplePurchaseReservationResponse) GetAppAccountToken() string {
+	if x != nil {
+		return x.AppAccountToken
+	}
+	return ""
+}
+
+func (x *ApplePurchaseReservationResponse) GetStatus() string {
+	if x != nil {
+		return x.Status
+	}
+	return ""
+}
+
+func (x *ApplePurchaseReservationResponse) GetExpiresAtUtc() string {
+	if x != nil {
+		return x.ExpiresAtUtc
+	}
+	return ""
+}
+
+type SynchronizeAppleTransactionRequest struct {
+	state             protoimpl.MessageState `protogen:"open.v1"`
+	CustomerId        string                 `protobuf:"bytes,1,opt,name=customer_id,json=customerId,proto3" json:"customer_id,omitempty"`
+	SignedTransaction string                 `protobuf:"bytes,2,opt,name=signed_transaction,json=signedTransaction,proto3" json:"signed_transaction,omitempty"`
+	ReservationId     string                 `protobuf:"bytes,3,opt,name=reservation_id,json=reservationId,proto3" json:"reservation_id,omitempty"`
+	Context           *RequestContext        `protobuf:"bytes,4,opt,name=context,proto3" json:"context,omitempty"`
+	unknownFields     protoimpl.UnknownFields
+	sizeCache         protoimpl.SizeCache
+}
+
+func (x *SynchronizeAppleTransactionRequest) Reset() {
+	*x = SynchronizeAppleTransactionRequest{}
+	mi := &file_subscriptionbilling_billing_proto_msgTypes[123]
+	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+	ms.StoreMessageInfo(mi)
+}
+
+func (x *SynchronizeAppleTransactionRequest) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*SynchronizeAppleTransactionRequest) ProtoMessage() {}
+
+func (x *SynchronizeAppleTransactionRequest) ProtoReflect() protoreflect.Message {
+	mi := &file_subscriptionbilling_billing_proto_msgTypes[123]
+	if x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use SynchronizeAppleTransactionRequest.ProtoReflect.Descriptor instead.
+func (*SynchronizeAppleTransactionRequest) Descriptor() ([]byte, []int) {
+	return file_subscriptionbilling_billing_proto_rawDescGZIP(), []int{123}
+}
+
+func (x *SynchronizeAppleTransactionRequest) GetCustomerId() string {
+	if x != nil {
+		return x.CustomerId
+	}
+	return ""
+}
+
+func (x *SynchronizeAppleTransactionRequest) GetSignedTransaction() string {
+	if x != nil {
+		return x.SignedTransaction
+	}
+	return ""
+}
+
+func (x *SynchronizeAppleTransactionRequest) GetReservationId() string {
+	if x != nil {
+		return x.ReservationId
+	}
+	return ""
+}
+
+func (x *SynchronizeAppleTransactionRequest) GetContext() *RequestContext {
+	if x != nil {
+		return x.Context
+	}
+	return nil
+}
+
+type AppleTransactionResponse struct {
+	state                      protoimpl.MessageState `protogen:"open.v1"`
+	Id                         string                 `protobuf:"bytes,1,opt,name=id,proto3" json:"id,omitempty"`
+	CustomerId                 string                 `protobuf:"bytes,2,opt,name=customer_id,json=customerId,proto3" json:"customer_id,omitempty"`
+	TransactionId              string                 `protobuf:"bytes,3,opt,name=transaction_id,json=transactionId,proto3" json:"transaction_id,omitempty"`
+	OriginalTransactionId      string                 `protobuf:"bytes,4,opt,name=original_transaction_id,json=originalTransactionId,proto3" json:"original_transaction_id,omitempty"`
+	ProductId                  string                 `protobuf:"bytes,5,opt,name=product_id,json=productId,proto3" json:"product_id,omitempty"`
+	BundleId                   string                 `protobuf:"bytes,6,opt,name=bundle_id,json=bundleId,proto3" json:"bundle_id,omitempty"`
+	Environment                string                 `protobuf:"bytes,7,opt,name=environment,proto3" json:"environment,omitempty"`
+	State                      string                 `protobuf:"bytes,8,opt,name=state,proto3" json:"state,omitempty"`
+	ReceivedAtUtc              string                 `protobuf:"bytes,9,opt,name=received_at_utc,json=receivedAtUtc,proto3" json:"received_at_utc,omitempty"`
+	VerifiedAtUtc              string                 `protobuf:"bytes,10,opt,name=verified_at_utc,json=verifiedAtUtc,proto3" json:"verified_at_utc,omitempty"`
+	ReconciliationAttemptCount int32                  `protobuf:"varint,11,opt,name=reconciliation_attempt_count,json=reconciliationAttemptCount,proto3" json:"reconciliation_attempt_count,omitempty"`
+	LastReconciliationFailure  string                 `protobuf:"bytes,12,opt,name=last_reconciliation_failure,json=lastReconciliationFailure,proto3" json:"last_reconciliation_failure,omitempty"`
+	NextReconciliationAtUtc    string                 `protobuf:"bytes,13,opt,name=next_reconciliation_at_utc,json=nextReconciliationAtUtc,proto3" json:"next_reconciliation_at_utc,omitempty"`
+	unknownFields              protoimpl.UnknownFields
+	sizeCache                  protoimpl.SizeCache
+}
+
+func (x *AppleTransactionResponse) Reset() {
+	*x = AppleTransactionResponse{}
+	mi := &file_subscriptionbilling_billing_proto_msgTypes[124]
+	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+	ms.StoreMessageInfo(mi)
+}
+
+func (x *AppleTransactionResponse) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*AppleTransactionResponse) ProtoMessage() {}
+
+func (x *AppleTransactionResponse) ProtoReflect() protoreflect.Message {
+	mi := &file_subscriptionbilling_billing_proto_msgTypes[124]
+	if x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use AppleTransactionResponse.ProtoReflect.Descriptor instead.
+func (*AppleTransactionResponse) Descriptor() ([]byte, []int) {
+	return file_subscriptionbilling_billing_proto_rawDescGZIP(), []int{124}
+}
+
+func (x *AppleTransactionResponse) GetId() string {
+	if x != nil {
+		return x.Id
+	}
+	return ""
+}
+
+func (x *AppleTransactionResponse) GetCustomerId() string {
+	if x != nil {
+		return x.CustomerId
+	}
+	return ""
+}
+
+func (x *AppleTransactionResponse) GetTransactionId() string {
+	if x != nil {
+		return x.TransactionId
+	}
+	return ""
+}
+
+func (x *AppleTransactionResponse) GetOriginalTransactionId() string {
+	if x != nil {
+		return x.OriginalTransactionId
+	}
+	return ""
+}
+
+func (x *AppleTransactionResponse) GetProductId() string {
+	if x != nil {
+		return x.ProductId
+	}
+	return ""
+}
+
+func (x *AppleTransactionResponse) GetBundleId() string {
+	if x != nil {
+		return x.BundleId
+	}
+	return ""
+}
+
+func (x *AppleTransactionResponse) GetEnvironment() string {
+	if x != nil {
+		return x.Environment
+	}
+	return ""
+}
+
+func (x *AppleTransactionResponse) GetState() string {
+	if x != nil {
+		return x.State
+	}
+	return ""
+}
+
+func (x *AppleTransactionResponse) GetReceivedAtUtc() string {
+	if x != nil {
+		return x.ReceivedAtUtc
+	}
+	return ""
+}
+
+func (x *AppleTransactionResponse) GetVerifiedAtUtc() string {
+	if x != nil {
+		return x.VerifiedAtUtc
+	}
+	return ""
+}
+
+func (x *AppleTransactionResponse) GetReconciliationAttemptCount() int32 {
+	if x != nil {
+		return x.ReconciliationAttemptCount
+	}
+	return 0
+}
+
+func (x *AppleTransactionResponse) GetLastReconciliationFailure() string {
+	if x != nil {
+		return x.LastReconciliationFailure
+	}
+	return ""
+}
+
+func (x *AppleTransactionResponse) GetNextReconciliationAtUtc() string {
+	if x != nil {
+		return x.NextReconciliationAtUtc
+	}
+	return ""
+}
+
+type AppleTransactionSyncResponse struct {
+	state         protoimpl.MessageState    `protogen:"open.v1"`
+	Transaction   *AppleTransactionResponse `protobuf:"bytes,1,opt,name=transaction,proto3" json:"transaction,omitempty"`
+	Subscription  *SubscriptionResponse     `protobuf:"bytes,2,opt,name=subscription,proto3" json:"subscription,omitempty"`
+	Pending       bool                      `protobuf:"varint,3,opt,name=pending,proto3" json:"pending,omitempty"`
+	unknownFields protoimpl.UnknownFields
+	sizeCache     protoimpl.SizeCache
+}
+
+func (x *AppleTransactionSyncResponse) Reset() {
+	*x = AppleTransactionSyncResponse{}
+	mi := &file_subscriptionbilling_billing_proto_msgTypes[125]
+	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+	ms.StoreMessageInfo(mi)
+}
+
+func (x *AppleTransactionSyncResponse) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*AppleTransactionSyncResponse) ProtoMessage() {}
+
+func (x *AppleTransactionSyncResponse) ProtoReflect() protoreflect.Message {
+	mi := &file_subscriptionbilling_billing_proto_msgTypes[125]
+	if x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use AppleTransactionSyncResponse.ProtoReflect.Descriptor instead.
+func (*AppleTransactionSyncResponse) Descriptor() ([]byte, []int) {
+	return file_subscriptionbilling_billing_proto_rawDescGZIP(), []int{125}
+}
+
+func (x *AppleTransactionSyncResponse) GetTransaction() *AppleTransactionResponse {
+	if x != nil {
+		return x.Transaction
+	}
+	return nil
+}
+
+func (x *AppleTransactionSyncResponse) GetSubscription() *SubscriptionResponse {
+	if x != nil {
+		return x.Subscription
+	}
+	return nil
+}
+
+func (x *AppleTransactionSyncResponse) GetPending() bool {
+	if x != nil {
+		return x.Pending
+	}
+	return false
+}
+
+type ListAppleTransactionsRequest struct {
+	state         protoimpl.MessageState `protogen:"open.v1"`
+	State         string                 `protobuf:"bytes,1,opt,name=state,proto3" json:"state,omitempty"`
+	Limit         int32                  `protobuf:"varint,2,opt,name=limit,proto3" json:"limit,omitempty"`
+	unknownFields protoimpl.UnknownFields
+	sizeCache     protoimpl.SizeCache
+}
+
+func (x *ListAppleTransactionsRequest) Reset() {
+	*x = ListAppleTransactionsRequest{}
+	mi := &file_subscriptionbilling_billing_proto_msgTypes[126]
+	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+	ms.StoreMessageInfo(mi)
+}
+
+func (x *ListAppleTransactionsRequest) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*ListAppleTransactionsRequest) ProtoMessage() {}
+
+func (x *ListAppleTransactionsRequest) ProtoReflect() protoreflect.Message {
+	mi := &file_subscriptionbilling_billing_proto_msgTypes[126]
+	if x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use ListAppleTransactionsRequest.ProtoReflect.Descriptor instead.
+func (*ListAppleTransactionsRequest) Descriptor() ([]byte, []int) {
+	return file_subscriptionbilling_billing_proto_rawDescGZIP(), []int{126}
+}
+
+func (x *ListAppleTransactionsRequest) GetState() string {
+	if x != nil {
+		return x.State
+	}
+	return ""
+}
+
+func (x *ListAppleTransactionsRequest) GetLimit() int32 {
+	if x != nil {
+		return x.Limit
+	}
+	return 0
+}
+
+type ListAppleTransactionsResponse struct {
+	state         protoimpl.MessageState      `protogen:"open.v1"`
+	Transactions  []*AppleTransactionResponse `protobuf:"bytes,1,rep,name=transactions,proto3" json:"transactions,omitempty"`
+	unknownFields protoimpl.UnknownFields
+	sizeCache     protoimpl.SizeCache
+}
+
+func (x *ListAppleTransactionsResponse) Reset() {
+	*x = ListAppleTransactionsResponse{}
+	mi := &file_subscriptionbilling_billing_proto_msgTypes[127]
+	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+	ms.StoreMessageInfo(mi)
+}
+
+func (x *ListAppleTransactionsResponse) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*ListAppleTransactionsResponse) ProtoMessage() {}
+
+func (x *ListAppleTransactionsResponse) ProtoReflect() protoreflect.Message {
+	mi := &file_subscriptionbilling_billing_proto_msgTypes[127]
+	if x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use ListAppleTransactionsResponse.ProtoReflect.Descriptor instead.
+func (*ListAppleTransactionsResponse) Descriptor() ([]byte, []int) {
+	return file_subscriptionbilling_billing_proto_rawDescGZIP(), []int{127}
+}
+
+func (x *ListAppleTransactionsResponse) GetTransactions() []*AppleTransactionResponse {
+	if x != nil {
+		return x.Transactions
+	}
+	return nil
+}
+
+type ReceiveAppleNotificationRequest struct {
+	state         protoimpl.MessageState `protogen:"open.v1"`
+	SignedPayload string                 `protobuf:"bytes,1,opt,name=signed_payload,json=signedPayload,proto3" json:"signed_payload,omitempty"`
+	Context       *RequestContext        `protobuf:"bytes,2,opt,name=context,proto3" json:"context,omitempty"`
+	unknownFields protoimpl.UnknownFields
+	sizeCache     protoimpl.SizeCache
+}
+
+func (x *ReceiveAppleNotificationRequest) Reset() {
+	*x = ReceiveAppleNotificationRequest{}
+	mi := &file_subscriptionbilling_billing_proto_msgTypes[128]
+	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+	ms.StoreMessageInfo(mi)
+}
+
+func (x *ReceiveAppleNotificationRequest) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*ReceiveAppleNotificationRequest) ProtoMessage() {}
+
+func (x *ReceiveAppleNotificationRequest) ProtoReflect() protoreflect.Message {
+	mi := &file_subscriptionbilling_billing_proto_msgTypes[128]
+	if x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use ReceiveAppleNotificationRequest.ProtoReflect.Descriptor instead.
+func (*ReceiveAppleNotificationRequest) Descriptor() ([]byte, []int) {
+	return file_subscriptionbilling_billing_proto_rawDescGZIP(), []int{128}
+}
+
+func (x *ReceiveAppleNotificationRequest) GetSignedPayload() string {
+	if x != nil {
+		return x.SignedPayload
+	}
+	return ""
+}
+
+func (x *ReceiveAppleNotificationRequest) GetContext() *RequestContext {
+	if x != nil {
+		return x.Context
+	}
+	return nil
+}
+
+type AppleNotificationReceiptResponse struct {
+	state            protoimpl.MessageState `protogen:"open.v1"`
+	Id               string                 `protobuf:"bytes,1,opt,name=id,proto3" json:"id,omitempty"`
+	NotificationUuid string                 `protobuf:"bytes,2,opt,name=notification_uuid,json=notificationUuid,proto3" json:"notification_uuid,omitempty"`
+	ProcessingStatus string                 `protobuf:"bytes,3,opt,name=processing_status,json=processingStatus,proto3" json:"processing_status,omitempty"`
+	Duplicate        bool                   `protobuf:"varint,4,opt,name=duplicate,proto3" json:"duplicate,omitempty"`
+	unknownFields    protoimpl.UnknownFields
+	sizeCache        protoimpl.SizeCache
+}
+
+func (x *AppleNotificationReceiptResponse) Reset() {
+	*x = AppleNotificationReceiptResponse{}
+	mi := &file_subscriptionbilling_billing_proto_msgTypes[129]
+	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+	ms.StoreMessageInfo(mi)
+}
+
+func (x *AppleNotificationReceiptResponse) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*AppleNotificationReceiptResponse) ProtoMessage() {}
+
+func (x *AppleNotificationReceiptResponse) ProtoReflect() protoreflect.Message {
+	mi := &file_subscriptionbilling_billing_proto_msgTypes[129]
+	if x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use AppleNotificationReceiptResponse.ProtoReflect.Descriptor instead.
+func (*AppleNotificationReceiptResponse) Descriptor() ([]byte, []int) {
+	return file_subscriptionbilling_billing_proto_rawDescGZIP(), []int{129}
+}
+
+func (x *AppleNotificationReceiptResponse) GetId() string {
+	if x != nil {
+		return x.Id
+	}
+	return ""
+}
+
+func (x *AppleNotificationReceiptResponse) GetNotificationUuid() string {
+	if x != nil {
+		return x.NotificationUuid
+	}
+	return ""
+}
+
+func (x *AppleNotificationReceiptResponse) GetProcessingStatus() string {
+	if x != nil {
+		return x.ProcessingStatus
+	}
+	return ""
+}
+
+func (x *AppleNotificationReceiptResponse) GetDuplicate() bool {
+	if x != nil {
+		return x.Duplicate
+	}
+	return false
+}
+
+type ListAppleNotificationsRequest struct {
+	state            protoimpl.MessageState `protogen:"open.v1"`
+	Status           string                 `protobuf:"bytes,1,opt,name=status,proto3" json:"status,omitempty"`
+	Limit            int32                  `protobuf:"varint,2,opt,name=limit,proto3" json:"limit,omitempty"`
+	Environment      string                 `protobuf:"bytes,3,opt,name=environment,proto3" json:"environment,omitempty"`
+	NotificationType string                 `protobuf:"bytes,4,opt,name=notification_type,json=notificationType,proto3" json:"notification_type,omitempty"`
+	unknownFields    protoimpl.UnknownFields
+	sizeCache        protoimpl.SizeCache
+}
+
+func (x *ListAppleNotificationsRequest) Reset() {
+	*x = ListAppleNotificationsRequest{}
+	mi := &file_subscriptionbilling_billing_proto_msgTypes[130]
+	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+	ms.StoreMessageInfo(mi)
+}
+
+func (x *ListAppleNotificationsRequest) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*ListAppleNotificationsRequest) ProtoMessage() {}
+
+func (x *ListAppleNotificationsRequest) ProtoReflect() protoreflect.Message {
+	mi := &file_subscriptionbilling_billing_proto_msgTypes[130]
+	if x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use ListAppleNotificationsRequest.ProtoReflect.Descriptor instead.
+func (*ListAppleNotificationsRequest) Descriptor() ([]byte, []int) {
+	return file_subscriptionbilling_billing_proto_rawDescGZIP(), []int{130}
+}
+
+func (x *ListAppleNotificationsRequest) GetStatus() string {
+	if x != nil {
+		return x.Status
+	}
+	return ""
+}
+
+func (x *ListAppleNotificationsRequest) GetLimit() int32 {
+	if x != nil {
+		return x.Limit
+	}
+	return 0
+}
+
+func (x *ListAppleNotificationsRequest) GetEnvironment() string {
+	if x != nil {
+		return x.Environment
+	}
+	return ""
+}
+
+func (x *ListAppleNotificationsRequest) GetNotificationType() string {
+	if x != nil {
+		return x.NotificationType
+	}
+	return ""
+}
+
+type AppleNotificationResponse struct {
+	state                             protoimpl.MessageState `protogen:"open.v1"`
+	Id                                string                 `protobuf:"bytes,1,opt,name=id,proto3" json:"id,omitempty"`
+	NotificationUuid                  string                 `protobuf:"bytes,2,opt,name=notification_uuid,json=notificationUuid,proto3" json:"notification_uuid,omitempty"`
+	NotificationType                  string                 `protobuf:"bytes,3,opt,name=notification_type,json=notificationType,proto3" json:"notification_type,omitempty"`
+	Subtype                           string                 `protobuf:"bytes,4,opt,name=subtype,proto3" json:"subtype,omitempty"`
+	ProcessingStatus                  string                 `protobuf:"bytes,5,opt,name=processing_status,json=processingStatus,proto3" json:"processing_status,omitempty"`
+	Environment                       string                 `protobuf:"bytes,6,opt,name=environment,proto3" json:"environment,omitempty"`
+	BundleId                          string                 `protobuf:"bytes,7,opt,name=bundle_id,json=bundleId,proto3" json:"bundle_id,omitempty"`
+	OriginalTransactionId             string                 `protobuf:"bytes,8,opt,name=original_transaction_id,json=originalTransactionId,proto3" json:"original_transaction_id,omitempty"`
+	AppleSubscriptionLineageId        string                 `protobuf:"bytes,9,opt,name=apple_subscription_lineage_id,json=appleSubscriptionLineageId,proto3" json:"apple_subscription_lineage_id,omitempty"`
+	AutoRenewProductId                string                 `protobuf:"bytes,10,opt,name=auto_renew_product_id,json=autoRenewProductId,proto3" json:"auto_renew_product_id,omitempty"`
+	AutoRenewEnabled                  bool                   `protobuf:"varint,11,opt,name=auto_renew_enabled,json=autoRenewEnabled,proto3" json:"auto_renew_enabled,omitempty"`
+	AutoRenewStatusKnown              bool                   `protobuf:"varint,12,opt,name=auto_renew_status_known,json=autoRenewStatusKnown,proto3" json:"auto_renew_status_known,omitempty"`
+	RetryCount                        int32                  `protobuf:"varint,13,opt,name=retry_count,json=retryCount,proto3" json:"retry_count,omitempty"`
+	LastProcessingError               string                 `protobuf:"bytes,14,opt,name=last_processing_error,json=lastProcessingError,proto3" json:"last_processing_error,omitempty"`
+	ReceivedAtUtc                     string                 `protobuf:"bytes,15,opt,name=received_at_utc,json=receivedAtUtc,proto3" json:"received_at_utc,omitempty"`
+	ProcessedAtUtc                    string                 `protobuf:"bytes,16,opt,name=processed_at_utc,json=processedAtUtc,proto3" json:"processed_at_utc,omitempty"`
+	LastSuccessfulReconciliationAtUtc string                 `protobuf:"bytes,17,opt,name=last_successful_reconciliation_at_utc,json=lastSuccessfulReconciliationAtUtc,proto3" json:"last_successful_reconciliation_at_utc,omitempty"`
+	NextProcessingAtUtc               string                 `protobuf:"bytes,18,opt,name=next_processing_at_utc,json=nextProcessingAtUtc,proto3" json:"next_processing_at_utc,omitempty"`
+	unknownFields                     protoimpl.UnknownFields
+	sizeCache                         protoimpl.SizeCache
+}
+
+func (x *AppleNotificationResponse) Reset() {
+	*x = AppleNotificationResponse{}
+	mi := &file_subscriptionbilling_billing_proto_msgTypes[131]
+	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+	ms.StoreMessageInfo(mi)
+}
+
+func (x *AppleNotificationResponse) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*AppleNotificationResponse) ProtoMessage() {}
+
+func (x *AppleNotificationResponse) ProtoReflect() protoreflect.Message {
+	mi := &file_subscriptionbilling_billing_proto_msgTypes[131]
+	if x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use AppleNotificationResponse.ProtoReflect.Descriptor instead.
+func (*AppleNotificationResponse) Descriptor() ([]byte, []int) {
+	return file_subscriptionbilling_billing_proto_rawDescGZIP(), []int{131}
+}
+
+func (x *AppleNotificationResponse) GetId() string {
+	if x != nil {
+		return x.Id
+	}
+	return ""
+}
+
+func (x *AppleNotificationResponse) GetNotificationUuid() string {
+	if x != nil {
+		return x.NotificationUuid
+	}
+	return ""
+}
+
+func (x *AppleNotificationResponse) GetNotificationType() string {
+	if x != nil {
+		return x.NotificationType
+	}
+	return ""
+}
+
+func (x *AppleNotificationResponse) GetSubtype() string {
+	if x != nil {
+		return x.Subtype
+	}
+	return ""
+}
+
+func (x *AppleNotificationResponse) GetProcessingStatus() string {
+	if x != nil {
+		return x.ProcessingStatus
+	}
+	return ""
+}
+
+func (x *AppleNotificationResponse) GetEnvironment() string {
+	if x != nil {
+		return x.Environment
+	}
+	return ""
+}
+
+func (x *AppleNotificationResponse) GetBundleId() string {
+	if x != nil {
+		return x.BundleId
+	}
+	return ""
+}
+
+func (x *AppleNotificationResponse) GetOriginalTransactionId() string {
+	if x != nil {
+		return x.OriginalTransactionId
+	}
+	return ""
+}
+
+func (x *AppleNotificationResponse) GetAppleSubscriptionLineageId() string {
+	if x != nil {
+		return x.AppleSubscriptionLineageId
+	}
+	return ""
+}
+
+func (x *AppleNotificationResponse) GetAutoRenewProductId() string {
+	if x != nil {
+		return x.AutoRenewProductId
+	}
+	return ""
+}
+
+func (x *AppleNotificationResponse) GetAutoRenewEnabled() bool {
+	if x != nil {
+		return x.AutoRenewEnabled
+	}
+	return false
+}
+
+func (x *AppleNotificationResponse) GetAutoRenewStatusKnown() bool {
+	if x != nil {
+		return x.AutoRenewStatusKnown
+	}
+	return false
+}
+
+func (x *AppleNotificationResponse) GetRetryCount() int32 {
+	if x != nil {
+		return x.RetryCount
+	}
+	return 0
+}
+
+func (x *AppleNotificationResponse) GetLastProcessingError() string {
+	if x != nil {
+		return x.LastProcessingError
+	}
+	return ""
+}
+
+func (x *AppleNotificationResponse) GetReceivedAtUtc() string {
+	if x != nil {
+		return x.ReceivedAtUtc
+	}
+	return ""
+}
+
+func (x *AppleNotificationResponse) GetProcessedAtUtc() string {
+	if x != nil {
+		return x.ProcessedAtUtc
+	}
+	return ""
+}
+
+func (x *AppleNotificationResponse) GetLastSuccessfulReconciliationAtUtc() string {
+	if x != nil {
+		return x.LastSuccessfulReconciliationAtUtc
+	}
+	return ""
+}
+
+func (x *AppleNotificationResponse) GetNextProcessingAtUtc() string {
+	if x != nil {
+		return x.NextProcessingAtUtc
+	}
+	return ""
+}
+
+type ListAppleNotificationsResponse struct {
+	state         protoimpl.MessageState       `protogen:"open.v1"`
+	Notifications []*AppleNotificationResponse `protobuf:"bytes,1,rep,name=notifications,proto3" json:"notifications,omitempty"`
+	unknownFields protoimpl.UnknownFields
+	sizeCache     protoimpl.SizeCache
+}
+
+func (x *ListAppleNotificationsResponse) Reset() {
+	*x = ListAppleNotificationsResponse{}
+	mi := &file_subscriptionbilling_billing_proto_msgTypes[132]
+	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+	ms.StoreMessageInfo(mi)
+}
+
+func (x *ListAppleNotificationsResponse) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*ListAppleNotificationsResponse) ProtoMessage() {}
+
+func (x *ListAppleNotificationsResponse) ProtoReflect() protoreflect.Message {
+	mi := &file_subscriptionbilling_billing_proto_msgTypes[132]
+	if x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use ListAppleNotificationsResponse.ProtoReflect.Descriptor instead.
+func (*ListAppleNotificationsResponse) Descriptor() ([]byte, []int) {
+	return file_subscriptionbilling_billing_proto_rawDescGZIP(), []int{132}
+}
+
+func (x *ListAppleNotificationsResponse) GetNotifications() []*AppleNotificationResponse {
+	if x != nil {
+		return x.Notifications
+	}
+	return nil
+}
+
 var File_subscriptionbilling_billing_proto protoreflect.FileDescriptor
 
 const file_subscriptionbilling_billing_proto_rawDesc = "" +
@@ -10234,7 +11618,131 @@ const file_subscriptionbilling_billing_proto_rawDesc = "" +
 	"\x02id\x18\x01 \x01(\tR\x02id\x12\x12\n" +
 	"\x04name\x18\x02 \x01(\tR\x04name\x12 \n" +
 	"\vdescription\x18\x03 \x01(\tR\vdescription\x12=\n" +
-	"\acontext\x18\x04 \x01(\v2#.subscriptionbilling.RequestContextR\acontext2\x96C\n" +
+	"\acontext\x18\x04 \x01(\v2#.subscriptionbilling.RequestContextR\acontext\"\xbd\x02\n" +
+	"#ConfigureAppleProductMappingRequest\x12\x19\n" +
+	"\bprice_id\x18\x01 \x01(\tR\apriceId\x12\x1b\n" +
+	"\tbundle_id\x18\x02 \x01(\tR\bbundleId\x12\x1d\n" +
+	"\n" +
+	"product_id\x18\x03 \x01(\tR\tproductId\x122\n" +
+	"\x15subscription_group_id\x18\x04 \x01(\tR\x13subscriptionGroupId\x12-\n" +
+	"\x12subscription_level\x18\x05 \x01(\x05R\x11subscriptionLevel\x12\x1d\n" +
+	"\n" +
+	"is_enabled\x18\x06 \x01(\bR\tisEnabled\x12=\n" +
+	"\acontext\x18\a \x01(\v2#.subscriptionbilling.RequestContextR\acontext\"\xcc\x04\n" +
+	"\x1bAppleProductMappingResponse\x12\x0e\n" +
+	"\x02id\x18\x01 \x01(\tR\x02id\x12\x17\n" +
+	"\aplan_id\x18\x02 \x01(\tR\x06planId\x12\x19\n" +
+	"\bprice_id\x18\x03 \x01(\tR\apriceId\x12\x1b\n" +
+	"\tbundle_id\x18\x04 \x01(\tR\bbundleId\x12\x1d\n" +
+	"\n" +
+	"product_id\x18\x05 \x01(\tR\tproductId\x122\n" +
+	"\x15subscription_group_id\x18\x06 \x01(\tR\x13subscriptionGroupId\x12-\n" +
+	"\x12subscription_level\x18\a \x01(\x05R\x11subscriptionLevel\x12\x1d\n" +
+	"\n" +
+	"is_enabled\x18\b \x01(\bR\tisEnabled\x12\x1b\n" +
+	"\tplan_code\x18\t \x01(\tR\bplanCode\x12\x1b\n" +
+	"\tplan_name\x18\n" +
+	" \x01(\tR\bplanName\x12\x1d\n" +
+	"\n" +
+	"price_code\x18\v \x01(\tR\tpriceCode\x12!\n" +
+	"\fprice_amount\x18\f \x01(\x01R\vpriceAmount\x12%\n" +
+	"\x0eprice_currency\x18\r \x01(\tR\rpriceCurrency\x12.\n" +
+	"\x13price_interval_unit\x18\x0e \x01(\tR\x11priceIntervalUnit\x120\n" +
+	"\x14price_interval_count\x18\x0f \x01(\x05R\x12priceIntervalCount\x12&\n" +
+	"\x0fprice_is_active\x18\x10 \x01(\bR\rpriceIsActive\"D\n" +
+	"\x1fListAppleProductMappingsRequest\x12!\n" +
+	"\fenabled_only\x18\x01 \x01(\bR\venabledOnly\"p\n" +
+	" ListAppleProductMappingsResponse\x12L\n" +
+	"\bproducts\x18\x01 \x03(\v20.subscriptionbilling.AppleProductMappingResponseR\bproducts\"\x9a\x01\n" +
+	"\x1bApplePurchaseContextRequest\x12\x1f\n" +
+	"\vcustomer_id\x18\x01 \x01(\tR\n" +
+	"customerId\x12\x1b\n" +
+	"\tbundle_id\x18\x02 \x01(\tR\bbundleId\x12=\n" +
+	"\acontext\x18\x03 \x01(\v2#.subscriptionbilling.RequestContextR\acontext\"\xe7\x01\n" +
+	"\x1cApplePurchaseContextResponse\x12*\n" +
+	"\x11app_account_token\x18\x01 \x01(\tR\x0fappAccountToken\x12\x1a\n" +
+	"\beligible\x18\x02 \x01(\bR\beligible\x121\n" +
+	"\x14ineligibility_reason\x18\x03 \x01(\tR\x13ineligibilityReason\x12L\n" +
+	"\bproducts\x18\x04 \x03(\v20.subscriptionbilling.AppleProductMappingResponseR\bproducts\"\xc0\x01\n" +
+	"%CreateApplePurchaseReservationRequest\x12\x1f\n" +
+	"\vcustomer_id\x18\x01 \x01(\tR\n" +
+	"customerId\x127\n" +
+	"\x18apple_product_mapping_id\x18\x02 \x01(\tR\x15appleProductMappingId\x12=\n" +
+	"\acontext\x18\x03 \x01(\v2#.subscriptionbilling.RequestContextR\acontext\"\xd5\x01\n" +
+	" ApplePurchaseReservationResponse\x12\x0e\n" +
+	"\x02id\x18\x01 \x01(\tR\x02id\x127\n" +
+	"\x18apple_product_mapping_id\x18\x02 \x01(\tR\x15appleProductMappingId\x12*\n" +
+	"\x11app_account_token\x18\x03 \x01(\tR\x0fappAccountToken\x12\x16\n" +
+	"\x06status\x18\x04 \x01(\tR\x06status\x12$\n" +
+	"\x0eexpires_at_utc\x18\x05 \x01(\tR\fexpiresAtUtc\"\xda\x01\n" +
+	"\"SynchronizeAppleTransactionRequest\x12\x1f\n" +
+	"\vcustomer_id\x18\x01 \x01(\tR\n" +
+	"customerId\x12-\n" +
+	"\x12signed_transaction\x18\x02 \x01(\tR\x11signedTransaction\x12%\n" +
+	"\x0ereservation_id\x18\x03 \x01(\tR\rreservationId\x12=\n" +
+	"\acontext\x18\x04 \x01(\v2#.subscriptionbilling.RequestContextR\acontext\"\xad\x04\n" +
+	"\x18AppleTransactionResponse\x12\x0e\n" +
+	"\x02id\x18\x01 \x01(\tR\x02id\x12\x1f\n" +
+	"\vcustomer_id\x18\x02 \x01(\tR\n" +
+	"customerId\x12%\n" +
+	"\x0etransaction_id\x18\x03 \x01(\tR\rtransactionId\x126\n" +
+	"\x17original_transaction_id\x18\x04 \x01(\tR\x15originalTransactionId\x12\x1d\n" +
+	"\n" +
+	"product_id\x18\x05 \x01(\tR\tproductId\x12\x1b\n" +
+	"\tbundle_id\x18\x06 \x01(\tR\bbundleId\x12 \n" +
+	"\venvironment\x18\a \x01(\tR\venvironment\x12\x14\n" +
+	"\x05state\x18\b \x01(\tR\x05state\x12&\n" +
+	"\x0freceived_at_utc\x18\t \x01(\tR\rreceivedAtUtc\x12&\n" +
+	"\x0fverified_at_utc\x18\n" +
+	" \x01(\tR\rverifiedAtUtc\x12@\n" +
+	"\x1creconciliation_attempt_count\x18\v \x01(\x05R\x1areconciliationAttemptCount\x12>\n" +
+	"\x1blast_reconciliation_failure\x18\f \x01(\tR\x19lastReconciliationFailure\x12;\n" +
+	"\x1anext_reconciliation_at_utc\x18\r \x01(\tR\x17nextReconciliationAtUtc\"\xd8\x01\n" +
+	"\x1cAppleTransactionSyncResponse\x12O\n" +
+	"\vtransaction\x18\x01 \x01(\v2-.subscriptionbilling.AppleTransactionResponseR\vtransaction\x12M\n" +
+	"\fsubscription\x18\x02 \x01(\v2).subscriptionbilling.SubscriptionResponseR\fsubscription\x12\x18\n" +
+	"\apending\x18\x03 \x01(\bR\apending\"J\n" +
+	"\x1cListAppleTransactionsRequest\x12\x14\n" +
+	"\x05state\x18\x01 \x01(\tR\x05state\x12\x14\n" +
+	"\x05limit\x18\x02 \x01(\x05R\x05limit\"r\n" +
+	"\x1dListAppleTransactionsResponse\x12Q\n" +
+	"\ftransactions\x18\x01 \x03(\v2-.subscriptionbilling.AppleTransactionResponseR\ftransactions\"\x87\x01\n" +
+	"\x1fReceiveAppleNotificationRequest\x12%\n" +
+	"\x0esigned_payload\x18\x01 \x01(\tR\rsignedPayload\x12=\n" +
+	"\acontext\x18\x02 \x01(\v2#.subscriptionbilling.RequestContextR\acontext\"\xaa\x01\n" +
+	" AppleNotificationReceiptResponse\x12\x0e\n" +
+	"\x02id\x18\x01 \x01(\tR\x02id\x12+\n" +
+	"\x11notification_uuid\x18\x02 \x01(\tR\x10notificationUuid\x12+\n" +
+	"\x11processing_status\x18\x03 \x01(\tR\x10processingStatus\x12\x1c\n" +
+	"\tduplicate\x18\x04 \x01(\bR\tduplicate\"\x9c\x01\n" +
+	"\x1dListAppleNotificationsRequest\x12\x16\n" +
+	"\x06status\x18\x01 \x01(\tR\x06status\x12\x14\n" +
+	"\x05limit\x18\x02 \x01(\x05R\x05limit\x12 \n" +
+	"\venvironment\x18\x03 \x01(\tR\venvironment\x12+\n" +
+	"\x11notification_type\x18\x04 \x01(\tR\x10notificationType\"\xcc\x06\n" +
+	"\x19AppleNotificationResponse\x12\x0e\n" +
+	"\x02id\x18\x01 \x01(\tR\x02id\x12+\n" +
+	"\x11notification_uuid\x18\x02 \x01(\tR\x10notificationUuid\x12+\n" +
+	"\x11notification_type\x18\x03 \x01(\tR\x10notificationType\x12\x18\n" +
+	"\asubtype\x18\x04 \x01(\tR\asubtype\x12+\n" +
+	"\x11processing_status\x18\x05 \x01(\tR\x10processingStatus\x12 \n" +
+	"\venvironment\x18\x06 \x01(\tR\venvironment\x12\x1b\n" +
+	"\tbundle_id\x18\a \x01(\tR\bbundleId\x126\n" +
+	"\x17original_transaction_id\x18\b \x01(\tR\x15originalTransactionId\x12A\n" +
+	"\x1dapple_subscription_lineage_id\x18\t \x01(\tR\x1aappleSubscriptionLineageId\x121\n" +
+	"\x15auto_renew_product_id\x18\n" +
+	" \x01(\tR\x12autoRenewProductId\x12,\n" +
+	"\x12auto_renew_enabled\x18\v \x01(\bR\x10autoRenewEnabled\x125\n" +
+	"\x17auto_renew_status_known\x18\f \x01(\bR\x14autoRenewStatusKnown\x12\x1f\n" +
+	"\vretry_count\x18\r \x01(\x05R\n" +
+	"retryCount\x122\n" +
+	"\x15last_processing_error\x18\x0e \x01(\tR\x13lastProcessingError\x12&\n" +
+	"\x0freceived_at_utc\x18\x0f \x01(\tR\rreceivedAtUtc\x12(\n" +
+	"\x10processed_at_utc\x18\x10 \x01(\tR\x0eprocessedAtUtc\x12P\n" +
+	"%last_successful_reconciliation_at_utc\x18\x11 \x01(\tR!lastSuccessfulReconciliationAtUtc\x123\n" +
+	"\x16next_processing_at_utc\x18\x12 \x01(\tR\x13nextProcessingAtUtc\"v\n" +
+	"\x1eListAppleNotificationsResponse\x12T\n" +
+	"\rnotifications\x18\x01 \x03(\v2..subscriptionbilling.AppleNotificationResponseR\rnotifications2\xddK\n" +
 	"\x16SubscriptionBillingApi\x12_\n" +
 	"\rCreateProduct\x12).subscriptionbilling.CreateProductRequest\x1a#.subscriptionbilling.EntityResponse\x12`\n" +
 	"\rUpdateProduct\x12).subscriptionbilling.UpdateProductRequest\x1a$.subscriptionbilling.ProductResponse\x12]\n" +
@@ -10318,7 +11826,15 @@ const file_subscriptionbilling_billing_proto_rawDesc = "" +
 	"\x0eCreateCheckout\x12*.subscriptionbilling.CreateCheckoutRequest\x1a%.subscriptionbilling.CheckoutResponse\x12q\n" +
 	"\x1bGetPaymentStatusByReference\x12,.subscriptionbilling.PaymentReferenceRequest\x1a$.subscriptionbilling.PaymentResponse\x12l\n" +
 	"\x16VerifyPaymentReference\x12,.subscriptionbilling.PaymentReferenceRequest\x1a$.subscriptionbilling.PaymentResponse\x12q\n" +
-	"\x16ReceivePaystackWebhook\x122.subscriptionbilling.ReceivePaystackWebhookRequest\x1a#.subscriptionbilling.StatusResponseB}ZSgithub.com/edadai/platform-go/contracts/subscriptionbillingpb;subscriptionbillingpb\xaa\x02%SubscriptionBillingService.Api.Protosb\x06proto3"
+	"\x16ReceivePaystackWebhook\x122.subscriptionbilling.ReceivePaystackWebhookRequest\x1a#.subscriptionbilling.StatusResponse\x12\x8a\x01\n" +
+	"\x1cConfigureAppleProductMapping\x128.subscriptionbilling.ConfigureAppleProductMappingRequest\x1a0.subscriptionbilling.AppleProductMappingResponse\x12\x87\x01\n" +
+	"\x18ListAppleProductMappings\x124.subscriptionbilling.ListAppleProductMappingsRequest\x1a5.subscriptionbilling.ListAppleProductMappingsResponse\x12~\n" +
+	"\x17GetApplePurchaseContext\x120.subscriptionbilling.ApplePurchaseContextRequest\x1a1.subscriptionbilling.ApplePurchaseContextResponse\x12\x93\x01\n" +
+	"\x1eCreateApplePurchaseReservation\x12:.subscriptionbilling.CreateApplePurchaseReservationRequest\x1a5.subscriptionbilling.ApplePurchaseReservationResponse\x12\x89\x01\n" +
+	"\x1bSynchronizeAppleTransaction\x127.subscriptionbilling.SynchronizeAppleTransactionRequest\x1a1.subscriptionbilling.AppleTransactionSyncResponse\x12~\n" +
+	"\x15ListAppleTransactions\x121.subscriptionbilling.ListAppleTransactionsRequest\x1a2.subscriptionbilling.ListAppleTransactionsResponse\x12\x87\x01\n" +
+	"\x18ReceiveAppleNotification\x124.subscriptionbilling.ReceiveAppleNotificationRequest\x1a5.subscriptionbilling.AppleNotificationReceiptResponse\x12\x81\x01\n" +
+	"\x16ListAppleNotifications\x122.subscriptionbilling.ListAppleNotificationsRequest\x1a3.subscriptionbilling.ListAppleNotificationsResponseB}ZSgithub.com/edadai/platform-go/contracts/subscriptionbillingpb;subscriptionbillingpb\xaa\x02%SubscriptionBillingService.Api.Protosb\x06proto3"
 
 var (
 	file_subscriptionbilling_billing_proto_rawDescOnce sync.Once
@@ -10332,7 +11848,7 @@ func file_subscriptionbilling_billing_proto_rawDescGZIP() []byte {
 	return file_subscriptionbilling_billing_proto_rawDescData
 }
 
-var file_subscriptionbilling_billing_proto_msgTypes = make([]protoimpl.MessageInfo, 115)
+var file_subscriptionbilling_billing_proto_msgTypes = make([]protoimpl.MessageInfo, 133)
 var file_subscriptionbilling_billing_proto_goTypes = []any{
 	(*ListPlansRequest)(nil),                           // 0: subscriptionbilling.ListPlansRequest
 	(*BillingSummaryRequest)(nil),                      // 1: subscriptionbilling.BillingSummaryRequest
@@ -10449,6 +11965,24 @@ var file_subscriptionbilling_billing_proto_goTypes = []any{
 	(*LedgerTransactionResponse)(nil),                  // 112: subscriptionbilling.LedgerTransactionResponse
 	(*ListLedgerTransactionsResponse)(nil),             // 113: subscriptionbilling.ListLedgerTransactionsResponse
 	(*UpdateProductRequest)(nil),                       // 114: subscriptionbilling.UpdateProductRequest
+	(*ConfigureAppleProductMappingRequest)(nil),        // 115: subscriptionbilling.ConfigureAppleProductMappingRequest
+	(*AppleProductMappingResponse)(nil),                // 116: subscriptionbilling.AppleProductMappingResponse
+	(*ListAppleProductMappingsRequest)(nil),            // 117: subscriptionbilling.ListAppleProductMappingsRequest
+	(*ListAppleProductMappingsResponse)(nil),           // 118: subscriptionbilling.ListAppleProductMappingsResponse
+	(*ApplePurchaseContextRequest)(nil),                // 119: subscriptionbilling.ApplePurchaseContextRequest
+	(*ApplePurchaseContextResponse)(nil),               // 120: subscriptionbilling.ApplePurchaseContextResponse
+	(*CreateApplePurchaseReservationRequest)(nil),      // 121: subscriptionbilling.CreateApplePurchaseReservationRequest
+	(*ApplePurchaseReservationResponse)(nil),           // 122: subscriptionbilling.ApplePurchaseReservationResponse
+	(*SynchronizeAppleTransactionRequest)(nil),         // 123: subscriptionbilling.SynchronizeAppleTransactionRequest
+	(*AppleTransactionResponse)(nil),                   // 124: subscriptionbilling.AppleTransactionResponse
+	(*AppleTransactionSyncResponse)(nil),               // 125: subscriptionbilling.AppleTransactionSyncResponse
+	(*ListAppleTransactionsRequest)(nil),               // 126: subscriptionbilling.ListAppleTransactionsRequest
+	(*ListAppleTransactionsResponse)(nil),              // 127: subscriptionbilling.ListAppleTransactionsResponse
+	(*ReceiveAppleNotificationRequest)(nil),            // 128: subscriptionbilling.ReceiveAppleNotificationRequest
+	(*AppleNotificationReceiptResponse)(nil),           // 129: subscriptionbilling.AppleNotificationReceiptResponse
+	(*ListAppleNotificationsRequest)(nil),              // 130: subscriptionbilling.ListAppleNotificationsRequest
+	(*AppleNotificationResponse)(nil),                  // 131: subscriptionbilling.AppleNotificationResponse
+	(*ListAppleNotificationsResponse)(nil),             // 132: subscriptionbilling.ListAppleNotificationsResponse
 }
 var file_subscriptionbilling_billing_proto_depIdxs = []int32{
 	8,   // 0: subscriptionbilling.SubscriptionStatsResponse.plan_breakdown:type_name -> subscriptionbilling.SubscriptionPlanBreakdownRow
@@ -10536,165 +12070,192 @@ var file_subscriptionbilling_billing_proto_depIdxs = []int32{
 	111, // 82: subscriptionbilling.LedgerTransactionResponse.entries:type_name -> subscriptionbilling.LedgerEntryResponse
 	112, // 83: subscriptionbilling.ListLedgerTransactionsResponse.transactions:type_name -> subscriptionbilling.LedgerTransactionResponse
 	35,  // 84: subscriptionbilling.UpdateProductRequest.context:type_name -> subscriptionbilling.RequestContext
-	39,  // 85: subscriptionbilling.SubscriptionBillingApi.CreateProduct:input_type -> subscriptionbilling.CreateProductRequest
-	114, // 86: subscriptionbilling.SubscriptionBillingApi.UpdateProduct:input_type -> subscriptionbilling.UpdateProductRequest
-	36,  // 87: subscriptionbilling.SubscriptionBillingApi.ActivateProduct:input_type -> subscriptionbilling.EntityIdRequest
-	36,  // 88: subscriptionbilling.SubscriptionBillingApi.DeactivateProduct:input_type -> subscriptionbilling.EntityIdRequest
-	40,  // 89: subscriptionbilling.SubscriptionBillingApi.CreatePlan:input_type -> subscriptionbilling.CreatePlanRequest
-	41,  // 90: subscriptionbilling.SubscriptionBillingApi.CreatePrice:input_type -> subscriptionbilling.CreatePriceRequest
-	36,  // 91: subscriptionbilling.SubscriptionBillingApi.SetDefaultPrice:input_type -> subscriptionbilling.EntityIdRequest
-	36,  // 92: subscriptionbilling.SubscriptionBillingApi.DeactivatePrice:input_type -> subscriptionbilling.EntityIdRequest
-	42,  // 93: subscriptionbilling.SubscriptionBillingApi.CreateOffer:input_type -> subscriptionbilling.CreateOfferRequest
-	44,  // 94: subscriptionbilling.SubscriptionBillingApi.UpdateOffer:input_type -> subscriptionbilling.UpdateOfferRequest
-	45,  // 95: subscriptionbilling.SubscriptionBillingApi.ConfigureOfferPhase:input_type -> subscriptionbilling.ConfigureOfferPhaseRequest
-	46,  // 96: subscriptionbilling.SubscriptionBillingApi.ConfigureCatalogPresentation:input_type -> subscriptionbilling.ConfigureCatalogPresentationRequest
-	36,  // 97: subscriptionbilling.SubscriptionBillingApi.EnableOffer:input_type -> subscriptionbilling.EntityIdRequest
-	36,  // 98: subscriptionbilling.SubscriptionBillingApi.DisableOffer:input_type -> subscriptionbilling.EntityIdRequest
-	47,  // 99: subscriptionbilling.SubscriptionBillingApi.AttachEntitlementToPlan:input_type -> subscriptionbilling.AttachEntitlementToPlanRequest
-	48,  // 100: subscriptionbilling.SubscriptionBillingApi.UpsertPlanEntitlement:input_type -> subscriptionbilling.UpsertPlanEntitlementRequest
-	49,  // 101: subscriptionbilling.SubscriptionBillingApi.ConfigureOfferPolicy:input_type -> subscriptionbilling.ConfigureOfferPolicyRequest
-	50,  // 102: subscriptionbilling.SubscriptionBillingApi.ConfigureBillingPolicy:input_type -> subscriptionbilling.ConfigureBillingPolicyRequest
-	1,   // 103: subscriptionbilling.SubscriptionBillingApi.GetBillingSummary:input_type -> subscriptionbilling.BillingSummaryRequest
-	3,   // 104: subscriptionbilling.SubscriptionBillingApi.GetSubscriptionStats:input_type -> subscriptionbilling.SubscriptionStatsRequest
-	10,  // 105: subscriptionbilling.SubscriptionBillingApi.GetChurnStats:input_type -> subscriptionbilling.ChurnStatsRequest
-	14,  // 106: subscriptionbilling.SubscriptionBillingApi.GetPaymentStats:input_type -> subscriptionbilling.PaymentStatsRequest
-	16,  // 107: subscriptionbilling.SubscriptionBillingApi.ListProducts:input_type -> subscriptionbilling.ListProductsRequest
-	0,   // 108: subscriptionbilling.SubscriptionBillingApi.ListPlans:input_type -> subscriptionbilling.ListPlansRequest
-	36,  // 109: subscriptionbilling.SubscriptionBillingApi.GetPlan:input_type -> subscriptionbilling.EntityIdRequest
-	36,  // 110: subscriptionbilling.SubscriptionBillingApi.ListPlanPrices:input_type -> subscriptionbilling.EntityIdRequest
-	27,  // 111: subscriptionbilling.SubscriptionBillingApi.ListOffers:input_type -> subscriptionbilling.ListOffersRequest
-	32,  // 112: subscriptionbilling.SubscriptionBillingApi.ListBillingPolicies:input_type -> subscriptionbilling.ListPoliciesRequest
-	19,  // 113: subscriptionbilling.SubscriptionBillingApi.UpdatePlan:input_type -> subscriptionbilling.UpdatePlanRequest
-	36,  // 114: subscriptionbilling.SubscriptionBillingApi.PublishPlan:input_type -> subscriptionbilling.EntityIdRequest
-	36,  // 115: subscriptionbilling.SubscriptionBillingApi.ArchivePlan:input_type -> subscriptionbilling.EntityIdRequest
-	38,  // 116: subscriptionbilling.SubscriptionBillingApi.ListSubscriptions:input_type -> subscriptionbilling.ListSubscriptionsRequest
-	51,  // 117: subscriptionbilling.SubscriptionBillingApi.StartSubscription:input_type -> subscriptionbilling.StartSubscriptionRequest
-	36,  // 118: subscriptionbilling.SubscriptionBillingApi.CancelSubscription:input_type -> subscriptionbilling.EntityIdRequest
-	36,  // 119: subscriptionbilling.SubscriptionBillingApi.ScheduleSubscriptionCancellation:input_type -> subscriptionbilling.EntityIdRequest
-	36,  // 120: subscriptionbilling.SubscriptionBillingApi.ResumeSubscription:input_type -> subscriptionbilling.EntityIdRequest
-	56,  // 121: subscriptionbilling.SubscriptionBillingApi.ChangePlan:input_type -> subscriptionbilling.ChangePlanRequest
-	36,  // 122: subscriptionbilling.SubscriptionBillingApi.GetSubscriptionStatus:input_type -> subscriptionbilling.EntityIdRequest
-	37,  // 123: subscriptionbilling.SubscriptionBillingApi.GetCurrentSubscription:input_type -> subscriptionbilling.CustomerRequest
-	52,  // 124: subscriptionbilling.SubscriptionBillingApi.CreateComplimentaryAccess:input_type -> subscriptionbilling.CreateComplimentaryAccessRequest
-	53,  // 125: subscriptionbilling.SubscriptionBillingApi.ListComplimentaryAccess:input_type -> subscriptionbilling.ListComplimentaryAccessRequest
-	37,  // 126: subscriptionbilling.SubscriptionBillingApi.GetCurrentComplimentaryAccess:input_type -> subscriptionbilling.CustomerRequest
-	54,  // 127: subscriptionbilling.SubscriptionBillingApi.ExtendComplimentaryAccess:input_type -> subscriptionbilling.ExtendComplimentaryAccessRequest
-	55,  // 128: subscriptionbilling.SubscriptionBillingApi.RevokeComplimentaryAccess:input_type -> subscriptionbilling.RevokeComplimentaryAccessRequest
-	57,  // 129: subscriptionbilling.SubscriptionBillingApi.CheckEntitlement:input_type -> subscriptionbilling.CheckEntitlementRequest
-	36,  // 130: subscriptionbilling.SubscriptionBillingApi.GetEntitlementSnapshot:input_type -> subscriptionbilling.EntityIdRequest
-	36,  // 131: subscriptionbilling.SubscriptionBillingApi.RefreshEntitlementSnapshot:input_type -> subscriptionbilling.EntityIdRequest
-	58,  // 132: subscriptionbilling.SubscriptionBillingApi.RecordUsage:input_type -> subscriptionbilling.RecordUsageRequest
-	59,  // 133: subscriptionbilling.SubscriptionBillingApi.CreateInvoice:input_type -> subscriptionbilling.CreateInvoiceRequest
-	36,  // 134: subscriptionbilling.SubscriptionBillingApi.GetInvoice:input_type -> subscriptionbilling.EntityIdRequest
-	102, // 135: subscriptionbilling.SubscriptionBillingApi.ListAllInvoices:input_type -> subscriptionbilling.ListBillingDocumentsRequest
-	37,  // 136: subscriptionbilling.SubscriptionBillingApi.ListInvoices:input_type -> subscriptionbilling.CustomerRequest
-	36,  // 137: subscriptionbilling.SubscriptionBillingApi.MarkManualInvoicePaid:input_type -> subscriptionbilling.EntityIdRequest
-	60,  // 138: subscriptionbilling.SubscriptionBillingApi.VoidAbandonedCheckout:input_type -> subscriptionbilling.VoidAbandonedCheckoutRequest
-	63,  // 139: subscriptionbilling.SubscriptionBillingApi.PayInvoice:input_type -> subscriptionbilling.PayInvoiceRequest
-	64,  // 140: subscriptionbilling.SubscriptionBillingApi.CreateInvoiceCheckout:input_type -> subscriptionbilling.CreateInvoiceCheckoutRequest
-	66,  // 141: subscriptionbilling.SubscriptionBillingApi.CreateCardVerificationCheckout:input_type -> subscriptionbilling.CreateCardVerificationCheckoutRequest
-	65,  // 142: subscriptionbilling.SubscriptionBillingApi.CreateUpcomingCheckout:input_type -> subscriptionbilling.CreateUpcomingCheckoutRequest
-	102, // 143: subscriptionbilling.SubscriptionBillingApi.ListPayments:input_type -> subscriptionbilling.ListBillingDocumentsRequest
-	61,  // 144: subscriptionbilling.SubscriptionBillingApi.RefundPayment:input_type -> subscriptionbilling.RefundPaymentRequest
-	62,  // 145: subscriptionbilling.SubscriptionBillingApi.RetryPayment:input_type -> subscriptionbilling.RetryPaymentRequest
-	67,  // 146: subscriptionbilling.SubscriptionBillingApi.ListPaymentRetryQueue:input_type -> subscriptionbilling.ListPaymentRetryQueueRequest
-	71,  // 147: subscriptionbilling.SubscriptionBillingApi.ProcessPaymentRetryQueue:input_type -> subscriptionbilling.ProcessPaymentRetryQueueRequest
-	73,  // 148: subscriptionbilling.SubscriptionBillingApi.CancelPaymentRetry:input_type -> subscriptionbilling.CancelPaymentRetryRequest
-	74,  // 149: subscriptionbilling.SubscriptionBillingApi.ListPaymentReviewCases:input_type -> subscriptionbilling.ListPaymentReviewCasesRequest
-	75,  // 150: subscriptionbilling.SubscriptionBillingApi.ResolvePaymentReviewCase:input_type -> subscriptionbilling.ResolvePaymentReviewCaseRequest
-	76,  // 151: subscriptionbilling.SubscriptionBillingApi.RecordPaymentReviewRefund:input_type -> subscriptionbilling.RecordPaymentReviewRefundRequest
-	79,  // 152: subscriptionbilling.SubscriptionBillingApi.PreviewSubscriptionReconciliation:input_type -> subscriptionbilling.SubscriptionReconciliationPreviewRequest
-	80,  // 153: subscriptionbilling.SubscriptionBillingApi.ApplySubscriptionReconciliation:input_type -> subscriptionbilling.ApplySubscriptionReconciliationRequest
-	83,  // 154: subscriptionbilling.SubscriptionBillingApi.PreviewRenewalPaymentReconciliation:input_type -> subscriptionbilling.RenewalPaymentReconciliationPreviewRequest
-	84,  // 155: subscriptionbilling.SubscriptionBillingApi.ApplyRenewalPaymentReconciliation:input_type -> subscriptionbilling.ApplyRenewalPaymentReconciliationRequest
-	107, // 156: subscriptionbilling.SubscriptionBillingApi.ListLedgerAccounts:input_type -> subscriptionbilling.ListLedgerAccountsRequest
-	110, // 157: subscriptionbilling.SubscriptionBillingApi.ListLedgerTransactions:input_type -> subscriptionbilling.ListLedgerTransactionsRequest
-	87,  // 158: subscriptionbilling.SubscriptionBillingApi.CreateCheckout:input_type -> subscriptionbilling.CreateCheckoutRequest
-	88,  // 159: subscriptionbilling.SubscriptionBillingApi.GetPaymentStatusByReference:input_type -> subscriptionbilling.PaymentReferenceRequest
-	88,  // 160: subscriptionbilling.SubscriptionBillingApi.VerifyPaymentReference:input_type -> subscriptionbilling.PaymentReferenceRequest
-	89,  // 161: subscriptionbilling.SubscriptionBillingApi.ReceivePaystackWebhook:input_type -> subscriptionbilling.ReceivePaystackWebhookRequest
-	90,  // 162: subscriptionbilling.SubscriptionBillingApi.CreateProduct:output_type -> subscriptionbilling.EntityResponse
-	17,  // 163: subscriptionbilling.SubscriptionBillingApi.UpdateProduct:output_type -> subscriptionbilling.ProductResponse
-	17,  // 164: subscriptionbilling.SubscriptionBillingApi.ActivateProduct:output_type -> subscriptionbilling.ProductResponse
-	17,  // 165: subscriptionbilling.SubscriptionBillingApi.DeactivateProduct:output_type -> subscriptionbilling.ProductResponse
-	90,  // 166: subscriptionbilling.SubscriptionBillingApi.CreatePlan:output_type -> subscriptionbilling.EntityResponse
-	90,  // 167: subscriptionbilling.SubscriptionBillingApi.CreatePrice:output_type -> subscriptionbilling.EntityResponse
-	22,  // 168: subscriptionbilling.SubscriptionBillingApi.SetDefaultPrice:output_type -> subscriptionbilling.PriceResponse
-	22,  // 169: subscriptionbilling.SubscriptionBillingApi.DeactivatePrice:output_type -> subscriptionbilling.PriceResponse
-	90,  // 170: subscriptionbilling.SubscriptionBillingApi.CreateOffer:output_type -> subscriptionbilling.EntityResponse
-	30,  // 171: subscriptionbilling.SubscriptionBillingApi.UpdateOffer:output_type -> subscriptionbilling.OfferResponse
-	90,  // 172: subscriptionbilling.SubscriptionBillingApi.ConfigureOfferPhase:output_type -> subscriptionbilling.EntityResponse
-	90,  // 173: subscriptionbilling.SubscriptionBillingApi.ConfigureCatalogPresentation:output_type -> subscriptionbilling.EntityResponse
-	90,  // 174: subscriptionbilling.SubscriptionBillingApi.EnableOffer:output_type -> subscriptionbilling.EntityResponse
-	90,  // 175: subscriptionbilling.SubscriptionBillingApi.DisableOffer:output_type -> subscriptionbilling.EntityResponse
-	90,  // 176: subscriptionbilling.SubscriptionBillingApi.AttachEntitlementToPlan:output_type -> subscriptionbilling.EntityResponse
-	24,  // 177: subscriptionbilling.SubscriptionBillingApi.UpsertPlanEntitlement:output_type -> subscriptionbilling.PlanEntitlementResponse
-	90,  // 178: subscriptionbilling.SubscriptionBillingApi.ConfigureOfferPolicy:output_type -> subscriptionbilling.EntityResponse
-	90,  // 179: subscriptionbilling.SubscriptionBillingApi.ConfigureBillingPolicy:output_type -> subscriptionbilling.EntityResponse
-	2,   // 180: subscriptionbilling.SubscriptionBillingApi.GetBillingSummary:output_type -> subscriptionbilling.BillingSummaryResponse
-	4,   // 181: subscriptionbilling.SubscriptionBillingApi.GetSubscriptionStats:output_type -> subscriptionbilling.SubscriptionStatsResponse
-	11,  // 182: subscriptionbilling.SubscriptionBillingApi.GetChurnStats:output_type -> subscriptionbilling.ChurnStatsResponse
-	15,  // 183: subscriptionbilling.SubscriptionBillingApi.GetPaymentStats:output_type -> subscriptionbilling.PaymentStatsResponse
-	18,  // 184: subscriptionbilling.SubscriptionBillingApi.ListProducts:output_type -> subscriptionbilling.ListProductsResponse
-	21,  // 185: subscriptionbilling.SubscriptionBillingApi.ListPlans:output_type -> subscriptionbilling.ListPlansResponse
-	26,  // 186: subscriptionbilling.SubscriptionBillingApi.GetPlan:output_type -> subscriptionbilling.PlanDetailResponse
-	23,  // 187: subscriptionbilling.SubscriptionBillingApi.ListPlanPrices:output_type -> subscriptionbilling.ListPricesResponse
-	31,  // 188: subscriptionbilling.SubscriptionBillingApi.ListOffers:output_type -> subscriptionbilling.ListOffersResponse
-	34,  // 189: subscriptionbilling.SubscriptionBillingApi.ListBillingPolicies:output_type -> subscriptionbilling.ListBillingPoliciesResponse
-	20,  // 190: subscriptionbilling.SubscriptionBillingApi.UpdatePlan:output_type -> subscriptionbilling.PlanResponse
-	20,  // 191: subscriptionbilling.SubscriptionBillingApi.PublishPlan:output_type -> subscriptionbilling.PlanResponse
-	20,  // 192: subscriptionbilling.SubscriptionBillingApi.ArchivePlan:output_type -> subscriptionbilling.PlanResponse
-	97,  // 193: subscriptionbilling.SubscriptionBillingApi.ListSubscriptions:output_type -> subscriptionbilling.ListSubscriptionsResponse
-	93,  // 194: subscriptionbilling.SubscriptionBillingApi.StartSubscription:output_type -> subscriptionbilling.SubscriptionResponse
-	93,  // 195: subscriptionbilling.SubscriptionBillingApi.CancelSubscription:output_type -> subscriptionbilling.SubscriptionResponse
-	93,  // 196: subscriptionbilling.SubscriptionBillingApi.ScheduleSubscriptionCancellation:output_type -> subscriptionbilling.SubscriptionResponse
-	93,  // 197: subscriptionbilling.SubscriptionBillingApi.ResumeSubscription:output_type -> subscriptionbilling.SubscriptionResponse
-	96,  // 198: subscriptionbilling.SubscriptionBillingApi.ChangePlan:output_type -> subscriptionbilling.PlanChangeResponse
-	92,  // 199: subscriptionbilling.SubscriptionBillingApi.GetSubscriptionStatus:output_type -> subscriptionbilling.SubscriptionStatusResponse
-	93,  // 200: subscriptionbilling.SubscriptionBillingApi.GetCurrentSubscription:output_type -> subscriptionbilling.SubscriptionResponse
-	94,  // 201: subscriptionbilling.SubscriptionBillingApi.CreateComplimentaryAccess:output_type -> subscriptionbilling.ComplimentaryAccessResponse
-	95,  // 202: subscriptionbilling.SubscriptionBillingApi.ListComplimentaryAccess:output_type -> subscriptionbilling.ListComplimentaryAccessResponse
-	94,  // 203: subscriptionbilling.SubscriptionBillingApi.GetCurrentComplimentaryAccess:output_type -> subscriptionbilling.ComplimentaryAccessResponse
-	94,  // 204: subscriptionbilling.SubscriptionBillingApi.ExtendComplimentaryAccess:output_type -> subscriptionbilling.ComplimentaryAccessResponse
-	94,  // 205: subscriptionbilling.SubscriptionBillingApi.RevokeComplimentaryAccess:output_type -> subscriptionbilling.ComplimentaryAccessResponse
-	98,  // 206: subscriptionbilling.SubscriptionBillingApi.CheckEntitlement:output_type -> subscriptionbilling.CheckEntitlementResponse
-	99,  // 207: subscriptionbilling.SubscriptionBillingApi.GetEntitlementSnapshot:output_type -> subscriptionbilling.EntitlementSnapshotResponse
-	99,  // 208: subscriptionbilling.SubscriptionBillingApi.RefreshEntitlementSnapshot:output_type -> subscriptionbilling.EntitlementSnapshotResponse
-	90,  // 209: subscriptionbilling.SubscriptionBillingApi.RecordUsage:output_type -> subscriptionbilling.EntityResponse
-	100, // 210: subscriptionbilling.SubscriptionBillingApi.CreateInvoice:output_type -> subscriptionbilling.InvoiceResponse
-	100, // 211: subscriptionbilling.SubscriptionBillingApi.GetInvoice:output_type -> subscriptionbilling.InvoiceResponse
-	101, // 212: subscriptionbilling.SubscriptionBillingApi.ListAllInvoices:output_type -> subscriptionbilling.ListInvoicesResponse
-	101, // 213: subscriptionbilling.SubscriptionBillingApi.ListInvoices:output_type -> subscriptionbilling.ListInvoicesResponse
-	100, // 214: subscriptionbilling.SubscriptionBillingApi.MarkManualInvoicePaid:output_type -> subscriptionbilling.InvoiceResponse
-	100, // 215: subscriptionbilling.SubscriptionBillingApi.VoidAbandonedCheckout:output_type -> subscriptionbilling.InvoiceResponse
-	105, // 216: subscriptionbilling.SubscriptionBillingApi.PayInvoice:output_type -> subscriptionbilling.PaymentResponse
-	103, // 217: subscriptionbilling.SubscriptionBillingApi.CreateInvoiceCheckout:output_type -> subscriptionbilling.PaymentIntentResponse
-	103, // 218: subscriptionbilling.SubscriptionBillingApi.CreateCardVerificationCheckout:output_type -> subscriptionbilling.PaymentIntentResponse
-	103, // 219: subscriptionbilling.SubscriptionBillingApi.CreateUpcomingCheckout:output_type -> subscriptionbilling.PaymentIntentResponse
-	106, // 220: subscriptionbilling.SubscriptionBillingApi.ListPayments:output_type -> subscriptionbilling.ListPaymentsResponse
-	90,  // 221: subscriptionbilling.SubscriptionBillingApi.RefundPayment:output_type -> subscriptionbilling.EntityResponse
-	105, // 222: subscriptionbilling.SubscriptionBillingApi.RetryPayment:output_type -> subscriptionbilling.PaymentResponse
-	69,  // 223: subscriptionbilling.SubscriptionBillingApi.ListPaymentRetryQueue:output_type -> subscriptionbilling.ListPaymentRetryQueueResponse
-	72,  // 224: subscriptionbilling.SubscriptionBillingApi.ProcessPaymentRetryQueue:output_type -> subscriptionbilling.PaymentRetryBatchResponse
-	90,  // 225: subscriptionbilling.SubscriptionBillingApi.CancelPaymentRetry:output_type -> subscriptionbilling.EntityResponse
-	78,  // 226: subscriptionbilling.SubscriptionBillingApi.ListPaymentReviewCases:output_type -> subscriptionbilling.ListPaymentReviewCasesResponse
-	77,  // 227: subscriptionbilling.SubscriptionBillingApi.ResolvePaymentReviewCase:output_type -> subscriptionbilling.PaymentReviewCaseResponse
-	77,  // 228: subscriptionbilling.SubscriptionBillingApi.RecordPaymentReviewRefund:output_type -> subscriptionbilling.PaymentReviewCaseResponse
-	82,  // 229: subscriptionbilling.SubscriptionBillingApi.PreviewSubscriptionReconciliation:output_type -> subscriptionbilling.SubscriptionReconciliationReportResponse
-	82,  // 230: subscriptionbilling.SubscriptionBillingApi.ApplySubscriptionReconciliation:output_type -> subscriptionbilling.SubscriptionReconciliationReportResponse
-	86,  // 231: subscriptionbilling.SubscriptionBillingApi.PreviewRenewalPaymentReconciliation:output_type -> subscriptionbilling.RenewalPaymentReconciliationReportResponse
-	86,  // 232: subscriptionbilling.SubscriptionBillingApi.ApplyRenewalPaymentReconciliation:output_type -> subscriptionbilling.RenewalPaymentReconciliationReportResponse
-	109, // 233: subscriptionbilling.SubscriptionBillingApi.ListLedgerAccounts:output_type -> subscriptionbilling.ListLedgerAccountsResponse
-	113, // 234: subscriptionbilling.SubscriptionBillingApi.ListLedgerTransactions:output_type -> subscriptionbilling.ListLedgerTransactionsResponse
-	104, // 235: subscriptionbilling.SubscriptionBillingApi.CreateCheckout:output_type -> subscriptionbilling.CheckoutResponse
-	105, // 236: subscriptionbilling.SubscriptionBillingApi.GetPaymentStatusByReference:output_type -> subscriptionbilling.PaymentResponse
-	105, // 237: subscriptionbilling.SubscriptionBillingApi.VerifyPaymentReference:output_type -> subscriptionbilling.PaymentResponse
-	91,  // 238: subscriptionbilling.SubscriptionBillingApi.ReceivePaystackWebhook:output_type -> subscriptionbilling.StatusResponse
-	162, // [162:239] is the sub-list for method output_type
-	85,  // [85:162] is the sub-list for method input_type
-	85,  // [85:85] is the sub-list for extension type_name
-	85,  // [85:85] is the sub-list for extension extendee
-	0,   // [0:85] is the sub-list for field type_name
+	35,  // 85: subscriptionbilling.ConfigureAppleProductMappingRequest.context:type_name -> subscriptionbilling.RequestContext
+	116, // 86: subscriptionbilling.ListAppleProductMappingsResponse.products:type_name -> subscriptionbilling.AppleProductMappingResponse
+	35,  // 87: subscriptionbilling.ApplePurchaseContextRequest.context:type_name -> subscriptionbilling.RequestContext
+	116, // 88: subscriptionbilling.ApplePurchaseContextResponse.products:type_name -> subscriptionbilling.AppleProductMappingResponse
+	35,  // 89: subscriptionbilling.CreateApplePurchaseReservationRequest.context:type_name -> subscriptionbilling.RequestContext
+	35,  // 90: subscriptionbilling.SynchronizeAppleTransactionRequest.context:type_name -> subscriptionbilling.RequestContext
+	124, // 91: subscriptionbilling.AppleTransactionSyncResponse.transaction:type_name -> subscriptionbilling.AppleTransactionResponse
+	93,  // 92: subscriptionbilling.AppleTransactionSyncResponse.subscription:type_name -> subscriptionbilling.SubscriptionResponse
+	124, // 93: subscriptionbilling.ListAppleTransactionsResponse.transactions:type_name -> subscriptionbilling.AppleTransactionResponse
+	35,  // 94: subscriptionbilling.ReceiveAppleNotificationRequest.context:type_name -> subscriptionbilling.RequestContext
+	131, // 95: subscriptionbilling.ListAppleNotificationsResponse.notifications:type_name -> subscriptionbilling.AppleNotificationResponse
+	39,  // 96: subscriptionbilling.SubscriptionBillingApi.CreateProduct:input_type -> subscriptionbilling.CreateProductRequest
+	114, // 97: subscriptionbilling.SubscriptionBillingApi.UpdateProduct:input_type -> subscriptionbilling.UpdateProductRequest
+	36,  // 98: subscriptionbilling.SubscriptionBillingApi.ActivateProduct:input_type -> subscriptionbilling.EntityIdRequest
+	36,  // 99: subscriptionbilling.SubscriptionBillingApi.DeactivateProduct:input_type -> subscriptionbilling.EntityIdRequest
+	40,  // 100: subscriptionbilling.SubscriptionBillingApi.CreatePlan:input_type -> subscriptionbilling.CreatePlanRequest
+	41,  // 101: subscriptionbilling.SubscriptionBillingApi.CreatePrice:input_type -> subscriptionbilling.CreatePriceRequest
+	36,  // 102: subscriptionbilling.SubscriptionBillingApi.SetDefaultPrice:input_type -> subscriptionbilling.EntityIdRequest
+	36,  // 103: subscriptionbilling.SubscriptionBillingApi.DeactivatePrice:input_type -> subscriptionbilling.EntityIdRequest
+	42,  // 104: subscriptionbilling.SubscriptionBillingApi.CreateOffer:input_type -> subscriptionbilling.CreateOfferRequest
+	44,  // 105: subscriptionbilling.SubscriptionBillingApi.UpdateOffer:input_type -> subscriptionbilling.UpdateOfferRequest
+	45,  // 106: subscriptionbilling.SubscriptionBillingApi.ConfigureOfferPhase:input_type -> subscriptionbilling.ConfigureOfferPhaseRequest
+	46,  // 107: subscriptionbilling.SubscriptionBillingApi.ConfigureCatalogPresentation:input_type -> subscriptionbilling.ConfigureCatalogPresentationRequest
+	36,  // 108: subscriptionbilling.SubscriptionBillingApi.EnableOffer:input_type -> subscriptionbilling.EntityIdRequest
+	36,  // 109: subscriptionbilling.SubscriptionBillingApi.DisableOffer:input_type -> subscriptionbilling.EntityIdRequest
+	47,  // 110: subscriptionbilling.SubscriptionBillingApi.AttachEntitlementToPlan:input_type -> subscriptionbilling.AttachEntitlementToPlanRequest
+	48,  // 111: subscriptionbilling.SubscriptionBillingApi.UpsertPlanEntitlement:input_type -> subscriptionbilling.UpsertPlanEntitlementRequest
+	49,  // 112: subscriptionbilling.SubscriptionBillingApi.ConfigureOfferPolicy:input_type -> subscriptionbilling.ConfigureOfferPolicyRequest
+	50,  // 113: subscriptionbilling.SubscriptionBillingApi.ConfigureBillingPolicy:input_type -> subscriptionbilling.ConfigureBillingPolicyRequest
+	1,   // 114: subscriptionbilling.SubscriptionBillingApi.GetBillingSummary:input_type -> subscriptionbilling.BillingSummaryRequest
+	3,   // 115: subscriptionbilling.SubscriptionBillingApi.GetSubscriptionStats:input_type -> subscriptionbilling.SubscriptionStatsRequest
+	10,  // 116: subscriptionbilling.SubscriptionBillingApi.GetChurnStats:input_type -> subscriptionbilling.ChurnStatsRequest
+	14,  // 117: subscriptionbilling.SubscriptionBillingApi.GetPaymentStats:input_type -> subscriptionbilling.PaymentStatsRequest
+	16,  // 118: subscriptionbilling.SubscriptionBillingApi.ListProducts:input_type -> subscriptionbilling.ListProductsRequest
+	0,   // 119: subscriptionbilling.SubscriptionBillingApi.ListPlans:input_type -> subscriptionbilling.ListPlansRequest
+	36,  // 120: subscriptionbilling.SubscriptionBillingApi.GetPlan:input_type -> subscriptionbilling.EntityIdRequest
+	36,  // 121: subscriptionbilling.SubscriptionBillingApi.ListPlanPrices:input_type -> subscriptionbilling.EntityIdRequest
+	27,  // 122: subscriptionbilling.SubscriptionBillingApi.ListOffers:input_type -> subscriptionbilling.ListOffersRequest
+	32,  // 123: subscriptionbilling.SubscriptionBillingApi.ListBillingPolicies:input_type -> subscriptionbilling.ListPoliciesRequest
+	19,  // 124: subscriptionbilling.SubscriptionBillingApi.UpdatePlan:input_type -> subscriptionbilling.UpdatePlanRequest
+	36,  // 125: subscriptionbilling.SubscriptionBillingApi.PublishPlan:input_type -> subscriptionbilling.EntityIdRequest
+	36,  // 126: subscriptionbilling.SubscriptionBillingApi.ArchivePlan:input_type -> subscriptionbilling.EntityIdRequest
+	38,  // 127: subscriptionbilling.SubscriptionBillingApi.ListSubscriptions:input_type -> subscriptionbilling.ListSubscriptionsRequest
+	51,  // 128: subscriptionbilling.SubscriptionBillingApi.StartSubscription:input_type -> subscriptionbilling.StartSubscriptionRequest
+	36,  // 129: subscriptionbilling.SubscriptionBillingApi.CancelSubscription:input_type -> subscriptionbilling.EntityIdRequest
+	36,  // 130: subscriptionbilling.SubscriptionBillingApi.ScheduleSubscriptionCancellation:input_type -> subscriptionbilling.EntityIdRequest
+	36,  // 131: subscriptionbilling.SubscriptionBillingApi.ResumeSubscription:input_type -> subscriptionbilling.EntityIdRequest
+	56,  // 132: subscriptionbilling.SubscriptionBillingApi.ChangePlan:input_type -> subscriptionbilling.ChangePlanRequest
+	36,  // 133: subscriptionbilling.SubscriptionBillingApi.GetSubscriptionStatus:input_type -> subscriptionbilling.EntityIdRequest
+	37,  // 134: subscriptionbilling.SubscriptionBillingApi.GetCurrentSubscription:input_type -> subscriptionbilling.CustomerRequest
+	52,  // 135: subscriptionbilling.SubscriptionBillingApi.CreateComplimentaryAccess:input_type -> subscriptionbilling.CreateComplimentaryAccessRequest
+	53,  // 136: subscriptionbilling.SubscriptionBillingApi.ListComplimentaryAccess:input_type -> subscriptionbilling.ListComplimentaryAccessRequest
+	37,  // 137: subscriptionbilling.SubscriptionBillingApi.GetCurrentComplimentaryAccess:input_type -> subscriptionbilling.CustomerRequest
+	54,  // 138: subscriptionbilling.SubscriptionBillingApi.ExtendComplimentaryAccess:input_type -> subscriptionbilling.ExtendComplimentaryAccessRequest
+	55,  // 139: subscriptionbilling.SubscriptionBillingApi.RevokeComplimentaryAccess:input_type -> subscriptionbilling.RevokeComplimentaryAccessRequest
+	57,  // 140: subscriptionbilling.SubscriptionBillingApi.CheckEntitlement:input_type -> subscriptionbilling.CheckEntitlementRequest
+	36,  // 141: subscriptionbilling.SubscriptionBillingApi.GetEntitlementSnapshot:input_type -> subscriptionbilling.EntityIdRequest
+	36,  // 142: subscriptionbilling.SubscriptionBillingApi.RefreshEntitlementSnapshot:input_type -> subscriptionbilling.EntityIdRequest
+	58,  // 143: subscriptionbilling.SubscriptionBillingApi.RecordUsage:input_type -> subscriptionbilling.RecordUsageRequest
+	59,  // 144: subscriptionbilling.SubscriptionBillingApi.CreateInvoice:input_type -> subscriptionbilling.CreateInvoiceRequest
+	36,  // 145: subscriptionbilling.SubscriptionBillingApi.GetInvoice:input_type -> subscriptionbilling.EntityIdRequest
+	102, // 146: subscriptionbilling.SubscriptionBillingApi.ListAllInvoices:input_type -> subscriptionbilling.ListBillingDocumentsRequest
+	37,  // 147: subscriptionbilling.SubscriptionBillingApi.ListInvoices:input_type -> subscriptionbilling.CustomerRequest
+	36,  // 148: subscriptionbilling.SubscriptionBillingApi.MarkManualInvoicePaid:input_type -> subscriptionbilling.EntityIdRequest
+	60,  // 149: subscriptionbilling.SubscriptionBillingApi.VoidAbandonedCheckout:input_type -> subscriptionbilling.VoidAbandonedCheckoutRequest
+	63,  // 150: subscriptionbilling.SubscriptionBillingApi.PayInvoice:input_type -> subscriptionbilling.PayInvoiceRequest
+	64,  // 151: subscriptionbilling.SubscriptionBillingApi.CreateInvoiceCheckout:input_type -> subscriptionbilling.CreateInvoiceCheckoutRequest
+	66,  // 152: subscriptionbilling.SubscriptionBillingApi.CreateCardVerificationCheckout:input_type -> subscriptionbilling.CreateCardVerificationCheckoutRequest
+	65,  // 153: subscriptionbilling.SubscriptionBillingApi.CreateUpcomingCheckout:input_type -> subscriptionbilling.CreateUpcomingCheckoutRequest
+	102, // 154: subscriptionbilling.SubscriptionBillingApi.ListPayments:input_type -> subscriptionbilling.ListBillingDocumentsRequest
+	61,  // 155: subscriptionbilling.SubscriptionBillingApi.RefundPayment:input_type -> subscriptionbilling.RefundPaymentRequest
+	62,  // 156: subscriptionbilling.SubscriptionBillingApi.RetryPayment:input_type -> subscriptionbilling.RetryPaymentRequest
+	67,  // 157: subscriptionbilling.SubscriptionBillingApi.ListPaymentRetryQueue:input_type -> subscriptionbilling.ListPaymentRetryQueueRequest
+	71,  // 158: subscriptionbilling.SubscriptionBillingApi.ProcessPaymentRetryQueue:input_type -> subscriptionbilling.ProcessPaymentRetryQueueRequest
+	73,  // 159: subscriptionbilling.SubscriptionBillingApi.CancelPaymentRetry:input_type -> subscriptionbilling.CancelPaymentRetryRequest
+	74,  // 160: subscriptionbilling.SubscriptionBillingApi.ListPaymentReviewCases:input_type -> subscriptionbilling.ListPaymentReviewCasesRequest
+	75,  // 161: subscriptionbilling.SubscriptionBillingApi.ResolvePaymentReviewCase:input_type -> subscriptionbilling.ResolvePaymentReviewCaseRequest
+	76,  // 162: subscriptionbilling.SubscriptionBillingApi.RecordPaymentReviewRefund:input_type -> subscriptionbilling.RecordPaymentReviewRefundRequest
+	79,  // 163: subscriptionbilling.SubscriptionBillingApi.PreviewSubscriptionReconciliation:input_type -> subscriptionbilling.SubscriptionReconciliationPreviewRequest
+	80,  // 164: subscriptionbilling.SubscriptionBillingApi.ApplySubscriptionReconciliation:input_type -> subscriptionbilling.ApplySubscriptionReconciliationRequest
+	83,  // 165: subscriptionbilling.SubscriptionBillingApi.PreviewRenewalPaymentReconciliation:input_type -> subscriptionbilling.RenewalPaymentReconciliationPreviewRequest
+	84,  // 166: subscriptionbilling.SubscriptionBillingApi.ApplyRenewalPaymentReconciliation:input_type -> subscriptionbilling.ApplyRenewalPaymentReconciliationRequest
+	107, // 167: subscriptionbilling.SubscriptionBillingApi.ListLedgerAccounts:input_type -> subscriptionbilling.ListLedgerAccountsRequest
+	110, // 168: subscriptionbilling.SubscriptionBillingApi.ListLedgerTransactions:input_type -> subscriptionbilling.ListLedgerTransactionsRequest
+	87,  // 169: subscriptionbilling.SubscriptionBillingApi.CreateCheckout:input_type -> subscriptionbilling.CreateCheckoutRequest
+	88,  // 170: subscriptionbilling.SubscriptionBillingApi.GetPaymentStatusByReference:input_type -> subscriptionbilling.PaymentReferenceRequest
+	88,  // 171: subscriptionbilling.SubscriptionBillingApi.VerifyPaymentReference:input_type -> subscriptionbilling.PaymentReferenceRequest
+	89,  // 172: subscriptionbilling.SubscriptionBillingApi.ReceivePaystackWebhook:input_type -> subscriptionbilling.ReceivePaystackWebhookRequest
+	115, // 173: subscriptionbilling.SubscriptionBillingApi.ConfigureAppleProductMapping:input_type -> subscriptionbilling.ConfigureAppleProductMappingRequest
+	117, // 174: subscriptionbilling.SubscriptionBillingApi.ListAppleProductMappings:input_type -> subscriptionbilling.ListAppleProductMappingsRequest
+	119, // 175: subscriptionbilling.SubscriptionBillingApi.GetApplePurchaseContext:input_type -> subscriptionbilling.ApplePurchaseContextRequest
+	121, // 176: subscriptionbilling.SubscriptionBillingApi.CreateApplePurchaseReservation:input_type -> subscriptionbilling.CreateApplePurchaseReservationRequest
+	123, // 177: subscriptionbilling.SubscriptionBillingApi.SynchronizeAppleTransaction:input_type -> subscriptionbilling.SynchronizeAppleTransactionRequest
+	126, // 178: subscriptionbilling.SubscriptionBillingApi.ListAppleTransactions:input_type -> subscriptionbilling.ListAppleTransactionsRequest
+	128, // 179: subscriptionbilling.SubscriptionBillingApi.ReceiveAppleNotification:input_type -> subscriptionbilling.ReceiveAppleNotificationRequest
+	130, // 180: subscriptionbilling.SubscriptionBillingApi.ListAppleNotifications:input_type -> subscriptionbilling.ListAppleNotificationsRequest
+	90,  // 181: subscriptionbilling.SubscriptionBillingApi.CreateProduct:output_type -> subscriptionbilling.EntityResponse
+	17,  // 182: subscriptionbilling.SubscriptionBillingApi.UpdateProduct:output_type -> subscriptionbilling.ProductResponse
+	17,  // 183: subscriptionbilling.SubscriptionBillingApi.ActivateProduct:output_type -> subscriptionbilling.ProductResponse
+	17,  // 184: subscriptionbilling.SubscriptionBillingApi.DeactivateProduct:output_type -> subscriptionbilling.ProductResponse
+	90,  // 185: subscriptionbilling.SubscriptionBillingApi.CreatePlan:output_type -> subscriptionbilling.EntityResponse
+	90,  // 186: subscriptionbilling.SubscriptionBillingApi.CreatePrice:output_type -> subscriptionbilling.EntityResponse
+	22,  // 187: subscriptionbilling.SubscriptionBillingApi.SetDefaultPrice:output_type -> subscriptionbilling.PriceResponse
+	22,  // 188: subscriptionbilling.SubscriptionBillingApi.DeactivatePrice:output_type -> subscriptionbilling.PriceResponse
+	90,  // 189: subscriptionbilling.SubscriptionBillingApi.CreateOffer:output_type -> subscriptionbilling.EntityResponse
+	30,  // 190: subscriptionbilling.SubscriptionBillingApi.UpdateOffer:output_type -> subscriptionbilling.OfferResponse
+	90,  // 191: subscriptionbilling.SubscriptionBillingApi.ConfigureOfferPhase:output_type -> subscriptionbilling.EntityResponse
+	90,  // 192: subscriptionbilling.SubscriptionBillingApi.ConfigureCatalogPresentation:output_type -> subscriptionbilling.EntityResponse
+	90,  // 193: subscriptionbilling.SubscriptionBillingApi.EnableOffer:output_type -> subscriptionbilling.EntityResponse
+	90,  // 194: subscriptionbilling.SubscriptionBillingApi.DisableOffer:output_type -> subscriptionbilling.EntityResponse
+	90,  // 195: subscriptionbilling.SubscriptionBillingApi.AttachEntitlementToPlan:output_type -> subscriptionbilling.EntityResponse
+	24,  // 196: subscriptionbilling.SubscriptionBillingApi.UpsertPlanEntitlement:output_type -> subscriptionbilling.PlanEntitlementResponse
+	90,  // 197: subscriptionbilling.SubscriptionBillingApi.ConfigureOfferPolicy:output_type -> subscriptionbilling.EntityResponse
+	90,  // 198: subscriptionbilling.SubscriptionBillingApi.ConfigureBillingPolicy:output_type -> subscriptionbilling.EntityResponse
+	2,   // 199: subscriptionbilling.SubscriptionBillingApi.GetBillingSummary:output_type -> subscriptionbilling.BillingSummaryResponse
+	4,   // 200: subscriptionbilling.SubscriptionBillingApi.GetSubscriptionStats:output_type -> subscriptionbilling.SubscriptionStatsResponse
+	11,  // 201: subscriptionbilling.SubscriptionBillingApi.GetChurnStats:output_type -> subscriptionbilling.ChurnStatsResponse
+	15,  // 202: subscriptionbilling.SubscriptionBillingApi.GetPaymentStats:output_type -> subscriptionbilling.PaymentStatsResponse
+	18,  // 203: subscriptionbilling.SubscriptionBillingApi.ListProducts:output_type -> subscriptionbilling.ListProductsResponse
+	21,  // 204: subscriptionbilling.SubscriptionBillingApi.ListPlans:output_type -> subscriptionbilling.ListPlansResponse
+	26,  // 205: subscriptionbilling.SubscriptionBillingApi.GetPlan:output_type -> subscriptionbilling.PlanDetailResponse
+	23,  // 206: subscriptionbilling.SubscriptionBillingApi.ListPlanPrices:output_type -> subscriptionbilling.ListPricesResponse
+	31,  // 207: subscriptionbilling.SubscriptionBillingApi.ListOffers:output_type -> subscriptionbilling.ListOffersResponse
+	34,  // 208: subscriptionbilling.SubscriptionBillingApi.ListBillingPolicies:output_type -> subscriptionbilling.ListBillingPoliciesResponse
+	20,  // 209: subscriptionbilling.SubscriptionBillingApi.UpdatePlan:output_type -> subscriptionbilling.PlanResponse
+	20,  // 210: subscriptionbilling.SubscriptionBillingApi.PublishPlan:output_type -> subscriptionbilling.PlanResponse
+	20,  // 211: subscriptionbilling.SubscriptionBillingApi.ArchivePlan:output_type -> subscriptionbilling.PlanResponse
+	97,  // 212: subscriptionbilling.SubscriptionBillingApi.ListSubscriptions:output_type -> subscriptionbilling.ListSubscriptionsResponse
+	93,  // 213: subscriptionbilling.SubscriptionBillingApi.StartSubscription:output_type -> subscriptionbilling.SubscriptionResponse
+	93,  // 214: subscriptionbilling.SubscriptionBillingApi.CancelSubscription:output_type -> subscriptionbilling.SubscriptionResponse
+	93,  // 215: subscriptionbilling.SubscriptionBillingApi.ScheduleSubscriptionCancellation:output_type -> subscriptionbilling.SubscriptionResponse
+	93,  // 216: subscriptionbilling.SubscriptionBillingApi.ResumeSubscription:output_type -> subscriptionbilling.SubscriptionResponse
+	96,  // 217: subscriptionbilling.SubscriptionBillingApi.ChangePlan:output_type -> subscriptionbilling.PlanChangeResponse
+	92,  // 218: subscriptionbilling.SubscriptionBillingApi.GetSubscriptionStatus:output_type -> subscriptionbilling.SubscriptionStatusResponse
+	93,  // 219: subscriptionbilling.SubscriptionBillingApi.GetCurrentSubscription:output_type -> subscriptionbilling.SubscriptionResponse
+	94,  // 220: subscriptionbilling.SubscriptionBillingApi.CreateComplimentaryAccess:output_type -> subscriptionbilling.ComplimentaryAccessResponse
+	95,  // 221: subscriptionbilling.SubscriptionBillingApi.ListComplimentaryAccess:output_type -> subscriptionbilling.ListComplimentaryAccessResponse
+	94,  // 222: subscriptionbilling.SubscriptionBillingApi.GetCurrentComplimentaryAccess:output_type -> subscriptionbilling.ComplimentaryAccessResponse
+	94,  // 223: subscriptionbilling.SubscriptionBillingApi.ExtendComplimentaryAccess:output_type -> subscriptionbilling.ComplimentaryAccessResponse
+	94,  // 224: subscriptionbilling.SubscriptionBillingApi.RevokeComplimentaryAccess:output_type -> subscriptionbilling.ComplimentaryAccessResponse
+	98,  // 225: subscriptionbilling.SubscriptionBillingApi.CheckEntitlement:output_type -> subscriptionbilling.CheckEntitlementResponse
+	99,  // 226: subscriptionbilling.SubscriptionBillingApi.GetEntitlementSnapshot:output_type -> subscriptionbilling.EntitlementSnapshotResponse
+	99,  // 227: subscriptionbilling.SubscriptionBillingApi.RefreshEntitlementSnapshot:output_type -> subscriptionbilling.EntitlementSnapshotResponse
+	90,  // 228: subscriptionbilling.SubscriptionBillingApi.RecordUsage:output_type -> subscriptionbilling.EntityResponse
+	100, // 229: subscriptionbilling.SubscriptionBillingApi.CreateInvoice:output_type -> subscriptionbilling.InvoiceResponse
+	100, // 230: subscriptionbilling.SubscriptionBillingApi.GetInvoice:output_type -> subscriptionbilling.InvoiceResponse
+	101, // 231: subscriptionbilling.SubscriptionBillingApi.ListAllInvoices:output_type -> subscriptionbilling.ListInvoicesResponse
+	101, // 232: subscriptionbilling.SubscriptionBillingApi.ListInvoices:output_type -> subscriptionbilling.ListInvoicesResponse
+	100, // 233: subscriptionbilling.SubscriptionBillingApi.MarkManualInvoicePaid:output_type -> subscriptionbilling.InvoiceResponse
+	100, // 234: subscriptionbilling.SubscriptionBillingApi.VoidAbandonedCheckout:output_type -> subscriptionbilling.InvoiceResponse
+	105, // 235: subscriptionbilling.SubscriptionBillingApi.PayInvoice:output_type -> subscriptionbilling.PaymentResponse
+	103, // 236: subscriptionbilling.SubscriptionBillingApi.CreateInvoiceCheckout:output_type -> subscriptionbilling.PaymentIntentResponse
+	103, // 237: subscriptionbilling.SubscriptionBillingApi.CreateCardVerificationCheckout:output_type -> subscriptionbilling.PaymentIntentResponse
+	103, // 238: subscriptionbilling.SubscriptionBillingApi.CreateUpcomingCheckout:output_type -> subscriptionbilling.PaymentIntentResponse
+	106, // 239: subscriptionbilling.SubscriptionBillingApi.ListPayments:output_type -> subscriptionbilling.ListPaymentsResponse
+	90,  // 240: subscriptionbilling.SubscriptionBillingApi.RefundPayment:output_type -> subscriptionbilling.EntityResponse
+	105, // 241: subscriptionbilling.SubscriptionBillingApi.RetryPayment:output_type -> subscriptionbilling.PaymentResponse
+	69,  // 242: subscriptionbilling.SubscriptionBillingApi.ListPaymentRetryQueue:output_type -> subscriptionbilling.ListPaymentRetryQueueResponse
+	72,  // 243: subscriptionbilling.SubscriptionBillingApi.ProcessPaymentRetryQueue:output_type -> subscriptionbilling.PaymentRetryBatchResponse
+	90,  // 244: subscriptionbilling.SubscriptionBillingApi.CancelPaymentRetry:output_type -> subscriptionbilling.EntityResponse
+	78,  // 245: subscriptionbilling.SubscriptionBillingApi.ListPaymentReviewCases:output_type -> subscriptionbilling.ListPaymentReviewCasesResponse
+	77,  // 246: subscriptionbilling.SubscriptionBillingApi.ResolvePaymentReviewCase:output_type -> subscriptionbilling.PaymentReviewCaseResponse
+	77,  // 247: subscriptionbilling.SubscriptionBillingApi.RecordPaymentReviewRefund:output_type -> subscriptionbilling.PaymentReviewCaseResponse
+	82,  // 248: subscriptionbilling.SubscriptionBillingApi.PreviewSubscriptionReconciliation:output_type -> subscriptionbilling.SubscriptionReconciliationReportResponse
+	82,  // 249: subscriptionbilling.SubscriptionBillingApi.ApplySubscriptionReconciliation:output_type -> subscriptionbilling.SubscriptionReconciliationReportResponse
+	86,  // 250: subscriptionbilling.SubscriptionBillingApi.PreviewRenewalPaymentReconciliation:output_type -> subscriptionbilling.RenewalPaymentReconciliationReportResponse
+	86,  // 251: subscriptionbilling.SubscriptionBillingApi.ApplyRenewalPaymentReconciliation:output_type -> subscriptionbilling.RenewalPaymentReconciliationReportResponse
+	109, // 252: subscriptionbilling.SubscriptionBillingApi.ListLedgerAccounts:output_type -> subscriptionbilling.ListLedgerAccountsResponse
+	113, // 253: subscriptionbilling.SubscriptionBillingApi.ListLedgerTransactions:output_type -> subscriptionbilling.ListLedgerTransactionsResponse
+	104, // 254: subscriptionbilling.SubscriptionBillingApi.CreateCheckout:output_type -> subscriptionbilling.CheckoutResponse
+	105, // 255: subscriptionbilling.SubscriptionBillingApi.GetPaymentStatusByReference:output_type -> subscriptionbilling.PaymentResponse
+	105, // 256: subscriptionbilling.SubscriptionBillingApi.VerifyPaymentReference:output_type -> subscriptionbilling.PaymentResponse
+	91,  // 257: subscriptionbilling.SubscriptionBillingApi.ReceivePaystackWebhook:output_type -> subscriptionbilling.StatusResponse
+	116, // 258: subscriptionbilling.SubscriptionBillingApi.ConfigureAppleProductMapping:output_type -> subscriptionbilling.AppleProductMappingResponse
+	118, // 259: subscriptionbilling.SubscriptionBillingApi.ListAppleProductMappings:output_type -> subscriptionbilling.ListAppleProductMappingsResponse
+	120, // 260: subscriptionbilling.SubscriptionBillingApi.GetApplePurchaseContext:output_type -> subscriptionbilling.ApplePurchaseContextResponse
+	122, // 261: subscriptionbilling.SubscriptionBillingApi.CreateApplePurchaseReservation:output_type -> subscriptionbilling.ApplePurchaseReservationResponse
+	125, // 262: subscriptionbilling.SubscriptionBillingApi.SynchronizeAppleTransaction:output_type -> subscriptionbilling.AppleTransactionSyncResponse
+	127, // 263: subscriptionbilling.SubscriptionBillingApi.ListAppleTransactions:output_type -> subscriptionbilling.ListAppleTransactionsResponse
+	129, // 264: subscriptionbilling.SubscriptionBillingApi.ReceiveAppleNotification:output_type -> subscriptionbilling.AppleNotificationReceiptResponse
+	132, // 265: subscriptionbilling.SubscriptionBillingApi.ListAppleNotifications:output_type -> subscriptionbilling.ListAppleNotificationsResponse
+	181, // [181:266] is the sub-list for method output_type
+	96,  // [96:181] is the sub-list for method input_type
+	96,  // [96:96] is the sub-list for extension type_name
+	96,  // [96:96] is the sub-list for extension extendee
+	0,   // [0:96] is the sub-list for field type_name
 }
 
 func init() { file_subscriptionbilling_billing_proto_init() }
@@ -10708,7 +12269,7 @@ func file_subscriptionbilling_billing_proto_init() {
 			GoPackagePath: reflect.TypeOf(x{}).PkgPath(),
 			RawDescriptor: unsafe.Slice(unsafe.StringData(file_subscriptionbilling_billing_proto_rawDesc), len(file_subscriptionbilling_billing_proto_rawDesc)),
 			NumEnums:      0,
-			NumMessages:   115,
+			NumMessages:   133,
 			NumExtensions: 0,
 			NumServices:   1,
 		},
