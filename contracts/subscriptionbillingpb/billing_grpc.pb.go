@@ -67,6 +67,19 @@ const (
 	SubscriptionBillingApi_GetEntitlementSnapshot_FullMethodName              = "/subscriptionbilling.SubscriptionBillingApi/GetEntitlementSnapshot"
 	SubscriptionBillingApi_RefreshEntitlementSnapshot_FullMethodName          = "/subscriptionbilling.SubscriptionBillingApi/RefreshEntitlementSnapshot"
 	SubscriptionBillingApi_RecordUsage_FullMethodName                         = "/subscriptionbilling.SubscriptionBillingApi/RecordUsage"
+	SubscriptionBillingApi_SynchronizeLearnerActions_FullMethodName           = "/subscriptionbilling.SubscriptionBillingApi/SynchronizeLearnerActions"
+	SubscriptionBillingApi_ListLearnerActions_FullMethodName                  = "/subscriptionbilling.SubscriptionBillingApi/ListLearnerActions"
+	SubscriptionBillingApi_ListFeatures_FullMethodName                        = "/subscriptionbilling.SubscriptionBillingApi/ListFeatures"
+	SubscriptionBillingApi_CreateFeature_FullMethodName                       = "/subscriptionbilling.SubscriptionBillingApi/CreateFeature"
+	SubscriptionBillingApi_UpdateFeature_FullMethodName                       = "/subscriptionbilling.SubscriptionBillingApi/UpdateFeature"
+	SubscriptionBillingApi_ListActionPolicies_FullMethodName                  = "/subscriptionbilling.SubscriptionBillingApi/ListActionPolicies"
+	SubscriptionBillingApi_UpsertActionPolicy_FullMethodName                  = "/subscriptionbilling.SubscriptionBillingApi/UpsertActionPolicy"
+	SubscriptionBillingApi_CheckCapability_FullMethodName                     = "/subscriptionbilling.SubscriptionBillingApi/CheckCapability"
+	SubscriptionBillingApi_ReserveCapability_FullMethodName                   = "/subscriptionbilling.SubscriptionBillingApi/ReserveCapability"
+	SubscriptionBillingApi_FinalizeReservation_FullMethodName                 = "/subscriptionbilling.SubscriptionBillingApi/FinalizeReservation"
+	SubscriptionBillingApi_ReleaseReservation_FullMethodName                  = "/subscriptionbilling.SubscriptionBillingApi/ReleaseReservation"
+	SubscriptionBillingApi_RenewReservation_FullMethodName                    = "/subscriptionbilling.SubscriptionBillingApi/RenewReservation"
+	SubscriptionBillingApi_ListEntitlementReservations_FullMethodName         = "/subscriptionbilling.SubscriptionBillingApi/ListEntitlementReservations"
 	SubscriptionBillingApi_CreateInvoice_FullMethodName                       = "/subscriptionbilling.SubscriptionBillingApi/CreateInvoice"
 	SubscriptionBillingApi_GetInvoice_FullMethodName                          = "/subscriptionbilling.SubscriptionBillingApi/GetInvoice"
 	SubscriptionBillingApi_ListAllInvoices_FullMethodName                     = "/subscriptionbilling.SubscriptionBillingApi/ListAllInvoices"
@@ -152,6 +165,19 @@ type SubscriptionBillingApiClient interface {
 	GetEntitlementSnapshot(ctx context.Context, in *EntityIdRequest, opts ...grpc.CallOption) (*EntitlementSnapshotResponse, error)
 	RefreshEntitlementSnapshot(ctx context.Context, in *EntityIdRequest, opts ...grpc.CallOption) (*EntitlementSnapshotResponse, error)
 	RecordUsage(ctx context.Context, in *RecordUsageRequest, opts ...grpc.CallOption) (*EntityResponse, error)
+	SynchronizeLearnerActions(ctx context.Context, in *SynchronizeLearnerActionsRequest, opts ...grpc.CallOption) (*ListLearnerActionsResponse, error)
+	ListLearnerActions(ctx context.Context, in *ListLearnerActionsRequest, opts ...grpc.CallOption) (*ListLearnerActionsResponse, error)
+	ListFeatures(ctx context.Context, in *ListFeaturesRequest, opts ...grpc.CallOption) (*ListFeaturesResponse, error)
+	CreateFeature(ctx context.Context, in *CreateFeatureRequest, opts ...grpc.CallOption) (*FeatureResponse, error)
+	UpdateFeature(ctx context.Context, in *UpdateFeatureRequest, opts ...grpc.CallOption) (*FeatureResponse, error)
+	ListActionPolicies(ctx context.Context, in *ListActionPoliciesRequest, opts ...grpc.CallOption) (*ListActionPoliciesResponse, error)
+	UpsertActionPolicy(ctx context.Context, in *UpsertActionPolicyRequest, opts ...grpc.CallOption) (*ActionPolicyResponse, error)
+	CheckCapability(ctx context.Context, in *CheckCapabilityRequest, opts ...grpc.CallOption) (*CapabilityResponse, error)
+	ReserveCapability(ctx context.Context, in *ReserveCapabilityRequest, opts ...grpc.CallOption) (*ReservationResponse, error)
+	FinalizeReservation(ctx context.Context, in *TransitionReservationRequest, opts ...grpc.CallOption) (*ReservationResponse, error)
+	ReleaseReservation(ctx context.Context, in *TransitionReservationRequest, opts ...grpc.CallOption) (*ReservationResponse, error)
+	RenewReservation(ctx context.Context, in *TransitionReservationRequest, opts ...grpc.CallOption) (*ReservationResponse, error)
+	ListEntitlementReservations(ctx context.Context, in *CustomerRequest, opts ...grpc.CallOption) (*ListEntitlementReservationsResponse, error)
 	CreateInvoice(ctx context.Context, in *CreateInvoiceRequest, opts ...grpc.CallOption) (*InvoiceResponse, error)
 	GetInvoice(ctx context.Context, in *EntityIdRequest, opts ...grpc.CallOption) (*InvoiceResponse, error)
 	ListAllInvoices(ctx context.Context, in *ListBillingDocumentsRequest, opts ...grpc.CallOption) (*ListInvoicesResponse, error)
@@ -675,6 +701,136 @@ func (c *subscriptionBillingApiClient) RecordUsage(ctx context.Context, in *Reco
 	return out, nil
 }
 
+func (c *subscriptionBillingApiClient) SynchronizeLearnerActions(ctx context.Context, in *SynchronizeLearnerActionsRequest, opts ...grpc.CallOption) (*ListLearnerActionsResponse, error) {
+	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
+	out := new(ListLearnerActionsResponse)
+	err := c.cc.Invoke(ctx, SubscriptionBillingApi_SynchronizeLearnerActions_FullMethodName, in, out, cOpts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *subscriptionBillingApiClient) ListLearnerActions(ctx context.Context, in *ListLearnerActionsRequest, opts ...grpc.CallOption) (*ListLearnerActionsResponse, error) {
+	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
+	out := new(ListLearnerActionsResponse)
+	err := c.cc.Invoke(ctx, SubscriptionBillingApi_ListLearnerActions_FullMethodName, in, out, cOpts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *subscriptionBillingApiClient) ListFeatures(ctx context.Context, in *ListFeaturesRequest, opts ...grpc.CallOption) (*ListFeaturesResponse, error) {
+	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
+	out := new(ListFeaturesResponse)
+	err := c.cc.Invoke(ctx, SubscriptionBillingApi_ListFeatures_FullMethodName, in, out, cOpts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *subscriptionBillingApiClient) CreateFeature(ctx context.Context, in *CreateFeatureRequest, opts ...grpc.CallOption) (*FeatureResponse, error) {
+	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
+	out := new(FeatureResponse)
+	err := c.cc.Invoke(ctx, SubscriptionBillingApi_CreateFeature_FullMethodName, in, out, cOpts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *subscriptionBillingApiClient) UpdateFeature(ctx context.Context, in *UpdateFeatureRequest, opts ...grpc.CallOption) (*FeatureResponse, error) {
+	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
+	out := new(FeatureResponse)
+	err := c.cc.Invoke(ctx, SubscriptionBillingApi_UpdateFeature_FullMethodName, in, out, cOpts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *subscriptionBillingApiClient) ListActionPolicies(ctx context.Context, in *ListActionPoliciesRequest, opts ...grpc.CallOption) (*ListActionPoliciesResponse, error) {
+	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
+	out := new(ListActionPoliciesResponse)
+	err := c.cc.Invoke(ctx, SubscriptionBillingApi_ListActionPolicies_FullMethodName, in, out, cOpts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *subscriptionBillingApiClient) UpsertActionPolicy(ctx context.Context, in *UpsertActionPolicyRequest, opts ...grpc.CallOption) (*ActionPolicyResponse, error) {
+	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
+	out := new(ActionPolicyResponse)
+	err := c.cc.Invoke(ctx, SubscriptionBillingApi_UpsertActionPolicy_FullMethodName, in, out, cOpts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *subscriptionBillingApiClient) CheckCapability(ctx context.Context, in *CheckCapabilityRequest, opts ...grpc.CallOption) (*CapabilityResponse, error) {
+	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
+	out := new(CapabilityResponse)
+	err := c.cc.Invoke(ctx, SubscriptionBillingApi_CheckCapability_FullMethodName, in, out, cOpts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *subscriptionBillingApiClient) ReserveCapability(ctx context.Context, in *ReserveCapabilityRequest, opts ...grpc.CallOption) (*ReservationResponse, error) {
+	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
+	out := new(ReservationResponse)
+	err := c.cc.Invoke(ctx, SubscriptionBillingApi_ReserveCapability_FullMethodName, in, out, cOpts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *subscriptionBillingApiClient) FinalizeReservation(ctx context.Context, in *TransitionReservationRequest, opts ...grpc.CallOption) (*ReservationResponse, error) {
+	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
+	out := new(ReservationResponse)
+	err := c.cc.Invoke(ctx, SubscriptionBillingApi_FinalizeReservation_FullMethodName, in, out, cOpts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *subscriptionBillingApiClient) ReleaseReservation(ctx context.Context, in *TransitionReservationRequest, opts ...grpc.CallOption) (*ReservationResponse, error) {
+	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
+	out := new(ReservationResponse)
+	err := c.cc.Invoke(ctx, SubscriptionBillingApi_ReleaseReservation_FullMethodName, in, out, cOpts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *subscriptionBillingApiClient) RenewReservation(ctx context.Context, in *TransitionReservationRequest, opts ...grpc.CallOption) (*ReservationResponse, error) {
+	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
+	out := new(ReservationResponse)
+	err := c.cc.Invoke(ctx, SubscriptionBillingApi_RenewReservation_FullMethodName, in, out, cOpts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *subscriptionBillingApiClient) ListEntitlementReservations(ctx context.Context, in *CustomerRequest, opts ...grpc.CallOption) (*ListEntitlementReservationsResponse, error) {
+	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
+	out := new(ListEntitlementReservationsResponse)
+	err := c.cc.Invoke(ctx, SubscriptionBillingApi_ListEntitlementReservations_FullMethodName, in, out, cOpts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
 func (c *subscriptionBillingApiClient) CreateInvoice(ctx context.Context, in *CreateInvoiceRequest, opts ...grpc.CallOption) (*InvoiceResponse, error) {
 	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
 	out := new(InvoiceResponse)
@@ -1019,6 +1175,19 @@ type SubscriptionBillingApiServer interface {
 	GetEntitlementSnapshot(context.Context, *EntityIdRequest) (*EntitlementSnapshotResponse, error)
 	RefreshEntitlementSnapshot(context.Context, *EntityIdRequest) (*EntitlementSnapshotResponse, error)
 	RecordUsage(context.Context, *RecordUsageRequest) (*EntityResponse, error)
+	SynchronizeLearnerActions(context.Context, *SynchronizeLearnerActionsRequest) (*ListLearnerActionsResponse, error)
+	ListLearnerActions(context.Context, *ListLearnerActionsRequest) (*ListLearnerActionsResponse, error)
+	ListFeatures(context.Context, *ListFeaturesRequest) (*ListFeaturesResponse, error)
+	CreateFeature(context.Context, *CreateFeatureRequest) (*FeatureResponse, error)
+	UpdateFeature(context.Context, *UpdateFeatureRequest) (*FeatureResponse, error)
+	ListActionPolicies(context.Context, *ListActionPoliciesRequest) (*ListActionPoliciesResponse, error)
+	UpsertActionPolicy(context.Context, *UpsertActionPolicyRequest) (*ActionPolicyResponse, error)
+	CheckCapability(context.Context, *CheckCapabilityRequest) (*CapabilityResponse, error)
+	ReserveCapability(context.Context, *ReserveCapabilityRequest) (*ReservationResponse, error)
+	FinalizeReservation(context.Context, *TransitionReservationRequest) (*ReservationResponse, error)
+	ReleaseReservation(context.Context, *TransitionReservationRequest) (*ReservationResponse, error)
+	RenewReservation(context.Context, *TransitionReservationRequest) (*ReservationResponse, error)
+	ListEntitlementReservations(context.Context, *CustomerRequest) (*ListEntitlementReservationsResponse, error)
 	CreateInvoice(context.Context, *CreateInvoiceRequest) (*InvoiceResponse, error)
 	GetInvoice(context.Context, *EntityIdRequest) (*InvoiceResponse, error)
 	ListAllInvoices(context.Context, *ListBillingDocumentsRequest) (*ListInvoicesResponse, error)
@@ -1205,6 +1374,45 @@ func (UnimplementedSubscriptionBillingApiServer) RefreshEntitlementSnapshot(cont
 }
 func (UnimplementedSubscriptionBillingApiServer) RecordUsage(context.Context, *RecordUsageRequest) (*EntityResponse, error) {
 	return nil, status.Error(codes.Unimplemented, "method RecordUsage not implemented")
+}
+func (UnimplementedSubscriptionBillingApiServer) SynchronizeLearnerActions(context.Context, *SynchronizeLearnerActionsRequest) (*ListLearnerActionsResponse, error) {
+	return nil, status.Error(codes.Unimplemented, "method SynchronizeLearnerActions not implemented")
+}
+func (UnimplementedSubscriptionBillingApiServer) ListLearnerActions(context.Context, *ListLearnerActionsRequest) (*ListLearnerActionsResponse, error) {
+	return nil, status.Error(codes.Unimplemented, "method ListLearnerActions not implemented")
+}
+func (UnimplementedSubscriptionBillingApiServer) ListFeatures(context.Context, *ListFeaturesRequest) (*ListFeaturesResponse, error) {
+	return nil, status.Error(codes.Unimplemented, "method ListFeatures not implemented")
+}
+func (UnimplementedSubscriptionBillingApiServer) CreateFeature(context.Context, *CreateFeatureRequest) (*FeatureResponse, error) {
+	return nil, status.Error(codes.Unimplemented, "method CreateFeature not implemented")
+}
+func (UnimplementedSubscriptionBillingApiServer) UpdateFeature(context.Context, *UpdateFeatureRequest) (*FeatureResponse, error) {
+	return nil, status.Error(codes.Unimplemented, "method UpdateFeature not implemented")
+}
+func (UnimplementedSubscriptionBillingApiServer) ListActionPolicies(context.Context, *ListActionPoliciesRequest) (*ListActionPoliciesResponse, error) {
+	return nil, status.Error(codes.Unimplemented, "method ListActionPolicies not implemented")
+}
+func (UnimplementedSubscriptionBillingApiServer) UpsertActionPolicy(context.Context, *UpsertActionPolicyRequest) (*ActionPolicyResponse, error) {
+	return nil, status.Error(codes.Unimplemented, "method UpsertActionPolicy not implemented")
+}
+func (UnimplementedSubscriptionBillingApiServer) CheckCapability(context.Context, *CheckCapabilityRequest) (*CapabilityResponse, error) {
+	return nil, status.Error(codes.Unimplemented, "method CheckCapability not implemented")
+}
+func (UnimplementedSubscriptionBillingApiServer) ReserveCapability(context.Context, *ReserveCapabilityRequest) (*ReservationResponse, error) {
+	return nil, status.Error(codes.Unimplemented, "method ReserveCapability not implemented")
+}
+func (UnimplementedSubscriptionBillingApiServer) FinalizeReservation(context.Context, *TransitionReservationRequest) (*ReservationResponse, error) {
+	return nil, status.Error(codes.Unimplemented, "method FinalizeReservation not implemented")
+}
+func (UnimplementedSubscriptionBillingApiServer) ReleaseReservation(context.Context, *TransitionReservationRequest) (*ReservationResponse, error) {
+	return nil, status.Error(codes.Unimplemented, "method ReleaseReservation not implemented")
+}
+func (UnimplementedSubscriptionBillingApiServer) RenewReservation(context.Context, *TransitionReservationRequest) (*ReservationResponse, error) {
+	return nil, status.Error(codes.Unimplemented, "method RenewReservation not implemented")
+}
+func (UnimplementedSubscriptionBillingApiServer) ListEntitlementReservations(context.Context, *CustomerRequest) (*ListEntitlementReservationsResponse, error) {
+	return nil, status.Error(codes.Unimplemented, "method ListEntitlementReservations not implemented")
 }
 func (UnimplementedSubscriptionBillingApiServer) CreateInvoice(context.Context, *CreateInvoiceRequest) (*InvoiceResponse, error) {
 	return nil, status.Error(codes.Unimplemented, "method CreateInvoice not implemented")
@@ -2179,6 +2387,240 @@ func _SubscriptionBillingApi_RecordUsage_Handler(srv interface{}, ctx context.Co
 	return interceptor(ctx, in, info, handler)
 }
 
+func _SubscriptionBillingApi_SynchronizeLearnerActions_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(SynchronizeLearnerActionsRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(SubscriptionBillingApiServer).SynchronizeLearnerActions(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: SubscriptionBillingApi_SynchronizeLearnerActions_FullMethodName,
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(SubscriptionBillingApiServer).SynchronizeLearnerActions(ctx, req.(*SynchronizeLearnerActionsRequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _SubscriptionBillingApi_ListLearnerActions_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(ListLearnerActionsRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(SubscriptionBillingApiServer).ListLearnerActions(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: SubscriptionBillingApi_ListLearnerActions_FullMethodName,
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(SubscriptionBillingApiServer).ListLearnerActions(ctx, req.(*ListLearnerActionsRequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _SubscriptionBillingApi_ListFeatures_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(ListFeaturesRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(SubscriptionBillingApiServer).ListFeatures(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: SubscriptionBillingApi_ListFeatures_FullMethodName,
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(SubscriptionBillingApiServer).ListFeatures(ctx, req.(*ListFeaturesRequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _SubscriptionBillingApi_CreateFeature_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(CreateFeatureRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(SubscriptionBillingApiServer).CreateFeature(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: SubscriptionBillingApi_CreateFeature_FullMethodName,
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(SubscriptionBillingApiServer).CreateFeature(ctx, req.(*CreateFeatureRequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _SubscriptionBillingApi_UpdateFeature_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(UpdateFeatureRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(SubscriptionBillingApiServer).UpdateFeature(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: SubscriptionBillingApi_UpdateFeature_FullMethodName,
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(SubscriptionBillingApiServer).UpdateFeature(ctx, req.(*UpdateFeatureRequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _SubscriptionBillingApi_ListActionPolicies_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(ListActionPoliciesRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(SubscriptionBillingApiServer).ListActionPolicies(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: SubscriptionBillingApi_ListActionPolicies_FullMethodName,
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(SubscriptionBillingApiServer).ListActionPolicies(ctx, req.(*ListActionPoliciesRequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _SubscriptionBillingApi_UpsertActionPolicy_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(UpsertActionPolicyRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(SubscriptionBillingApiServer).UpsertActionPolicy(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: SubscriptionBillingApi_UpsertActionPolicy_FullMethodName,
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(SubscriptionBillingApiServer).UpsertActionPolicy(ctx, req.(*UpsertActionPolicyRequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _SubscriptionBillingApi_CheckCapability_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(CheckCapabilityRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(SubscriptionBillingApiServer).CheckCapability(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: SubscriptionBillingApi_CheckCapability_FullMethodName,
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(SubscriptionBillingApiServer).CheckCapability(ctx, req.(*CheckCapabilityRequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _SubscriptionBillingApi_ReserveCapability_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(ReserveCapabilityRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(SubscriptionBillingApiServer).ReserveCapability(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: SubscriptionBillingApi_ReserveCapability_FullMethodName,
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(SubscriptionBillingApiServer).ReserveCapability(ctx, req.(*ReserveCapabilityRequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _SubscriptionBillingApi_FinalizeReservation_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(TransitionReservationRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(SubscriptionBillingApiServer).FinalizeReservation(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: SubscriptionBillingApi_FinalizeReservation_FullMethodName,
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(SubscriptionBillingApiServer).FinalizeReservation(ctx, req.(*TransitionReservationRequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _SubscriptionBillingApi_ReleaseReservation_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(TransitionReservationRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(SubscriptionBillingApiServer).ReleaseReservation(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: SubscriptionBillingApi_ReleaseReservation_FullMethodName,
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(SubscriptionBillingApiServer).ReleaseReservation(ctx, req.(*TransitionReservationRequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _SubscriptionBillingApi_RenewReservation_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(TransitionReservationRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(SubscriptionBillingApiServer).RenewReservation(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: SubscriptionBillingApi_RenewReservation_FullMethodName,
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(SubscriptionBillingApiServer).RenewReservation(ctx, req.(*TransitionReservationRequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _SubscriptionBillingApi_ListEntitlementReservations_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(CustomerRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(SubscriptionBillingApiServer).ListEntitlementReservations(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: SubscriptionBillingApi_ListEntitlementReservations_FullMethodName,
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(SubscriptionBillingApiServer).ListEntitlementReservations(ctx, req.(*CustomerRequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
 func _SubscriptionBillingApi_CreateInvoice_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
 	in := new(CreateInvoiceRequest)
 	if err := dec(in); err != nil {
@@ -2899,6 +3341,58 @@ var SubscriptionBillingApi_ServiceDesc = grpc.ServiceDesc{
 		{
 			MethodName: "RecordUsage",
 			Handler:    _SubscriptionBillingApi_RecordUsage_Handler,
+		},
+		{
+			MethodName: "SynchronizeLearnerActions",
+			Handler:    _SubscriptionBillingApi_SynchronizeLearnerActions_Handler,
+		},
+		{
+			MethodName: "ListLearnerActions",
+			Handler:    _SubscriptionBillingApi_ListLearnerActions_Handler,
+		},
+		{
+			MethodName: "ListFeatures",
+			Handler:    _SubscriptionBillingApi_ListFeatures_Handler,
+		},
+		{
+			MethodName: "CreateFeature",
+			Handler:    _SubscriptionBillingApi_CreateFeature_Handler,
+		},
+		{
+			MethodName: "UpdateFeature",
+			Handler:    _SubscriptionBillingApi_UpdateFeature_Handler,
+		},
+		{
+			MethodName: "ListActionPolicies",
+			Handler:    _SubscriptionBillingApi_ListActionPolicies_Handler,
+		},
+		{
+			MethodName: "UpsertActionPolicy",
+			Handler:    _SubscriptionBillingApi_UpsertActionPolicy_Handler,
+		},
+		{
+			MethodName: "CheckCapability",
+			Handler:    _SubscriptionBillingApi_CheckCapability_Handler,
+		},
+		{
+			MethodName: "ReserveCapability",
+			Handler:    _SubscriptionBillingApi_ReserveCapability_Handler,
+		},
+		{
+			MethodName: "FinalizeReservation",
+			Handler:    _SubscriptionBillingApi_FinalizeReservation_Handler,
+		},
+		{
+			MethodName: "ReleaseReservation",
+			Handler:    _SubscriptionBillingApi_ReleaseReservation_Handler,
+		},
+		{
+			MethodName: "RenewReservation",
+			Handler:    _SubscriptionBillingApi_RenewReservation_Handler,
+		},
+		{
+			MethodName: "ListEntitlementReservations",
+			Handler:    _SubscriptionBillingApi_ListEntitlementReservations_Handler,
 		},
 		{
 			MethodName: "CreateInvoice",

@@ -1,99 +1,112 @@
 syntax = "proto3";
 
+package subscriptionbilling;
+
 option csharp_namespace = "SubscriptionBillingService.Api.Protos";
 option go_package = "github.com/edadai/platform-go/contracts/subscriptionbillingpb;subscriptionbillingpb";
 
-package subscriptionbilling;
-
 service SubscriptionBillingApi {
-  rpc CreateProduct (CreateProductRequest) returns (EntityResponse);
-  rpc UpdateProduct (UpdateProductRequest) returns (ProductResponse);
-  rpc ActivateProduct (EntityIdRequest) returns (ProductResponse);
-  rpc DeactivateProduct (EntityIdRequest) returns (ProductResponse);
-  rpc CreatePlan (CreatePlanRequest) returns (EntityResponse);
-  rpc CreatePrice (CreatePriceRequest) returns (EntityResponse);
-  rpc SetDefaultPrice (EntityIdRequest) returns (PriceResponse);
-  rpc DeactivatePrice (EntityIdRequest) returns (PriceResponse);
-  rpc CreateOffer (CreateOfferRequest) returns (EntityResponse);
-  rpc UpdateOffer (UpdateOfferRequest) returns (OfferResponse);
-  rpc ConfigureOfferPhase (ConfigureOfferPhaseRequest) returns (EntityResponse);
-  rpc ConfigureCatalogPresentation (ConfigureCatalogPresentationRequest) returns (EntityResponse);
-  rpc EnableOffer (EntityIdRequest) returns (EntityResponse);
-  rpc DisableOffer (EntityIdRequest) returns (EntityResponse);
-  rpc AttachEntitlementToPlan (AttachEntitlementToPlanRequest) returns (EntityResponse);
-  rpc UpsertPlanEntitlement (UpsertPlanEntitlementRequest) returns (PlanEntitlementResponse);
-  rpc ConfigureOfferPolicy (ConfigureOfferPolicyRequest) returns (EntityResponse);
-  rpc ConfigureBillingPolicy (ConfigureBillingPolicyRequest) returns (EntityResponse);
-  rpc GetBillingSummary (BillingSummaryRequest) returns (BillingSummaryResponse);
-  rpc GetSubscriptionStats (SubscriptionStatsRequest) returns (SubscriptionStatsResponse);
-  rpc GetChurnStats (ChurnStatsRequest) returns (ChurnStatsResponse);
-  rpc GetPaymentStats (PaymentStatsRequest) returns (PaymentStatsResponse);
-  rpc ListProducts (ListProductsRequest) returns (ListProductsResponse);
-  rpc ListPlans (ListPlansRequest) returns (ListPlansResponse);
-  rpc GetPlan (EntityIdRequest) returns (PlanDetailResponse);
-  rpc ListPlanPrices (EntityIdRequest) returns (ListPricesResponse);
-  rpc ListOffers (ListOffersRequest) returns (ListOffersResponse);
-  rpc ListBillingPolicies (ListPoliciesRequest) returns (ListBillingPoliciesResponse);
-  rpc UpdatePlan (UpdatePlanRequest) returns (PlanResponse);
-  rpc PublishPlan (EntityIdRequest) returns (PlanResponse);
-  rpc ArchivePlan (EntityIdRequest) returns (PlanResponse);
+  rpc CreateProduct(CreateProductRequest) returns (EntityResponse);
+  rpc UpdateProduct(UpdateProductRequest) returns (ProductResponse);
+  rpc ActivateProduct(EntityIdRequest) returns (ProductResponse);
+  rpc DeactivateProduct(EntityIdRequest) returns (ProductResponse);
+  rpc CreatePlan(CreatePlanRequest) returns (EntityResponse);
+  rpc CreatePrice(CreatePriceRequest) returns (EntityResponse);
+  rpc SetDefaultPrice(EntityIdRequest) returns (PriceResponse);
+  rpc DeactivatePrice(EntityIdRequest) returns (PriceResponse);
+  rpc CreateOffer(CreateOfferRequest) returns (EntityResponse);
+  rpc UpdateOffer(UpdateOfferRequest) returns (OfferResponse);
+  rpc ConfigureOfferPhase(ConfigureOfferPhaseRequest) returns (EntityResponse);
+  rpc ConfigureCatalogPresentation(ConfigureCatalogPresentationRequest) returns (EntityResponse);
+  rpc EnableOffer(EntityIdRequest) returns (EntityResponse);
+  rpc DisableOffer(EntityIdRequest) returns (EntityResponse);
+  rpc AttachEntitlementToPlan(AttachEntitlementToPlanRequest) returns (EntityResponse);
+  rpc UpsertPlanEntitlement(UpsertPlanEntitlementRequest) returns (PlanEntitlementResponse);
+  rpc ConfigureOfferPolicy(ConfigureOfferPolicyRequest) returns (EntityResponse);
+  rpc ConfigureBillingPolicy(ConfigureBillingPolicyRequest) returns (EntityResponse);
+  rpc GetBillingSummary(BillingSummaryRequest) returns (BillingSummaryResponse);
+  rpc GetSubscriptionStats(SubscriptionStatsRequest) returns (SubscriptionStatsResponse);
+  rpc GetChurnStats(ChurnStatsRequest) returns (ChurnStatsResponse);
+  rpc GetPaymentStats(PaymentStatsRequest) returns (PaymentStatsResponse);
+  rpc ListProducts(ListProductsRequest) returns (ListProductsResponse);
+  rpc ListPlans(ListPlansRequest) returns (ListPlansResponse);
+  rpc GetPlan(EntityIdRequest) returns (PlanDetailResponse);
+  rpc ListPlanPrices(EntityIdRequest) returns (ListPricesResponse);
+  rpc ListOffers(ListOffersRequest) returns (ListOffersResponse);
+  rpc ListBillingPolicies(ListPoliciesRequest) returns (ListBillingPoliciesResponse);
+  rpc UpdatePlan(UpdatePlanRequest) returns (PlanResponse);
+  rpc PublishPlan(EntityIdRequest) returns (PlanResponse);
+  rpc ArchivePlan(EntityIdRequest) returns (PlanResponse);
 
-  rpc ListSubscriptions (ListSubscriptionsRequest) returns (ListSubscriptionsResponse);
-  rpc StartSubscription (StartSubscriptionRequest) returns (SubscriptionResponse);
-  rpc CancelSubscription (EntityIdRequest) returns (SubscriptionResponse);
+  rpc ListSubscriptions(ListSubscriptionsRequest) returns (ListSubscriptionsResponse);
+  rpc StartSubscription(StartSubscriptionRequest) returns (SubscriptionResponse);
+  rpc CancelSubscription(EntityIdRequest) returns (SubscriptionResponse);
   // Customer-initiated cancellation, honouring the period already paid for. CancelSubscription
   // is the administrative one and blocks access immediately.
-  rpc ScheduleSubscriptionCancellation (EntityIdRequest) returns (SubscriptionResponse);
-  rpc ResumeSubscription (EntityIdRequest) returns (SubscriptionResponse);
-  rpc ChangePlan (ChangePlanRequest) returns (PlanChangeResponse);
-  rpc GetSubscriptionStatus (EntityIdRequest) returns (SubscriptionStatusResponse);
-  rpc GetCurrentSubscription (CustomerRequest) returns (SubscriptionResponse);
-  rpc CreateComplimentaryAccess (CreateComplimentaryAccessRequest) returns (ComplimentaryAccessResponse);
-  rpc ListComplimentaryAccess (ListComplimentaryAccessRequest) returns (ListComplimentaryAccessResponse);
-  rpc GetCurrentComplimentaryAccess (CustomerRequest) returns (ComplimentaryAccessResponse);
-  rpc ExtendComplimentaryAccess (ExtendComplimentaryAccessRequest) returns (ComplimentaryAccessResponse);
-  rpc RevokeComplimentaryAccess (RevokeComplimentaryAccessRequest) returns (ComplimentaryAccessResponse);
+  rpc ScheduleSubscriptionCancellation(EntityIdRequest) returns (SubscriptionResponse);
+  rpc ResumeSubscription(EntityIdRequest) returns (SubscriptionResponse);
+  rpc ChangePlan(ChangePlanRequest) returns (PlanChangeResponse);
+  rpc GetSubscriptionStatus(EntityIdRequest) returns (SubscriptionStatusResponse);
+  rpc GetCurrentSubscription(CustomerRequest) returns (SubscriptionResponse);
+  rpc CreateComplimentaryAccess(CreateComplimentaryAccessRequest) returns (ComplimentaryAccessResponse);
+  rpc ListComplimentaryAccess(ListComplimentaryAccessRequest) returns (ListComplimentaryAccessResponse);
+  rpc GetCurrentComplimentaryAccess(CustomerRequest) returns (ComplimentaryAccessResponse);
+  rpc ExtendComplimentaryAccess(ExtendComplimentaryAccessRequest) returns (ComplimentaryAccessResponse);
+  rpc RevokeComplimentaryAccess(RevokeComplimentaryAccessRequest) returns (ComplimentaryAccessResponse);
 
-  rpc CheckEntitlement (CheckEntitlementRequest) returns (CheckEntitlementResponse);
-  rpc GetEntitlementSnapshot (EntityIdRequest) returns (EntitlementSnapshotResponse);
-  rpc RefreshEntitlementSnapshot (EntityIdRequest) returns (EntitlementSnapshotResponse);
-  rpc RecordUsage (RecordUsageRequest) returns (EntityResponse);
+  rpc CheckEntitlement(CheckEntitlementRequest) returns (CheckEntitlementResponse);
+  rpc GetEntitlementSnapshot(EntityIdRequest) returns (EntitlementSnapshotResponse);
+  rpc RefreshEntitlementSnapshot(EntityIdRequest) returns (EntitlementSnapshotResponse);
+  rpc RecordUsage(RecordUsageRequest) returns (EntityResponse);
+  rpc SynchronizeLearnerActions(SynchronizeLearnerActionsRequest) returns (ListLearnerActionsResponse);
+  rpc ListLearnerActions(ListLearnerActionsRequest) returns (ListLearnerActionsResponse);
+  rpc ListFeatures(ListFeaturesRequest) returns (ListFeaturesResponse);
+  rpc CreateFeature(CreateFeatureRequest) returns (FeatureResponse);
+  rpc UpdateFeature(UpdateFeatureRequest) returns (FeatureResponse);
+  rpc ListActionPolicies(ListActionPoliciesRequest) returns (ListActionPoliciesResponse);
+  rpc UpsertActionPolicy(UpsertActionPolicyRequest) returns (ActionPolicyResponse);
+  rpc CheckCapability(CheckCapabilityRequest) returns (CapabilityResponse);
+  rpc ReserveCapability(ReserveCapabilityRequest) returns (ReservationResponse);
+  rpc FinalizeReservation(TransitionReservationRequest) returns (ReservationResponse);
+  rpc ReleaseReservation(TransitionReservationRequest) returns (ReservationResponse);
+  rpc RenewReservation(TransitionReservationRequest) returns (ReservationResponse);
+  rpc ListEntitlementReservations(CustomerRequest) returns (ListEntitlementReservationsResponse);
 
-  rpc CreateInvoice (CreateInvoiceRequest) returns (InvoiceResponse);
-  rpc GetInvoice (EntityIdRequest) returns (InvoiceResponse);
-  rpc ListAllInvoices (ListBillingDocumentsRequest) returns (ListInvoicesResponse);
-  rpc ListInvoices (CustomerRequest) returns (ListInvoicesResponse);
-  rpc MarkManualInvoicePaid (EntityIdRequest) returns (InvoiceResponse);
-  rpc VoidAbandonedCheckout (VoidAbandonedCheckoutRequest) returns (InvoiceResponse);
+  rpc CreateInvoice(CreateInvoiceRequest) returns (InvoiceResponse);
+  rpc GetInvoice(EntityIdRequest) returns (InvoiceResponse);
+  rpc ListAllInvoices(ListBillingDocumentsRequest) returns (ListInvoicesResponse);
+  rpc ListInvoices(CustomerRequest) returns (ListInvoicesResponse);
+  rpc MarkManualInvoicePaid(EntityIdRequest) returns (InvoiceResponse);
+  rpc VoidAbandonedCheckout(VoidAbandonedCheckoutRequest) returns (InvoiceResponse);
   // Customer-driven recovery of an outstanding invoice: with the saved card, or by entering a
   // new one at the provider. Both carry the customer id so the service scopes the invoice itself.
-  rpc PayInvoice (PayInvoiceRequest) returns (PaymentResponse);
-  rpc CreateInvoiceCheckout (CreateInvoiceCheckoutRequest) returns (PaymentIntentResponse);
+  rpc PayInvoice(PayInvoiceRequest) returns (PaymentResponse);
+  rpc CreateInvoiceCheckout(CreateInvoiceCheckoutRequest) returns (PaymentIntentResponse);
   // Charges a small, non-refundable fee to capture a reusable card authorization.
-  rpc CreateCardVerificationCheckout (CreateCardVerificationCheckoutRequest) returns (PaymentIntentResponse);
+  rpc CreateCardVerificationCheckout(CreateCardVerificationCheckoutRequest) returns (PaymentIntentResponse);
   // Deprecated: retained for old clients and always rejected.
-  rpc CreateUpcomingCheckout (CreateUpcomingCheckoutRequest) returns (PaymentIntentResponse);
-  rpc ListPayments (ListBillingDocumentsRequest) returns (ListPaymentsResponse);
-  rpc RefundPayment (RefundPaymentRequest) returns (EntityResponse);
-  rpc RetryPayment (RetryPaymentRequest) returns (PaymentResponse);
-  rpc ListPaymentRetryQueue (ListPaymentRetryQueueRequest) returns (ListPaymentRetryQueueResponse);
-  rpc ProcessPaymentRetryQueue (ProcessPaymentRetryQueueRequest) returns (PaymentRetryBatchResponse);
-  rpc CancelPaymentRetry (CancelPaymentRetryRequest) returns (EntityResponse);
-  rpc ListPaymentReviewCases (ListPaymentReviewCasesRequest) returns (ListPaymentReviewCasesResponse);
-  rpc ResolvePaymentReviewCase (ResolvePaymentReviewCaseRequest) returns (PaymentReviewCaseResponse);
-  rpc RecordPaymentReviewRefund (RecordPaymentReviewRefundRequest) returns (PaymentReviewCaseResponse);
-  rpc PreviewSubscriptionReconciliation (SubscriptionReconciliationPreviewRequest) returns (SubscriptionReconciliationReportResponse);
-  rpc ApplySubscriptionReconciliation (ApplySubscriptionReconciliationRequest) returns (SubscriptionReconciliationReportResponse);
-  rpc PreviewRenewalPaymentReconciliation (RenewalPaymentReconciliationPreviewRequest) returns (RenewalPaymentReconciliationReportResponse);
-  rpc ApplyRenewalPaymentReconciliation (ApplyRenewalPaymentReconciliationRequest) returns (RenewalPaymentReconciliationReportResponse);
-  rpc ListLedgerAccounts (ListLedgerAccountsRequest) returns (ListLedgerAccountsResponse);
-  rpc ListLedgerTransactions (ListLedgerTransactionsRequest) returns (ListLedgerTransactionsResponse);
+  rpc CreateUpcomingCheckout(CreateUpcomingCheckoutRequest) returns (PaymentIntentResponse);
+  rpc ListPayments(ListBillingDocumentsRequest) returns (ListPaymentsResponse);
+  rpc RefundPayment(RefundPaymentRequest) returns (EntityResponse);
+  rpc RetryPayment(RetryPaymentRequest) returns (PaymentResponse);
+  rpc ListPaymentRetryQueue(ListPaymentRetryQueueRequest) returns (ListPaymentRetryQueueResponse);
+  rpc ProcessPaymentRetryQueue(ProcessPaymentRetryQueueRequest) returns (PaymentRetryBatchResponse);
+  rpc CancelPaymentRetry(CancelPaymentRetryRequest) returns (EntityResponse);
+  rpc ListPaymentReviewCases(ListPaymentReviewCasesRequest) returns (ListPaymentReviewCasesResponse);
+  rpc ResolvePaymentReviewCase(ResolvePaymentReviewCaseRequest) returns (PaymentReviewCaseResponse);
+  rpc RecordPaymentReviewRefund(RecordPaymentReviewRefundRequest) returns (PaymentReviewCaseResponse);
+  rpc PreviewSubscriptionReconciliation(SubscriptionReconciliationPreviewRequest) returns (SubscriptionReconciliationReportResponse);
+  rpc ApplySubscriptionReconciliation(ApplySubscriptionReconciliationRequest) returns (SubscriptionReconciliationReportResponse);
+  rpc PreviewRenewalPaymentReconciliation(RenewalPaymentReconciliationPreviewRequest) returns (RenewalPaymentReconciliationReportResponse);
+  rpc ApplyRenewalPaymentReconciliation(ApplyRenewalPaymentReconciliationRequest) returns (RenewalPaymentReconciliationReportResponse);
+  rpc ListLedgerAccounts(ListLedgerAccountsRequest) returns (ListLedgerAccountsResponse);
+  rpc ListLedgerTransactions(ListLedgerTransactionsRequest) returns (ListLedgerTransactionsResponse);
 
-  rpc CreateCheckout (CreateCheckoutRequest) returns (CheckoutResponse);
-  rpc GetPaymentStatusByReference (PaymentReferenceRequest) returns (PaymentResponse);
-  rpc VerifyPaymentReference (PaymentReferenceRequest) returns (PaymentResponse);
+  rpc CreateCheckout(CreateCheckoutRequest) returns (CheckoutResponse);
+  rpc GetPaymentStatusByReference(PaymentReferenceRequest) returns (PaymentResponse);
+  rpc VerifyPaymentReference(PaymentReferenceRequest) returns (PaymentResponse);
 
-  rpc ReceivePaystackWebhook (ReceivePaystackWebhookRequest) returns (StatusResponse);
+  rpc ReceivePaystackWebhook(ReceivePaystackWebhookRequest) returns (StatusResponse);
 }
 
 message ListPlansRequest {
@@ -227,7 +240,9 @@ message PaymentStatsResponse {
   double open_invoice_amount = 8;
   string currency = 9;
 }
-message ListProductsRequest { bool active_only = 1; }
+message ListProductsRequest {
+  bool active_only = 1;
+}
 message ProductResponse {
   string id = 1;
   string code = 2;
@@ -237,7 +252,9 @@ message ProductResponse {
   string created_at_utc = 6;
   string updated_at_utc = 7;
 }
-message ListProductsResponse { repeated ProductResponse products = 1; }
+message ListProductsResponse {
+  repeated ProductResponse products = 1;
+}
 message UpdatePlanRequest {
   string id = 1;
   string name = 2;
@@ -287,7 +304,9 @@ message PlanResponse {
   string catalog_option_id = 36;
   repeated string features = 37;
 }
-message ListPlansResponse { repeated PlanResponse plans = 1; }
+message ListPlansResponse {
+  repeated PlanResponse plans = 1;
+}
 message PriceResponse {
   string id = 1;
   string plan_id = 2;
@@ -302,7 +321,9 @@ message PriceResponse {
   string created_at_utc = 11;
   string updated_at_utc = 12;
 }
-message ListPricesResponse { repeated PriceResponse prices = 1; }
+message ListPricesResponse {
+  repeated PriceResponse prices = 1;
+}
 message PlanEntitlementResponse {
   string id = 1;
   string plan_id = 2;
@@ -313,6 +334,157 @@ message PlanEntitlementResponse {
   bool is_enabled = 7;
   string created_at_utc = 8;
   string updated_at_utc = 9;
+  string feature_id = 10;
+  int64 revision = 11;
+}
+
+message LearnerActionRegistration {
+  string action_key = 1;
+  string name = 2;
+  string description = 3;
+  string category = 4;
+  bool recommended_consumes_quota = 5;
+  string completion_kind = 6;
+  string unconfigured_behavior = 7;
+}
+message SynchronizeLearnerActionsRequest {
+  repeated LearnerActionRegistration actions = 1;
+  RequestContext context = 2;
+}
+message ListLearnerActionsRequest {}
+message LearnerActionResponse {
+  string id = 1;
+  string action_key = 2;
+  string name = 3;
+  string description = 4;
+  string category = 5;
+  bool recommended_consumes_quota = 6;
+  string completion_kind = 7;
+  string unconfigured_behavior = 8;
+  string lifecycle_status = 9;
+  string last_registered_at_utc = 10;
+  int64 revision = 11;
+}
+message ListLearnerActionsResponse {
+  repeated LearnerActionResponse actions = 1;
+}
+
+message ListFeaturesRequest {}
+message FeatureResponse {
+  string id = 1;
+  string code = 2;
+  string name = 3;
+  string description = 4;
+  string lifecycle_status = 5;
+  int64 revision = 6;
+  string created_at_utc = 7;
+  string updated_at_utc = 8;
+}
+message ListFeaturesResponse {
+  repeated FeatureResponse features = 1;
+}
+message CreateFeatureRequest {
+  string code = 1;
+  string name = 2;
+  string description = 3;
+  RequestContext context = 4;
+}
+message UpdateFeatureRequest {
+  string id = 1;
+  string name = 2;
+  string description = 3;
+  string lifecycle_status = 4;
+  int64 expected_revision = 5;
+  RequestContext context = 6;
+}
+
+message ListActionPoliciesRequest {}
+message ActionPolicyResponse {
+  string id = 1;
+  string action_id = 2;
+  string feature_id = 3;
+  bool is_enabled = 4;
+  bool consumes_quota = 5;
+  int64 revision = 6;
+  string created_at_utc = 7;
+  string updated_at_utc = 8;
+}
+message ListActionPoliciesResponse {
+  repeated ActionPolicyResponse policies = 1;
+}
+message UpsertActionPolicyRequest {
+  string action_id = 1;
+  string feature_id = 2;
+  bool is_enabled = 3;
+  bool consumes_quota = 4;
+  int64 expected_revision = 5;
+  RequestContext context = 6;
+}
+
+message CheckCapabilityRequest {
+  string customer_id = 1;
+  string action_key = 2;
+}
+message CapabilityResponse {
+  string action_key = 1;
+  bool available = 2;
+  string reason = 3;
+  string feature_id = 4;
+  string feature_code = 5;
+  string feature_name = 6;
+  bool consumes_quota = 7;
+  bool unlimited = 8;
+  double allowance = 9;
+  bool has_allowance = 10;
+  double used = 11;
+  double reserved = 12;
+  double remaining = 13;
+  string cycle_starts_at_utc = 14;
+  string cycle_ends_at_utc = 15;
+  string reset_at_utc = 16;
+}
+message ReserveCapabilityRequest {
+  string customer_id = 1;
+  string action_key = 2;
+  string operation_id = 3;
+  string idempotency_key = 4;
+  string request_fingerprint = 5;
+}
+message TransitionReservationRequest {
+  string reservation_id = 1;
+  string operation_id = 2;
+}
+message ReservationResponse {
+  CapabilityResponse capability = 1;
+  string reservation_id = 2;
+  string operation_id = 3;
+  string status = 4;
+  string expires_at_utc = 5;
+  bool existing = 6;
+}
+message EntitlementReservationHistoryResponse {
+  string id = 1;
+  string subscription_id = 2;
+  string customer_id = 3;
+  string action_key = 4;
+  string feature_code = 5;
+  string operation_id = 6;
+  string status = 7;
+  double allowance = 8;
+  int64 policy_revision = 9;
+  int64 feature_revision = 10;
+  int64 plan_entitlement_revision = 11;
+  string cycle_starts_at_utc = 12;
+  string cycle_ends_at_utc = 13;
+  string expires_at_utc = 14;
+  string finalized_at_utc = 15;
+  string released_at_utc = 16;
+  string expired_at_utc = 17;
+  string created_at_utc = 18;
+  string updated_at_utc = 19;
+}
+message ListEntitlementReservationsResponse {
+  repeated EntitlementReservationHistoryResponse reservations = 1;
 }
 message CatalogPresentationResponse {
   string id = 1;
@@ -335,7 +507,10 @@ message PlanDetailResponse {
   CatalogPresentationResponse presentation = 4;
   repeated OfferResponse offers = 5;
 }
-message ListOffersRequest { string plan_id = 1; bool enabled_only = 2; }
+message ListOffersRequest {
+  string plan_id = 1;
+  bool enabled_only = 2;
+}
 message OfferPhaseResponse {
   string id = 1;
   string offer_id = 2;
@@ -368,7 +543,9 @@ message OfferResponse {
   repeated OfferPolicyResponse policies = 12;
   int32 display_order = 13;
 }
-message ListOffersResponse { repeated OfferResponse offers = 1; }
+message ListOffersResponse {
+  repeated OfferResponse offers = 1;
+}
 
 message ListPoliciesRequest {}
 message BillingPolicyResponse {
@@ -382,7 +559,9 @@ message BillingPolicyResponse {
   string failure_access_behavior = 8;
   bool is_enabled = 9;
 }
-message ListBillingPoliciesResponse { repeated BillingPolicyResponse policies = 1; }
+message ListBillingPoliciesResponse {
+  repeated BillingPolicyResponse policies = 1;
+}
 
 message RequestContext {
   string correlation_id = 1;
@@ -506,6 +685,7 @@ message UpsertPlanEntitlementRequest {
   bool has_usage_limit = 5;
   bool is_enabled = 6;
   RequestContext context = 7;
+  int64 expected_revision = 8;
 }
 
 message ConfigureOfferPolicyRequest {
@@ -931,7 +1111,9 @@ message PlanChangeResponse {
   SubscriptionResponse subscription = 18;
 }
 
-message ListSubscriptionsResponse { repeated SubscriptionResponse subscriptions = 1; }
+message ListSubscriptionsResponse {
+  repeated SubscriptionResponse subscriptions = 1;
+}
 
 message CheckEntitlementResponse {
   bool allowed = 1;
@@ -1006,7 +1188,9 @@ message PaymentResponse {
   string customer_id = 13;
 }
 
-message ListPaymentsResponse { repeated PaymentResponse payments = 1; }
+message ListPaymentsResponse {
+  repeated PaymentResponse payments = 1;
+}
 
 message ListLedgerAccountsRequest {}
 message LedgerAccountResponse {
@@ -1016,7 +1200,9 @@ message LedgerAccountResponse {
   string category = 4;
   bool is_system = 5;
 }
-message ListLedgerAccountsResponse { repeated LedgerAccountResponse accounts = 1; }
+message ListLedgerAccountsResponse {
+  repeated LedgerAccountResponse accounts = 1;
+}
 
 message ListLedgerTransactionsRequest {
   string reference = 1;
@@ -1037,7 +1223,9 @@ message LedgerTransactionResponse {
   string posted_at_utc = 4;
   repeated LedgerEntryResponse entries = 5;
 }
-message ListLedgerTransactionsResponse { repeated LedgerTransactionResponse transactions = 1; }
+message ListLedgerTransactionsResponse {
+  repeated LedgerTransactionResponse transactions = 1;
+}
 
 message UpdateProductRequest {
   string id = 1;
