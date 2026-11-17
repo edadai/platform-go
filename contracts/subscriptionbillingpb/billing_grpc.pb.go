@@ -96,6 +96,14 @@ const (
 	SubscriptionBillingApi_GetPaymentStatusByReference_FullMethodName         = "/subscriptionbilling.SubscriptionBillingApi/GetPaymentStatusByReference"
 	SubscriptionBillingApi_VerifyPaymentReference_FullMethodName              = "/subscriptionbilling.SubscriptionBillingApi/VerifyPaymentReference"
 	SubscriptionBillingApi_ReceivePaystackWebhook_FullMethodName              = "/subscriptionbilling.SubscriptionBillingApi/ReceivePaystackWebhook"
+	SubscriptionBillingApi_ConfigureAppleProductMapping_FullMethodName        = "/subscriptionbilling.SubscriptionBillingApi/ConfigureAppleProductMapping"
+	SubscriptionBillingApi_ListAppleProductMappings_FullMethodName            = "/subscriptionbilling.SubscriptionBillingApi/ListAppleProductMappings"
+	SubscriptionBillingApi_GetApplePurchaseContext_FullMethodName             = "/subscriptionbilling.SubscriptionBillingApi/GetApplePurchaseContext"
+	SubscriptionBillingApi_CreateApplePurchaseReservation_FullMethodName      = "/subscriptionbilling.SubscriptionBillingApi/CreateApplePurchaseReservation"
+	SubscriptionBillingApi_SynchronizeAppleTransaction_FullMethodName         = "/subscriptionbilling.SubscriptionBillingApi/SynchronizeAppleTransaction"
+	SubscriptionBillingApi_ListAppleTransactions_FullMethodName               = "/subscriptionbilling.SubscriptionBillingApi/ListAppleTransactions"
+	SubscriptionBillingApi_ReceiveAppleNotification_FullMethodName            = "/subscriptionbilling.SubscriptionBillingApi/ReceiveAppleNotification"
+	SubscriptionBillingApi_ListAppleNotifications_FullMethodName              = "/subscriptionbilling.SubscriptionBillingApi/ListAppleNotifications"
 )
 
 // SubscriptionBillingApiClient is the client API for SubscriptionBillingApi service.
@@ -185,6 +193,14 @@ type SubscriptionBillingApiClient interface {
 	GetPaymentStatusByReference(ctx context.Context, in *PaymentReferenceRequest, opts ...grpc.CallOption) (*PaymentResponse, error)
 	VerifyPaymentReference(ctx context.Context, in *PaymentReferenceRequest, opts ...grpc.CallOption) (*PaymentResponse, error)
 	ReceivePaystackWebhook(ctx context.Context, in *ReceivePaystackWebhookRequest, opts ...grpc.CallOption) (*StatusResponse, error)
+	ConfigureAppleProductMapping(ctx context.Context, in *ConfigureAppleProductMappingRequest, opts ...grpc.CallOption) (*AppleProductMappingResponse, error)
+	ListAppleProductMappings(ctx context.Context, in *ListAppleProductMappingsRequest, opts ...grpc.CallOption) (*ListAppleProductMappingsResponse, error)
+	GetApplePurchaseContext(ctx context.Context, in *ApplePurchaseContextRequest, opts ...grpc.CallOption) (*ApplePurchaseContextResponse, error)
+	CreateApplePurchaseReservation(ctx context.Context, in *CreateApplePurchaseReservationRequest, opts ...grpc.CallOption) (*ApplePurchaseReservationResponse, error)
+	SynchronizeAppleTransaction(ctx context.Context, in *SynchronizeAppleTransactionRequest, opts ...grpc.CallOption) (*AppleTransactionSyncResponse, error)
+	ListAppleTransactions(ctx context.Context, in *ListAppleTransactionsRequest, opts ...grpc.CallOption) (*ListAppleTransactionsResponse, error)
+	ReceiveAppleNotification(ctx context.Context, in *ReceiveAppleNotificationRequest, opts ...grpc.CallOption) (*AppleNotificationReceiptResponse, error)
+	ListAppleNotifications(ctx context.Context, in *ListAppleNotificationsRequest, opts ...grpc.CallOption) (*ListAppleNotificationsResponse, error)
 }
 
 type subscriptionBillingApiClient struct {
@@ -965,6 +981,86 @@ func (c *subscriptionBillingApiClient) ReceivePaystackWebhook(ctx context.Contex
 	return out, nil
 }
 
+func (c *subscriptionBillingApiClient) ConfigureAppleProductMapping(ctx context.Context, in *ConfigureAppleProductMappingRequest, opts ...grpc.CallOption) (*AppleProductMappingResponse, error) {
+	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
+	out := new(AppleProductMappingResponse)
+	err := c.cc.Invoke(ctx, SubscriptionBillingApi_ConfigureAppleProductMapping_FullMethodName, in, out, cOpts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *subscriptionBillingApiClient) ListAppleProductMappings(ctx context.Context, in *ListAppleProductMappingsRequest, opts ...grpc.CallOption) (*ListAppleProductMappingsResponse, error) {
+	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
+	out := new(ListAppleProductMappingsResponse)
+	err := c.cc.Invoke(ctx, SubscriptionBillingApi_ListAppleProductMappings_FullMethodName, in, out, cOpts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *subscriptionBillingApiClient) GetApplePurchaseContext(ctx context.Context, in *ApplePurchaseContextRequest, opts ...grpc.CallOption) (*ApplePurchaseContextResponse, error) {
+	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
+	out := new(ApplePurchaseContextResponse)
+	err := c.cc.Invoke(ctx, SubscriptionBillingApi_GetApplePurchaseContext_FullMethodName, in, out, cOpts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *subscriptionBillingApiClient) CreateApplePurchaseReservation(ctx context.Context, in *CreateApplePurchaseReservationRequest, opts ...grpc.CallOption) (*ApplePurchaseReservationResponse, error) {
+	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
+	out := new(ApplePurchaseReservationResponse)
+	err := c.cc.Invoke(ctx, SubscriptionBillingApi_CreateApplePurchaseReservation_FullMethodName, in, out, cOpts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *subscriptionBillingApiClient) SynchronizeAppleTransaction(ctx context.Context, in *SynchronizeAppleTransactionRequest, opts ...grpc.CallOption) (*AppleTransactionSyncResponse, error) {
+	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
+	out := new(AppleTransactionSyncResponse)
+	err := c.cc.Invoke(ctx, SubscriptionBillingApi_SynchronizeAppleTransaction_FullMethodName, in, out, cOpts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *subscriptionBillingApiClient) ListAppleTransactions(ctx context.Context, in *ListAppleTransactionsRequest, opts ...grpc.CallOption) (*ListAppleTransactionsResponse, error) {
+	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
+	out := new(ListAppleTransactionsResponse)
+	err := c.cc.Invoke(ctx, SubscriptionBillingApi_ListAppleTransactions_FullMethodName, in, out, cOpts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *subscriptionBillingApiClient) ReceiveAppleNotification(ctx context.Context, in *ReceiveAppleNotificationRequest, opts ...grpc.CallOption) (*AppleNotificationReceiptResponse, error) {
+	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
+	out := new(AppleNotificationReceiptResponse)
+	err := c.cc.Invoke(ctx, SubscriptionBillingApi_ReceiveAppleNotification_FullMethodName, in, out, cOpts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *subscriptionBillingApiClient) ListAppleNotifications(ctx context.Context, in *ListAppleNotificationsRequest, opts ...grpc.CallOption) (*ListAppleNotificationsResponse, error) {
+	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
+	out := new(ListAppleNotificationsResponse)
+	err := c.cc.Invoke(ctx, SubscriptionBillingApi_ListAppleNotifications_FullMethodName, in, out, cOpts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
 // SubscriptionBillingApiServer is the server API for SubscriptionBillingApi service.
 // All implementations must embed UnimplementedSubscriptionBillingApiServer
 // for forward compatibility.
@@ -1052,6 +1148,14 @@ type SubscriptionBillingApiServer interface {
 	GetPaymentStatusByReference(context.Context, *PaymentReferenceRequest) (*PaymentResponse, error)
 	VerifyPaymentReference(context.Context, *PaymentReferenceRequest) (*PaymentResponse, error)
 	ReceivePaystackWebhook(context.Context, *ReceivePaystackWebhookRequest) (*StatusResponse, error)
+	ConfigureAppleProductMapping(context.Context, *ConfigureAppleProductMappingRequest) (*AppleProductMappingResponse, error)
+	ListAppleProductMappings(context.Context, *ListAppleProductMappingsRequest) (*ListAppleProductMappingsResponse, error)
+	GetApplePurchaseContext(context.Context, *ApplePurchaseContextRequest) (*ApplePurchaseContextResponse, error)
+	CreateApplePurchaseReservation(context.Context, *CreateApplePurchaseReservationRequest) (*ApplePurchaseReservationResponse, error)
+	SynchronizeAppleTransaction(context.Context, *SynchronizeAppleTransactionRequest) (*AppleTransactionSyncResponse, error)
+	ListAppleTransactions(context.Context, *ListAppleTransactionsRequest) (*ListAppleTransactionsResponse, error)
+	ReceiveAppleNotification(context.Context, *ReceiveAppleNotificationRequest) (*AppleNotificationReceiptResponse, error)
+	ListAppleNotifications(context.Context, *ListAppleNotificationsRequest) (*ListAppleNotificationsResponse, error)
 	mustEmbedUnimplementedSubscriptionBillingApiServer()
 }
 
@@ -1292,6 +1396,30 @@ func (UnimplementedSubscriptionBillingApiServer) VerifyPaymentReference(context.
 }
 func (UnimplementedSubscriptionBillingApiServer) ReceivePaystackWebhook(context.Context, *ReceivePaystackWebhookRequest) (*StatusResponse, error) {
 	return nil, status.Error(codes.Unimplemented, "method ReceivePaystackWebhook not implemented")
+}
+func (UnimplementedSubscriptionBillingApiServer) ConfigureAppleProductMapping(context.Context, *ConfigureAppleProductMappingRequest) (*AppleProductMappingResponse, error) {
+	return nil, status.Error(codes.Unimplemented, "method ConfigureAppleProductMapping not implemented")
+}
+func (UnimplementedSubscriptionBillingApiServer) ListAppleProductMappings(context.Context, *ListAppleProductMappingsRequest) (*ListAppleProductMappingsResponse, error) {
+	return nil, status.Error(codes.Unimplemented, "method ListAppleProductMappings not implemented")
+}
+func (UnimplementedSubscriptionBillingApiServer) GetApplePurchaseContext(context.Context, *ApplePurchaseContextRequest) (*ApplePurchaseContextResponse, error) {
+	return nil, status.Error(codes.Unimplemented, "method GetApplePurchaseContext not implemented")
+}
+func (UnimplementedSubscriptionBillingApiServer) CreateApplePurchaseReservation(context.Context, *CreateApplePurchaseReservationRequest) (*ApplePurchaseReservationResponse, error) {
+	return nil, status.Error(codes.Unimplemented, "method CreateApplePurchaseReservation not implemented")
+}
+func (UnimplementedSubscriptionBillingApiServer) SynchronizeAppleTransaction(context.Context, *SynchronizeAppleTransactionRequest) (*AppleTransactionSyncResponse, error) {
+	return nil, status.Error(codes.Unimplemented, "method SynchronizeAppleTransaction not implemented")
+}
+func (UnimplementedSubscriptionBillingApiServer) ListAppleTransactions(context.Context, *ListAppleTransactionsRequest) (*ListAppleTransactionsResponse, error) {
+	return nil, status.Error(codes.Unimplemented, "method ListAppleTransactions not implemented")
+}
+func (UnimplementedSubscriptionBillingApiServer) ReceiveAppleNotification(context.Context, *ReceiveAppleNotificationRequest) (*AppleNotificationReceiptResponse, error) {
+	return nil, status.Error(codes.Unimplemented, "method ReceiveAppleNotification not implemented")
+}
+func (UnimplementedSubscriptionBillingApiServer) ListAppleNotifications(context.Context, *ListAppleNotificationsRequest) (*ListAppleNotificationsResponse, error) {
+	return nil, status.Error(codes.Unimplemented, "method ListAppleNotifications not implemented")
 }
 func (UnimplementedSubscriptionBillingApiServer) mustEmbedUnimplementedSubscriptionBillingApiServer() {
 }
@@ -2701,6 +2829,150 @@ func _SubscriptionBillingApi_ReceivePaystackWebhook_Handler(srv interface{}, ctx
 	return interceptor(ctx, in, info, handler)
 }
 
+func _SubscriptionBillingApi_ConfigureAppleProductMapping_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(ConfigureAppleProductMappingRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(SubscriptionBillingApiServer).ConfigureAppleProductMapping(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: SubscriptionBillingApi_ConfigureAppleProductMapping_FullMethodName,
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(SubscriptionBillingApiServer).ConfigureAppleProductMapping(ctx, req.(*ConfigureAppleProductMappingRequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _SubscriptionBillingApi_ListAppleProductMappings_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(ListAppleProductMappingsRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(SubscriptionBillingApiServer).ListAppleProductMappings(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: SubscriptionBillingApi_ListAppleProductMappings_FullMethodName,
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(SubscriptionBillingApiServer).ListAppleProductMappings(ctx, req.(*ListAppleProductMappingsRequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _SubscriptionBillingApi_GetApplePurchaseContext_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(ApplePurchaseContextRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(SubscriptionBillingApiServer).GetApplePurchaseContext(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: SubscriptionBillingApi_GetApplePurchaseContext_FullMethodName,
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(SubscriptionBillingApiServer).GetApplePurchaseContext(ctx, req.(*ApplePurchaseContextRequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _SubscriptionBillingApi_CreateApplePurchaseReservation_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(CreateApplePurchaseReservationRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(SubscriptionBillingApiServer).CreateApplePurchaseReservation(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: SubscriptionBillingApi_CreateApplePurchaseReservation_FullMethodName,
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(SubscriptionBillingApiServer).CreateApplePurchaseReservation(ctx, req.(*CreateApplePurchaseReservationRequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _SubscriptionBillingApi_SynchronizeAppleTransaction_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(SynchronizeAppleTransactionRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(SubscriptionBillingApiServer).SynchronizeAppleTransaction(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: SubscriptionBillingApi_SynchronizeAppleTransaction_FullMethodName,
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(SubscriptionBillingApiServer).SynchronizeAppleTransaction(ctx, req.(*SynchronizeAppleTransactionRequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _SubscriptionBillingApi_ListAppleTransactions_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(ListAppleTransactionsRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(SubscriptionBillingApiServer).ListAppleTransactions(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: SubscriptionBillingApi_ListAppleTransactions_FullMethodName,
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(SubscriptionBillingApiServer).ListAppleTransactions(ctx, req.(*ListAppleTransactionsRequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _SubscriptionBillingApi_ReceiveAppleNotification_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(ReceiveAppleNotificationRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(SubscriptionBillingApiServer).ReceiveAppleNotification(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: SubscriptionBillingApi_ReceiveAppleNotification_FullMethodName,
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(SubscriptionBillingApiServer).ReceiveAppleNotification(ctx, req.(*ReceiveAppleNotificationRequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _SubscriptionBillingApi_ListAppleNotifications_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(ListAppleNotificationsRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(SubscriptionBillingApiServer).ListAppleNotifications(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: SubscriptionBillingApi_ListAppleNotifications_FullMethodName,
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(SubscriptionBillingApiServer).ListAppleNotifications(ctx, req.(*ListAppleNotificationsRequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
 // SubscriptionBillingApi_ServiceDesc is the grpc.ServiceDesc for SubscriptionBillingApi service.
 // It's only intended for direct use with grpc.RegisterService,
 // and not to be introspected or modified (even as a copy)
@@ -3015,6 +3287,38 @@ var SubscriptionBillingApi_ServiceDesc = grpc.ServiceDesc{
 		{
 			MethodName: "ReceivePaystackWebhook",
 			Handler:    _SubscriptionBillingApi_ReceivePaystackWebhook_Handler,
+		},
+		{
+			MethodName: "ConfigureAppleProductMapping",
+			Handler:    _SubscriptionBillingApi_ConfigureAppleProductMapping_Handler,
+		},
+		{
+			MethodName: "ListAppleProductMappings",
+			Handler:    _SubscriptionBillingApi_ListAppleProductMappings_Handler,
+		},
+		{
+			MethodName: "GetApplePurchaseContext",
+			Handler:    _SubscriptionBillingApi_GetApplePurchaseContext_Handler,
+		},
+		{
+			MethodName: "CreateApplePurchaseReservation",
+			Handler:    _SubscriptionBillingApi_CreateApplePurchaseReservation_Handler,
+		},
+		{
+			MethodName: "SynchronizeAppleTransaction",
+			Handler:    _SubscriptionBillingApi_SynchronizeAppleTransaction_Handler,
+		},
+		{
+			MethodName: "ListAppleTransactions",
+			Handler:    _SubscriptionBillingApi_ListAppleTransactions_Handler,
+		},
+		{
+			MethodName: "ReceiveAppleNotification",
+			Handler:    _SubscriptionBillingApi_ReceiveAppleNotification_Handler,
+		},
+		{
+			MethodName: "ListAppleNotifications",
+			Handler:    _SubscriptionBillingApi_ListAppleNotifications_Handler,
 		},
 	},
 	Streams:  []grpc.StreamDesc{},

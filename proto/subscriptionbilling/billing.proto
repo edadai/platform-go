@@ -94,6 +94,14 @@ service SubscriptionBillingApi {
   rpc VerifyPaymentReference (PaymentReferenceRequest) returns (PaymentResponse);
 
   rpc ReceivePaystackWebhook (ReceivePaystackWebhookRequest) returns (StatusResponse);
+  rpc ConfigureAppleProductMapping (ConfigureAppleProductMappingRequest) returns (AppleProductMappingResponse);
+  rpc ListAppleProductMappings (ListAppleProductMappingsRequest) returns (ListAppleProductMappingsResponse);
+  rpc GetApplePurchaseContext (ApplePurchaseContextRequest) returns (ApplePurchaseContextResponse);
+  rpc CreateApplePurchaseReservation (CreateApplePurchaseReservationRequest) returns (ApplePurchaseReservationResponse);
+  rpc SynchronizeAppleTransaction (SynchronizeAppleTransactionRequest) returns (AppleTransactionSyncResponse);
+  rpc ListAppleTransactions (ListAppleTransactionsRequest) returns (ListAppleTransactionsResponse);
+  rpc ReceiveAppleNotification (ReceiveAppleNotificationRequest) returns (AppleNotificationReceiptResponse);
+  rpc ListAppleNotifications (ListAppleNotificationsRequest) returns (ListAppleNotificationsResponse);
 }
 
 message ListPlansRequest {
@@ -1045,3 +1053,44 @@ message UpdateProductRequest {
   string description = 3;
   RequestContext context = 4;
 }
+
+message ConfigureAppleProductMappingRequest { string price_id = 1; string bundle_id = 2; string product_id = 3; string subscription_group_id = 4; int32 subscription_level = 5; bool is_enabled = 6; RequestContext context = 7; }
+message AppleProductMappingResponse {
+  string id = 1;
+  string plan_id = 2;
+  string price_id = 3;
+  string bundle_id = 4;
+  string product_id = 5;
+  string subscription_group_id = 6;
+  int32 subscription_level = 7;
+  bool is_enabled = 8;
+  string plan_code = 9;
+  string plan_name = 10;
+  string price_code = 11;
+  double price_amount = 12;
+  string price_currency = 13;
+  string price_interval_unit = 14;
+  int32 price_interval_count = 15;
+  bool price_is_active = 16;
+}
+message ListAppleProductMappingsRequest { bool enabled_only = 1; }
+message ListAppleProductMappingsResponse { repeated AppleProductMappingResponse products = 1; }
+message ApplePurchaseContextRequest { string customer_id = 1; string bundle_id = 2; RequestContext context = 3; }
+message ApplePurchaseContextResponse { string app_account_token = 1; bool eligible = 2; string ineligibility_reason = 3; repeated AppleProductMappingResponse products = 4; }
+message CreateApplePurchaseReservationRequest { string customer_id = 1; string apple_product_mapping_id = 2; RequestContext context = 3; }
+message ApplePurchaseReservationResponse { string id = 1; string apple_product_mapping_id = 2; string app_account_token = 3; string status = 4; string expires_at_utc = 5; }
+message SynchronizeAppleTransactionRequest { string customer_id = 1; string signed_transaction = 2; string reservation_id = 3; RequestContext context = 4; }
+message AppleTransactionResponse { string id = 1; string customer_id = 2; string transaction_id = 3; string original_transaction_id = 4; string product_id = 5; string bundle_id = 6; string environment = 7; string state = 8; string received_at_utc = 9; string verified_at_utc = 10; int32 reconciliation_attempt_count = 11; string last_reconciliation_failure = 12; string next_reconciliation_at_utc = 13; }
+message AppleTransactionSyncResponse { AppleTransactionResponse transaction = 1; SubscriptionResponse subscription = 2; bool pending = 3; }
+message ListAppleTransactionsRequest { string state = 1; int32 limit = 2; }
+message ListAppleTransactionsResponse { repeated AppleTransactionResponse transactions = 1; }
+message ReceiveAppleNotificationRequest { string signed_payload = 1; RequestContext context = 2; }
+message AppleNotificationReceiptResponse { string id = 1; string notification_uuid = 2; string processing_status = 3; bool duplicate = 4; }
+message ListAppleNotificationsRequest {
+  string status = 1;
+  int32 limit = 2;
+  string environment = 3;
+  string notification_type = 4;
+}
+message AppleNotificationResponse { string id = 1; string notification_uuid = 2; string notification_type = 3; string subtype = 4; string processing_status = 5; string environment = 6; string bundle_id = 7; string original_transaction_id = 8; string apple_subscription_lineage_id = 9; string auto_renew_product_id = 10; bool auto_renew_enabled = 11; bool auto_renew_status_known = 12; int32 retry_count = 13; string last_processing_error = 14; string received_at_utc = 15; string processed_at_utc = 16; string last_successful_reconciliation_at_utc = 17; string next_processing_at_utc = 18; }
+message ListAppleNotificationsResponse { repeated AppleNotificationResponse notifications = 1; }
