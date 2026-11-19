@@ -101,6 +101,7 @@ const (
 	SubscriptionBillingApi_GetApplePurchaseContext_FullMethodName             = "/subscriptionbilling.SubscriptionBillingApi/GetApplePurchaseContext"
 	SubscriptionBillingApi_CreateApplePurchaseReservation_FullMethodName      = "/subscriptionbilling.SubscriptionBillingApi/CreateApplePurchaseReservation"
 	SubscriptionBillingApi_SynchronizeAppleTransaction_FullMethodName         = "/subscriptionbilling.SubscriptionBillingApi/SynchronizeAppleTransaction"
+	SubscriptionBillingApi_ResolveAppleTransactionOwner_FullMethodName        = "/subscriptionbilling.SubscriptionBillingApi/ResolveAppleTransactionOwner"
 	SubscriptionBillingApi_ListAppleTransactions_FullMethodName               = "/subscriptionbilling.SubscriptionBillingApi/ListAppleTransactions"
 	SubscriptionBillingApi_ReceiveAppleNotification_FullMethodName            = "/subscriptionbilling.SubscriptionBillingApi/ReceiveAppleNotification"
 	SubscriptionBillingApi_ListAppleNotifications_FullMethodName              = "/subscriptionbilling.SubscriptionBillingApi/ListAppleNotifications"
@@ -198,6 +199,7 @@ type SubscriptionBillingApiClient interface {
 	GetApplePurchaseContext(ctx context.Context, in *ApplePurchaseContextRequest, opts ...grpc.CallOption) (*ApplePurchaseContextResponse, error)
 	CreateApplePurchaseReservation(ctx context.Context, in *CreateApplePurchaseReservationRequest, opts ...grpc.CallOption) (*ApplePurchaseReservationResponse, error)
 	SynchronizeAppleTransaction(ctx context.Context, in *SynchronizeAppleTransactionRequest, opts ...grpc.CallOption) (*AppleTransactionSyncResponse, error)
+	ResolveAppleTransactionOwner(ctx context.Context, in *ResolveAppleTransactionOwnerRequest, opts ...grpc.CallOption) (*ResolveAppleTransactionOwnerResponse, error)
 	ListAppleTransactions(ctx context.Context, in *ListAppleTransactionsRequest, opts ...grpc.CallOption) (*ListAppleTransactionsResponse, error)
 	ReceiveAppleNotification(ctx context.Context, in *ReceiveAppleNotificationRequest, opts ...grpc.CallOption) (*AppleNotificationReceiptResponse, error)
 	ListAppleNotifications(ctx context.Context, in *ListAppleNotificationsRequest, opts ...grpc.CallOption) (*ListAppleNotificationsResponse, error)
@@ -1031,6 +1033,16 @@ func (c *subscriptionBillingApiClient) SynchronizeAppleTransaction(ctx context.C
 	return out, nil
 }
 
+func (c *subscriptionBillingApiClient) ResolveAppleTransactionOwner(ctx context.Context, in *ResolveAppleTransactionOwnerRequest, opts ...grpc.CallOption) (*ResolveAppleTransactionOwnerResponse, error) {
+	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
+	out := new(ResolveAppleTransactionOwnerResponse)
+	err := c.cc.Invoke(ctx, SubscriptionBillingApi_ResolveAppleTransactionOwner_FullMethodName, in, out, cOpts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
 func (c *subscriptionBillingApiClient) ListAppleTransactions(ctx context.Context, in *ListAppleTransactionsRequest, opts ...grpc.CallOption) (*ListAppleTransactionsResponse, error) {
 	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
 	out := new(ListAppleTransactionsResponse)
@@ -1153,6 +1165,7 @@ type SubscriptionBillingApiServer interface {
 	GetApplePurchaseContext(context.Context, *ApplePurchaseContextRequest) (*ApplePurchaseContextResponse, error)
 	CreateApplePurchaseReservation(context.Context, *CreateApplePurchaseReservationRequest) (*ApplePurchaseReservationResponse, error)
 	SynchronizeAppleTransaction(context.Context, *SynchronizeAppleTransactionRequest) (*AppleTransactionSyncResponse, error)
+	ResolveAppleTransactionOwner(context.Context, *ResolveAppleTransactionOwnerRequest) (*ResolveAppleTransactionOwnerResponse, error)
 	ListAppleTransactions(context.Context, *ListAppleTransactionsRequest) (*ListAppleTransactionsResponse, error)
 	ReceiveAppleNotification(context.Context, *ReceiveAppleNotificationRequest) (*AppleNotificationReceiptResponse, error)
 	ListAppleNotifications(context.Context, *ListAppleNotificationsRequest) (*ListAppleNotificationsResponse, error)
@@ -1411,6 +1424,9 @@ func (UnimplementedSubscriptionBillingApiServer) CreateApplePurchaseReservation(
 }
 func (UnimplementedSubscriptionBillingApiServer) SynchronizeAppleTransaction(context.Context, *SynchronizeAppleTransactionRequest) (*AppleTransactionSyncResponse, error) {
 	return nil, status.Error(codes.Unimplemented, "method SynchronizeAppleTransaction not implemented")
+}
+func (UnimplementedSubscriptionBillingApiServer) ResolveAppleTransactionOwner(context.Context, *ResolveAppleTransactionOwnerRequest) (*ResolveAppleTransactionOwnerResponse, error) {
+	return nil, status.Error(codes.Unimplemented, "method ResolveAppleTransactionOwner not implemented")
 }
 func (UnimplementedSubscriptionBillingApiServer) ListAppleTransactions(context.Context, *ListAppleTransactionsRequest) (*ListAppleTransactionsResponse, error) {
 	return nil, status.Error(codes.Unimplemented, "method ListAppleTransactions not implemented")
@@ -2919,6 +2935,24 @@ func _SubscriptionBillingApi_SynchronizeAppleTransaction_Handler(srv interface{}
 	return interceptor(ctx, in, info, handler)
 }
 
+func _SubscriptionBillingApi_ResolveAppleTransactionOwner_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(ResolveAppleTransactionOwnerRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(SubscriptionBillingApiServer).ResolveAppleTransactionOwner(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: SubscriptionBillingApi_ResolveAppleTransactionOwner_FullMethodName,
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(SubscriptionBillingApiServer).ResolveAppleTransactionOwner(ctx, req.(*ResolveAppleTransactionOwnerRequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
 func _SubscriptionBillingApi_ListAppleTransactions_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
 	in := new(ListAppleTransactionsRequest)
 	if err := dec(in); err != nil {
@@ -3307,6 +3341,10 @@ var SubscriptionBillingApi_ServiceDesc = grpc.ServiceDesc{
 		{
 			MethodName: "SynchronizeAppleTransaction",
 			Handler:    _SubscriptionBillingApi_SynchronizeAppleTransaction_Handler,
+		},
+		{
+			MethodName: "ResolveAppleTransactionOwner",
+			Handler:    _SubscriptionBillingApi_ResolveAppleTransactionOwner_Handler,
 		},
 		{
 			MethodName: "ListAppleTransactions",

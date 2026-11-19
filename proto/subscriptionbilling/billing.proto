@@ -99,6 +99,7 @@ service SubscriptionBillingApi {
   rpc GetApplePurchaseContext (ApplePurchaseContextRequest) returns (ApplePurchaseContextResponse);
   rpc CreateApplePurchaseReservation (CreateApplePurchaseReservationRequest) returns (ApplePurchaseReservationResponse);
   rpc SynchronizeAppleTransaction (SynchronizeAppleTransactionRequest) returns (AppleTransactionSyncResponse);
+  rpc ResolveAppleTransactionOwner (ResolveAppleTransactionOwnerRequest) returns (ResolveAppleTransactionOwnerResponse);
   rpc ListAppleTransactions (ListAppleTransactionsRequest) returns (ListAppleTransactionsResponse);
   rpc ReceiveAppleNotification (ReceiveAppleNotificationRequest) returns (AppleNotificationReceiptResponse);
   rpc ListAppleNotifications (ListAppleNotificationsRequest) returns (ListAppleNotificationsResponse);
@@ -1054,7 +1055,9 @@ message UpdateProductRequest {
   RequestContext context = 4;
 }
 
-message ConfigureAppleProductMappingRequest { string price_id = 1; string bundle_id = 2; string product_id = 3; string subscription_group_id = 4; int32 subscription_level = 5; bool is_enabled = 6; RequestContext context = 7; }
+message ConfigureAppleProductMappingRequest { string price_id = 1; string bundle_id = 2; string product_id = 3; string subscription_group_id = 4; int32 subscription_level = 5; bool is_enabled = 6; RequestContext context = 7; string mapping_id = 8; }
+message ResolveAppleTransactionOwnerRequest { string signed_transaction = 1; }
+message ResolveAppleTransactionOwnerResponse { string customer_id = 1; }
 message AppleProductMappingResponse {
   string id = 1;
   string plan_id = 2;
